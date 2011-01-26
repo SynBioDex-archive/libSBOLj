@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+<rdf:Description rdf:about="http://sbols.org/sbol.owl#BFa_8.15">
+	<rdf:type rdf:resource="http://sbols.org/sbol.owl#DnaComponent"/>
+	<dnaSequence xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#25f8026a68f4d5da419ddcadd7c7610242ac12069608683db31ec8e3684fb4da"/>
+	<isCircular xmlns="http://sbols.org/sbol.owl#" rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</isCircular>
+	<displayId xmlns="http://sbols.org/sbol.owl#">BFa_8.15</displayId>
+	<type xmlns="rdf:" rdf:resource="http://sbols.org/sbol.owl#type"/>
+	<annotation xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#301a42b24c12e0ec7ff5a149376940a73b9bea32a573b02a9ba10b01ef134e15"/>
+	<annotation xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#f90586d068604f7292ebdb13a8521bdd59e861994a543f7658feed8e9a06acfc"/>
+	<annotation xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#995cd64bbdfd68f9d050c55cc4057456fbc68e8ff01ac1f9f01d3026f2acead0"/>
+	<annotation xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#b5c327787e20ef02ec84e653f0e2b8e86f8f8a6adc8e7b553e66d64897509de6"/>
+	<annotation xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#1028dd4ba94bc869f0e2e6b8032bc48abba5917404f93892c1bdb5b601c49447"/>
+	<annotation xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#e8ff8bcee4029199964228e9f80df1ddda8be2c18869edb5b8c774751ac8480a"/>
+	<annotation xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#44864fab56b9b84185efd1c1e1c8d69b6166d82f2d89935b906b07434f96e945"/>
+	<annotation xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#8fc514ef2d7c247876fb433a508c3fc9237cce526ffe651ee37bff19a37d8eb9"/>
+	<name xmlns="http://sbols.org/sbol.owl#">BFa_8.15</name>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://sbols.org/sbol.owl#f90586d068604f7292ebdb13a8521bdd59e861994a543f7658feed8e9a06acfc">
+	<rdf:type rdf:resource="http://sbols.org/sbol.owl#SequenceAnnotation"/>
+	<feature xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#To_terminator"/>
+	<strand xmlns="http://sbols.org/sbol.owl#">+</strand>
+	<start xmlns="http://sbols.org/sbol.owl#" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1890</start>
+	<stop xmlns="http://sbols.org/sbol.owl#" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1995</stop>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://sbols.org/sbol.owl#b5c327787e20ef02ec84e653f0e2b8e86f8f8a6adc8e7b553e66d64897509de6">
+	<rdf:type rdf:resource="http://sbols.org/sbol.owl#SequenceAnnotation"/>
+	<feature xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#dbI_terminator"/>
+	<strand xmlns="http://sbols.org/sbol.owl#">+</strand>
+	<start xmlns="http://sbols.org/sbol.owl#" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">953</start>
+	<stop xmlns="http://sbols.org/sbol.owl#" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1081</stop>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://sbols.org/sbol.owl#e8ff8bcee4029199964228e9f80df1ddda8be2c18869edb5b8c774751ac8480a">
+	<rdf:type rdf:resource="http://sbols.org/sbol.owl#SequenceAnnotation"/>
+	<feature xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#Anderson_RBS"/>
+	<strand xmlns="http://sbols.org/sbol.owl#">+</strand>
+	<start xmlns="http://sbols.org/sbol.owl#" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">186</start>
+	<stop xmlns="http://sbols.org/sbol.owl#" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">211</stop>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://sbols.org/sbol.owl#8fc514ef2d7c247876fb433a508c3fc9237cce526ffe651ee37bff19a37d8eb9">
+	<rdf:type rdf:resource="http://sbols.org/sbol.owl#SequenceAnnotation"/>
+	<feature xmlns="http://sbols.org/sbol.owl#" rdf:resource="http://sbols.org/sbol.owl#misc"/>
+	<strand xmlns="http://sbols.org/sbol.owl#">+</strand>
+	<start xmlns="http://sbols.org/sbol.owl#" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</start>
+	<stop xmlns="http://sbols.org/sbol.owl#" rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2670</stop>
+</rdf:Description>
+
+</rdf:RDF>
