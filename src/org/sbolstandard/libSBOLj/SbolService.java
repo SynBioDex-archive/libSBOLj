@@ -58,6 +58,14 @@ public class SbolService {
         component.addAnnotation(annotation);
         return component;
     }
+    public Library addDnaComponentToLibrary(DnaComponent component, Library library){
+        library.addComponent(component);
+        return library;
+    }
+    public Library addSequenceFeatureToLibrary(SequenceFeature feature, Library library){
+        library.addFeature(feature);
+        return library;
+    }
 
     
 }

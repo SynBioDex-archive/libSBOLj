@@ -24,6 +24,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -47,7 +48,7 @@ import org.openrdf.rio.RDFFormat;
  */
 public class SBOLutil {
 
-    public RichSequence fromGenBankFile(String filename) throws BioException {
+    public RichSequenceIterator fromGenBankFile(String filename) throws BioException {
         //for now assumes one GB record in file, uses the last one throws away the rest
         BufferedReader br = null;
         SimpleNamespace ns = null;
@@ -62,16 +63,22 @@ public class SBOLutil {
         ns = new SimpleNamespace("bioJavaNS");
         //Make a biojava.RichSequenceObject
         RichSequenceIterator rsi = RichSequence.IOTools.readGenbankDNA(br, ns);
-        while (rsi.hasNext()) {
-            RichSequence rs = rsi.nextRichSequence();
-            System.out.println("readGB file of: " + rs.getName());
-            rs_1 = rs;
-        }
+        
         /**  } catch (Exception be) {
         System.exit(-1);
         }
          */
-        return rs_1;
+        return rsi;
+    }
+    public Library fromRichSequenceIter(RichSequenceIterator rsi) throws NoSuchElementException, BioException{
+        SbolService s = new SbolService();
+        Library lib = new Library();
+        while (rsi.hasNext()) {
+            RichSequence rs = rsi.nextRichSequence();
+            System.out.println("readGB file of: " + rs.getName());
+            s.addDnaComponentToLibrary(readRichSequence(rs),lib);
+        }
+        return lib;
     }
 
     public DnaComponent readRichSequence(RichSequence rs) {

@@ -20,6 +20,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * @author mgaldzic
  */
 public class Library implements SupportsRdfId {
+
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
     @RdfId(namespace = "http://sbols.org/sbol.owl#")
@@ -37,12 +38,14 @@ public class Library implements SupportsRdfId {
     @RdfProperty("sbol:SequenceFeature")
     private Collection<SequenceFeature> feature = new HashSet<SequenceFeature>();
 
-    public Collection<DnaComponent> getComponent() {
+    public Collection<DnaComponent> getComponents() {
         return component;
     }
 
-    public void setComponent(Collection<DnaComponent> component) {
-        this.component = component;
+    void addComponent(DnaComponent component) {
+        if (!getComponents().contains(component)) {
+            getComponents().add(component);
+        }
     }
 
     public String getDescription() {
@@ -62,12 +65,14 @@ public class Library implements SupportsRdfId {
         setId(displayId);
     }
 
-    public Collection<SequenceFeature> getFeature() {
+    public Collection<SequenceFeature> getFeatures() {
         return feature;
     }
 
-    public void setFeature(Collection<SequenceFeature> feature) {
-        this.feature = feature;
+    void addFeature(SequenceFeature feature) {
+        if (!getFeatures().contains(feature)) {
+            getFeatures().add(feature);
+        }
     }
 
     public String getId() {
