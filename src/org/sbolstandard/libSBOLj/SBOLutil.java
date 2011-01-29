@@ -63,20 +63,22 @@ public class SBOLutil {
         ns = new SimpleNamespace("bioJavaNS");
         //Make a biojava.RichSequenceObject
         RichSequenceIterator rsi = RichSequence.IOTools.readGenbankDNA(br, ns);
-        
+
         /**  } catch (Exception be) {
         System.exit(-1);
         }
          */
         return rsi;
     }
-    public Library fromRichSequenceIter(RichSequenceIterator rsi) throws NoSuchElementException, BioException{
+
+    public Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
         SbolService s = new SbolService();
         Library lib = new Library();
+        lib.setId("BioFabLib_1");
         while (rsi.hasNext()) {
             RichSequence rs = rsi.nextRichSequence();
             System.out.println("readGB file of: " + rs.getName());
-            s.addDnaComponentToLibrary(readRichSequence(rs),lib);
+            s.addDnaComponentToLibrary(readRichSequence(rs), lib);
         }
         return lib;
     }
@@ -134,7 +136,7 @@ public class SBOLutil {
         // Field tag only annotation
     }
 
-    public String toJson(DnaComponent input) {
+    public String toJson(Library input) {
 
         // converting to JSON
         //add this type to skip: SupportsRdfId
@@ -161,16 +163,21 @@ public class SBOLutil {
         return aJsonString;
     }
 
-    public String toRDF(DnaComponent input) throws IOException {
+    public String toRDF(Library input) throws IOException {
         ExtRepository aRepo = OpenRdfUtil.createInMemoryRepo();
         ExtGraph aGraph;
         String rdfString = null;
         //make RDF
         try {
             aGraph = RdfGenerator.asRdf(input);
-            for (Iterator<SequenceAnnotation> sai = input.getAnnotations().iterator(); sai.hasNext();) {
-                System.out.println("sai id:" + sai.next().getId());
-                aGraph.add(RdfGenerator.asRdf(sai.next()));
+            for (Iterator<DnaComponent> dci = input.getComponents().iterator(); dci.hasNext();) {
+                DnaComponent aDc = dci.next();
+                aGraph.add(RdfGenerator.asRdf(aDc));
+                for (Iterator<SequenceAnnotation> sai = aDc.getAnnotations().iterator(); sai.hasNext();) {
+                    SequenceAnnotation aSa = sai.next();
+                    System.out.println("sai id:" + aSa.getId());
+                    aGraph.add(RdfGenerator.asRdf(aSa));
+                }
             }
             rdfString = "t";//aGraph.toString();
             try {

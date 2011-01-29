@@ -100,14 +100,14 @@ public class SBOLutilTest {
         //DnaComponent input = s.createDnaComponent("diplayId", "name", "description", false, "type", dnaSequence);
 
         SBOLutil s = new SBOLutil();
-        DnaComponent aBioFABpart = s.readRichSequence(s.fromGenBankFile("test\\test_files\\BFa_8.15.gb"));
+        Library aBioFABpartLib = s.fromRichSequenceIter(s.fromGenBankFile("test\\test_files\\BFa_8.15.gb"));
         try {
 
-                System.out.println("aBioFABpart string: " + s.toRDF(aBioFABpart).toString());
+                System.out.println("aBioFABpart string: " + s.toRDF(aBioFABpartLib).toString());
         } catch (IOException ex) {
             Logger.getLogger(SBOLutilTest.class.getName()).log(Level.SEVERE, "sout RDF", ex);
         }
-        System.out.println("aBioFABpart json"+s.toJson(aBioFABpart));
+        System.out.println("aBioFABpart json"+s.toJson(aBioFABpartLib));
         //ring expResult = "";
         //String result = instance.toRDF(input);
         boolean result = true;

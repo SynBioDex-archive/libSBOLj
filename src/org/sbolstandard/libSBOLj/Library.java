@@ -5,12 +5,15 @@
 package org.sbolstandard.libSBOLj;
 
 import com.clarkparsia.empire.SupportsRdfId;
+import com.clarkparsia.empire.annotation.Namespaces;
 import com.clarkparsia.empire.annotation.RdfId;
 import com.clarkparsia.empire.annotation.RdfProperty;
+import com.clarkparsia.empire.annotation.RdfsClass;
 import com.clarkparsia.empire.annotation.SupportsRdfIdImpl;
 import java.util.Collection;
 import java.util.HashSet;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
@@ -19,6 +22,9 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  *
  * @author mgaldzic
  */
+@Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
+@RdfsClass("sbol:Library")
+@Entity
 public class Library implements SupportsRdfId {
 
     @SkipInJson
@@ -79,7 +85,7 @@ public class Library implements SupportsRdfId {
         return id;
     }
 
-    private void setId(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
