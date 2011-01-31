@@ -2,13 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+//package libSBOLjUseExample;
 
-package libsboljexample;
-
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.biojava.bio.BioException;
+import org.biojavax.bio.seq.RichSequenceIterator;
 import org.sbolstandard.libSBOLj.SBOLutil;
 import org.sbolstandard.libSBOLj.Library;
 
@@ -22,17 +19,15 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws BioException {
-       System.out.println("createDnaComponent");
+        System.out.println("createDnaComponent");
         SBOLutil s = new SBOLutil();
-        Library aBioFABlib = s.fromRichSequenceIter(s.fromGenBankFile("test\\test_files\\BFa_8.15.gb"));
-        try {
-           
-                System.out.println("aBioFABpart string: " + s.toRDF(aBioFABpart).toString());
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "sout RDF", ex);
-        }
-        System.out.println("aBioFABpart json"+s.toJson(aBioFABpart));
+        Library aBioFABlib = null;
+
+
+        RichSequenceIterator aRsIter = s.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
+        aBioFABlib = s.fromRichSequenceIter(aRsIter);
+
+        System.out.println("aBioFABpart json" + s.toJson(aBioFABlib));
         //DnaComponent result = s.createDnaComponent(displayId, name, description, isCircular, type);
     }
-
 }

@@ -49,7 +49,7 @@ import org.openrdf.rio.RDFFormat;
 public class SBOLutil {
 
     public RichSequenceIterator fromGenBankFile(String filename) throws BioException {
-        //for now assumes one GB record in file, uses the last one throws away the rest
+        
         BufferedReader br = null;
         SimpleNamespace ns = null;
         String fileString = filename;
