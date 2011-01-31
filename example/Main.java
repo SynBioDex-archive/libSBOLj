@@ -28,6 +28,7 @@ public class Main {
         aBioFABlib = s.fromRichSequenceIter(aRsIter);
 
         System.out.println("aBioFABpart json" + s.toJson(aBioFABlib));
+        System.out.println("aBioFABpart RDF" + s.toRDF(aBioFABlib));
         //DnaComponent result = s.createDnaComponent(displayId, name, description, isCircular, type);
     }
 }

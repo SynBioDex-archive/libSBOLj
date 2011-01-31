@@ -38,9 +38,16 @@ import org.biojavax.SimpleNamespace;
 import org.biojavax.bio.seq.RichFeature;
 import org.biojavax.bio.seq.RichSequence;
 import org.biojavax.bio.seq.RichSequenceIterator;
+import org.openrdf.query.MalformedQueryException;
+import org.openrdf.query.QueryEvaluationException;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
+import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFFormat;
+import org.openrdf.rio.rdfxml.RDFXMLWriter;
+import org.openrdf.rio.rdfxml.util.RDFXMLPrettyWriter;
 
 /**
  *
@@ -49,7 +56,7 @@ import org.openrdf.rio.RDFFormat;
 public class SBOLutil {
 
     public RichSequenceIterator fromGenBankFile(String filename) throws BioException {
-        
+
         BufferedReader br = null;
         SimpleNamespace ns = null;
         String fileString = filename;
@@ -163,7 +170,7 @@ public class SBOLutil {
         return aJsonString;
     }
 
-    public String toRDF(Library input) throws IOException {
+    public String toRDF(Library input) {
         ExtRepository aRepo = OpenRdfUtil.createInMemoryRepo();
         ExtGraph aGraph;
         String rdfString = null;
@@ -179,17 +186,35 @@ public class SBOLutil {
                     aGraph.add(RdfGenerator.asRdf(aSa));
                 }
             }
-            rdfString = "t";//aGraph.toString();
+            //rdfString = "t";//aGraph.toString();
             try {
                 aRepo.addGraph(aGraph);
+                RepositoryConnection con = aRepo.getConnection();
+
+                RDFXMLPrettyWriter rdfWriter = new RDFXMLPrettyWriter(System.out);
+                try {
+                    try {
+                        con.prepareGraphQuery(QueryLanguage.SERQL, "CONSTRUCT * FROM {x} p {y}").evaluate(rdfWriter);
+                        //TurtleWriter turtleWriter = new TurtleWriter(System.out);
+                        //TurtleWriter turtleWriter = new TurtleWriter(System.out);
+                    } catch (QueryEvaluationException ex) {
+                        Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (RDFHandlerException ex) {
+                        Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (MalformedQueryException ex) {
+                    Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } catch (RepositoryException ex) {
                 Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "addGraph", ex);
             }
             OpenRdfIO.writeGraph(aGraph, new OutputStreamWriter(new FileOutputStream("data\\output.ttl")), RDFFormat.TURTLE);
             OpenRdfIO.writeGraph(aGraph, new OutputStreamWriter(new FileOutputStream("data\\output.rdf")), RDFFormat.RDFXML);
 
+        } catch (IOException ex) {
+            Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "toRDF IO Ex", ex);
         } catch (InvalidRdfException ex) {
-            Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "makeRDF", ex);
+            Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "toRDF Invalid RDF", ex);
         }
         return rdfString;
         /*
