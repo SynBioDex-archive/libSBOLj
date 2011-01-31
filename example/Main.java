@@ -21,14 +21,12 @@ public class Main {
     public static void main(String[] args) throws BioException {
         System.out.println("createDnaComponent");
         SBOLutil s = new SBOLutil();
-        Library aBioFABlib = null;
-
 
         RichSequenceIterator aRsIter = s.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
-        aBioFABlib = s.fromRichSequenceIter(aRsIter);
+        Library aBioFABlib = s.fromRichSequenceIter(aRsIter);
 
-        System.out.println("aBioFABpart json" + s.toJson(aBioFABlib));
-        System.out.println("aBioFABpart RDF" + s.toRDF(aBioFABlib));
-        //DnaComponent result = s.createDnaComponent(displayId, name, description, isCircular, type);
+        System.out.println("aBioFABlib json: \n" + s.toJson(aBioFABlib));
+        System.out.println("aBioFABlib RDF: \n"+ s.toRDF(aBioFABlib));
+        
     }
 }

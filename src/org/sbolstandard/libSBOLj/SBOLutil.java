@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -190,11 +191,12 @@ public class SBOLutil {
             try {
                 aRepo.addGraph(aGraph);
                 RepositoryConnection con = aRepo.getConnection();
-
-                RDFXMLPrettyWriter rdfWriter = new RDFXMLPrettyWriter(System.out);
+                StringWriter out = new StringWriter();
+                RDFXMLPrettyWriter rdfWriter = new RDFXMLPrettyWriter(out);
                 try {
                     try {
                         con.prepareGraphQuery(QueryLanguage.SERQL, "CONSTRUCT * FROM {x} p {y}").evaluate(rdfWriter);
+                        rdfString = out.toString();
                         //TurtleWriter turtleWriter = new TurtleWriter(System.out);
                         //TurtleWriter turtleWriter = new TurtleWriter(System.out);
                     } catch (QueryEvaluationException ex) {
