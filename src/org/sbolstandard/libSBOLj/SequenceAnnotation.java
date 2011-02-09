@@ -22,7 +22,9 @@ import org.apache.commons.codec.binary.Hex;
 import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 
 /**
+ * The SBOL data model's SequenceAnnotation for RDF and Json.
  *
+ * 
  * @author mgaldzic
  */
 @Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
