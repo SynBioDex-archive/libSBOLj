@@ -31,6 +31,9 @@ public class Library implements SupportsRdfId {
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
     @RdfId(namespace = "http://sbols.org/sbol.owl#")
     private String id;
+    /**
+     * human readable ID
+     */
     @RdfProperty("sbol:displayId")
     private String displayId;
     @RdfProperty("sbol:name")
@@ -62,10 +65,18 @@ public class Library implements SupportsRdfId {
         this.description = description;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDisplayId() {
         return displayId;
     }
 
+    /**
+     *
+     * @param displayId
+     */
     public void setDisplayId(String displayId) {
         this.displayId = displayId;
         setId(displayId);
