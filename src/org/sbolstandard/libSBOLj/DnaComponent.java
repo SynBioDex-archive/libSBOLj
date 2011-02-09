@@ -23,9 +23,11 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 /**
  * The SBOL data model's DnaComponent for RDF and Json.
  *
- * This objects of this type represent DNA components which can be described
- * by SequenceAnnotation objects and must specify their DnaSequence object.
- * DnaComponents are expected to be found inside a SBOL Library object.
+ * This objects of this type represent DNA components for biological engineering
+ * which can be described by SequenceAnnotation objects and must specify their
+ * DnaSequence object. DnaComponents are expected to be found inside
+ * a SBOL Library object.
+ *
  * @author mgaldzic
  * @version 0.1, 02/08/2011
  */
@@ -36,29 +38,21 @@ public class DnaComponent implements SupportsRdfId {
 
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
-
     @RdfId(namespace = "http://sbols.org/sbol.owl#")
     private String id;
-
     @RdfProperty("sbol:displayId")
     private String displayId;
-
     @RdfProperty("sbol:name")
     private String name;
-
     @RdfProperty("sbol:description")
     private String description;
-
     @RdfProperty("sbol:isCircular")
     private boolean isCircular;
-
     @RdfProperty("rdf:type")
     private URI type;
-
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("sbol:dnaSequence")
     private DnaSequence dnaSequence;
-    
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("sbol:annotation")
     private Collection<SequenceAnnotation> annotation = new HashSet<SequenceAnnotation>();
@@ -157,10 +151,11 @@ public class DnaComponent implements SupportsRdfId {
     public String getId() {
         return id;
     }
-/**
- * A unique identifier which will be used as the ID portion of the URI
- * @param id the RDF id for the object
- */
+
+    /**
+     * A unique identifier which will be used as the ID portion of the URI
+     * @param id the RDF id for the object
+     */
     public void setId(String id) {
         this.id = id;
     }
