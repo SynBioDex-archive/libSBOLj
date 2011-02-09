@@ -21,16 +21,15 @@ import javax.persistence.OneToMany;
 import org.apache.commons.codec.binary.Hex;
 import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 
+
 /**
- * The SBOL data model's SequenceAnnotation for RDF and Json.
- *
  * 
  * @author mgaldzic
  */
 @Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
 @RdfsClass("sbol:SequenceAnnotation")
 @Entity
-class SequenceAnnotation implements SupportsRdfId {
+public class SequenceAnnotation implements SupportsRdfId {
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
     @RdfId(namespace = "http://sbols.org/sbol.owl#")
@@ -45,14 +44,26 @@ class SequenceAnnotation implements SupportsRdfId {
     @RdfProperty("sbol:feature")
     private Collection<SequenceFeature> feature = new HashSet<SequenceFeature>();
 
+    /**
+     * 
+     * @return
+     */
     public Collection<SequenceFeature> getFeature() {
         return feature;
     }
 
+    /**
+     * 
+     * @param feature
+     */
     public void setFeature(Collection<SequenceFeature> feature) {
         this.feature = feature;
     }
 
+    /**
+     * 
+     * @param feature
+     */
     public void addFeature(SequenceFeature feature) {
         if (!getFeatures().contains(feature)) {
             getFeatures().add(feature);
@@ -60,14 +71,26 @@ class SequenceAnnotation implements SupportsRdfId {
         }
     }
 
+    /**
+     * 
+     * @return
+     */
     public Collection<SequenceFeature> getFeatures() {
         return feature;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param parentDnaComp
+     */
     public void setId(DnaComponent parentDnaComp) {
         String newId;
         if (this.id == null) {
@@ -82,38 +105,65 @@ class SequenceAnnotation implements SupportsRdfId {
         this.id = newId;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getStart() {
         return start;
     }
 
+    /**
+     * 
+     * @param start
+     */
     public void setStart(int start) {
         this.start = start;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Integer getStop() {
         return stop;
     }
 
+    /**
+     * 
+     * @param stop
+     */
     public void setStop(Integer stop) {
         this.stop = stop;
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getStrand() {
         return strand;
     }
 
+    /**
+     * 
+     * @param strand
+     */
     public void setStrand(String strand) {
         this.strand = strand;
     }
 
+    
     /**
-     * @inheritDoc
+     * 
+     * @return
      */
     public RdfKey getRdfId() {
         return mIdSupport.getRdfId();
     }
 
     /**
+     * @param id 
      * @inheritDoc
      */
     public void setRdfId(final RdfKey id) {

@@ -24,7 +24,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 @Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
 @RdfsClass("sbol:SequenceFeature")
 @Entity
-class SequenceFeature implements SupportsRdfId {
+public class SequenceFeature implements SupportsRdfId {
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
     @RdfId(namespace = "http://sbols.org/sbol.owl#")
@@ -41,59 +41,115 @@ class SequenceFeature implements SupportsRdfId {
     @RdfProperty("sbol:dnaSequence")
     private DnaSequence dnaSequence;
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDisplayId() {
         return displayId;
     }
 
+    /**
+     *
+     * @param displayId
+     */
     public void setDisplayId(String displayId) {
         this.displayId = displayId;
         setId(displayId);
     }
 
+    /**
+     *
+     * @return
+     */
     public DnaSequence getDnaSequence() {
         return dnaSequence;
     }
 
+    /**
+     *
+     * @param dnaSequence
+     */
     public void setDnaSequence(DnaSequence dnaSequence) {
         this.dnaSequence = dnaSequence;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public URI getType() {
         return type;
     }
 
+    /**
+     *
+     * @param type
+     */
     public void setType(URI type) {
         this.type = type;
     }
 
+    /**
+     *
+     * @return
+     */
     public RdfKey getRdfId() {
         return mIdSupport.getRdfId();
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setRdfId(final RdfKey id) {
         mIdSupport.setRdfId(id);
     }

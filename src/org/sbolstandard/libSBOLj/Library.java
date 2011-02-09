@@ -47,6 +47,10 @@ public class Library implements SupportsRdfId {
     @RdfProperty("sbol:SequenceFeature")
     private Collection<SequenceFeature> feature = new HashSet<SequenceFeature>();
 
+    /**
+     *
+     * @return
+     */
     public Collection<DnaComponent> getComponents() {
         return component;
     }
@@ -57,10 +61,18 @@ public class Library implements SupportsRdfId {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
@@ -82,6 +94,10 @@ public class Library implements SupportsRdfId {
         setId(displayId);
     }
 
+    /**
+     *
+     * @return
+     */
     public Collection<SequenceFeature> getFeatures() {
         return feature;
     }
@@ -92,26 +108,50 @@ public class Library implements SupportsRdfId {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public RdfKey getRdfId() {
         return mIdSupport.getRdfId();
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setRdfId(final RdfKey id) {
         mIdSupport.setRdfId(id);
     }

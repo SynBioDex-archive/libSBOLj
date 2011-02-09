@@ -56,6 +56,12 @@ import org.openrdf.rio.rdfxml.util.RDFXMLPrettyWriter;
  */
 public class SBOLutil {
 
+    /**
+     *
+     * @param filename
+     * @return
+     * @throws BioException
+     */
     public RichSequenceIterator fromGenBankFile(String filename) throws BioException {
 
         BufferedReader br = null;
@@ -79,6 +85,12 @@ public class SBOLutil {
         return rsi;
     }
 
+    /**
+     *
+     * @param rsi
+     * @return
+     * @throws BioException
+     */
     public Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
         SbolService s = new SbolService();
         Library lib = new Library();
@@ -91,6 +103,11 @@ public class SBOLutil {
         return lib;
     }
 
+    /**
+     *
+     * @param rs
+     * @return
+     */
     public DnaComponent readRichSequence(RichSequence rs) {
         SbolService s = new SbolService();
         //The main GenBank Record can be found by the following
@@ -138,12 +155,20 @@ public class SBOLutil {
         return compAnotFeat;
     }
 
+    /**
+     *
+     */
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.FIELD})
     public @interface SkipInJson {
         // Field tag only annotation
     }
 
+    /**
+     *
+     * @param input
+     * @return
+     */
     public String toJson(Library input) {
 
         // converting to JSON
@@ -171,6 +196,11 @@ public class SBOLutil {
         return aJsonString;
     }
 
+    /**
+     *
+     * @param input
+     * @return
+     */
     public String toRDF(Library input) {
         ExtRepository aRepo = OpenRdfUtil.createInMemoryRepo();
         ExtGraph aGraph;
