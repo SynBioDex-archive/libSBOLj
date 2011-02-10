@@ -165,7 +165,7 @@ public class SequenceAnnotation implements SupportsRdfId {
      * 
      * Start coordinate in terms of the DnaSequence of the DnaComponent annotated.
      *
-     * @param start positive integer coordinate of first base of the SequenceFeature.
+     * @param start positive integer coordinate of first base of the SequenceFeature
      */
     public void setStart(int start) {
         this.start = start;
@@ -176,7 +176,7 @@ public class SequenceAnnotation implements SupportsRdfId {
      *
      * Stop coordinate is in terms of the DnaSequence of the DnaComponent annotated.
      *
-     * @return positive integer coordinate of last base of the SequenceFeature.
+     * @return positive integer coordinate of last base of the SequenceFeature
      */
     public Integer getStop() {
         return stop;
@@ -185,7 +185,7 @@ public class SequenceAnnotation implements SupportsRdfId {
     /**
      * Last position of the Sequence Feature on the DnaComponent.
      *
-     * @param stop positive integer coordinate of last base of the SequenceFeature.
+     * @param stop positive integer coordinate of last base of the SequenceFeature
      */
     public void setStop(Integer stop) {
         this.stop = stop;

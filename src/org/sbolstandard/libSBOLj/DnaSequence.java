@@ -25,7 +25,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * Information specifying the exact base pair sequence of DNA components and
  * Sequence Features is very important for the ability to replicate synthetic
  * biology work. Both experimental work and theoretical sequence composition
- * research heavily depends on this information. *
+ * research heavily depends on this information.
  *
  * @author mgaldzic
  * @version 0.1, 02/09/2011
@@ -83,7 +83,7 @@ public class DnaSequence implements SupportsRdfId {
      * c.The sequence text must be in ASCII or UTF-8 encoding. For the alphabets
      * used, the two are identical.
      *
-     * @param dnaSequence a sequence of letters
+     * @param dnaSequence a sequence of [a|c|t|g] letters
      */
     public void setDnaSequence(String dnaSequence) {
         this.dnaSequence = dnaSequence;

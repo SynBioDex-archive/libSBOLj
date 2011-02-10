@@ -100,7 +100,7 @@ public class DnaComponent implements SupportsRdfId {
      * the rest of the DNA components computable fields. Do not include <> tags
      * such as HTML or XML inside as that may break the RDF. Don't include {}
      * tags as that may break the Json.
-     * @param description Human readable text describing the component
+     * @param description human readable text describing the component
      */
     public void setDescription(String description) {
         this.description = description;
@@ -108,7 +108,7 @@ public class DnaComponent implements SupportsRdfId {
 
     /**
      * Identifier to display to users.
-     * @return A human readable identifier
+     * @return a human readable identifier
      */
     public String getDisplayId() {
         return displayId;
@@ -120,7 +120,7 @@ public class DnaComponent implements SupportsRdfId {
      * it should be generated.
      * TODO: It should be restricted to alphanumeric/underscore and starting with a
      * letter or underscore.
-     * @param displayId A human readable identifier
+     * @param displayId a human readable identifier
      */
     public void setDisplayId(String displayId) {
         this.displayId = displayId;
@@ -138,7 +138,7 @@ public class DnaComponent implements SupportsRdfId {
 
     /**
      * DNA sequence which this DnaComponent object represents.
-     * @param dnaSequence specify the DNA sequence of this DnaComponent
+     * @param dnaSequence specify the DnaSequence of this DnaComponent
      */
     public void setDnaSequence(DnaSequence dnaSequence) {
         this.dnaSequence = dnaSequence;
