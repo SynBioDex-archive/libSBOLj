@@ -9,7 +9,15 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="libSBOLj" default="default" basedir=".">
     <description>Builds, tests, and runs the project libSBOLj.</description>
-    <import file="nbproject/build-impl.xml"/>
+   <import file="nbproject/build-impl.xml"/>
+
+   <!-- My custom target for docs -->
+         <target name="-post-jar">
+			 <copy todir="${build.dir}/javadoc">
+                <fileset dir="${dist.javadoc.dir}"/>
+            </copy>
+        </target>
+
     <!--
 
     There exist several targets which are by default empty and which can be 
