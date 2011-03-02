@@ -28,7 +28,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * research heavily depends on this information.
  *
  * @author mgaldzic
- * @version 0.1, 02/09/2011
+ * @version 0.2, 03/02/2011
  */
 @Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
 @RdfsClass("sbol:DnaSequence")

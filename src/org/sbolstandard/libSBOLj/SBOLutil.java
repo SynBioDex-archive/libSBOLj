@@ -58,7 +58,7 @@ import org.openrdf.rio.rdfxml.util.RDFXMLPrettyWriter;
  * SBOL utils also include the methods for exchanging data with other common
  * data formats, such as GenBank flat files using BioJava.
  * @author mgaldzic
- * @version 0.1, 02/10/2011
+ * @version 0.2, 03/2/2011
  */
 public class SBOLutil {
 

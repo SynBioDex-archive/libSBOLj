@@ -29,7 +29,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * a SBOL Library object.
  *
  * @author mgaldzic
- * @version 0.1, 02/08/2011
+ * @version 0.2, 03/02/2011
  */
 @Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
 @RdfsClass("sbol:DnaComponent")
