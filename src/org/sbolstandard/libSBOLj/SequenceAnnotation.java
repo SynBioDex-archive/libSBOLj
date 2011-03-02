@@ -56,27 +56,15 @@ public class SequenceAnnotation implements SupportsRdfId {
     private Collection<SequenceFeature> feature = new HashSet<SequenceFeature>();
 
     /**
-     * /SHOULD be removed, Describes the segment of the DNA sequence from start to stop on the strand.
-     *
-     * The feature has its own displayID, name, description, type, and sequence.
-     * Most commonly it is used to describe the sub-sequences of a DnaComponent.
-     * Features can be re-used, whenever the SequenceFeature.equals
-     * NOTE: the feature could be used as a DnaComponent itself, but this is not
-     * implemented in libSBOLj, yet. SbolService does not yet check if an .equals
-     * feature exists already.
-     * @return collection of any features here
-     */
-    public Collection<SequenceFeature> getFeature() {
-        return feature;
-    }
-
-    /**
-     * Place all SequenceFeatures at this.start, .stop, .strand location. //WHY?
+     * Place all SequenceFeatures at this.start, .stop, .strand location. 
+     * WHY? is this needed? If we change the model to SA-SF as 1to1 then its ok.
+     * Cesar advocated for this to be 1to1, as no use case is currently there for
+     * absolutely overlapping features
      *
      * Feature describes this position so it should include the information
      * the users want to be able to get when examining this position.
      *
-     * @param feature
+     * @param feature a Collection of 1 feature //awkward in current state
      */
     public void setFeature(Collection<SequenceFeature> feature) {
         this.feature = feature;
@@ -98,7 +86,7 @@ public class SequenceAnnotation implements SupportsRdfId {
     }
 
     /**
-     * The SequenceFeatures are found here, from start to stop on the strand.
+     * Describe the segments of DNA sequence from start to stop on the strand.
      *
      * The feature has its own displayID, name, description, type, and sequence.
      * Most commonly it is used to describe the sub-sequences of a DnaComponent.
