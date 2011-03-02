@@ -51,16 +51,31 @@ import org.openrdf.rio.rdfxml.RDFXMLWriter;
 import org.openrdf.rio.rdfxml.util.RDFXMLPrettyWriter;
 
 /**
+ * SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.
  *
+ * The utils include methods for writing SBOL RDF and JSON. Since, the primary
+ * goal of SBOL is data/ information exchange/ sharing on the web we are using RDF.
+ * SBOL utils also include the methods for exchanging data with other common
+ * data formats, such as GenBank flat files using BioJava.
  * @author mgaldzic
+ * @version 0.1, 02/10/2011
  */
 public class SBOLutil {
 
     /**
+     * Reads the common GenBank flat file so the records in it can be iterated over.
      *
-     * @param filename
-     * @return
-     * @throws BioException
+     * GenBank flat format files can have multiple sequence records. Threfore, 
+     * fromGenBankFile uses the org.biojavax.bio.seq.RichSequenceIterator to hold
+     * the data from a GenBank file so it can be stepped through.
+     * #fromRichSequenceIter(org.biojavax.bio.seq.RichSequenceIterator) will do
+     * that.
+     *
+     * @param filename The file path for a GenBank file (eg "test\\test_files\\BFa_8.15.gb")
+     * @return Data from the input file as a RichSequenceIterator a BioJava iterator for annotated sequences.
+     *         If it cannot find a file it prints a warning, and returns an empty iterator.
+     * @throws BioException BioJava threw up, TODO: understand what BioJava exceptions are.
+     * @see #fromRichSequenceIter(org.biojavax.bio.seq.RichSequenceIterator)
      */
     public RichSequenceIterator fromGenBankFile(String filename) throws BioException {
 
@@ -86,10 +101,16 @@ public class SBOLutil {
     }
 
     /**
+     * Steps through a RichSequenceIterator and builds up an SBOL Library.
      *
-     * @param rsi
-     * @return
-     * @throws BioException
+     * The 1 or many GenBank style records, stored as a BioJava object
+     * RichSequenceIterator are mapped to a SBOL Library object which can contain
+     * many DNA components. The libSBOLj.Library can then be serialized as RDF or
+     * Json.
+     *
+     * @param rsi RichSequenceIterator created by BioJava (eg from GenBank file)
+     * @return Library of DNA Components and SequenceFeatures from the input
+     * @throws BioException BioJava threw up, TODO: understand what BioJava exceptions are.
      */
     public Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
         SbolService s = new SbolService();
@@ -104,9 +125,15 @@ public class SBOLutil {
     }
 
     /**
+     * Maps the BioJava RichSequence object to DnaComponent its DNA Sequence, Annotations, and Features.
      *
-     * @param rs
-     * @return
+     * An individual GenBank record is translated into the SBOL model, by mapping.
+     * The GenBank record is mapped to DnaComponent. The Features location information
+     * is mapped to SequenceAnnotations of that DnaComponent. The Feature Notes
+     * are mapped to SequenceFeatures. Then the DnaComponent gets linked to its
+     * annotations and the features.
+     * @param rs a RichSequence containing DNA sequence described by features.
+     * @return DnaComponent with the attached SequenceAnnotations and SequenceFeatures
      */
     public DnaComponent readRichSequence(RichSequence rs) {
         SbolService s = new SbolService();
@@ -156,6 +183,10 @@ public class SBOLutil {
     }
 
     /**
+     * Customizes the Json writer to leave out fields annotated with @SkipInJson.
+     *
+     * This is needed for the MyExclusionStrategy class
+     * TODO: Does this need to be public?
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
@@ -165,9 +196,14 @@ public class SBOLutil {
     }
 
     /**
+     * Writes a Json serialization of a Library.
      *
-     * @param input
-     * @return
+     * All SBOL information that is found in a Library is written into Json form.
+     * Uses the com.google.gson library which walks the SBOL data graph from Library
+     * to all its children and outputs a String with all the information inside.
+     *
+     * @param input an SBOL Library to be written out
+     * @return String containing the Json serialization
      */
     public String toJson(Library input) {
 
@@ -197,9 +233,15 @@ public class SBOLutil {
     }
 
     /**
+     * Writes a RDF serialization of a Library.
      *
-     * @param input
-     * @return
+     * All SBOL information that is found in a Library is written into RDF form.
+     * SHOULD just use com.clarkparsia.empire
+     * RIGHT NOW Uses the com.clarkparsia.openrdf library which walks the SBOL data graph from Library
+     * to all its children and outputs a String with all the information inside.
+     *
+     * @param input an SBOL Library to be written out
+     * @return String containing the RDF serialization
      */
     public String toRDF(Library input) {
         ExtRepository aRepo = OpenRdfUtil.createInMemoryRepo();

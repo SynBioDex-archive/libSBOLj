@@ -38,7 +38,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * issues as extensions for useful computable objects are proposed.
  *
  * @author mgaldzic
- * @version 0.1, 03/01/2011
+ * @version 0.1, 02/10/2011
  */
 @Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
 @RdfsClass("sbol:Library")
