@@ -22,7 +22,7 @@ import java.net.URI;
  * http://www.javaworld.com/javaworld/jw-01-2008/jw-01-jpa1.html
  *
  * @author mgaldzic
- * @version 0.2, 03/2/2011
+ * @since 0.2, 03/2/2011
  */
 public class SbolService {
     /**

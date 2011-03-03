@@ -39,7 +39,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * definitions.
  *
  * @author mgaldzic
- * @version 0.2, 03/2/2011
+ * @since  0.2, 03/02/2011
  */
 @Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
 @RdfsClass("sbol:Library")
