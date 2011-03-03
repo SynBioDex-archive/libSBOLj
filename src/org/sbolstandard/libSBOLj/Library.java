@@ -30,12 +30,13 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * could contain all the DNA components used in a specific project, lab, or any
  * custom grouping specified by the user.
  *
- * COMMENT: Mike Galdzicki thinks Library is not necessary as generic metadata 
- * element, sets should be left to the lower level implementation (eg Collection in Java).
- * Or be defined by queries, when there is information that groups the collection.
- * And new objects should be created and named when the groupings are generally useful.
- * Having a custom legacy objects for groups will cause downstream development
- * issues as extensions for useful computable objects are proposed.
+ * COMMENT: Mike Galdzicki thinks Library is a Generic metadata object. This metadata
+ * element, is a set. It would be best defined by queries, when there is information
+ * that groups the collection. Arbitrary groupings and new Library objects should
+ * not be created and named when the groupings are not defined, but also Libraries
+ * should not be created whenever an arbitrary set is possible, only create if useful.
+ * Extensions for useful computable objects should be proposed to help Library
+ * definitions.
  *
  * @author mgaldzic
  * @version 0.2, 03/2/2011

@@ -263,6 +263,14 @@ public class DnaComponent implements SupportsRdfId {
         mIdSupport.setRdfId(id);
     }
 
+    /**
+     * Checks whether the other object is an equivalent DnaComponent
+     * @param obj other object to be checked for equivalence with this one
+     *        (may be null, as specified in generic Object.equals(Object) contract)
+     * @return true if another object is equivalent to this one, false otherwise
+     *         (including null parameter)
+     */
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
