@@ -49,6 +49,7 @@ import org.openrdf.rio.RDFParseException;
 public class SbolService {
 
     private EntityManager aManager = null;
+    private Library library = null;
 
     public SbolService() {
         EmpireConfiguration empireConfig = new EmpireConfiguration();
@@ -124,7 +125,7 @@ public class SbolService {
         aSF.setDisplayId(displayId);
         aSF.setName(name);
         aSF.setDescription(description);
-        aSF.setType(URI.create("http://sbols.org/sbol.owl#" + type));
+        aSF.addType(URI.create("http://sbols.org/sbol.owl#" + type));
         aManager.persist(aSF);
         return aSF;
     }
@@ -202,7 +203,7 @@ public class SbolService {
         aDC.setDescription(description);
         aDC.setCircular(isCircular);
 
-        aDC.setType(URI.create("http://sbols.org/sbol.owl#" + type));
+        aDC.addType(URI.create("http://sbols.org/sbol.owl#" + type));
         aDC.setDnaSequence(dnaSequence);
         aManager.persist(aDC);
 
@@ -250,8 +251,6 @@ public class SbolService {
      */
     public void insertLibrary(Library lib) {
         aManager.persist(lib);
-
-
     }
 
     /**
@@ -266,10 +265,7 @@ public class SbolService {
         library.addComponent(component);
         aManager.merge(library);
 
-
         return library;
-
-
     }
 
     /**
@@ -307,15 +303,17 @@ public class SbolService {
             singleResult.write(out, RDFFormat.RDFXML);
             rdfString = out.toString();
 
-
-
-
         } catch (IOException ex) {
             Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
         return rdfString;
+    }
 
+    public Library getLibrary(String id) {
+        Library findMe = new Library();
+        findMe.setId(id);
+        aManager.persist(findMe);
+        Library lib = aManager.find(Library.class, findMe.getRdfId());
+        return lib;
     }
 }

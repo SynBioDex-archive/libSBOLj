@@ -48,8 +48,9 @@ public class DnaComponent implements SupportsRdfId {
     private String description;
     @RdfProperty("sbol:isCircular")
     private boolean isCircular;
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("rdf:type")
-    private URI type;
+    private Collection<URI> type = new HashSet<URI>();
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("sbol:dnaSequence")
     private DnaSequence dnaSequence;
@@ -230,7 +231,7 @@ public class DnaComponent implements SupportsRdfId {
      * TODO: When serialized to RDF this is a URI, so when read from persistence it should become
      * one of the SO human readable vocabulary terms. Note:I should allow many types
      */
-    public URI getType() {
+    public Collection<URI> getTypes() {
         return type;
     }
 
@@ -241,8 +242,11 @@ public class DnaComponent implements SupportsRdfId {
      * @param type Sequence Ontology URI specifying the type of the DnaComponent
      * @see setType
      */
-    public void setType(URI type) {
-        this.type = type;
+    public void addType(URI type) {
+        if (!getTypes().contains(type)) {
+            getTypes().add(type);
+        //this.type.add(type);
+        }
     }
 
     /**

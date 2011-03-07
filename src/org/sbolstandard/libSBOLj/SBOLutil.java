@@ -4,31 +4,18 @@
  */
 package org.sbolstandard.libSBOLj;
 
-import com.clarkparsia.empire.annotation.InvalidRdfException;
-import com.clarkparsia.empire.annotation.RdfGenerator;
-import com.clarkparsia.openrdf.ExtGraph;
-import com.clarkparsia.openrdf.ExtRepository;
-import com.clarkparsia.openrdf.OpenRdfIO;
-import com.clarkparsia.openrdf.OpenRdfUtil;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.NoSuchElementException;
-import java.util.logging.Logger;
 import java.util.Iterator;
-import java.util.logging.Level;
 import org.biojava.bio.BioException;
 import org.biojava.bio.seq.Feature;
 import org.biojava.bio.seq.FeatureFilter;
@@ -39,16 +26,6 @@ import org.biojavax.SimpleNamespace;
 import org.biojavax.bio.seq.RichFeature;
 import org.biojavax.bio.seq.RichSequence;
 import org.biojavax.bio.seq.RichSequenceIterator;
-import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.QueryEvaluationException;
-import org.openrdf.query.QueryLanguage;
-import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryException;
-import org.openrdf.rio.RDFHandlerException;
-import org.openrdf.rio.RDFParseException;
-import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.rdfxml.RDFXMLWriter;
-import org.openrdf.rio.rdfxml.util.RDFXMLPrettyWriter;
 
 /**
  * SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.
@@ -140,7 +117,7 @@ public class SBOLutil {
         SbolService s = new SbolService();
         //The main GenBank Record can be found by the following
         DnaComponent comp = s.createDnaComponent(rs.getName(),
-                rs.getName(), rs.getDescription(), false, "type",
+                rs.getName(), rs.getDescription(), false, "other_DNA",
                 s.createDnaSequence(rs.seqString()));
 
         //Now iterate through the features (all)
@@ -183,6 +160,8 @@ public class SBOLutil {
         }
         return comp;
     }
+
+
 
     /**
      * Customizes the Json writer to leave out fields annotated with @SkipInJson.
@@ -228,7 +207,7 @@ public class SBOLutil {
                 return f.getAnnotation(SkipInJson.class) != null;
             }
         }
-        Gson gson = new GsonBuilder().setExclusionStrategies(new MyExclusionStrategy(String.class)).create();
+        Gson gson = new GsonBuilder().setExclusionStrategies(new MyExclusionStrategy(SkipInJson.class)).create();
 
         String aJsonString = gson.toJson(input);
         return aJsonString;
@@ -252,4 +231,9 @@ public class SBOLutil {
         return rdfString;
      
     }
+    public SbolService fromRDF(String rdfString) {
+        SbolService s = new SbolService(rdfString);
+        return s;
+    }
+
 }

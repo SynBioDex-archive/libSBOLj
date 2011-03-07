@@ -11,9 +11,12 @@ import com.clarkparsia.empire.annotation.RdfProperty;
 import com.clarkparsia.empire.annotation.RdfsClass;
 import com.clarkparsia.empire.annotation.SupportsRdfIdImpl;
 import java.net.URI;
+import java.util.Collection;
+import java.util.HashSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 
@@ -47,8 +50,9 @@ public class SequenceFeature implements SupportsRdfId {
     private String name;
     @RdfProperty("sbol:description")
     private String description;
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("rdf:type")
-    private URI type;
+    private Collection<URI> type = new HashSet<URI>();
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("sbol:dnaSequence")
     private DnaSequence dnaSequence;
@@ -164,7 +168,7 @@ public class SequenceFeature implements SupportsRdfId {
      * TODO: When serialized to RDF this is a URI, so when read from persistence it should become
      * one of the SO human readable vocabulary terms. Note: should allow many types
      */
-    public URI getType() {
+    public Collection<URI> getTypes() {
         return type;
     }
 
@@ -175,8 +179,11 @@ public class SequenceFeature implements SupportsRdfId {
      * @param type Sequence Ontology URI specifying the type of the SequenceFeature
      * @see setType
      */
-    public void setType(URI type) {
-        this.type = type;
+    public void addType(URI type) {
+        if (!getTypes().contains(type)) {
+            getTypes().add(type);
+        //this.type.add(type);
+        }
     }
 
     /**

@@ -8,6 +8,7 @@ import org.biojava.bio.BioException;
 import org.biojavax.bio.seq.RichSequenceIterator;
 import org.sbolstandard.libSBOLj.SBOLutil;
 import org.sbolstandard.libSBOLj.Library;
+import org.sbolstandard.libSBOLj.SbolService;
 
 /**
  * Main serves as a simple example of use.
@@ -25,7 +26,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws BioException {
-        System.out.println("createLibrary");
+        System.out.println("create BIOFAB Library");
         SBOLutil sU = new SBOLutil();
 
         RichSequenceIterator aRsIter = sU.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
@@ -33,6 +34,10 @@ public class Main {
 
         System.out.println("aBioFABlib json: \n" + sU.toJson(aBioFABlib));
         System.out.println("aBioFABlib RDF: \n"+ sU.toRDF(aBioFABlib));
-        
+        String rdfString = sU.toRDF(aBioFABlib);
+
+        SbolService aS = sU.fromRDF(rdfString);
+        Library lib = aS.getLibrary("BioFabLib_1");
+        System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName());
     }
 }
