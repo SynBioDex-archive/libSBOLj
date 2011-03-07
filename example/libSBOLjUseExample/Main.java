@@ -26,13 +26,13 @@ public class Main {
      */
     public static void main(String[] args) throws BioException {
         System.out.println("createLibrary");
-        SBOLutil s = new SBOLutil();
+        SBOLutil sU = new SBOLutil();
 
-        RichSequenceIterator aRsIter = s.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
-        Library aBioFABlib = s.fromRichSequenceIter(aRsIter);
+        RichSequenceIterator aRsIter = sU.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
+        Library aBioFABlib = sU.fromRichSequenceIter(aRsIter);
 
-        System.out.println("aBioFABlib json: \n" + s.toJson(aBioFABlib));
-        System.out.println("aBioFABlib RDF: \n"+ s.toRDF(aBioFABlib));
+        System.out.println("aBioFABlib json: \n" + sU.toJson(aBioFABlib));
+        System.out.println("aBioFABlib RDF: \n"+ sU.toRDF(aBioFABlib));
         
     }
 }

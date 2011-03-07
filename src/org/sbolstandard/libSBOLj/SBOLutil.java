@@ -114,8 +114,9 @@ public class SBOLutil {
      */
     public Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
         SbolService s = new SbolService();
-        Library lib = new Library();
-        lib.setId("BioFabLib_1");
+        
+        Library lib = s.createLibrary("BioFabLib_1", "BIOAFAB Pilot Project",
+                "Pilot Project Designs, see http://biofab.org/data");
         while (rsi.hasNext()) {
             RichSequence rs = rsi.nextRichSequence();
             System.out.println("readGB file of: " + rs.getName());
@@ -145,7 +146,7 @@ public class SBOLutil {
         //Now iterate through the features (all)
         FeatureHolder fh = rs.filter(FeatureFilter.all);
         //System.out.println("Features");
-        DnaComponent compAnotFeat = null;
+        //DnaComponent compAnotFeat = null;
         for (Iterator<Feature> i = fh.features(); i.hasNext();) {
             RichFeature rf = (RichFeature) i.next();
 
@@ -153,8 +154,8 @@ public class SBOLutil {
             Integer rfStart = rf.getLocation().getMin();
             Integer rfStop = rf.getLocation().getMax();
             String rfStrand = Character.toString(rf.getStrand().getToken());
-            SequenceAnnotation anot = s.createSequenceAnnotation(rfStart,
-                    rfStop, rfStrand);
+            SequenceAnnotation anot = s.createSequenceAnnotationForDnaComponent(rfStart,
+                    rfStop, rfStrand, comp);
 
             //Get the Rich Annotation of the Rich Feature
             RichAnnotation ra = (RichAnnotation) rf.getAnnotation();
@@ -175,11 +176,12 @@ public class SBOLutil {
                 }
             }
             SequenceFeature feat = s.createSequenceFeature(label, label, label, rf.getType());
+            // should add return void?
             SequenceAnnotation anotFeat = s.addSequenceFeatureToSequenceAnnotation(feat, anot);
-            compAnotFeat = s.addSequenceAnnotationToDnaComponent(anotFeat, comp);
+            //compAnotFeat = s.addSequenceAnnotationToDnaComponent(anotFeat, comp);
 
         }
-        return compAnotFeat;
+        return comp;
     }
 
     /**
@@ -236,75 +238,18 @@ public class SBOLutil {
      * Writes a RDF serialization of a Library.
      *
      * All SBOL information that is found in a Library is written into RDF form.
-     * SHOULD just use com.clarkparsia.empire
-     * RIGHT NOW Uses the com.clarkparsia.openrdf library which walks the SBOL data graph from Library
-     * to all its children and outputs a String with all the information inside.
+     * Walks the SBOL data graph from Library to all its children and outputs
+     * a String with all the RDF information inside.
      *
      * @param input an SBOL Library to be written out
      * @return String containing the RDF serialization
      */
     public String toRDF(Library input) {
-        ExtRepository aRepo = OpenRdfUtil.createInMemoryRepo();
-        ExtGraph aGraph;
-        String rdfString = null;
         //make RDF
-        try {
-            aGraph = RdfGenerator.asRdf(input);
-            for (Iterator<DnaComponent> dci = input.getComponents().iterator(); dci.hasNext();) {
-                DnaComponent aDc = dci.next();
-                aGraph.add(RdfGenerator.asRdf(aDc));
-                for (Iterator<SequenceAnnotation> sai = aDc.getAnnotations().iterator(); sai.hasNext();) {
-                    SequenceAnnotation aSa = sai.next();
-                    System.out.println("sai id:" + aSa.getId());
-                    aGraph.add(RdfGenerator.asRdf(aSa));
-                }
-            }
-            //rdfString = "t";//aGraph.toString();
-            try {
-                aRepo.addGraph(aGraph);
-                RepositoryConnection con = aRepo.getConnection();
-                StringWriter out = new StringWriter();
-                RDFXMLPrettyWriter rdfWriter = new RDFXMLPrettyWriter(out);
-                try {
-                    try {
-                        con.prepareGraphQuery(QueryLanguage.SERQL, "CONSTRUCT * FROM {x} p {y}").evaluate(rdfWriter);
-                        rdfString = out.toString();
-                        //TurtleWriter turtleWriter = new TurtleWriter(System.out);
-                        //TurtleWriter turtleWriter = new TurtleWriter(System.out);
-                    } catch (QueryEvaluationException ex) {
-                        Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (RDFHandlerException ex) {
-                        Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } catch (MalformedQueryException ex) {
-                    Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } catch (RepositoryException ex) {
-                Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "addGraph", ex);
-            }
-            OpenRdfIO.writeGraph(aGraph, new OutputStreamWriter(new FileOutputStream("data\\output.ttl")), RDFFormat.TURTLE);
-            OpenRdfIO.writeGraph(aGraph, new OutputStreamWriter(new FileOutputStream("data\\output.rdf")), RDFFormat.RDFXML);
-
-        } catch (IOException ex) {
-            Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "toRDF IO Ex", ex);
-        } catch (InvalidRdfException ex) {
-            Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "toRDF Invalid RDF", ex);
-        }
+        SbolService s = new SbolService();
+        s.insertLibrary(input);
+        String rdfString = s.getAllAsRDF();
         return rdfString;
-        /*
-
-        ExtRepository theRepo = OpenRdfUtil.createInMemoryRepo();
-        ExtGraph theGraph;
-
-        try {
-        theGraph = OpenRdfIO.readGraph(new InputStreamReader(new FileInputStream("data\\input.rdf")), RDFFormat.RDFXML);
-        try {
-        theRepo.addGraph(theGraph);
-        } catch (RepositoryException ex) {
-        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        } catch (RDFParseException ex) {
-        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+     
     }
 }
