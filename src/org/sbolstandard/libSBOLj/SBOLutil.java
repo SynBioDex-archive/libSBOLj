@@ -4,31 +4,18 @@
  */
 package org.sbolstandard.libSBOLj;
 
-import com.clarkparsia.empire.annotation.InvalidRdfException;
-import com.clarkparsia.empire.annotation.RdfGenerator;
-import com.clarkparsia.openrdf.ExtGraph;
-import com.clarkparsia.openrdf.ExtRepository;
-import com.clarkparsia.openrdf.OpenRdfIO;
-import com.clarkparsia.openrdf.OpenRdfUtil;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.NoSuchElementException;
-import java.util.logging.Logger;
 import java.util.Iterator;
-import java.util.logging.Level;
 import org.biojava.bio.BioException;
 import org.biojava.bio.seq.Feature;
 import org.biojava.bio.seq.FeatureFilter;
@@ -39,16 +26,6 @@ import org.biojavax.SimpleNamespace;
 import org.biojavax.bio.seq.RichFeature;
 import org.biojavax.bio.seq.RichSequence;
 import org.biojavax.bio.seq.RichSequenceIterator;
-import org.openrdf.query.MalformedQueryException;
-import org.openrdf.query.QueryEvaluationException;
-import org.openrdf.query.QueryLanguage;
-import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryException;
-import org.openrdf.rio.RDFHandlerException;
-import org.openrdf.rio.RDFParseException;
-import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.rdfxml.RDFXMLWriter;
-import org.openrdf.rio.rdfxml.util.RDFXMLPrettyWriter;
 
 /**
  * SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.
@@ -58,7 +35,7 @@ import org.openrdf.rio.rdfxml.util.RDFXMLPrettyWriter;
  * SBOL utils also include the methods for exchanging data with other common
  * data formats, such as GenBank flat files using BioJava.
  * @author mgaldzic
- * @version 0.1, 02/10/2011
+ * @since 0.2, 03/2/2011
  */
 public class SBOLutil {
 
@@ -114,8 +91,9 @@ public class SBOLutil {
      */
     public Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
         SbolService s = new SbolService();
-        Library lib = new Library();
-        lib.setId("BioFabLib_1");
+        
+        Library lib = s.createLibrary("BioFabLib_1", "BIOAFAB Pilot Project",
+                "Pilot Project Designs, see http://biofab.org/data");
         while (rsi.hasNext()) {
             RichSequence rs = rsi.nextRichSequence();
             System.out.println("readGB file of: " + rs.getName());
@@ -139,13 +117,13 @@ public class SBOLutil {
         SbolService s = new SbolService();
         //The main GenBank Record can be found by the following
         DnaComponent comp = s.createDnaComponent(rs.getName(),
-                rs.getName(), rs.getDescription(), false, "type",
+                rs.getName(), rs.getDescription(), false, "other_DNA",
                 s.createDnaSequence(rs.seqString()));
 
         //Now iterate through the features (all)
         FeatureHolder fh = rs.filter(FeatureFilter.all);
         //System.out.println("Features");
-        DnaComponent compAnotFeat = null;
+        //DnaComponent compAnotFeat = null;
         for (Iterator<Feature> i = fh.features(); i.hasNext();) {
             RichFeature rf = (RichFeature) i.next();
 
@@ -153,8 +131,8 @@ public class SBOLutil {
             Integer rfStart = rf.getLocation().getMin();
             Integer rfStop = rf.getLocation().getMax();
             String rfStrand = Character.toString(rf.getStrand().getToken());
-            SequenceAnnotation anot = s.createSequenceAnnotation(rfStart,
-                    rfStop, rfStrand);
+            SequenceAnnotation anot = s.createSequenceAnnotationForDnaComponent(rfStart,
+                    rfStop, rfStrand, comp);
 
             //Get the Rich Annotation of the Rich Feature
             RichAnnotation ra = (RichAnnotation) rf.getAnnotation();
@@ -175,12 +153,15 @@ public class SBOLutil {
                 }
             }
             SequenceFeature feat = s.createSequenceFeature(label, label, label, rf.getType());
+            // should add return void?
             SequenceAnnotation anotFeat = s.addSequenceFeatureToSequenceAnnotation(feat, anot);
-            compAnotFeat = s.addSequenceAnnotationToDnaComponent(anotFeat, comp);
+            //compAnotFeat = s.addSequenceAnnotationToDnaComponent(anotFeat, comp);
 
         }
-        return compAnotFeat;
+        return comp;
     }
+
+
 
     /**
      * Customizes the Json writer to leave out fields annotated with @SkipInJson.
@@ -226,7 +207,7 @@ public class SBOLutil {
                 return f.getAnnotation(SkipInJson.class) != null;
             }
         }
-        Gson gson = new GsonBuilder().setExclusionStrategies(new MyExclusionStrategy(String.class)).create();
+        Gson gson = new GsonBuilder().setExclusionStrategies(new MyExclusionStrategy(SkipInJson.class)).create();
 
         String aJsonString = gson.toJson(input);
         return aJsonString;
@@ -236,75 +217,23 @@ public class SBOLutil {
      * Writes a RDF serialization of a Library.
      *
      * All SBOL information that is found in a Library is written into RDF form.
-     * SHOULD just use com.clarkparsia.empire
-     * RIGHT NOW Uses the com.clarkparsia.openrdf library which walks the SBOL data graph from Library
-     * to all its children and outputs a String with all the information inside.
+     * Walks the SBOL data graph from Library to all its children and outputs
+     * a String with all the RDF information inside.
      *
      * @param input an SBOL Library to be written out
      * @return String containing the RDF serialization
      */
     public String toRDF(Library input) {
-        ExtRepository aRepo = OpenRdfUtil.createInMemoryRepo();
-        ExtGraph aGraph;
-        String rdfString = null;
         //make RDF
-        try {
-            aGraph = RdfGenerator.asRdf(input);
-            for (Iterator<DnaComponent> dci = input.getComponents().iterator(); dci.hasNext();) {
-                DnaComponent aDc = dci.next();
-                aGraph.add(RdfGenerator.asRdf(aDc));
-                for (Iterator<SequenceAnnotation> sai = aDc.getAnnotations().iterator(); sai.hasNext();) {
-                    SequenceAnnotation aSa = sai.next();
-                    System.out.println("sai id:" + aSa.getId());
-                    aGraph.add(RdfGenerator.asRdf(aSa));
-                }
-            }
-            //rdfString = "t";//aGraph.toString();
-            try {
-                aRepo.addGraph(aGraph);
-                RepositoryConnection con = aRepo.getConnection();
-                StringWriter out = new StringWriter();
-                RDFXMLPrettyWriter rdfWriter = new RDFXMLPrettyWriter(out);
-                try {
-                    try {
-                        con.prepareGraphQuery(QueryLanguage.SERQL, "CONSTRUCT * FROM {x} p {y}").evaluate(rdfWriter);
-                        rdfString = out.toString();
-                        //TurtleWriter turtleWriter = new TurtleWriter(System.out);
-                        //TurtleWriter turtleWriter = new TurtleWriter(System.out);
-                    } catch (QueryEvaluationException ex) {
-                        Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (RDFHandlerException ex) {
-                        Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } catch (MalformedQueryException ex) {
-                    Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } catch (RepositoryException ex) {
-                Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "addGraph", ex);
-            }
-            OpenRdfIO.writeGraph(aGraph, new OutputStreamWriter(new FileOutputStream("data\\output.ttl")), RDFFormat.TURTLE);
-            OpenRdfIO.writeGraph(aGraph, new OutputStreamWriter(new FileOutputStream("data\\output.rdf")), RDFFormat.RDFXML);
-
-        } catch (IOException ex) {
-            Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "toRDF IO Ex", ex);
-        } catch (InvalidRdfException ex) {
-            Logger.getLogger(SBOLutil.class.getName()).log(Level.SEVERE, "toRDF Invalid RDF", ex);
-        }
+        SbolService s = new SbolService();
+        s.insertLibrary(input);
+        String rdfString = s.getAllAsRDF();
         return rdfString;
-        /*
-
-        ExtRepository theRepo = OpenRdfUtil.createInMemoryRepo();
-        ExtGraph theGraph;
-
-        try {
-        theGraph = OpenRdfIO.readGraph(new InputStreamReader(new FileInputStream("data\\input.rdf")), RDFFormat.RDFXML);
-        try {
-        theRepo.addGraph(theGraph);
-        } catch (RepositoryException ex) {
-        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        } catch (RDFParseException ex) {
-        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+     
     }
+    public SbolService fromRDF(String rdfString) {
+        SbolService s = new SbolService(rdfString);
+        return s;
+    }
+
 }

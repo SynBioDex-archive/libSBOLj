@@ -29,7 +29,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * a SBOL Library object.
  *
  * @author mgaldzic
- * @version 0.1, 02/08/2011
+ * @since 0.1, 02/08/2011
  */
 @Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
 @RdfsClass("sbol:DnaComponent")
@@ -48,8 +48,9 @@ public class DnaComponent implements SupportsRdfId {
     private String description;
     @RdfProperty("sbol:isCircular")
     private boolean isCircular;
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("rdf:type")
-    private URI type;
+    private Collection<URI> type = new HashSet<URI>();
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("sbol:dnaSequence")
     private DnaSequence dnaSequence;
@@ -230,7 +231,7 @@ public class DnaComponent implements SupportsRdfId {
      * TODO: When serialized to RDF this is a URI, so when read from persistence it should become
      * one of the SO human readable vocabulary terms. Note:I should allow many types
      */
-    public URI getType() {
+    public Collection<URI> getTypes() {
         return type;
     }
 
@@ -241,8 +242,11 @@ public class DnaComponent implements SupportsRdfId {
      * @param type Sequence Ontology URI specifying the type of the DnaComponent
      * @see setType
      */
-    public void setType(URI type) {
-        this.type = type;
+    public void addType(URI type) {
+        if (!getTypes().contains(type)) {
+            getTypes().add(type);
+        //this.type.add(type);
+        }
     }
 
     /**
@@ -262,6 +266,14 @@ public class DnaComponent implements SupportsRdfId {
     public void setRdfId(final RdfKey id) {
         mIdSupport.setRdfId(id);
     }
+
+    /**
+     * Checks whether the other object is an equivalent DnaComponent
+     * @param obj other object to be checked for equivalence with this one
+     *        (may be null, as specified in generic Object.equals(Object) contract)
+     * @return true if another object is equivalent to this one, false otherwise
+     *         (including null parameter)
+     */
 
     @Override
     public boolean equals(Object obj) {

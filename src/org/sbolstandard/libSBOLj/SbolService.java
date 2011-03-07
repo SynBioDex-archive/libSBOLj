@@ -4,7 +4,29 @@
  */
 package org.sbolstandard.libSBOLj;
 
+import com.clarkparsia.empire.Empire;
+import com.clarkparsia.empire.config.EmpireConfiguration;
+import com.clarkparsia.empire.sesametwo.OpenRdfEmpireModule;
+import com.clarkparsia.openrdf.ExtGraph;
+import com.clarkparsia.openrdf.ExtRepository;
+import com.clarkparsia.openrdf.OpenRdfUtil;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import org.openrdf.rio.RDFFormat;
+import org.openrdf.rio.RDFParseException;
 
 /**
  * SbolService provides the methods for making new SBOL objects and adding SBOL
@@ -22,9 +44,52 @@ import java.net.URI;
  * http://www.javaworld.com/javaworld/jw-01-2008/jw-01-jpa1.html
  *
  * @author mgaldzic
- * @version 0.1, 02/10/2011
+ * @since 0.2, 03/2/2011
  */
 public class SbolService {
+
+    private EntityManager aManager = null;
+    private Library library = null;
+
+    public SbolService() {
+        EmpireConfiguration empireConfig = new EmpireConfiguration();
+        empireConfig.getGlobalConfig().put("annotation.index", "config//libSBOLj.empire.annotation.config");
+        empireConfig.getGlobalConfig().put("name", "michal");
+        empireConfig.getGlobalConfig().put("factory", "sesame");
+        empireConfig.getGlobalConfig().put("files", "data//blank.rdf");
+        Empire.init(empireConfig, new OpenRdfEmpireModule());
+        aManager = Persistence.createEntityManagerFactory("newRDF").createEntityManager();
+    }
+
+    public SbolService(String rdfString) {
+        this();
+        InputStream is = null;
+        try {
+            ExtRepository aRepo = OpenRdfUtil.createInMemoryRepo();
+            is = new ByteArrayInputStream(rdfString.getBytes("UTF-8"));
+            try {
+                aRepo.read(is, RDFFormat.RDFXML);
+            } catch (IOException ex) {
+                Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RDFParseException ex) {
+                Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Map aMap = new HashMap();
+            aMap.put("repo_handle", aRepo);
+
+            aManager = Persistence.createEntityManagerFactory("existingRDF").createEntityManager(aMap);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                is.close();
+            } catch (IOException ex) {
+                Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
     /**
      * Builds a new DnaSequence using a string of dna sequence is input.
      *
@@ -35,11 +100,13 @@ public class SbolService {
      * @return DnaSequence can be used as the sequence of a DnaComponent or
      * SequenceFeature
      */
-    public DnaSequence createDnaSequence(String dnaSequence){
+    public DnaSequence createDnaSequence(String dnaSequence) {
         DnaSequence aDS = new DnaSequence();
         aDS.setDnaSequence(dnaSequence);
+        aManager.persist(aDS);
         return aDS;
     }
+
     /**
      * Builds a new SequenceFeature which SequenceAnnotations can point to.
      *
@@ -53,20 +120,22 @@ public class SbolService {
      * @see SequenceFeature
      */
     public SequenceFeature createSequenceFeature(String displayId, String name,
-            String description, String type){
+            String description, String type) {
         SequenceFeature aSF = new SequenceFeature();
         aSF.setDisplayId(displayId);
         aSF.setName(name);
         aSF.setDescription(description);
-        aSF.setType(URI.create("http://sbols.org/sbol.owl#" + type));
+        aSF.addType(URI.create("http://sbols.org/sbol.owl#" + type));
+        aManager.persist(aSF);
         return aSF;
     }
+
     /**
-     * Builds a new SequenceAnnotation which can be used to describe a segment
-     * of a DnaComponent.
+     * Builds a new SequenceAnnotation to describe a segment of the DnaComponent.
      *
-     * Can only describe one DnaComponent. (SequenceFeatures are to be re-used,
-     * when the same one is reused to describe multiple DnaCompenents)
+     * Links the SequenceAnnotation to the component, it can only describe one
+     * DnaComponent. (But, SequenceFeatures are to be re-used, when the same one
+     * is describes multiple DnaCompenents)
      *
      * @param start coordinate of first base of the SequenceFeature
      * @param stop coordinate of last base of the SequenceFeature
@@ -76,14 +145,19 @@ public class SbolService {
      *
      * @see SequenceAnnotation#setStrand(java.lang.String)
      */
-    public SequenceAnnotation createSequenceAnnotation(Integer start,
-            Integer stop, String strand){
+    public SequenceAnnotation createSequenceAnnotationForDnaComponent(Integer start,
+            Integer stop, String strand, DnaComponent component) {
         SequenceAnnotation aSA = new SequenceAnnotation();
         aSA.setStart(start);
         aSA.setStop(stop);
         aSA.setStrand(strand);
+        aSA.setId(component);
+        aManager.persist(aSA);
+        component.addAnnotation(aSA);
+        aManager.merge(component);
         return aSA;
     }
+
     /**
      * Links SequenceFeature to its SequenceAnnotation.
      *
@@ -93,8 +167,9 @@ public class SbolService {
      * objects should be kept in a entity manager
      */
     public SequenceAnnotation addSequenceFeatureToSequenceAnnotation(
-            SequenceFeature feature, SequenceAnnotation annotation){
+            SequenceFeature feature, SequenceAnnotation annotation) {
         annotation.addFeature(feature);
+        aManager.merge(annotation);
         return annotation;
     }
 
@@ -128,27 +203,56 @@ public class SbolService {
         aDC.setDescription(description);
         aDC.setCircular(isCircular);
 
-        aDC.setType(URI.create("http://sbols.org/sbol.owl#" + type));
+        aDC.addType(URI.create("http://sbols.org/sbol.owl#" + type));
         aDC.setDnaSequence(dnaSequence);
+        aManager.persist(aDC);
+
+
         return aDC;
+
+
     }
 
     /**
-     * Links a SequenceAnnotation to the DnaComponent it describes.
+     * Builds a new Library, ready to collect any DnaComponents or Features.
      *
-     * @param annotation position and strand of the feature that was added to the
-     *                   annotation
-     * @param component the DnaComponent being described by the annotation
+     * A Library is the primary object that holds everything to exchange via SBOL.
+     * Create one, and then add DnaComponents and/or SequenceFeatures to it,
+     * then send it to a friend or another SBOL application.
      *
-     * @return the now annotated DnaComponent //WHY? as for the annotation-feature
-     * link this should be maintained by a entity manager
-     * TODO: add an enity manager to the SbolService class
+     * @param displayId A human readable identifier
+     * @param name commonly used to refer to this Library (eg BIOAFAB Pilot Project)
+     * @param description human readable text describing the Library (eg Pilot Project Designs, see http://biofab.org/data)
+     * @return a Library with the metadata fields set, empty otherwise (ie no components or features)
      */
-    public DnaComponent addSequenceAnnotationToDnaComponent(SequenceAnnotation annotation, DnaComponent component){
-        annotation.setId(component);
-        component.addAnnotation(annotation);
-        return component;
+    public Library createLibrary(String displayId, String name, String description) {
+        Library aL = new Library();
+        aL.setDisplayId(displayId);
+        aL.setName(name);
+        aL.setDescription(description);
+        aManager.persist(aL);
+
+
+        return aL;
+
+
     }
+
+    /**
+     * Adds the Library given as input to the SbolService. 
+     * 
+     * If you already have a Library of components and features, you can add it 
+     * directly to the SbolService, to get the benefits of SBOL data persistence services.
+     * 
+     * @param displayId A human readable identifier
+     * @param name commonly used to refer to this Library (eg BIOAFAB Pilot Project)
+     * @param description human readable text describing the Library (eg Pilot Project Designs, see http://biofab.org/data)
+     * @return a Library with the metadata fields set, empty otherwise (ie no components or features)
+     */
+    public void insertLibrary(Library lib) {
+        aManager.persist(lib);
+    }
+
     /**
      * Link the DnaComponent into a Library for organizing it as a list of components
      * that can be re-used, exchanged with another application, or published on the web.
@@ -157,10 +261,13 @@ public class SbolService {
      * @param library a Library which will hold this DnaComponent
      * @return the Library with the DnaComponent inside
      */
-    public Library addDnaComponentToLibrary(DnaComponent component, Library library){
+    public Library addDnaComponentToLibrary(DnaComponent component, Library library) {
         library.addComponent(component);
+        aManager.merge(library);
+
         return library;
     }
+
     /**
      * Link the SequenceFeature into a Library for organizing it as a list of
      * features that can be re-used, exchanged with another application, or published
@@ -174,10 +281,39 @@ public class SbolService {
      * @param library Library that will hold the SequenceFeature
      * @return
      */
-    public Library addSequenceFeatureToLibrary(SequenceFeature feature, Library library){
+    public Library addSequenceFeatureToLibrary(SequenceFeature feature, Library library) {
         library.addFeature(feature);
+        aManager.merge(library);
+
+
         return library;
+
+
     }
 
-    
+    public String getAllAsRDF() {
+        String rdfString = null;
+
+
+        try {
+            Query aQuery = aManager.createQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o.}");
+            ExtGraph singleResult = (ExtGraph) aQuery.getSingleResult();
+            StringWriter out = new StringWriter();
+            //RDFXMLPrettyWriter rdfWriter = new RDFXMLPrettyWriter(out);
+            singleResult.write(out, RDFFormat.RDFXML);
+            rdfString = out.toString();
+
+        } catch (IOException ex) {
+            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rdfString;
+    }
+
+    public Library getLibrary(String id) {
+        Library findMe = new Library();
+        findMe.setId(id);
+        aManager.persist(findMe);
+        Library lib = aManager.find(Library.class, findMe.getRdfId());
+        return lib;
+    }
 }

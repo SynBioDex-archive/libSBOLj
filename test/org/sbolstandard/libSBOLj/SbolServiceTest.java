@@ -88,7 +88,7 @@ public class SbolServiceTest {
         expResult.setStart(start);
         expResult.setStop(stop);
         expResult.setStrand(strand);
-        SequenceAnnotation result = instance.createSequenceAnnotation(start, stop, strand);
+        SequenceAnnotation result = instance.createSequenceAnnotationForDnaComponent(start, stop, strand,);
         assertEquals(expResult, result);
     }
 
