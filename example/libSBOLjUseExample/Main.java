@@ -17,7 +17,7 @@ import org.sbolstandard.libSBOLj.SbolService;
  * TODO: make a completely separate examples of use code base.
  *
  * @author mgaldzic
- * @version 0.2, 03/02/2011
+ * @since 0.2, 03/02/2011
  */
 public class Main {
 
