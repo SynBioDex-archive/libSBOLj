@@ -28,7 +28,7 @@ import org.biojavax.bio.seq.RichSequence;
 import org.biojavax.bio.seq.RichSequenceIterator;
 
 /**
- * SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.
+ * \brief SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.
  *
  * The utils include methods for writing SBOL RDF and JSON. Since, the primary
  * goal of SBOL is data/ information exchange/ sharing on the web we are using RDF.
@@ -40,7 +40,7 @@ import org.biojavax.bio.seq.RichSequenceIterator;
 public class SBOLutil {
 
     /**
-     * Reads the common GenBank flat file so the records in it can be iterated over.
+     * \brief Reads the common GenBank flat file so the records in it can be iterated over.
      *
      * GenBank flat format files can have multiple sequence records. Threfore, 
      * fromGenBankFile uses the org.biojavax.bio.seq.RichSequenceIterator to hold
