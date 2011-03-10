@@ -45,7 +45,7 @@ public class DnaSequence implements SupportsRdfId {
 
     /**
      * The URI which specifies the DNA sequence at another location.
-     * TODO: currently this is not supported by a test case where both the
+     * @todo currently this is not supported by a test case where both the
      * String DnaSequence and DnaRef are both specified. Only one should exist
      * according to the spec. The need for this field may be redundant with the
      * URI for the DnaSequence object (id). Should be re-examined when looking at

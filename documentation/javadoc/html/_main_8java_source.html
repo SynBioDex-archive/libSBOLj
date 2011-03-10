@@ -28,6 +28,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -68,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00008"></a>00008 <span class="keyword">import</span> org.biojavax.bio.seq.RichSequenceIterator;
 <a name="l00009"></a>00009 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SBOLutil;
 <a name="l00010"></a>00010 <span class="keyword">import</span> org.sbolstandard.libSBOLj.Library;
-<a name="l00011"></a>00011 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SbolService;
+<a name="l00011"></a>00011 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SBOLservice;
 <a name="l00012"></a>00012 
 <a name="l00022"></a><a class="code" href="classlib_s_b_o_lj_use_example_1_1_main.html">00022</a> <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classlib_s_b_o_lj_use_example_1_1_main.html" title="Main serves as a simple example of use.">Main</a> {
 <a name="l00023"></a>00023 
@@ -83,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00036"></a>00036         System.out.println(<span class="stringliteral">&quot;aBioFABlib RDF: \n&quot;</span>+ <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">SBOLutil</a>.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil.html#ae3619183fa2c87b782946dd59d758f80" title="Writes a RDF serialization of a Library.">toRDF</a>(aBioFABlib));
 <a name="l00037"></a>00037         String rdfString = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">SBOLutil</a>.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil.html#ae3619183fa2c87b782946dd59d758f80" title="Writes a RDF serialization of a Library.">toRDF</a>(aBioFABlib);
 <a name="l00038"></a>00038 
-<a name="l00039"></a>00039         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html" title="SbolService provides the methods for making new SBOL objects and adding SBOL data.">SbolService</a> aS = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">SBOLutil</a>.fromRDF(rdfString);
+<a name="l00039"></a>00039         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html" title="SBOLservice provides the methods for making new SBOL objects and adding SBOL data.">SBOLservice</a> aS = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">SBOLutil</a>.fromRDF(rdfString);
 <a name="l00040"></a>00040         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> lib = aS.getLibrary(<span class="stringliteral">&quot;BioFabLib_1&quot;</span>);
 <a name="l00041"></a>00041         System.out.println(<span class="stringliteral">&quot;lib Contains: &quot;</span>+lib.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a45382b83b645ea4b89393c96023c54ba" title="Elements that are intended as engineering components in synthetic biology.">getComponents</a>().iterator().next().getName());
 <a name="l00042"></a>00042     }
@@ -104,7 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 9 2011 19:09:06 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 9 2011 21:43:21 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

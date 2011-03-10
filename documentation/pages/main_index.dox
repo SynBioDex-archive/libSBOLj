@@ -1,0 +1,17 @@
+/*! \mainpage SBOL java library
+ 
+  \section intro Introduction
+ 
+  This is the introduction.
+ 
+  \section install_sec Installation
+ 
+  \subsection step1 Step 1: Open the box
+ 
+  \section tutorial_sec Tutorial
+  <ul>
+  <li> \ref tutorial - explains how to use libSBOLj to read and write SBOL data
+ 
+  etc...<a href="http://link.html">link</a>
+  
+ */

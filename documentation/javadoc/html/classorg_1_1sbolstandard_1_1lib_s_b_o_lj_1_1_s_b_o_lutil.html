@@ -28,6 +28,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -93,8 +94,8 @@ Static Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a Json serialization of a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a>.  <a href="#a4fd6d767f8ac9cc03cc70a9aff85161b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil.html#ae3619183fa2c87b782946dd59d758f80">toRDF</a> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library</a> input)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a RDF serialization of a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a>.  <a href="#ae3619183fa2c87b782946dd59d758f80"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9adaa49c34d9d0df4bf33caf516945ec"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SBOLutil::fromRDF" ref="a9adaa49c34d9d0df4bf33caf516945ec" args="(String rdfString)" -->
-static <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html">SbolService</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fromRDF</b> (String rdfString)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5b232ec7d46fb12170154b15c9c6742"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SBOLutil::fromRDF" ref="ad5b232ec7d46fb12170154b15c9c6742" args="(String rdfString)" -->
+static <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html">SBOLservice</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fromRDF</b> (String rdfString)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj. </p>
@@ -130,10 +131,11 @@ static <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_ser
 <dl class="return"><dt><b>Returns:</b></dt><dd>Data from the input file as a RichSequenceIterator a BioJava iterator for annotated sequences. If it cannot find a file it prints a warning, and returns an empty iterator. </dd></dl>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
-    <tr><td class="paramname">BioException</td><td>BioJava threw up, TODO: understand what BioJava exceptions are. </td></tr>
+    <tr><td class="paramname">BioException</td><td>BioJava threw up,</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>understand what BioJava exceptions are. </dd></dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil.html#a375e674a9edc77307e250df41d76f02d" title="Steps through a RichSequenceIterator and builds up an SBOL Library.">fromRichSequenceIter</a>(org.biojavax.bio.seq.RichSequenceIterator) </dd></dl>
 
 <p><p>} catch (Exception be) { System.exit(-1); }</p>
@@ -169,10 +171,11 @@ static <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_ser
 <dl class="return"><dt><b>Returns:</b></dt><dd><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> of DNA Components and SequenceFeatures from the input </dd></dl>
 <dl><dt><b>Exceptions:</b></dt><dd>
   <table class="exception">
-    <tr><td class="paramname">BioException</td><td>BioJava threw up, TODO: understand what BioJava exceptions are. </td></tr>
+    <tr><td class="paramname">BioException</td><td>BioJava threw up,</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>understand what BioJava exceptions are. </dd></dl>
 
 <p>Definition at line <a class="el" href="_s_b_o_lutil_8java_source.html#l00092">92</a> of file <a class="el" href="_s_b_o_lutil_8java_source.html">SBOLutil.java</a>.</p>
 
@@ -283,7 +286,7 @@ static <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_ser
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 9 2011 19:09:07 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 9 2011 21:43:21 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

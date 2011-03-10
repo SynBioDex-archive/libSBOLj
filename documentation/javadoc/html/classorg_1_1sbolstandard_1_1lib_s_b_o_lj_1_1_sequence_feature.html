@@ -28,6 +28,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -115,7 +116,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>The SBOL data model's <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&#39;s SequenceFeature for RDF and Json.">SequenceFeature</a> for RDF and Json. </p>
 <p>The objects of this type represent DNA features which describe DnaComponents found in the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a>. They are associated with DnaComponents via the position and strand information found in the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a>. They SHOULD have a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&#39;s DnaSequence for RDF and Json.">DnaSequence</a> object which corresponds to the sequence of the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> starting and ending at the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a> position in the direction given by the strand. DnaComponents are EXPECTED to be found inside a SBOL <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> object.</p>
-<p>TODO: SHOULD, EXPECTED above</p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>SHOULD, EXPECTED above</dd></dl>
 <dl class="author"><dt><b>Author:</b></dt><dd>mgaldzic </dd></dl>
 <dl class="since"><dt><b>Since:</b></dt><dd>0.1, 02/08/2011 </dd></dl>
 
@@ -296,8 +297,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <div class="memdoc">
 
 <p>Sequence Ontology vocabulary provides a defined term for types of <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&#39;s SequenceFeature for RDF and Json.">SequenceFeature</a>. </p>
-<p>TODO: implement use of SO within libSBOLj. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>a Sequence Ontology (SO) vocabulary term to describe the type of <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&#39;s SequenceFeature for RDF and Json.">SequenceFeature</a>. TODO: When serialized to RDF this is a URI, so when read from persistence it should become one of the SO human readable vocabulary terms. Note: should allow many types </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>implement use of SO within libSBOLj. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>a Sequence Ontology (SO) vocabulary term to describe the type of <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&#39;s SequenceFeature for RDF and Json.">SequenceFeature</a>. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>When serialized to RDF this is a URI, so when read from persistence it should become one of the SO human readable vocabulary terms. Note: should allow many types </dd></dl>
 
 <p>Definition at line <a class="el" href="_sequence_feature_8java_source.html#l00171">171</a> of file <a class="el" href="_sequence_feature_8java_source.html">SequenceFeature.java</a>.</p>
 
@@ -347,7 +349,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <div class="memdoc">
 
 <p>Identifier that users will see as reference to this feature. </p>
-<p>It should be unambiguous and is likely imported from source data. Otherwise it SHOULD be generated. TODO: It should be restricted to alphanumeric/underscore and starting with a letter or underscore. TODO: SHOULD </p>
+<p>It should be unambiguous and is likely imported from source data. Otherwise it SHOULD be generated. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd><p class="startdd">It should be restricted to alphanumeric/underscore and starting with a letter or underscore. </p>
+<p class="enddd">SHOULD </p>
+</dd></dl>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">displayId</td><td>A human readable identifier </td></tr>
@@ -485,7 +490,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 9 2011 19:09:07 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Mar 9 2011 21:43:21 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>
