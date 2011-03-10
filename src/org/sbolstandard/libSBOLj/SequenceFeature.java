@@ -21,7 +21,7 @@ import javax.persistence.OneToOne;
 import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 
 /**
- * The SBOL data model's Sequence Feature for RDF and Json.
+ * The SBOL data model's SequenceFeature for RDF and Json.
  *
  * The objects of this type represent DNA features which describe DnaComponents
  * found in the Library. They are associated with DnaComponents via the position
