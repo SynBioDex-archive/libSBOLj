@@ -97,7 +97,7 @@ public class SBOLutil {
         while (rsi.hasNext()) {
             RichSequence rs = rsi.nextRichSequence();
             System.out.println("readGB file of: " + rs.getName());
-            s.addDnaComponentToLibrary(SbolService.readRichSequence(rs), lib);
+            s.addDnaComponentToLibrary(SBOLutil.readRichSequence(rs), lib);
         }
         return lib;
     }
