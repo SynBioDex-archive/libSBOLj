@@ -1,0 +1,109 @@
+<html>
+<h1><span style="font-weight:normal">libSBOLj v.02 Tutorial</span></h1>
+
+<p align="center" style="margin-bottom:0in;margin-bottom:.0001pt;text-align:center">03/09/2011</p>
+
+<p align="center" style="margin-bottom:0in;margin-bottom:.0001pt;text-align:center">Michal Galdzicki</p>
+
+<h1 style="margin-left:0in;text-indent:0in"><span><span>A. </span></span>Write SBOL RDF or Json data
+from a GenBank File</h1>
+
+<p><i>The code in this
+example can be found in libSBOLjUseExample.Main</i></p>
+
+<p>The basic SBOL use case is to represent a DNA level design
+of a DNA construct. Legacy designs of biological constructs are likely to be
+found in GenBank flatfile format, as DNA sequence editor software (eg ApE,
+VectorNTI, GD-ICE’s Vector Editor) used to create them has the ability to
+export this format.<span>&nbsp; </span>Additionally the
+GenBank format is the <i>de-facto</i>
+standard for exchange of annotated DNA sequence data between software.
+Therefore, for our<span>&nbsp; </span>first example we
+convert a GenBank file from the BIOFAB Pilot Project into SBOL RDF and Json
+serializations.</p>
+
+<h2 style="text-indent:0in"><span><span>1.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span>Create a new SBOLutil object</h2>
+
+<p>The SBOLutil class contains useful methods
+specific to this conversion use case. To use SBOLutil you first instantiate an
+object of this type.</p>
+<p><span style="font-family:Courier New">
+</span></p>
+<blockquote>
+<pre>SBOLutil sU = new SBOLutil()
+
+</pre>
+</blockquote>
+
+
+<h2 style="text-indent:0in"><span><span>2.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span>Read GenBank file RichSequence</h2>
+
+<p>The BioJava library utilities (BioJava-1.7.1)
+are used to parse a GenBank flat file formatted file and create a
+RichSequenceIterator. The RichSequence objects correspond to one GenBank record
+from a file. GenBank files can contain multiple records therefore the
+collection of records needs to be iterated over. However, as is the case in our
+example, usually there is one GenBank record in a file. The file <span><span style="font-family:Courier New;color:black">BFa_8.15.gb</span></span>
+contains the sequence for a plasmid vector and annotations for a GFP expression
+cassette. The SBOLutil object method <span><span style="font-family:Courier New;color:black">fromGenBankFile</span></span><span><span style="color:black"> is a convience method to read GenBank files.</span></span></p>
+
+<p><span><span style="font-family:Courier New;color:black">Iterator aRsIter =
+sU.fromGenBankFile("test\\test_files\\BFa_8.15.gb");</span></span></p>
+
+<h2 style="text-indent:0in"><span><span>3.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span>Get a new Library object from RichSequence
+objects</h2>
+
+<p>The SBOLutil method fromRichSequenceIter steps
+through the RichSequenceiterator object and creates a Library SBOL object. The
+output contains the DnaCompnents for each RichSequence object (ie GenBank
+Record) and its annotations.<span>&nbsp; </span></p>
+
+<p><span><span style="font-family:Courier New;color:black">Library aBioFABlib = sU.fromRichSequenceIter(aRsIter);</span></span></p>
+
+<p>More detail: fromRichSequenceIter loops over
+the iterator using the readRichSequence method to read each RichSequence
+object, and to map the information contained within RichSequence to an SBOL
+DnaComponent. Finally, it adds each DnaComponent to a Library which is
+returned. The readRichSequence method can be used independently if only one
+RichSequence is expected.</p>
+
+<h2 style="text-indent:0in"><span><span>4.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span>Serialize the Library object to RDF or Json</h2>
+
+<p>Finally, to serialize the SBOL data, found
+in the Library object, there are two methods that allow you to serialize the
+Library object either to RDF or to Json.</p>
+
+<p><span><span style="font-family:Courier New;color:black"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>String jsonString =
+sU.toJson(aBioFABlib);</span></span></p>
+
+<p><span><span style="color:black">&nbsp;</span></span></p>
+
+<p><span><span style="font-family:Courier New;color:black"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>String rdfString = sU.toRDF(aBioFABlib);</span></span></p>
+
+<h1 style="margin-left:0in;text-indent:0in"><span><span>B. </span></span>Read SBOL RDF data into a
+Library object</h1>
+
+<p>&nbsp;</p>
+
+<p><span><span style="font-family:Courier New;color:black"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SbolService aS = sU.fromRDF(rdfString);</span></span></p>
+
+<p><span><span style="font-family:Courier New;color:black">&nbsp;</span></span></p>
+
+<p><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Library lib = aS.getLibrary("BioFabLib_1");</p>
+
+<p>&nbsp;</p>
+
+<p><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>System.out.println("lib Contains:
+"+lib.getComponents().iterator().next().getName());</p>
+
+<h1 style="margin-left:0in;text-indent:0in"><span><span>C. </span></span>Create a New SBOL Library
+object</h1>
+
+<h1 style="margin-left:0in;text-indent:0in"><span><span>D. </span></span>Access members of Library</h1>
+</html>	
