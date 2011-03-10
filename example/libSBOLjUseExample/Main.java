@@ -17,7 +17,7 @@ import org.sbolstandard.libSBOLj.SbolService;
  * TODO: make a completely separate examples of use code base.
  *
  * @author mgaldzic
- * @version 0.2, 03/02/2011
+ * @since 0.2, 03/02/2011
  */
 public class Main {
 
@@ -27,16 +27,16 @@ public class Main {
      */
     public static void main(String[] args) throws BioException {
         System.out.println("create BIOFAB Library");
-        SBOLutil sU = new SBOLutil();
+        
 
-        RichSequenceIterator aRsIter = sU.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
-        Library aBioFABlib = sU.fromRichSequenceIter(aRsIter);
+        RichSequenceIterator aRsIter = SBOLutil.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
+        Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRsIter);
 
-        System.out.println("aBioFABlib json: \n" + sU.toJson(aBioFABlib));
-        System.out.println("aBioFABlib RDF: \n"+ sU.toRDF(aBioFABlib));
-        String rdfString = sU.toRDF(aBioFABlib);
+        System.out.println("aBioFABlib json: \n" + SBOLutil.toJson(aBioFABlib));
+        System.out.println("aBioFABlib RDF: \n"+ SBOLutil.toRDF(aBioFABlib));
+        String rdfString = SBOLutil.toRDF(aBioFABlib);
 
-        SbolService aS = sU.fromRDF(rdfString);
+        SbolService aS = SBOLutil.fromRDF(rdfString);
         Library lib = aS.getLibrary("BioFabLib_1");
         System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName());
     }

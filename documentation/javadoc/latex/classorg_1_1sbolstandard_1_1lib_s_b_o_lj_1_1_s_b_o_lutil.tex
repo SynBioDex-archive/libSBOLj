@@ -1,0 +1,203 @@
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil}{
+\section{SBOLutil Class Reference}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil}\index{org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}}
+}
+
+
+SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \hyperlink{interfaceorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_1_1_skip_in_json}{SkipInJson}
+\begin{DoxyCompactList}\small\item\em Customizes the Json writer to leave out fields annotated with . \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static RichSequenceIterator \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_ab30e7fc9ccb218e864e45cad4366304a}{fromGenBankFile} (String filename)  throws BioException 
+\begin{DoxyCompactList}\small\item\em Reads the common GenBank flat file so the records in it can be iterated over. \item\end{DoxyCompactList}\item 
+static \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a375e674a9edc77307e250df41d76f02d}{fromRichSequenceIter} (RichSequenceIterator rsi)  throws BioException 
+\begin{DoxyCompactList}\small\item\em Steps through a RichSequenceIterator and builds up an SBOL \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. \item\end{DoxyCompactList}\item 
+static \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a36d32367508f84b9628401ab634219b2}{readRichSequence} (RichSequence rs)
+\begin{DoxyCompactList}\small\item\em Maps the BioJava RichSequence object to \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} its DNA Sequence, Annotations, and Features. \item\end{DoxyCompactList}\item 
+static String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a4fd6d767f8ac9cc03cc70a9aff85161b}{toJson} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} input)
+\begin{DoxyCompactList}\small\item\em Writes a Json serialization of a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. \item\end{DoxyCompactList}\item 
+static String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_ae3619183fa2c87b782946dd59d758f80}{toRDF} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} input)
+\begin{DoxyCompactList}\small\item\em Writes a RDF serialization of a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. \item\end{DoxyCompactList}\item 
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a9adaa49c34d9d0df4bf33caf516945ec}{
+static \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service}{SbolService} {\bfseries fromRDF} (String rdfString)}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a9adaa49c34d9d0df4bf33caf516945ec}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj. The utils include methods for writing SBOL RDF and JSON. Since, the primary goal of SBOL is data/ information exchange/ sharing on the web we are using RDF. SBOL utils also include the methods for exchanging data with other common data formats, such as GenBank flat files using BioJava. \begin{DoxyAuthor}{Author}
+mgaldzic 
+\end{DoxyAuthor}
+\begin{DoxySince}{Since}
+0.2, 03/2/2011 
+\end{DoxySince}
+
+
+Definition at line 40 of file SBOLutil.java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_ab30e7fc9ccb218e864e45cad4366304a}{
+\index{org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}!fromGenBankFile@{fromGenBankFile}}
+\index{fromGenBankFile@{fromGenBankFile}!org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}}
+\subsubsection[{fromGenBankFile}]{\setlength{\rightskip}{0pt plus 5cm}static RichSequenceIterator fromGenBankFile (
+\begin{DoxyParamCaption}
+\item[{String}]{filename}
+\end{DoxyParamCaption}
+)  throws BioException \hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_ab30e7fc9ccb218e864e45cad4366304a}
+
+
+Reads the common GenBank flat file so the records in it can be iterated over. 
+
+GenBank flat format files can have multiple sequence records. Threfore, fromGenBankFile uses the org.biojavax.bio.seq.RichSequenceIterator to hold the data from a GenBank file so it can be stepped through. \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a375e674a9edc77307e250df41d76f02d}{fromRichSequenceIter}(org.biojavax.bio.seq.RichSequenceIterator) will do that.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The file path for a GenBank file (eg \char`\"{}test$\backslash$$\backslash$test\_\-files$\backslash$$\backslash$BFa\_\-8.15.gb\char`\"{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Data from the input file as a RichSequenceIterator a BioJava iterator for annotated sequences. If it cannot find a file it prints a warning, and returns an empty iterator. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em BioException} & BioJava threw up, TODO: understand what BioJava exceptions are. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a375e674a9edc77307e250df41d76f02d}{fromRichSequenceIter}(org.biojavax.bio.seq.RichSequenceIterator) 
+\end{DoxySeeAlso}
+
+
+\} catch (Exception be) \{ System.exit(-\/1); \}
+
+
+
+Definition at line 57 of file SBOLutil.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a375e674a9edc77307e250df41d76f02d}{
+\index{org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}!fromRichSequenceIter@{fromRichSequenceIter}}
+\index{fromRichSequenceIter@{fromRichSequenceIter}!org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}}
+\subsubsection[{fromRichSequenceIter}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Library} fromRichSequenceIter (
+\begin{DoxyParamCaption}
+\item[{RichSequenceIterator}]{rsi}
+\end{DoxyParamCaption}
+)  throws BioException \hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a375e674a9edc77307e250df41d76f02d}
+
+
+Steps through a RichSequenceIterator and builds up an SBOL \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. 
+
+The 1 or many GenBank style records, stored as a BioJava object RichSequenceIterator are mapped to a SBOL \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} object which can contain many DNA components. The \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{libSBOLj.Library} can then be serialized as RDF or Json.
+
+
+\begin{DoxyParams}{Parameters}
+{\em rsi} & RichSequenceIterator created by BioJava (eg from GenBank file) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} of DNA Components and SequenceFeatures from the input 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em BioException} & BioJava threw up, TODO: understand what BioJava exceptions are. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 92 of file SBOLutil.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a36d32367508f84b9628401ab634219b2}{
+\index{org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}!readRichSequence@{readRichSequence}}
+\index{readRichSequence@{readRichSequence}!org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}}
+\subsubsection[{readRichSequence}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf DnaComponent} readRichSequence (
+\begin{DoxyParamCaption}
+\item[{RichSequence}]{rs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a36d32367508f84b9628401ab634219b2}
+
+
+Maps the BioJava RichSequence object to \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} its DNA Sequence, Annotations, and Features. 
+
+An individual GenBank record is translated into the SBOL model, by mapping. The GenBank record is mapped to \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. The Features location information is mapped to SequenceAnnotations of that \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. The Feature Notes are mapped to SequenceFeatures. Then the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} gets linked to its annotations and the features. 
+\begin{DoxyParams}{Parameters}
+{\em rs} & a RichSequence containing DNA sequence described by features. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} with the attached SequenceAnnotations and SequenceFeatures 
+\end{DoxyReturn}
+
+
+Definition at line 116 of file SBOLutil.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a4fd6d767f8ac9cc03cc70a9aff85161b}{
+\index{org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}!toJson@{toJson}}
+\index{toJson@{toJson}!org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}}
+\subsubsection[{toJson}]{\setlength{\rightskip}{0pt plus 5cm}static String toJson (
+\begin{DoxyParamCaption}
+\item[{{\bf Library}}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_a4fd6d767f8ac9cc03cc70a9aff85161b}
+
+
+Writes a Json serialization of a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. 
+
+All SBOL information that is found in a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} is written into Json form. Uses the com.google.gson library which walks the SBOL data graph from \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} to all its children and outputs a String with all the information inside.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & an SBOL \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} to be written out \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String containing the Json serialization 
+\end{DoxyReturn}
+
+
+Definition at line 189 of file SBOLutil.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_ae3619183fa2c87b782946dd59d758f80}{
+\index{org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}!toRDF@{toRDF}}
+\index{toRDF@{toRDF}!org::sbolstandard::libSBOLj::SBOLutil@{org::sbolstandard::libSBOLj::SBOLutil}}
+\subsubsection[{toRDF}]{\setlength{\rightskip}{0pt plus 5cm}static String toRDF (
+\begin{DoxyParamCaption}
+\item[{{\bf Library}}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_ae3619183fa2c87b782946dd59d758f80}
+
+
+Writes a RDF serialization of a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. 
+
+All SBOL information that is found in a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} is written into RDF form. Walks the SBOL data graph from \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} to all its children and outputs a String with all the RDF information inside.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & an SBOL \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} to be written out \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String containing the RDF serialization 
+\end{DoxyReturn}
+
+
+Definition at line 226 of file SBOLutil.java.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/Users/mgaldzic/Documents/NetBeansProjects/libSBOLj/src/org/sbolstandard/libSBOLj/SBOLutil.java\end{DoxyCompactItemize}

@@ -54,7 +54,7 @@ public class SBOLutil {
      * @throws BioException BioJava threw up, TODO: understand what BioJava exceptions are.
      * @see #fromRichSequenceIter(org.biojavax.bio.seq.RichSequenceIterator)
      */
-    public RichSequenceIterator fromGenBankFile(String filename) throws BioException {
+    public static RichSequenceIterator fromGenBankFile(String filename) throws BioException {
 
         BufferedReader br = null;
         SimpleNamespace ns = null;
@@ -89,7 +89,7 @@ public class SBOLutil {
      * @return Library of DNA Components and SequenceFeatures from the input
      * @throws BioException BioJava threw up, TODO: understand what BioJava exceptions are.
      */
-    public Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
+    public static Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
         SbolService s = new SbolService();
         
         Library lib = s.createLibrary("BioFabLib_1", "BIOAFAB Pilot Project",
@@ -97,7 +97,7 @@ public class SBOLutil {
         while (rsi.hasNext()) {
             RichSequence rs = rsi.nextRichSequence();
             System.out.println("readGB file of: " + rs.getName());
-            s.addDnaComponentToLibrary(readRichSequence(rs), lib);
+            s.addDnaComponentToLibrary(SBOLutil.readRichSequence(rs), lib);
         }
         return lib;
     }
@@ -113,7 +113,7 @@ public class SBOLutil {
      * @param rs a RichSequence containing DNA sequence described by features.
      * @return DnaComponent with the attached SequenceAnnotations and SequenceFeatures
      */
-    public DnaComponent readRichSequence(RichSequence rs) {
+    public static DnaComponent readRichSequence(RichSequence rs) {
         SbolService s = new SbolService();
         //The main GenBank Record can be found by the following
         DnaComponent comp = s.createDnaComponent(rs.getName(),
@@ -186,7 +186,7 @@ public class SBOLutil {
      * @param input an SBOL Library to be written out
      * @return String containing the Json serialization
      */
-    public String toJson(Library input) {
+    public static String toJson(Library input) {
 
         // converting to JSON
         //add this type to skip: SupportsRdfId
@@ -223,7 +223,7 @@ public class SBOLutil {
      * @param input an SBOL Library to be written out
      * @return String containing the RDF serialization
      */
-    public String toRDF(Library input) {
+    public static String toRDF(Library input) {
         //make RDF
         SbolService s = new SbolService();
         s.insertLibrary(input);
@@ -231,7 +231,7 @@ public class SBOLutil {
         return rdfString;
      
     }
-    public SbolService fromRDF(String rdfString) {
+    public static SbolService fromRDF(String rdfString) {
         SbolService s = new SbolService(rdfString);
         return s;
     }
