@@ -48,7 +48,9 @@ String {\bfseries getAllAsRDF} ()}
 \subsection{Detailed Description}
 \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice}{SBOLservice} provides the methods for making new SBOL objects and adding SBOL data. Use methods of \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice}{SBOLservice} when creating new SBOL objects and adding data. It is called a service as it performs operations on the SBOL objects that do not really belong to the class itself. These convenience methods SHOLD include an entity manager from empire, delete methods, creating entities SHOULD check for previously existing objects and eventually should be the only way most applications interact with the SBOL API.
 
-inspired by examples on: \href{http://www.java2s.com/Code/Java/JPA}{\tt http://www.java2s.com/Code/Java/JPA} it should do more of the things found in the intro to jpa: \href{http://www.javaworld.com/javaworld/jw-01-2008/jw-01-jpa1.html}{\tt http://www.javaworld.com/javaworld/jw-\/01-\/2008/jw-\/01-\/jpa1.html}
+inspired by examples on: \href{http://www.java2s.com/Code/Java/JPA}{\tt http://www.java2s.com/Code/Java/JPA} it should do more of the things found in the intro to jpa: \href{http://www.javaworld.com/javaworld/jw-01-2008/jw-01-jpa1.html}{\tt http://www.javaworld.com/javaworld/jw-\/01-\/2008/jw-\/01-\/jpa1.html} \begin{Desc}
+\item[\hyperlink{todo__todo000004}{Todo}]update and delete methods.\end{Desc}
+
 
 \begin{DoxyAuthor}{Author}
 mgaldzic 
@@ -58,7 +60,7 @@ mgaldzic
 \end{DoxySince}
 
 
-Definition at line 49 of file SBOLservice.java.
+Definition at line 50 of file SBOLservice.java.
 
 
 
@@ -89,7 +91,7 @@ the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} wi
 \end{DoxyReturn}
 
 
-Definition at line 264 of file SBOLservice.java.
+Definition at line 265 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_ae387ca46de01accf2c313559d3783d1c}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!addSequenceFeatureToLibrary@{addSequenceFeatureToLibrary}}
@@ -119,7 +121,7 @@ Features do not have to describe components. They are useful on their own if you
 \end{DoxyReturn}
 
 
-Definition at line 284 of file SBOLservice.java.
+Definition at line 285 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a4dbd0885b3977f121439873805a294ba}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!addSequenceFeatureToSequenceAnnotation@{addSequenceFeatureToSequenceAnnotation}}
@@ -147,7 +149,7 @@ The linked \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_anno
 \end{DoxyReturn}
 
 
-Definition at line 169 of file SBOLservice.java.
+Definition at line 170 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_ad3946d924f4c43fa442841aa5d56d474}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!createDnaComponent@{createDnaComponent}}
@@ -198,7 +200,7 @@ Builds a new \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_compone
 \end{DoxySeeAlso}
 
 
-Definition at line 197 of file SBOLservice.java.
+Definition at line 198 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a61e2cda6134ecedb3a5d0b92206b91a2}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!createDnaSequence@{createDnaSequence}}
@@ -226,7 +228,7 @@ Builds a new \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequenc
 \end{DoxyReturn}
 
 
-Definition at line 103 of file SBOLservice.java.
+Definition at line 104 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a7a21049be3161d93bd273e6906899c5a}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!createLibrary@{createLibrary}}
@@ -259,7 +261,7 @@ a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} with
 \end{DoxyReturn}
 
 
-Definition at line 228 of file SBOLservice.java.
+Definition at line 229 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_ab96b56fff36ffe4e728e749e0dcbef29}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!createSequenceAnnotationForDnaComponent@{createSequenceAnnotationForDnaComponent}}
@@ -296,7 +298,7 @@ a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}{S
 \end{DoxySeeAlso}
 
 
-Definition at line 148 of file SBOLservice.java.
+Definition at line 149 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a5dab616a55f915c1ebaa6b244fb48fb5}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!createSequenceFeature@{createSequenceFeature}}
@@ -333,7 +335,7 @@ a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{Sequ
 \end{DoxySeeAlso}
 
 
-Definition at line 122 of file SBOLservice.java.
+Definition at line 123 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a96b5821c89233871863efb31ae98d629}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!insertLibrary@{insertLibrary}}
@@ -364,7 +366,7 @@ a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} with
 \end{DoxyReturn}
 
 
-Definition at line 252 of file SBOLservice.java.
+Definition at line 253 of file SBOLservice.java.
 
 
 

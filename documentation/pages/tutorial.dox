@@ -1,10 +1,15 @@
 /*! \page tutorial libSBOLj v.02 Tutorial
-<center>
- 03/09/2011
-Michal Galdzicki
-</center>
 
+\section sec_toc Learn how to:
+
+\ref A \n
+\ref B \n
+\ref C \n
+\ref D \n
+
+<hr>
 \section A A. Write SBOL RDF or Json data from a GenBank File
+
 <i>The code in this example can be found in libSBOLjUseExample.Main</i>
 
 The basic SBOL use case is to represent a DNA level design of a DNA construct.
@@ -15,14 +20,11 @@ format is the de-facto standard for exchange of annotated DNA sequence data
 between software. Therefore, for our  first example we convert a GenBank file
 from the BIOFAB Pilot Project into SBOL RDF and Json serializations.
 
-\subsection gb_in Read in a GenBank file
-
-<ol>
-<li>\par Use SBOLutil class
+-# \par Use SBOLutil class
 The SBOLutil class contains static methods, namely utilities for the GenBank to
 SBOL conversion use case.
 
-<li>\par Read GenBank file RichSequence
+-# \par Read in a GenBank file into RichSequence
 The BioJava library utilities (BioJava-1.7.1) are used to parse a GenBank flat
 file formatted file and create a RichSequenceIterator. The RichSequence objects
 correspond to one GenBank record from a file. Since, GenBank files can contain
@@ -31,37 +33,159 @@ as is the case in our example, there is often one GenBank record in a file. The
 file BFa_8.15.gb contains the sequence for a plasmid vector and annotations for
 a GFP expression cassette. The SBOLutil method fromGenBankFile is a convenience
 method to read GenBank files.
-\verbatim
-RichSequenceIterator aRsIter = SBOLutil.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
-\endverbatim
+\code
+RichSequenceIterator aRSiter = SBOLutil.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
+\endcode
 
-<li>\par Get a new Library object from RichSequence objects
+-# \par Get a new Library object from BioJava.RichSequence objects
 The SBOLutil method fromRichSequenceIter steps through the RichSequenceiterator
 object and creates a Library SBOL object. The output contains the DnaCompnents
 for each RichSequence object (ie GenBank Record) and its annotations.  
-\verbatim Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRsIter); \endverbatim
-\note More detail:
+\code Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRsIter); \endcode
+<em> More detail</em>:
 fromRichSequenceIter loops over the iterator using the readRichSequence method
 to read each RichSequence object, and to map the information contained within
 RichSequence to an SBOL DnaComponent. Finally, it adds each DnaComponent to a
 Library which is returned. The readRichSequence method can be used independently
 if only one RichSequence is expected.
 
-<li>\par Serialize the Library object to RDF or Json
-Finally, to serialize the SBOL data, found in the Library object, there are two methods that allow you to serialize the Library object either to RDF or to Json.
-\verbatim
+-# \par Serialize the Library object to RDF or Json
+Finally, to serialize the SBOL data, found in the Library object, there are two
+methods that allow you to serialize the Library object either to RDF or to Json.
+\code
 String jsonString = SBOLutil.toJson(aBioFABlib);
 String rdfString = SBOLutil.toRDF(aBioFABlib);
-\endverbatim
-</ol>
+\endcode
+
+The serialized RDF/XML or Json can then be sent to a collaborator or written to
+disk.
+
+<hr>
 \section B B. Read SBOL RDF data into a Library object
-Now that the 
 
-        SBOLservice aS = SBOLutil.fromRDF(rdfString);
+In an information exchange use case SBOL RDF is sent from one party to another.
+Once SBOL RDF exists it can be easily read by libSBOLj. Then, the libSBOLj objects
+can be accessed, manipulated, mapped to another API, or stored in a persistent 
+repository. The libSBOLj object SBOLservice provides the services to manipulate 
+the data.
 
-        Library lib = aS.getLibrary("BioFabLib_1");
+-# \par Read RDF/XML from a String
+For this example we use as input the rdfString, output of \ref A "example A". The
+SBOLutil.fromRDF method reads a String which contains the RDF/XML (UTF-8) data and
+populates the corresponding libSBOLj objects. It returns a SBOLservice object
+which provides create and read methods.
+\code
+SBOLservice aS = SBOLutil.fromRDF(rdfString);
+\endcode
 
-        System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName());
-C. Create a New SBOL Library object
-D. Access members of Library
+-# \par Get a libSBOLj.Library object
+Since the SBOLservice could contain multiple Libraries, to get at the data you
+select a Library by it's ID, using the .getLibrary method. <em>In this example,
+the Library ID is a mockup</em> used for example A.
+\code
+Library lib = aS.getLibrary("BioFabLib_1");
+\endcode
+
+-# \par Access data members
+The Library object behaves as a POJO and conforms to the SBOL core data model in
+structure. There are getters and setter methods for fields and one-to-many relations
+are Collections which can be iterated over. <em>For example see \ref C "example C" </em>.
+\code
+System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName());
+\endcode
+
+For access to other data members see documentation for getters in SBOL objects,
+(ie. \link org.sbolstandard.libSBOLj.Library Library \endlink).
+
+<hr>
+\section C C. Create a New SBOL Library object
+
+-# \par Create a new SBOLservice
+\code
+SBOLservice s = new SBOLservice();
+\endcode
+
+-# \par Create a new DnaComponent
+DnaComponents are the segments of DNA sequence, which can be used to build new
+synthetic biological devices and systems.
+\code
+DnaComponent aDC = s.createDnaComponent(
+                "BBa_R0040",                 //displayId
+                "pTet",                      //name
+                "TetR repressible promoter", //description
+                false,                       //circular
+                "promoter",                  //type
+                s.createDnaSequence(         //DNA sequence
+                     "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac")
+                );
+\endcode
+or
+\code
+DnaComponent aDC = new DnaComponent();
+aDC.setDisplayId("BBa_R0040");
+aDC.setName("pTet");
+aDC.setDescription("TetR repressible promoter");
+aDC.setCircular(false);
+aDC.setType("promoter");
+aDC.set(s.createDnaSequence(
+                  "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"));
+
+\endcode
+
+-# \par Create Annotations and Features
+SequenceAnnotations provide the position and strand of SequenceFeatures which
+describe the DnaComponent.
+\code
+//The location of the feature
+SequenceAnnotation aSA = s.createSequenceAnnotationForDnaComponent(
+                    127, //start
+                    181, //stop
+                    "+", //strand orientation
+                    aDC  //DnaComponent
+                    );
+\endcode
+or
+\code
+SequenceAnnotation anot = new SequenceAnnotation();
+aSA.setStart(127);
+aSA.setStop(181);
+aSA.setStrand("+");
+aSA.setId(aDC);
+//annotate the DnaComponent
+aDC.addAnnotation(aSA);
+\endcode
+
+-# \par Create Feature
+\code
+SequenceFeature aSF = s.createSequenceFeature(
+            "BBa_R0062",                             //displayID
+            "pLux",                                  //name
+            "Activated by LuxR in concert with HSL", //description
+            "promoter"                               //type
+            );
+\endcode
+or
+\code
+SequenceFeature aSF = new SequenceFeature();
+aSF.setDiplayID("BBa_R0062");
+aSF.setName("pLux");
+aSF.setDescription("Activated by LuxR in concert with HSL");
+aSF.addType(URI.create("http://purl.org/obo/owl/SO#" + "promoter"));
+\endcode
+
+-# \par Then, link the Feature to the Annotation
+\code
+SequenceAnnotation anotFeat = s.addSequenceFeatureToSequenceAnnotation(feat, anot);
+\endcode
+
+<hr>
+\section D D. Access members of Library
+
+-# \par
+
+
+<hr>
+Michal Galdzicki - 03/09/2011
 */
+
+\subsection gb_in Read in a GenBank file
