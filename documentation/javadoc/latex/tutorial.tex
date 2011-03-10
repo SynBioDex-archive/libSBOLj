@@ -1,0 +1,41 @@
+\begin{center} 03/09/2011 Michal Galdzicki \end{center} \hypertarget{tutorial_A}{}\section{A. Write SBOL RDF or Json data from a GenBank File}\label{tutorial_A}
+{\itshape The code in this example can be found in \hyperlink{classlib_s_b_o_lj_use_example_1_1_main}{libSBOLjUseExample.Main}\/}
+
+The basic SBOL use case is to represent a DNA level design of a DNA construct. Legacy designs of biological constructs are likely to be found in GenBank flatfile format, as DNA sequence editor software (eg ApE, VectorNTI, GD-\/ICE's Vector Editor) used to create them has the ability to export this format. Additionally the GenBank format is the de-\/facto standard for exchange of annotated DNA sequence data between software. Therefore, for our first example we convert a GenBank file from the BIOFAB Pilot Project into SBOL RDF and Json serializations.\hypertarget{tutorial_gb_in}{}\subsection{Read in a GenBank file}\label{tutorial_gb_in}
+
+\begin{DoxyEnumerate}
+\item \begin{DoxyParagraph}{Use SBOLutil class}
+The SBOLutil class contains static methods, namely utilities for the GenBank to SBOL conversion use case.
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Read GenBank file RichSequence}
+The BioJava library utilities (BioJava-\/1.7.1) are used to parse a GenBank flat file formatted file and create a RichSequenceIterator. The RichSequence objects correspond to one GenBank record from a file. Since, GenBank files can contain multiple records, the collection of records needs to be iterated over. However, as is the case in our example, there is often one GenBank record in a file. The file BFa\_\-8.15.gb contains the sequence for a plasmid vector and annotations for a GFP expression cassette. The SBOLutil method fromGenBankFile is a convenience method to read GenBank files. \begin{DoxyVerb}
+RichSequenceIterator aRsIter = SBOLutil.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
+\end{DoxyVerb}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Get a new Library object from RichSequence objects}
+The SBOLutil method fromRichSequenceIter steps through the RichSequenceiterator object and creates a Library SBOL object. The output contains the DnaCompnents for each RichSequence object (ie GenBank Record) and its annotations. \begin{DoxyVerb}Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRsIter); \end{DoxyVerb}
+ 
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+More detail: fromRichSequenceIter loops over the iterator using the readRichSequence method to read each RichSequence object, and to map the information contained within RichSequence to an SBOL DnaComponent. Finally, it adds each DnaComponent to a Library which is returned. The readRichSequence method can be used independently if only one RichSequence is expected.
+\end{DoxyNote}
+
+\item \begin{DoxyParagraph}{Serialize the Library object to RDF or Json}
+Finally, to serialize the SBOL data, found in the Library object, there are two methods that allow you to serialize the Library object either to RDF or to Json. \begin{DoxyVerb}
+String jsonString = SBOLutil.toJson(aBioFABlib);
+String rdfString = SBOLutil.toRDF(aBioFABlib);
+\end{DoxyVerb}
+ 
+\end{DoxyParagraph}
+
+\end{DoxyEnumerate}\hypertarget{tutorial_B}{}\section{B. Read SBOL RDF data into a Library object}\label{tutorial_B}
+Now that the
+
+SBOLservice aS = SBOLutil.fromRDF(rdfString);
+
+Library lib = aS.getLibrary(\char`\"{}BioFabLib\_\-1\char`\"{});
+
+System.out.println(\char`\"{}lib Contains: \char`\"{}+lib.getComponents().iterator().next().getName()); C. Create a New SBOL Library object D. Access members of Library 
