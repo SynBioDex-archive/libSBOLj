@@ -4,13 +4,13 @@
  
   This is the introduction.
  
-  \section install_sec Installation
- 
-  \subsection step1 Step 1: Open the box
- 
   \section tutorial_sec Tutorial
-  <ul>
-  <li> \ref tutorial - explains how to use libSBOLj to read and write SBOL data
+  - \ref tutorial - explains how to use libSBOLj to read and write SBOL data
+
+  \section class_sec Classes
+  - \ref annotated
+
+  \subsection step1 Step 1: Open the box
  
   etc...<a href="http://link.html">link</a>
   

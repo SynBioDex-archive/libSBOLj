@@ -158,6 +158,7 @@ public class SBOLutil {
             //compAnotFeat = s.addSequenceAnnotationToDnaComponent(anotFeat, comp);
 
         }
+
         return comp;
     }
 

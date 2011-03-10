@@ -42,6 +42,7 @@ import org.openrdf.rio.RDFParseException;
  * inspired by examples on: http://www.java2s.com/Code/Java/JPA
  * it should do more of the things found in the intro to jpa:
  * http://www.javaworld.com/javaworld/jw-01-2008/jw-01-jpa1.html
+ * @todo update and delete methods.
  *
  * @author mgaldzic
  * @since 0.2, 03/2/2011
@@ -125,7 +126,7 @@ public class SBOLservice {
         aSF.setDisplayId(displayId);
         aSF.setName(name);
         aSF.setDescription(description);
-        aSF.addType(URI.create("http://sbols.org/sbol.owl#" + type));
+        aSF.addType(URI.create("http://purl.org/obo/owl/SO#" + type));
         aManager.persist(aSF);
         return aSF;
     }
