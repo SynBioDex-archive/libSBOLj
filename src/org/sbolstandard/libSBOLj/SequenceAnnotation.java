@@ -55,20 +55,6 @@ public class SequenceAnnotation implements SupportsRdfId {
     @RdfProperty("sbol:feature")
     private Collection<SequenceFeature> feature = new HashSet<SequenceFeature>();
 
-    /**
-     * Place all SequenceFeatures at this.start, .stop, .strand location. 
-     * WHY? is this needed? If we change the model to SA-SF as 1to1 then its ok.
-     * Cesar advocated for this to be 1to1, as no use case is currently there for
-     * absolutely overlapping features
-     *
-     * Feature describes this position so it should include the information
-     * the users want to be able to get when examining this position.
-     *
-     * @param feature a Collection of 1 feature //awkward in current state
-     */
-    public void setFeature(Collection<SequenceFeature> feature) {
-        this.feature = feature;
-    }
 
     /**
      * Place a SequenceFeature at this.start, .stop, .strand location.
