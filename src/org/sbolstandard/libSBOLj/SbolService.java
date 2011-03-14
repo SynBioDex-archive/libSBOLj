@@ -29,10 +29,10 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /**
- * SbolService provides the methods for making new SBOL objects and adding SBOL
+ * SBOLservice provides the methods for making new SBOL objects and adding SBOL
  * data.
  *
- * Use methods of SbolService when creating new SBOL objects and adding data.
+ * Use methods of SBOLservice when creating new SBOL objects and adding data.
  * It is called a service as it performs operations on the SBOL objects that do
  * not really belong to the class itself. These convenience methods SHOLD include
  * an entity manager from empire, delete methods, creating entities SHOULD check
@@ -42,16 +42,17 @@ import org.openrdf.rio.RDFParseException;
  * inspired by examples on: http://www.java2s.com/Code/Java/JPA
  * it should do more of the things found in the intro to jpa:
  * http://www.javaworld.com/javaworld/jw-01-2008/jw-01-jpa1.html
+ * @todo update and delete methods.
  *
  * @author mgaldzic
  * @since 0.2, 03/2/2011
  */
-public class SbolService {
+public class SBOLservice {
 
     private EntityManager aManager = null;
     private Library library = null;
 
-    public SbolService() {
+    public SBOLservice() {
         EmpireConfiguration empireConfig = new EmpireConfiguration();
         empireConfig.getGlobalConfig().put("annotation.index", "config//libSBOLj.empire.annotation.config");
         empireConfig.getGlobalConfig().put("name", "michal");
@@ -61,7 +62,7 @@ public class SbolService {
         aManager = Persistence.createEntityManagerFactory("newRDF").createEntityManager();
     }
 
-    public SbolService(String rdfString) {
+    public SBOLservice(String rdfString) {
         this();
         InputStream is = null;
         try {
@@ -70,21 +71,21 @@ public class SbolService {
             try {
                 aRepo.read(is, RDFFormat.RDFXML);
             } catch (IOException ex) {
-                Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RDFParseException ex) {
-                Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
             }
             Map aMap = new HashMap();
             aMap.put("repo_handle", aRepo);
 
             aManager = Persistence.createEntityManagerFactory("existingRDF").createEntityManager(aMap);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 is.close();
             } catch (IOException ex) {
-                Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -125,7 +126,7 @@ public class SbolService {
         aSF.setDisplayId(displayId);
         aSF.setName(name);
         aSF.setDescription(description);
-        aSF.addType(URI.create("http://sbols.org/sbol.owl#" + type));
+        aSF.addType(URI.create("http://purl.org/obo/owl/SO#" + type));
         aManager.persist(aSF);
         return aSF;
     }
@@ -162,14 +163,19 @@ public class SbolService {
      * Links SequenceFeature to its SequenceAnnotation.
      *
      * @param feature description of the position
-     * @param annotation position information for a DnaComponent being describes
+     * @param annotation position information for a DnaComponent being described
      * @return The linked SequenceAnnotation. //WHY? here is an example of when
      * objects should be kept in a entity manager
      */
     public SequenceAnnotation addSequenceFeatureToSequenceAnnotation(
             SequenceFeature feature, SequenceAnnotation annotation) {
         annotation.addFeature(feature);
-        aManager.merge(annotation);
+        if (aManager.contains(annotation)){
+            aManager.merge(annotation);
+        } else {
+            aManager.persist(annotation);
+        }
+        
         return annotation;
     }
 
@@ -239,21 +245,6 @@ public class SbolService {
     }
 
     /**
-     * Adds the Library given as input to the SbolService. 
-     * 
-     * If you already have a Library of components and features, you can add it 
-     * directly to the SbolService, to get the benefits of SBOL data persistence services.
-     * 
-     * @param displayId A human readable identifier
-     * @param name commonly used to refer to this Library (eg BIOAFAB Pilot Project)
-     * @param description human readable text describing the Library (eg Pilot Project Designs, see http://biofab.org/data)
-     * @return a Library with the metadata fields set, empty otherwise (ie no components or features)
-     */
-    public void insertLibrary(Library lib) {
-        aManager.persist(lib);
-    }
-
-    /**
      * Link the DnaComponent into a Library for organizing it as a list of components
      * that can be re-used, exchanged with another application, or published on the web.
      *
@@ -263,7 +254,11 @@ public class SbolService {
      */
     public Library addDnaComponentToLibrary(DnaComponent component, Library library) {
         library.addComponent(component);
+        if (aManager.contains(library)){
         aManager.merge(library);
+        }else{
+            aManager.persist(library);
+        }
 
         return library;
     }
@@ -283,12 +278,13 @@ public class SbolService {
      */
     public Library addSequenceFeatureToLibrary(SequenceFeature feature, Library library) {
         library.addFeature(feature);
-        aManager.merge(library);
-
+        if (aManager.contains(library)) {
+            aManager.merge(library);
+        } else {
+            aManager.persist(library);
+        }
 
         return library;
-
-
     }
 
     public String getAllAsRDF() {
@@ -304,7 +300,7 @@ public class SbolService {
             rdfString = out.toString();
 
         } catch (IOException ex) {
-            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rdfString;
     }
@@ -315,5 +311,40 @@ public class SbolService {
         aManager.persist(findMe);
         Library lib = aManager.find(Library.class, findMe.getRdfId());
         return lib;
+    }
+
+    public DnaComponent addSequenceAnnotationToDnaComponent(SequenceAnnotation annotation, DnaComponent component) {
+
+        component.addAnnotation(annotation);
+        if (aManager.contains(component)) {
+            aManager.merge(component);
+        } else {
+            aManager.persist(component);
+        }
+        return component;
+    }
+
+    /**
+     * Adds the Library given as input to the SBOLservice.
+     *
+     * If you already have a Library of components and features, you can add it
+     * directly to the SBOLservice, to get the benefits of SBOL data persistence services.
+     * 
+     * @param a Library with the metadata fields set, empty otherwise (ie no components or features)
+     */
+    public void insertLibrary(Library lib) {
+        aManager.persist(lib);
+    }
+
+    public void insertDnaComponent(DnaComponent comp) {
+        aManager.persist(comp);
+    }
+
+    public void insertSequenceAnnotation(SequenceAnnotation anot) {
+        aManager.persist(anot);
+    }
+
+    public void insertSequenceFeature(SequenceFeature feat) {
+        aManager.persist(feat);
     }
 }

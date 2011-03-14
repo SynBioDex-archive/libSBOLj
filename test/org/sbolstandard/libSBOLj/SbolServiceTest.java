@@ -40,7 +40,7 @@ public class SbolServiceTest {
     }
 
     /**
-     * Test of createDnaSequence method, of class SbolService.
+     * Test of createDnaSequence method, of class SBOLservice.
      */
     @Test
     public void testCreateDnaSequence() {
@@ -49,13 +49,13 @@ public class SbolServiceTest {
         DnaSequence expResult = new DnaSequence();
         expResult.setDnaSequence(dnaSequence);
 
-        SbolService instance = new SbolService();
+        SBOLservice instance = new SBOLservice();
         DnaSequence result = instance.createDnaSequence(dnaSequence);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of createSequenceFeature method, of class SbolService.
+     * Test of createSequenceFeature method, of class SBOLservice.
      */
     @Test
     public void testCreateSequenceFeature() {
@@ -64,7 +64,7 @@ public class SbolServiceTest {
         String name = "name";
         String description = "description";
         String type = "type";
-        SbolService instance = new SbolService();
+        SBOLservice instance = new SBOLservice();
         SequenceFeature expResult = new SequenceFeature();
         expResult.setDisplayId(displayId);
         expResult.setName(name);
@@ -75,7 +75,7 @@ public class SbolServiceTest {
     }
 
     /**
-     * Test of createSequenceAnnotation method, of class SbolService.
+     * Test of createSequenceAnnotation method, of class SBOLservice.
      */
     @Test
     public void testCreateSequenceAnnotation() {
@@ -83,7 +83,7 @@ public class SbolServiceTest {
         Integer start = 1;
         Integer stop = 2;
         String strand = "+";
-        SbolService instance = new SbolService();
+        SBOLservice instance = new SBOLservice();
         SequenceAnnotation expResult = new SequenceAnnotation();
         expResult.setStart(start);
         expResult.setStop(stop);
@@ -93,12 +93,12 @@ public class SbolServiceTest {
     }
 
     /**
-     * Test of addSequenceFeatureToSequenceAnnotation method, of class SbolService.
+     * Test of addSequenceFeatureToSequenceAnnotation method, of class SBOLservice.
      */
     @Test
     public void testAddSequenceFeatureToSequenceAnnotation() throws CloneNotSupportedException {
         System.out.println("addSequenceFeatureToSequenceAnnotation");
-        SbolService instance = new SbolService();
+        SBOLservice instance = new SBOLservice();
         SequenceFeature feature = instance.createSequenceFeature("diplayID", "name", "description", "type");
         SequenceFeature expFeature = instance.createSequenceFeature("diplayID", "name", "description", "type");
         SequenceAnnotation annotation = instance.createSequenceAnnotation(1, 2, "+");
@@ -112,7 +112,7 @@ public class SbolServiceTest {
     }
 
     /**
-     * Test of createDnaComponent method, of class SbolService.
+     * Test of createDnaComponent method, of class SBOLservice.
      */
     @Test
     public void testCreateDnaComponent() {
@@ -122,7 +122,7 @@ public class SbolServiceTest {
         String description = "description";
         Boolean isCircular = false;
         String type = "type";
-        SbolService instance = new SbolService();
+        SBOLservice instance = new SBOLservice();
         DnaSequence dnaSequence = instance.createDnaSequence("actg");
         
         DnaComponent expResult = new DnaComponent();
@@ -138,12 +138,12 @@ public class SbolServiceTest {
     }
 
     /**
-     * Test of addSequenceAnnotationToDnaComponent method, of class SbolService.
+     * Test of addSequenceAnnotationToDnaComponent method, of class SBOLservice.
      */
     @Test
     public void testAddSequenceAnnotationToDnaComponent(){
         System.out.println("addSequenceAnnotationToDnaComponent");
-        SbolService instance = new SbolService();
+        SBOLservice instance = new SBOLservice();
         SequenceAnnotation annotation = instance.createSequenceAnnotation(1, 2, "+");
         SequenceAnnotation expAnnotation = instance.createSequenceAnnotation(1, 2, "+");
         DnaSequence dnaSequence = instance.createDnaSequence("actg");

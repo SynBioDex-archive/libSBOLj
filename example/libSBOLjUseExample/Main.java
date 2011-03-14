@@ -8,13 +8,13 @@ import org.biojava.bio.BioException;
 import org.biojavax.bio.seq.RichSequenceIterator;
 import org.sbolstandard.libSBOLj.SBOLutil;
 import org.sbolstandard.libSBOLj.Library;
-import org.sbolstandard.libSBOLj.SbolService;
+import org.sbolstandard.libSBOLj.SBOLservice;
 
 /**
  * Main serves as a simple example of use.
  *
  * It is a convenient place for a simple example, when developing something new.
- * TODO: make a completely separate examples of use code base.
+ * @todo make a completely separate examples of use code base.
  *
  * @author mgaldzic
  * @since 0.2, 03/02/2011
@@ -36,7 +36,7 @@ public class Main {
         System.out.println("aBioFABlib RDF: \n"+ SBOLutil.toRDF(aBioFABlib));
         String rdfString = SBOLutil.toRDF(aBioFABlib);
 
-        SbolService aS = SBOLutil.fromRDF(rdfString);
+        SBOLservice aS = SBOLutil.fromRDF(rdfString);
         Library lib = aS.getLibrary("BioFabLib_1");
         System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName());
     }

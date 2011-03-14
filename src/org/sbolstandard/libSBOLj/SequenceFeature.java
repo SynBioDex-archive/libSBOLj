@@ -31,7 +31,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * by the strand. DnaComponents are EXPECTED to be found inside
  * a SBOL Library object.
  *
- * TODO: SHOULD, EXPECTED above
+ * @todo SHOULD, EXPECTED above
  *
  * @author mgaldzic
  * @since  0.1, 02/08/2011
@@ -95,9 +95,9 @@ public class SequenceFeature implements SupportsRdfId {
      * Identifier that users will see as reference to this feature.
      * It should be unambiguous and is likely imported from source data. Otherwise
      * it SHOULD be generated.
-     * TODO: It should be restricted to alphanumeric/underscore and starting with a
+     * @todo It should be restricted to alphanumeric/underscore and starting with a
      * letter or underscore.
-     * TODO: SHOULD
+     * @todo SHOULD
      * @param displayId A human readable identifier
      */
     public void setDisplayId(String displayId) {
@@ -163,9 +163,9 @@ public class SequenceFeature implements SupportsRdfId {
     /**
      * Sequence Ontology vocabulary provides a defined term for types of
      * SequenceFeature.
-     * TODO: implement use of SO within libSBOLj.
+     * @todo implement use of SO within libSBOLj.
      * @return a Sequence Ontology (SO) vocabulary term to describe the type of SequenceFeature.
-     * TODO: When serialized to RDF this is a URI, so when read from persistence it should become
+     * @todo When serialized to RDF this is a URI, so when read from persistence it should become
      * one of the SO human readable vocabulary terms. Note: should allow many types
      */
     public Collection<URI> getTypes() {

@@ -311,8 +311,10 @@ Definition at line 257 of file DnaComponent.java.
 Sequence Ontology vocabulary provides a defined term for types of DNA components. 
 
 TO DO: implement use of SO within libSBOLj. \begin{DoxyReturn}{Returns}
-a Sequence Ontology (SO) vocabulary term to describe the type of \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. TODO: When serialized to RDF this is a URI, so when read from persistence it should become one of the SO human readable vocabulary terms. Note:I should allow many types 
+a Sequence Ontology (SO) vocabulary term to describe the type of \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. 
 \end{DoxyReturn}
+\begin{Desc}
+\item[\hyperlink{todo__todo000002}{Todo}]When serialized to RDF this is a URI, so when read from persistence it should become one of the SO human readable vocabulary terms. Note:I should allow many types \end{Desc}
 
 
 Definition at line 234 of file DnaComponent.java.
@@ -398,7 +400,9 @@ Definition at line 106 of file DnaComponent.java.
 
 Identifier that users will see as reference to the DNA construct. 
 
-It should be unambiguous and is likely imported from source data. Otherwise it should be generated. TODO: It should be restricted to alphanumeric/underscore and starting with a letter or underscore. 
+It should be unambiguous and is likely imported from source data. Otherwise it should be generated. \begin{Desc}
+\item[\hyperlink{todo__todo000001}{Todo}]It should be restricted to alphanumeric/underscore and starting with a letter or underscore. \end{Desc}
+
 \begin{DoxyParams}{Parameters}
 {\em displayId} & a human readable identifier \\
 \hline
