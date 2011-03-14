@@ -2,10 +2,6 @@
 
 <p>The libSBOLj library implements the SBOL core data model. It is part of the Synthetic Biology Open Language project. <a href="http://sbols.org">http://sbols.org</a> </p>
 
-  \section intro Introduction
-
-  This is the introduction.
-
  
   \section tutorial_sec Tutorial
 
