@@ -17,9 +17,16 @@
   \htmlinclude download_sec.html
 
 
-  \section author_sec Author
+  \section issues_sec Issues
 
-  - Michal Galdzicki (<a href="http://github.com/mgaldzic">mgaldzic</a>) University of Washington
+  -  Check the <a href="https://github.com/mgaldzic/libSBOLj/issues">issues tracker</a> for bug reports and features planned
+
+
+  \section author_sec Developers
+
+  - Lead: Michal Galdzicki (<a href="http://github.com/mgaldzic">mgaldzic</a>) University of Washington
+  - Second: Cesar A. Rodriguez
+  - SBOL developers: Laura Adam, Deepak Chandran, Douglas Densmore, Matthew Lux, Akshay Maheshwari, Barry Moore, Chris J. Myers, Jean Peccoud, Nicholas Roehner, Guy-Bart Stan, Mandy Wilson, Herbert M. Sauro
 
 
   \section contact_sec Contact
