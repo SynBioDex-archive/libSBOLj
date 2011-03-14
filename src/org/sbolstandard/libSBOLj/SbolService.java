@@ -163,14 +163,19 @@ public class SBOLservice {
      * Links SequenceFeature to its SequenceAnnotation.
      *
      * @param feature description of the position
-     * @param annotation position information for a DnaComponent being describes
+     * @param annotation position information for a DnaComponent being described
      * @return The linked SequenceAnnotation. //WHY? here is an example of when
      * objects should be kept in a entity manager
      */
     public SequenceAnnotation addSequenceFeatureToSequenceAnnotation(
             SequenceFeature feature, SequenceAnnotation annotation) {
         annotation.addFeature(feature);
-        aManager.merge(annotation);
+        if (aManager.contains(annotation)){
+            aManager.merge(annotation);
+        } else {
+            aManager.persist(annotation);
+        }
+        
         return annotation;
     }
 
@@ -240,21 +245,6 @@ public class SBOLservice {
     }
 
     /**
-     * Adds the Library given as input to the SBOLservice.
-     * 
-     * If you already have a Library of components and features, you can add it 
-     * directly to the SBOLservice, to get the benefits of SBOL data persistence services.
-     * 
-     * @param displayId A human readable identifier
-     * @param name commonly used to refer to this Library (eg BIOAFAB Pilot Project)
-     * @param description human readable text describing the Library (eg Pilot Project Designs, see http://biofab.org/data)
-     * @return a Library with the metadata fields set, empty otherwise (ie no components or features)
-     */
-    public void insertLibrary(Library lib) {
-        aManager.persist(lib);
-    }
-
-    /**
      * Link the DnaComponent into a Library for organizing it as a list of components
      * that can be re-used, exchanged with another application, or published on the web.
      *
@@ -264,7 +254,11 @@ public class SBOLservice {
      */
     public Library addDnaComponentToLibrary(DnaComponent component, Library library) {
         library.addComponent(component);
+        if (aManager.contains(library)){
         aManager.merge(library);
+        }else{
+            aManager.persist(library);
+        }
 
         return library;
     }
@@ -284,12 +278,13 @@ public class SBOLservice {
      */
     public Library addSequenceFeatureToLibrary(SequenceFeature feature, Library library) {
         library.addFeature(feature);
-        aManager.merge(library);
-
+        if (aManager.contains(library)) {
+            aManager.merge(library);
+        } else {
+            aManager.persist(library);
+        }
 
         return library;
-
-
     }
 
     public String getAllAsRDF() {
@@ -316,5 +311,40 @@ public class SBOLservice {
         aManager.persist(findMe);
         Library lib = aManager.find(Library.class, findMe.getRdfId());
         return lib;
+    }
+
+    public DnaComponent addSequenceAnnotationToDnaComponent(SequenceAnnotation annotation, DnaComponent component) {
+
+        component.addAnnotation(annotation);
+        if (aManager.contains(component)) {
+            aManager.merge(component);
+        } else {
+            aManager.persist(component);
+        }
+        return component;
+    }
+
+    /**
+     * Adds the Library given as input to the SBOLservice.
+     *
+     * If you already have a Library of components and features, you can add it
+     * directly to the SBOLservice, to get the benefits of SBOL data persistence services.
+     * 
+     * @param a Library with the metadata fields set, empty otherwise (ie no components or features)
+     */
+    public void insertLibrary(Library lib) {
+        aManager.persist(lib);
+    }
+
+    public void insertDnaComponent(DnaComponent comp) {
+        aManager.persist(comp);
+    }
+
+    public void insertSequenceAnnotation(SequenceAnnotation anot) {
+        aManager.persist(anot);
+    }
+
+    public void insertSequenceFeature(SequenceFeature feat) {
+        aManager.persist(feat);
     }
 }
