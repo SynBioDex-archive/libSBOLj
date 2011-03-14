@@ -79,12 +79,12 @@ public class AccessLibrary {
                     SequenceFeature oneSF = fi.next();
                     
                     //Print SequenceAnnotatations and Features
-                    System.out.println("Feature Name: "+oneSF.getName() +
-                                       "\nPosition: ("+ oneSA.getStart()+
-                                       ","+oneSA.getStop()+
-                                       ") Strand:["+oneSA.getStrand()+"]\n"+
+                    System.out.println("Feature Name: "+oneSF.getName() +    //name
+                                       "\nPosition: ("+ oneSA.getStart()+    //Start position
+                                       ","+oneSA.getStop()+                  //Stop position
+                                       ") Strand:["+oneSA.getStrand()+"]\n"+ //Strand
                                        "Feature Description: "+
-                                       oneSF.getDescription());
+                                       oneSF.getDescription());              //Description
                    System.out.println("-----------------------");
 
                 } // end SequenceFeatures

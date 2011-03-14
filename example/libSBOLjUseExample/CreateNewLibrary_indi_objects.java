@@ -68,6 +68,7 @@ public class CreateNewLibrary_indi_objects {
         DnaComponent dc_anot_feat = s.addSequenceAnnotationToDnaComponent(anot_feat,aDC);
 
         aLib = s.addDnaComponentToLibrary(dc_anot_feat, aLib);
+
         return aLib;
     }
 }

@@ -1,14 +1,15 @@
 \hypertarget{tutorial_sec_toc}{}\section{Learn how to:}\label{tutorial_sec_toc}
 \hyperlink{tutorial_A}{A. Write SBOL RDF or Json data from a GenBank File} \par
  \hyperlink{tutorial_B}{B. Read SBOL RDF data into a Library object} \par
- \hyperlink{tutorial_C}{C. Create a New SBOL Library object} \par
- \hyperlink{tutorial_D}{D. Access members of Library} \par
+ \hyperlink{tutorial_C}{C. Create a New SBOL Library of DnaCompenents using SBOLservices (preferred method)} \par
+ \hyperlink{tutorial_D}{D. Create a New SBOL Library of DnaCompenents making individual objects (more control)} \par
+ \hyperlink{tutorial_E}{E. Access members of Library} \par
 
 
 
 
- \hypertarget{tutorial_A}{}\section{A. Write SBOL RDF or Json data from a GenBank File}\label{tutorial_A}
-{\itshape The code in this example can be found in \hyperlink{classlib_s_b_o_lj_use_example_1_1_main}{libSBOLjUseExample.Main}\/}
+\hypertarget{tutorial_A}{}\section{A. Write SBOL RDF or Json data from a GenBank File}\label{tutorial_A}
+{\itshape The code in this example can be found in \hyperlink{classlib_s_b_o_lj_use_example_1_1_read_gen_bank_file}{libSBOLjUseExample.ReadGenBankFile}\/}
 
 The basic SBOL use case is to represent a DNA level design of a DNA construct. Legacy designs of biological constructs are likely to be found in GenBank flatfile format, as DNA sequence editor software (eg ApE, VectorNTI, GD-\/ICE's Vector Editor) used to create them has the ability to export this format. Additionally the GenBank format is the de-\/facto standard for exchange of annotated DNA sequence data between software. Therefore, for our first example we convert a GenBank file from the BIOFAB Pilot Project into SBOL RDF and Json serializations.
 
@@ -30,7 +31,7 @@ RichSequenceIterator aRSiter = SBOLutil.fromGenBankFile("test\\test_files\\BFa_8
 \item \begin{DoxyParagraph}{Get a new Library object from BioJava.RichSequence objects}
 The SBOLutil method fromRichSequenceIter steps through the RichSequenceiterator object and creates a Library SBOL object. The output contains the DnaCompnents for each RichSequence object (ie GenBank Record) and its annotations. 
 \begin{DoxyCode}
- Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRsIter); 
+ Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRSiter); 
 \end{DoxyCode}
  {\itshape  More detail\/}: fromRichSequenceIter loops over the iterator using the readRichSequence method to read each RichSequence object, and to map the information contained within RichSequence to an SBOL DnaComponent. Finally, it adds each DnaComponent to a Library which is returned. The readRichSequence method can be used independently if only one RichSequence is expected.
 \end{DoxyParagraph}
@@ -49,6 +50,8 @@ The serialized RDF/XML or Json can then be sent to a collaborator or written to 
 
 
  \hypertarget{tutorial_B}{}\section{B. Read SBOL RDF data into a Library object}\label{tutorial_B}
+{\itshape The code in this example can be found in \hyperlink{classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata}{libSBOLjUseExample.ReadRDFdata}\/}
+
 In an information exchange use case SBOL RDF is sent from one party to another. Once SBOL RDF exists it can be easily read by libSBOLj. Then, the libSBOLj objects can be accessed, manipulated, mapped to another API, or stored in a persistent repository. The libSBOLj object SBOLservice provides the services to manipulate the data.
 
 
@@ -64,7 +67,7 @@ SBOLservice aS = SBOLutil.fromRDF(rdfString);
 \item \begin{DoxyParagraph}{Get a libSBOLj.Library object}
 Since the SBOLservice could contain multiple Libraries, to get at the data you select a Library by it's ID, using the .getLibrary method. {\itshape In this example, the Library ID is a mockup\/} used for example A. 
 \begin{DoxyCode}
-Library lib = aS.getLibrary("BioFabLib_1");
+Library aLib = aS.getLibrary("BioFabLib_1");
 \end{DoxyCode}
 
 \end{DoxyParagraph}
@@ -72,8 +75,8 @@ Library lib = aS.getLibrary("BioFabLib_1");
 \item \begin{DoxyParagraph}{Access data members}
 The Library object behaves as a POJO and conforms to the SBOL core data model in structure. There are getters and setter methods for fields and one-\/to-\/many relations are Collections which can be iterated over. {\itshape For example see \hyperlink{tutorial_C}{example C} \/}. 
 \begin{DoxyCode}
-System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName
-      ());
+System.out.println("lib Contains: "+aLib.getComponents().iterator().next().getNam
+      e());
 \end{DoxyCode}
 
 \end{DoxyParagraph}
@@ -82,13 +85,25 @@ For access to other data members see documentation for getters in SBOL objects, 
 
 
 
- \hypertarget{tutorial_C}{}\section{C. Create a New SBOL Library object}\label{tutorial_C}
+ \hypertarget{tutorial_C}{}\section{C. Create a New SBOL Library of DnaCompenents using SBOLservices (preferred method)}\label{tutorial_C}
 
 \begin{DoxyEnumerate}
 \item \begin{DoxyParagraph}{Create a new SBOLservice}
-
+SBOLservice manages the creation of SBOL objects, so you don't have to. 
 \begin{DoxyCode}
 SBOLservice s = new SBOLservice();
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Create a new Library}
+Library will be a collection of the DnaComponents you create. Optionally it can store SequenceFeatures just as well. 
+\begin{DoxyCode}
+Library aLib = s.createLibrary(
+                      "BioFabLib_1",                   //displayID
+                      "BIOAFAB Pilot Project",         //name
+                      "Pilot Project Designs"+         //description
+                      " see http://biofab.org/data");
 \end{DoxyCode}
 
 \end{DoxyParagraph}
@@ -106,24 +121,12 @@ DnaComponent aDC = s.createDnaComponent(
                      "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac")
                 );
 \end{DoxyCode}
- or 
-\begin{DoxyCode}
-DnaComponent aDC = new DnaComponent();
-aDC.setDisplayId("BBa_R0040");
-aDC.setName("pTet");
-aDC.setDescription("TetR repressible promoter");
-aDC.setCircular(false);
-aDC.setType("promoter");
-aDC.set(s.createDnaSequence(
-                  "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"));
-\end{DoxyCode}
 
 \end{DoxyParagraph}
 
-\item \begin{DoxyParagraph}{Create Annotations and Features}
+\item \begin{DoxyParagraph}{Create a SequenceAnnotation}
 SequenceAnnotations provide the position and strand of SequenceFeatures which describe the DnaComponent. 
 \begin{DoxyCode}
-//The location of the feature
 SequenceAnnotation aSA = s.createSequenceAnnotationForDnaComponent(
                     127, //start
                     181, //stop
@@ -131,21 +134,11 @@ SequenceAnnotation aSA = s.createSequenceAnnotationForDnaComponent(
                     aDC  //DnaComponent
                     );
 \end{DoxyCode}
- or 
-\begin{DoxyCode}
-SequenceAnnotation anot = new SequenceAnnotation();
-aSA.setStart(127);
-aSA.setStop(181);
-aSA.setStrand("+");
-aSA.setId(aDC);
-//annotate the DnaComponent
-aDC.addAnnotation(aSA);
-\end{DoxyCode}
 
 \end{DoxyParagraph}
 
-\item \begin{DoxyParagraph}{Create Feature}
-
+\item \begin{DoxyParagraph}{Create a SequenceFeature}
+SequenceFeatures are the descriptors of what is at the position described using the SequenceAnnotation. \mbox{[}Optionally, they can be re-\/used if the same, a good practice.\mbox{]} 
 \begin{DoxyCode}
 SequenceFeature aSF = s.createSequenceFeature(
             "BBa_R0062",                             //displayID
@@ -154,32 +147,216 @@ SequenceFeature aSF = s.createSequenceFeature(
             "promoter"                               //type
             );
 \end{DoxyCode}
- or 
-\begin{DoxyCode}
-SequenceFeature aSF = new SequenceFeature();
-aSF.setDiplayID("BBa_R0062");
-aSF.setName("pLux");
-aSF.setDescription("Activated by LuxR in concert with HSL");
-aSF.addType(URI.create("http://purl.org/obo/owl/SO#" + "promoter"));
-\end{DoxyCode}
 
 \end{DoxyParagraph}
 
 \item \begin{DoxyParagraph}{Then, link the Feature to the Annotation}
 
 \begin{DoxyCode}
-SequenceAnnotation anotFeat = s.addSequenceFeatureToSequenceAnnotation(feat, anot
-      );
+SequenceAnnotation aSA_SF = s.addSequenceFeatureToSequenceAnnotation(aSF, aSA);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Finally, add the DnaComponent to a Library}
+
+\begin{DoxyCode}
+aLib = s.addDnaComponentToLibrary(aDC, aLib);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+You're done, you have a Library of components (one in this example) and the SBOLservice {\ttfamily s} from the example knows about it. See other examples for what you can do with a SBOLservice.
+\end{DoxyEnumerate}
+
+
+
+ \hypertarget{tutorial_D}{}\section{D. Create a New SBOL Library of DnaCompenents making individual objects (more control)}\label{tutorial_D}
+
+\begin{DoxyEnumerate}
+\item \begin{DoxyParagraph}{Create a new SBOLservice}
+
+\begin{DoxyCode}
+SBOLservice s = new SBOLservice();
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Create a new Library}
+Library will be a collection of the DnaComponents you create. Optionally it can store SequenceFeatures just as well. 
+\begin{DoxyCode}
+Library aLib = new Library();
+aLib.setDisplayId("BioFabLib_1");
+aLib.setName("BIOAFAB Pilot Project");
+aLib.setDescription("Pilot Project Designs see http://biofab.org/data");
+s.insertLibrary(aLib);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Create a new DnaComponent}
+
+\begin{DoxyCode}
+DnaComponent aDC = new DnaComponent();
+aDC.setDisplayId("BBa_R0040");
+aDC.setName("pTet");
+aDC.setDescription("TetR repressible promoter");
+aDC.setCircular(false);
+aDC.addType(URI.create("http://purl.org/obo/owl/SO#" + "promoter"));
+aDC.setDnaSequence(s.createDnaSequence(
+                  "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"));
+s.insertDnaComponent(aDC);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Create a SequenceAnnotation}
+
+\begin{DoxyCode}
+SequenceAnnotation aSA = new SequenceAnnotation();
+aSA.setStart(127);
+aSA.setStop(181);
+aSA.setStrand("+");
+aSA.setId(aDC);
+s.insertSequenceAnnotation(aSA);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Create a SequenceFeature}
+
+\begin{DoxyCode}
+SequenceFeature aSF = new SequenceFeature();
+aSF.setDisplayId("BBa_R0062");
+aSF.setName("pLux");
+aSF.setDescription("Activated by LuxR in concert with HSL");
+aSF.addType(URI.create("http://purl.org/obo/owl/SO#" + "promoter"));
+s.insertSequenceFeature(aSF);
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Then, link the objects. First, add the Feature to the Annotation}
+
+\begin{DoxyCode}
+SequenceAnnotation anot_feat = s.addSequenceFeatureToSequenceAnnotation(aSF, aSA)
+      ;
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Annotate the DnaComponent}
+
+\begin{DoxyCode}
+DnaComponent dc_anot_feat = s.addSequenceAnnotationToDnaComponent(anot_feat,aDC);
+      
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Finally, add the annotated DnaComponent to a Library}
+
+\begin{DoxyCode}
+aLib = s.addDnaComponentToLibrary(dc_anot_feat, aLib);
 \end{DoxyCode}
 
 \end{DoxyParagraph}
 
 
  
-\end{DoxyEnumerate}\hypertarget{tutorial_D}{}\section{D. Access members of Library}\label{tutorial_D}
+\end{DoxyEnumerate}\hypertarget{tutorial_E}{}\section{E. Access members of Library}\label{tutorial_E}
 
 \begin{DoxyEnumerate}
-\item \begin{DoxyParagraph}{}
+\item \begin{DoxyParagraph}{Get Library}
+
+\begin{DoxyEnumerate}
+\item If the Library is in a SBOLservice object, getLibrary by Library ID. For example if the Library was created using SBOLservice methods or it was read into the service object. Essentially if the equivalent of: 
+\begin{DoxyCode}
+       SBOLservice s = new SBOLservice();
+       s.insertLibrary(inputLib);
+\end{DoxyCode}
+ Was performed then, retrieve a Library object using getLibrary(libraryID). For example: 
+\begin{DoxyCode}
+        Library theLib = s.getLibrary("BioFabLib_1");
+\end{DoxyCode}
+
+\item Otherwise, a Library object may be available to you.
+\end{DoxyEnumerate}
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Access the Library metadata elements}
+
+\begin{DoxyCode}
+        //Print Library object fields
+        System.out.println("-----------------------");
+        System.out.println("Library");
+        System.out.println("-----------------------");
+        System.out.println("DisplayId: " + theLib.getDisplayId());
+        System.out.println("Name: " + theLib.getName());
+        System.out.println("Description: " + theLib.getDescription());
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{To get individual DnaComponents iterate through the Library}
+
+\begin{DoxyCode}
+        //Get DnaComponents
+        Collection c = theLib.getComponents();
+        for (Iterator<DnaComponent> i = theLib.getComponents().iterator(); i.hasN
+      ext();) {
+            DnaComponent oneDC = i.next();
+            //Print DnaComponent Fields
+            System.out.println("-----------------------");
+            System.out.println("DnaComponent(s)");
+            System.out.println("-----------------------");
+            System.out.println("DisplayId: " + oneDC.getDisplayId());
+            System.out.println("Name: " + oneDC.getName());
+            System.out.println("Description: " + oneDC.getDescription());
+
+            //Get DnaSequence
+            DnaSequence itsSeq = oneDC.getDnaSequence();
+
+            //Print DnaSequence
+
+            System.out.println("DnaSequence: " + itsSeq.getDnaSequence());
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\item \begin{DoxyParagraph}{Get Sequence Annotations and the SequenceFeatures for a DnaComponent use}
+the same pattern. 
+\begin{DoxyCode}
+            //Get SequenceAnnotations
+            System.out.println("-----------------------");
+            System.out.println("Annotation(s)");
+            System.out.println("-----------------------");
+            for (Iterator<SequenceAnnotation> ai = oneDC.getAnnotations().iterato
+      r(); ai.hasNext();) {
+                SequenceAnnotation oneSA = ai.next();
+
+                //Get SequenceFeatures
+                for (Iterator<SequenceFeature> fi = oneSA.getFeatures().iterator(
+      ); fi.hasNext();) {
+                    SequenceFeature oneSF = fi.next();
+
+                    //Print SequenceAnnotatations and Features
+                    System.out.println("Feature Name: "+oneSF.getName() +    //na
+      me
+                                       "\nPosition: ("+ oneSA.getStart()+    //St
+      art position
+                                       ","+oneSA.getStop()+                  //St
+      op position
+                                       ") Strand:["+oneSA.getStrand()+"]\n"+ //St
+      rand
+                                       "Feature Description: "+
+                                       oneSF.getDescription());              //De
+      scription
+                   System.out.println("-----------------------");
+
+                } // end SequenceFeatures
+            } //end SequenceAnnotations
+        }// end DnaComponents
+\end{DoxyCode}
 
 \end{DoxyParagraph}
 

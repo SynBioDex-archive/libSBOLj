@@ -27,8 +27,6 @@
 \begin{DoxyCompactList}\small\item\em Builds a new \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} to describe and add to \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. \item\end{DoxyCompactList}\item 
 \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a7a21049be3161d93bd273e6906899c5a}{createLibrary} (String displayId, String name, String description)
 \begin{DoxyCompactList}\small\item\em Builds a new \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}, ready to collect any DnaComponents or Features. \item\end{DoxyCompactList}\item 
-void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a96b5821c89233871863efb31ae98d629}{insertLibrary} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} lib)
-\begin{DoxyCompactList}\small\item\em Adds the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} given as input to the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice}{SBOLservice}. \item\end{DoxyCompactList}\item 
 \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a0f8d861cd85028c6a67c6480dc87d15e}{addDnaComponentToLibrary} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} component, \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} library)
 \begin{DoxyCompactList}\small\item\em Link the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} into a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} for organizing it as a list of components that can be re-\/used, exchanged with another application, or published on the web. \item\end{DoxyCompactList}\item 
 \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_ae387ca46de01accf2c313559d3783d1c}{addSequenceFeatureToLibrary} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} feature, \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} library)
@@ -41,6 +39,28 @@ String {\bfseries getAllAsRDF} ()}
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_ae514a61ce2bda5351f853390e77afab5}{
 \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} {\bfseries getLibrary} (String id)}
 \label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_ae514a61ce2bda5351f853390e77afab5}
+
+\item 
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_aa99a884c2378cef0b2b4741637a56d00}{
+\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} {\bfseries addSequenceAnnotationToDnaComponent} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}{SequenceAnnotation} annotation, \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} component)}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_aa99a884c2378cef0b2b4741637a56d00}
+
+\item 
+void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a96b5821c89233871863efb31ae98d629}{insertLibrary} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} lib)
+\begin{DoxyCompactList}\small\item\em Adds the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} given as input to the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice}{SBOLservice}. \item\end{DoxyCompactList}\item 
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a68017de73adfaf0fe2cc0bb88ee10ccb}{
+void {\bfseries insertDnaComponent} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} comp)}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a68017de73adfaf0fe2cc0bb88ee10ccb}
+
+\item 
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a63e4420d05d6fffa910fccd9f3aae032}{
+void {\bfseries insertSequenceAnnotation} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}{SequenceAnnotation} anot)}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a63e4420d05d6fffa910fccd9f3aae032}
+
+\item 
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a3d36f09a42ea6b9248c8f6894420a1f8}{
+void {\bfseries insertSequenceFeature} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} feat)}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a3d36f09a42ea6b9248c8f6894420a1f8}
 
 \end{DoxyCompactItemize}
 
@@ -91,7 +111,7 @@ the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} wi
 \end{DoxyReturn}
 
 
-Definition at line 265 of file SBOLservice.java.
+Definition at line 255 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_ae387ca46de01accf2c313559d3783d1c}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!addSequenceFeatureToLibrary@{addSequenceFeatureToLibrary}}
@@ -121,7 +141,7 @@ Features do not have to describe components. They are useful on their own if you
 \end{DoxyReturn}
 
 
-Definition at line 285 of file SBOLservice.java.
+Definition at line 279 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a4dbd0885b3977f121439873805a294ba}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!addSequenceFeatureToSequenceAnnotation@{addSequenceFeatureToSequenceAnnotation}}
@@ -141,7 +161,7 @@ Links \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{
 \begin{DoxyParams}{Parameters}
 {\em feature} & description of the position \\
 \hline
-{\em annotation} & position information for a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} being describes \\
+{\em annotation} & position information for a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} being described \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -200,7 +220,7 @@ Builds a new \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_compone
 \end{DoxySeeAlso}
 
 
-Definition at line 198 of file SBOLservice.java.
+Definition at line 203 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_a61e2cda6134ecedb3a5d0b92206b91a2}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!createDnaSequence@{createDnaSequence}}
@@ -261,7 +281,7 @@ a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} with
 \end{DoxyReturn}
 
 
-Definition at line 229 of file SBOLservice.java.
+Definition at line 234 of file SBOLservice.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice_ab96b56fff36ffe4e728e749e0dcbef29}{
 \index{org::sbolstandard::libSBOLj::SBOLservice@{org::sbolstandard::libSBOLj::SBOLservice}!createSequenceAnnotationForDnaComponent@{createSequenceAnnotationForDnaComponent}}
@@ -354,19 +374,12 @@ If you already have a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_li
 
 
 \begin{DoxyParams}{Parameters}
-{\em displayId} & A human readable identifier \\
-\hline
-{\em name} & commonly used to refer to this \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} (eg BIOAFAB Pilot Project) \\
-\hline
-{\em description} & human readable text describing the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} (eg Pilot Project Designs, see \href{http://biofab.org/data}{\tt http://biofab.org/data}) \\
+{\em a} & \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} with the metadata fields set, empty otherwise (ie no components or features) \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} with the metadata fields set, empty otherwise (ie no components or features) 
-\end{DoxyReturn}
 
 
-Definition at line 253 of file SBOLservice.java.
+Definition at line 335 of file SBOLservice.java.
 
 
 

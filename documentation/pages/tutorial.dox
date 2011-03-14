@@ -6,6 +6,7 @@
 \ref B \n
 \ref C \n
 \ref D \n
+\ref E \n
 
 
 
@@ -203,6 +204,7 @@ Library aLib = new Library();
 aLib.setDisplayId("BioFabLib_1");
 aLib.setName("BIOAFAB Pilot Project");
 aLib.setDescription("Pilot Project Designs see http://biofab.org/data");
+s.insertLibrary(aLib);
 \endcode
 
 -# \par Create a new DnaComponent
@@ -215,7 +217,7 @@ aDC.setCircular(false);
 aDC.addType(URI.create("http://purl.org/obo/owl/SO#" + "promoter"));
 aDC.setDnaSequence(s.createDnaSequence(
                   "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"));
-
+s.insertDnaComponent(aDC);
 \endcode
 
 -# \par Create a SequenceAnnotation
@@ -225,11 +227,7 @@ aSA.setStart(127);
 aSA.setStop(181);
 aSA.setStrand("+");
 aSA.setId(aDC);
-\endcode
-
--# \par Annotate the DnaComponent
-\code
-aDC.addAnnotation(aSA);
+s.insertSequenceAnnotation(aSA);
 \endcode
 
 -# \par Create a SequenceFeature
@@ -239,16 +237,24 @@ aSF.setDisplayId("BBa_R0062");
 aSF.setName("pLux");
 aSF.setDescription("Activated by LuxR in concert with HSL");
 aSF.addType(URI.create("http://purl.org/obo/owl/SO#" + "promoter"));
+s.insertSequenceFeature(aSF);
 \endcode
 
--# \par Then, link the Feature to the Annotation
+
+
+-# \par Then, link the objects. First, add the Feature to the Annotation
 \code
-SequenceAnnotation anotFeat = s.addSequenceFeatureToSequenceAnnotation(aSF, aSA);
+SequenceAnnotation anot_feat = s.addSequenceFeatureToSequenceAnnotation(aSF, aSA);
 \endcode
 
--# \par Finally, add the DnaComponent to a Library
+-# \par Annotate the DnaComponent
 \code
-aLib = s.addDnaComponentToLibrary(aDC, aLib);
+DnaComponent dc_anot_feat = s.addSequenceAnnotationToDnaComponent(anot_feat,aDC);
+\endcode
+
+-# \par Finally, add the annotated DnaComponent to a Library
+\code
+aLib = s.addDnaComponentToLibrary(dc_anot_feat, aLib);
 \endcode
 
 
@@ -262,8 +268,83 @@ aLib = s.addDnaComponentToLibrary(aDC, aLib);
 <hr>
 \section E E. Access members of Library
 
--# \par stuff
+-# \par Get Library
+    -# If the Library is in a SBOLservice object, getLibrary by Library ID. For
+       example if the Library was created using SBOLservice methods or it was read
+       into the service object.
+       Essentially if the equivalent of:
+       \code
+       SBOLservice s = new SBOLservice();
+       s.insertLibrary(inputLib);
+       \endcode
+       Was performed then, retrieve a Library object using getLibrary(libraryID).
+       For example:
+       \code
+        Library theLib = s.getLibrary("BioFabLib_1");
+       \endcode
+    -# Otherwise, a Library object may be available to you.
 
+-# \par Access the Library metadata elements
+\code
+        //Print Library object fields
+        System.out.println("-----------------------");
+        System.out.println("Library");
+        System.out.println("-----------------------");
+        System.out.println("DisplayId: " + theLib.getDisplayId());
+        System.out.println("Name: " + theLib.getName());
+        System.out.println("Description: " + theLib.getDescription());
+\endcode
+
+-# \par To get individual DnaComponents iterate through the Library
+\code
+        //Get DnaComponents
+        Collection c = theLib.getComponents();
+        for (Iterator<DnaComponent> i = theLib.getComponents().iterator(); i.hasNext();) {
+            DnaComponent oneDC = i.next();
+            //Print DnaComponent Fields
+            System.out.println("-----------------------");
+            System.out.println("DnaComponent(s)");
+            System.out.println("-----------------------");
+            System.out.println("DisplayId: " + oneDC.getDisplayId());
+            System.out.println("Name: " + oneDC.getName());
+            System.out.println("Description: " + oneDC.getDescription());
+
+            //Get DnaSequence
+            DnaSequence itsSeq = oneDC.getDnaSequence();
+
+            //Print DnaSequence
+
+            System.out.println("DnaSequence: " + itsSeq.getDnaSequence());
+
+\endcode
+
+-# \par Get Sequence Annotations and the SequenceFeatures for a DnaComponent use
+ the same pattern.
+\code
+            //Get SequenceAnnotations
+            System.out.println("-----------------------");
+            System.out.println("Annotation(s)");
+            System.out.println("-----------------------");
+            for (Iterator<SequenceAnnotation> ai = oneDC.getAnnotations().iterator(); ai.hasNext();) {
+                SequenceAnnotation oneSA = ai.next();
+
+                //Get SequenceFeatures
+                for (Iterator<SequenceFeature> fi = oneSA.getFeatures().iterator(); fi.hasNext();) {
+                    SequenceFeature oneSF = fi.next();
+
+                    //Print SequenceAnnotatations and Features
+                    System.out.println("Feature Name: "+oneSF.getName() +    //name
+                                       "\nPosition: ("+ oneSA.getStart()+    //Start position
+                                       ","+oneSA.getStop()+                  //Stop position
+                                       ") Strand:["+oneSA.getStrand()+"]\n"+ //Strand
+                                       "Feature Description: "+
+                                       oneSF.getDescription());              //Description
+                   System.out.println("-----------------------");
+
+                } // end SequenceFeatures
+            } //end SequenceAnnotations
+        }// end DnaComponents
+\endcode
 
 <hr>
 Michal Galdzicki - 03/09/2011

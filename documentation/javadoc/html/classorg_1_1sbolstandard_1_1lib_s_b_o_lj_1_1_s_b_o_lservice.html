@@ -93,8 +93,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a new <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> to describe and add to <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a>.  <a href="#ad3946d924f4c43fa442841aa5d56d474"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#a7a21049be3161d93bd273e6906899c5a">createLibrary</a> (String displayId, String name, String description)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a new <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a>, ready to collect any DnaComponents or Features.  <a href="#a7a21049be3161d93bd273e6906899c5a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#a96b5821c89233871863efb31ae98d629">insertLibrary</a> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library</a> lib)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> given as input to the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html" title="SBOLservice provides the methods for making new SBOL objects and adding SBOL data.">SBOLservice</a>.  <a href="#a96b5821c89233871863efb31ae98d629"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#a0f8d861cd85028c6a67c6480dc87d15e">addDnaComponentToLibrary</a> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">DnaComponent</a> component, <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library</a> library)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Link the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> into a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> for organizing it as a list of components that can be re-used, exchanged with another application, or published on the web.  <a href="#a0f8d861cd85028c6a67c6480dc87d15e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#ae387ca46de01accf2c313559d3783d1c">addSequenceFeatureToLibrary</a> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html">SequenceFeature</a> feature, <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library</a> library)</td></tr>
@@ -103,6 +101,16 @@ Public Member Functions</h2></td></tr>
 String&#160;</td><td class="memItemRight" valign="bottom"><b>getAllAsRDF</b> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae514a61ce2bda5351f853390e77afab5"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SBOLservice::getLibrary" ref="ae514a61ce2bda5351f853390e77afab5" args="(String id)" -->
 <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getLibrary</b> (String id)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa99a884c2378cef0b2b4741637a56d00"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SBOLservice::addSequenceAnnotationToDnaComponent" ref="aa99a884c2378cef0b2b4741637a56d00" args="(SequenceAnnotation annotation, DnaComponent component)" -->
+<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">DnaComponent</a>&#160;</td><td class="memItemRight" valign="bottom"><b>addSequenceAnnotationToDnaComponent</b> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html">SequenceAnnotation</a> annotation, <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">DnaComponent</a> component)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#a96b5821c89233871863efb31ae98d629">insertLibrary</a> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library</a> lib)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> given as input to the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html" title="SBOLservice provides the methods for making new SBOL objects and adding SBOL data.">SBOLservice</a>.  <a href="#a96b5821c89233871863efb31ae98d629"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a68017de73adfaf0fe2cc0bb88ee10ccb"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SBOLservice::insertDnaComponent" ref="a68017de73adfaf0fe2cc0bb88ee10ccb" args="(DnaComponent comp)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>insertDnaComponent</b> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">DnaComponent</a> comp)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63e4420d05d6fffa910fccd9f3aae032"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SBOLservice::insertSequenceAnnotation" ref="a63e4420d05d6fffa910fccd9f3aae032" args="(SequenceAnnotation anot)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>insertSequenceAnnotation</b> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html">SequenceAnnotation</a> anot)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3d36f09a42ea6b9248c8f6894420a1f8"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SBOLservice::insertSequenceFeature" ref="a3d36f09a42ea6b9248c8f6894420a1f8" args="(SequenceFeature feat)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>insertSequenceFeature</b> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html">SequenceFeature</a> feat)</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html" title="SBOLservice provides the methods for making new SBOL objects and adding SBOL data.">SBOLservice</a> provides the methods for making new SBOL objects and adding SBOL data. </p>
@@ -149,7 +157,7 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>getAllAsRDF</b> ()<
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> with the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> inside </dd></dl>
 
-<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00265">265</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
+<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00255">255</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
 
 </div>
 </div>
@@ -189,7 +197,7 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>getAllAsRDF</b> ()<
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00285">285</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
+<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00279">279</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
 
 </div>
 </div>
@@ -222,7 +230,7 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>getAllAsRDF</b> ()<
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">feature</td><td>description of the position </td></tr>
-    <tr><td class="paramname">annotation</td><td>position information for a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> being describes </td></tr>
+    <tr><td class="paramname">annotation</td><td>position information for a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> being described </td></tr>
   </table>
   </dd>
 </dl>
@@ -304,7 +312,7 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>getAllAsRDF</b> ()<
 <dd>
 <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a2e16af0dece16378b9ee31d818bd8ef1" title="DNA sequence which this DnaComponent object represents.">DnaComponent.setDnaSequence</a>(<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&#39;s DnaSequence for RDF and Json.">org.sbolstandard.libSBOLj.DnaSequence</a>) </dd></dl>
 
-<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00198">198</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
+<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00203">203</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
 
 </div>
 </div>
@@ -380,7 +388,7 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>getAllAsRDF</b> ()<
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> with the metadata fields set, empty otherwise (ie no components or features) </dd></dl>
 
-<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00229">229</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
+<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00234">234</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
 
 </div>
 </div>
@@ -511,15 +519,12 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>getAllAsRDF</b> ()<
 <p>If you already have a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> of components and features, you can add it directly to the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html" title="SBOLservice provides the methods for making new SBOL objects and adding SBOL data.">SBOLservice</a>, to get the benefits of SBOL data persistence services.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">displayId</td><td>A human readable identifier </td></tr>
-    <tr><td class="paramname">name</td><td>commonly used to refer to this <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> (eg BIOAFAB Pilot Project) </td></tr>
-    <tr><td class="paramname">description</td><td>human readable text describing the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> (eg Pilot Project Designs, see <a href="http://biofab.org/data">http://biofab.org/data</a>) </td></tr>
+    <tr><td class="paramname">a</td><td><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> with the metadata fields set, empty otherwise (ie no components or features) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> with the metadata fields set, empty otherwise (ie no components or features) </dd></dl>
 
-<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00253">253</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
+<p>Definition at line <a class="el" href="_s_b_o_lservice_8java_source.html#l00335">335</a> of file <a class="el" href="_s_b_o_lservice_8java_source.html">SBOLservice.java</a>.</p>
 
 </div>
 </div>
@@ -541,7 +546,7 @@ String&#160;</td><td class="memItemRight" valign="bottom"><b>getAllAsRDF</b> ()<
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 10 2011 11:58:21 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 13 2011 19:23:24 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

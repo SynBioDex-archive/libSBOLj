@@ -59,13 +59,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Learn how to:</h2>
 <p><a class="el" href="tutorial.html#A">A. Write SBOL RDF or Json data from a GenBank File</a> <br/>
  <a class="el" href="tutorial.html#B">B. Read SBOL RDF data into a Library object</a> <br/>
- <a class="el" href="tutorial.html#C">C. Create a New SBOL Library object</a> <br/>
- <a class="el" href="tutorial.html#D">D. Access members of Library</a> <br/>
+ <a class="el" href="tutorial.html#C">C. Create a New SBOL Library of DnaCompenents using SBOLservices (preferred method)</a> <br/>
+ <a class="el" href="tutorial.html#D">D. Create a New SBOL Library of DnaCompenents making individual objects (more control)</a> <br/>
+ <a class="el" href="tutorial.html#E">E. Access members of Library</a> <br/>
 </p>
 <hr/>
- <h2><a class="anchor" id="A"></a>
+<h2><a class="anchor" id="A"></a>
 A. Write SBOL RDF or Json data from a GenBank File</h2>
-<p><em>The code in this example can be found in <a class="el" href="classlib_s_b_o_lj_use_example_1_1_main.html" title="Main serves as a simple example of use.">libSBOLjUseExample.Main</a></em></p>
+<p><em>The code in this example can be found in <a class="el" href="classlib_s_b_o_lj_use_example_1_1_read_gen_bank_file.html" title="See Tutorial Example A.">libSBOLjUseExample.ReadGenBankFile</a></em></p>
 <p>The basic SBOL use case is to represent a DNA level design of a DNA construct. Legacy designs of biological constructs are likely to be found in GenBank flatfile format, as DNA sequence editor software (eg ApE, VectorNTI, GD-ICE's Vector Editor) used to create them has the ability to export this format. Additionally the GenBank format is the de-facto standard for exchange of annotated DNA sequence data between software. Therefore, for our first example we convert a GenBank file from the BIOFAB Pilot Project into SBOL RDF and Json serializations.</p>
 <ol type="1">
 <li><dl class="user"><dt><b>Use SBOLutil class</b></dt><dd>The SBOLutil class contains static methods, namely utilities for the GenBank to SBOL conversion use case.</dd></dl>
@@ -73,7 +74,7 @@ A. Write SBOL RDF or Json data from a GenBank File</h2>
 <li><dl class="user"><dt><b>Read in a GenBank file into RichSequence</b></dt><dd>The BioJava library utilities (BioJava-1.7.1) are used to parse a GenBank flat file formatted file and create a RichSequenceIterator. The RichSequence objects correspond to one GenBank record from a file. Since, GenBank files can contain multiple records, the collection of records needs to be iterated over. However, as is the case in our example, there is often one GenBank record in a file. The file BFa_8.15.gb contains the sequence for a plasmid vector and annotations for a GFP expression cassette. The SBOLutil method fromGenBankFile is a convenience method to read GenBank files. <div class="fragment"><pre class="fragment">RichSequenceIterator aRSiter = SBOLutil.fromGenBankFile(<span class="stringliteral">&quot;test\\test_files\\BFa_8.15.gb&quot;</span>);
 </pre></div></dd></dl>
 </li>
-<li><dl class="user"><dt><b>Get a new Library object from BioJava.RichSequence objects</b></dt><dd>The SBOLutil method fromRichSequenceIter steps through the RichSequenceiterator object and creates a Library SBOL object. The output contains the DnaCompnents for each RichSequence object (ie GenBank Record) and its annotations. <div class="fragment"><pre class="fragment"> Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRsIter); 
+<li><dl class="user"><dt><b>Get a new Library object from BioJava.RichSequence objects</b></dt><dd>The SBOLutil method fromRichSequenceIter steps through the RichSequenceiterator object and creates a Library SBOL object. The output contains the DnaCompnents for each RichSequence object (ie GenBank Record) and its annotations. <div class="fragment"><pre class="fragment"> Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRSiter); 
 </pre></div> <em> More detail</em>: fromRichSequenceIter loops over the iterator using the readRichSequence method to read each RichSequence object, and to map the information contained within RichSequence to an SBOL DnaComponent. Finally, it adds each DnaComponent to a Library which is returned. The readRichSequence method can be used independently if only one RichSequence is expected.</dd></dl>
 </li>
 <li><dl class="user"><dt><b>Serialize the Library object to RDF or Json</b></dt><dd>Finally, to serialize the SBOL data, found in the Library object, there are two methods that allow you to serialize the Library object either to RDF or to Json. <div class="fragment"><pre class="fragment">String jsonString = SBOLutil.toJson(aBioFABlib);
@@ -84,23 +85,31 @@ The serialized RDF/XML or Json can then be sent to a collaborator or written to 
 <hr/>
  <h2><a class="anchor" id="B"></a>
 B. Read SBOL RDF data into a Library object</h2>
+<p><em>The code in this example can be found in <a class="el" href="classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata.html" title="See Tutorial Example B.">libSBOLjUseExample.ReadRDFdata</a></em></p>
 <p>In an information exchange use case SBOL RDF is sent from one party to another. Once SBOL RDF exists it can be easily read by libSBOLj. Then, the libSBOLj objects can be accessed, manipulated, mapped to another API, or stored in a persistent repository. The libSBOLj object SBOLservice provides the services to manipulate the data.</p>
 <ol type="1">
 <li><dl class="user"><dt><b>Read RDF/XML from a String</b></dt><dd>For this example we use as input the rdfString, output of <a class="el" href="tutorial.html#A">example A</a>. The SBOLutil.fromRDF method reads a String which contains the RDF/XML (UTF-8) data and populates the corresponding libSBOLj objects. It returns a SBOLservice object which provides create and read methods. <div class="fragment"><pre class="fragment">SBOLservice aS = SBOLutil.fromRDF(rdfString);
 </pre></div></dd></dl>
 </li>
-<li><dl class="user"><dt><b>Get a libSBOLj.Library object</b></dt><dd>Since the SBOLservice could contain multiple Libraries, to get at the data you select a Library by it's ID, using the .getLibrary method. <em>In this example, the Library ID is a mockup</em> used for example A. <div class="fragment"><pre class="fragment">Library lib = aS.getLibrary(<span class="stringliteral">&quot;BioFabLib_1&quot;</span>);
+<li><dl class="user"><dt><b>Get a libSBOLj.Library object</b></dt><dd>Since the SBOLservice could contain multiple Libraries, to get at the data you select a Library by it's ID, using the .getLibrary method. <em>In this example, the Library ID is a mockup</em> used for example A. <div class="fragment"><pre class="fragment">Library aLib = aS.getLibrary(<span class="stringliteral">&quot;BioFabLib_1&quot;</span>);
 </pre></div></dd></dl>
 </li>
-<li><dl class="user"><dt><b>Access data members</b></dt><dd>The Library object behaves as a POJO and conforms to the SBOL core data model in structure. There are getters and setter methods for fields and one-to-many relations are Collections which can be iterated over. <em>For example see <a class="el" href="tutorial.html#C">example C</a> </em>. <div class="fragment"><pre class="fragment">System.out.println(<span class="stringliteral">&quot;lib Contains: &quot;</span>+lib.getComponents().iterator().next().getName());
+<li><dl class="user"><dt><b>Access data members</b></dt><dd>The Library object behaves as a POJO and conforms to the SBOL core data model in structure. There are getters and setter methods for fields and one-to-many relations are Collections which can be iterated over. <em>For example see <a class="el" href="tutorial.html#C">example C</a> </em>. <div class="fragment"><pre class="fragment">System.out.println(<span class="stringliteral">&quot;lib Contains: &quot;</span>+aLib.getComponents().iterator().next().getName());
 </pre></div></dd></dl>
 For access to other data members see documentation for getters in SBOL objects, (ie. <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">Library </a>).</li>
 </ol>
 <hr/>
  <h2><a class="anchor" id="C"></a>
-C. Create a New SBOL Library object</h2>
+C. Create a New SBOL Library of DnaCompenents using SBOLservices (preferred method)</h2>
 <ol type="1">
-<li><dl class="user"><dt><b>Create a new SBOLservice</b></dt><dd><div class="fragment"><pre class="fragment">SBOLservice s = <span class="keyword">new</span> SBOLservice();
+<li><dl class="user"><dt><b>Create a new SBOLservice</b></dt><dd>SBOLservice manages the creation of SBOL objects, so you don't have to. <div class="fragment"><pre class="fragment">SBOLservice s = <span class="keyword">new</span> SBOLservice();
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Create a new Library</b></dt><dd>Library will be a collection of the DnaComponents you create. Optionally it can store SequenceFeatures just as well. <div class="fragment"><pre class="fragment">Library aLib = s.createLibrary(
+                      <span class="stringliteral">&quot;BioFabLib_1&quot;</span>,                   <span class="comment">//displayID</span>
+                      <span class="stringliteral">&quot;BIOAFAB Pilot Project&quot;</span>,         <span class="comment">//name</span>
+                      <span class="stringliteral">&quot;Pilot Project Designs&quot;</span>+         <span class="comment">//description</span>
+                      <span class="stringliteral">&quot; see http://biofab.org/data&quot;</span>);
 </pre></div></dd></dl>
 </li>
 <li><dl class="user"><dt><b>Create a new DnaComponent</b></dt><dd>DnaComponents are the segments of DNA sequence, which can be used to build new synthetic biological devices and systems. <div class="fragment"><pre class="fragment">DnaComponent aDC = s.createDnaComponent(
@@ -112,54 +121,148 @@ C. Create a New SBOL Library object</h2>
                 s.createDnaSequence(         <span class="comment">//DNA sequence</span>
                      <span class="stringliteral">&quot;tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac&quot;</span>)
                 );
-</pre></div> or <div class="fragment"><pre class="fragment">DnaComponent aDC = <span class="keyword">new</span> DnaComponent();
-aDC.setDisplayId(<span class="stringliteral">&quot;BBa_R0040&quot;</span>);
-aDC.setName(<span class="stringliteral">&quot;pTet&quot;</span>);
-aDC.setDescription(<span class="stringliteral">&quot;TetR repressible promoter&quot;</span>);
-aDC.setCircular(<span class="keyword">false</span>);
-aDC.setType(<span class="stringliteral">&quot;promoter&quot;</span>);
-aDC.set(s.createDnaSequence(
-                  <span class="stringliteral">&quot;tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac&quot;</span>));
 </pre></div></dd></dl>
 </li>
-<li><dl class="user"><dt><b>Create Annotations and Features</b></dt><dd>SequenceAnnotations provide the position and strand of SequenceFeatures which describe the DnaComponent. <div class="fragment"><pre class="fragment"><span class="comment">//The location of the feature</span>
-SequenceAnnotation aSA = s.createSequenceAnnotationForDnaComponent(
+<li><dl class="user"><dt><b>Create a SequenceAnnotation</b></dt><dd>SequenceAnnotations provide the position and strand of SequenceFeatures which describe the DnaComponent. <div class="fragment"><pre class="fragment">SequenceAnnotation aSA = s.createSequenceAnnotationForDnaComponent(
                     127, <span class="comment">//start</span>
                     181, <span class="comment">//stop</span>
                     <span class="stringliteral">&quot;+&quot;</span>, <span class="comment">//strand orientation</span>
                     aDC  <span class="comment">//DnaComponent</span>
                     );
-</pre></div> or <div class="fragment"><pre class="fragment">SequenceAnnotation anot = <span class="keyword">new</span> SequenceAnnotation();
-aSA.setStart(127);
-aSA.setStop(181);
-aSA.setStrand(<span class="stringliteral">&quot;+&quot;</span>);
-aSA.setId(aDC);
-<span class="comment">//annotate the DnaComponent</span>
-aDC.addAnnotation(aSA);
 </pre></div></dd></dl>
 </li>
-<li><dl class="user"><dt><b>Create Feature</b></dt><dd><div class="fragment"><pre class="fragment">SequenceFeature aSF = s.createSequenceFeature(
+<li><dl class="user"><dt><b>Create a SequenceFeature</b></dt><dd>SequenceFeatures are the descriptors of what is at the position described using the SequenceAnnotation. [Optionally, they can be re-used if the same, a good practice.] <div class="fragment"><pre class="fragment">SequenceFeature aSF = s.createSequenceFeature(
             <span class="stringliteral">&quot;BBa_R0062&quot;</span>,                             <span class="comment">//displayID</span>
             <span class="stringliteral">&quot;pLux&quot;</span>,                                  <span class="comment">//name</span>
             <span class="stringliteral">&quot;Activated by LuxR in concert with HSL&quot;</span>, <span class="comment">//description</span>
             <span class="stringliteral">&quot;promoter&quot;</span>                               <span class="comment">//type</span>
             );
-</pre></div> or <div class="fragment"><pre class="fragment">SequenceFeature aSF = <span class="keyword">new</span> SequenceFeature();
-aSF.setDiplayID(<span class="stringliteral">&quot;BBa_R0062&quot;</span>);
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Then, link the Feature to the Annotation</b></dt><dd><div class="fragment"><pre class="fragment">SequenceAnnotation aSA_SF = s.addSequenceFeatureToSequenceAnnotation(aSF, aSA);
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Finally, add the DnaComponent to a Library</b></dt><dd><div class="fragment"><pre class="fragment">aLib = s.addDnaComponentToLibrary(aDC, aLib);
+</pre></div></dd></dl>
+You're done, you have a Library of components (one in this example) and the SBOLservice <code>s</code> from the example knows about it. See other examples for what you can do with a SBOLservice.</li>
+</ol>
+<hr/>
+ <h2><a class="anchor" id="D"></a>
+D. Create a New SBOL Library of DnaCompenents making individual objects (more control)</h2>
+<ol type="1">
+<li><dl class="user"><dt><b>Create a new SBOLservice</b></dt><dd><div class="fragment"><pre class="fragment">SBOLservice s = <span class="keyword">new</span> SBOLservice();
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Create a new Library</b></dt><dd>Library will be a collection of the DnaComponents you create. Optionally it can store SequenceFeatures just as well. <div class="fragment"><pre class="fragment">Library aLib = <span class="keyword">new</span> Library();
+aLib.setDisplayId(<span class="stringliteral">&quot;BioFabLib_1&quot;</span>);
+aLib.setName(<span class="stringliteral">&quot;BIOAFAB Pilot Project&quot;</span>);
+aLib.setDescription(<span class="stringliteral">&quot;Pilot Project Designs see http://biofab.org/data&quot;</span>);
+s.insertLibrary(aLib);
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Create a new DnaComponent</b></dt><dd><div class="fragment"><pre class="fragment">DnaComponent aDC = <span class="keyword">new</span> DnaComponent();
+aDC.setDisplayId(<span class="stringliteral">&quot;BBa_R0040&quot;</span>);
+aDC.setName(<span class="stringliteral">&quot;pTet&quot;</span>);
+aDC.setDescription(<span class="stringliteral">&quot;TetR repressible promoter&quot;</span>);
+aDC.setCircular(<span class="keyword">false</span>);
+aDC.addType(URI.create(<span class="stringliteral">&quot;http://purl.org/obo/owl/SO#&quot;</span> + <span class="stringliteral">&quot;promoter&quot;</span>));
+aDC.setDnaSequence(s.createDnaSequence(
+                  <span class="stringliteral">&quot;tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac&quot;</span>));
+s.insertDnaComponent(aDC);
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Create a SequenceAnnotation</b></dt><dd><div class="fragment"><pre class="fragment">SequenceAnnotation aSA = <span class="keyword">new</span> SequenceAnnotation();
+aSA.setStart(127);
+aSA.setStop(181);
+aSA.setStrand(<span class="stringliteral">&quot;+&quot;</span>);
+aSA.setId(aDC);
+s.insertSequenceAnnotation(aSA);
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Create a SequenceFeature</b></dt><dd><div class="fragment"><pre class="fragment">SequenceFeature aSF = <span class="keyword">new</span> SequenceFeature();
+aSF.setDisplayId(<span class="stringliteral">&quot;BBa_R0062&quot;</span>);
 aSF.setName(<span class="stringliteral">&quot;pLux&quot;</span>);
 aSF.setDescription(<span class="stringliteral">&quot;Activated by LuxR in concert with HSL&quot;</span>);
 aSF.addType(URI.create(<span class="stringliteral">&quot;http://purl.org/obo/owl/SO#&quot;</span> + <span class="stringliteral">&quot;promoter&quot;</span>));
+s.insertSequenceFeature(aSF);
 </pre></div></dd></dl>
 </li>
-<li><dl class="user"><dt><b>Then, link the Feature to the Annotation</b></dt><dd><div class="fragment"><pre class="fragment">SequenceAnnotation anotFeat = s.addSequenceFeatureToSequenceAnnotation(feat, anot);
+<li><dl class="user"><dt><b>Then, link the objects. First, add the Feature to the Annotation</b></dt><dd><div class="fragment"><pre class="fragment">SequenceAnnotation anot_feat = s.addSequenceFeatureToSequenceAnnotation(aSF, aSA);
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Annotate the DnaComponent</b></dt><dd><div class="fragment"><pre class="fragment">DnaComponent dc_anot_feat = s.addSequenceAnnotationToDnaComponent(anot_feat,aDC);
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Finally, add the annotated DnaComponent to a Library</b></dt><dd><div class="fragment"><pre class="fragment">aLib = s.addDnaComponentToLibrary(dc_anot_feat, aLib);
 </pre></div></dd></dl>
 <hr/>
  </li>
 </ol>
-<h2><a class="anchor" id="D"></a>
-D. Access members of Library</h2>
+<h2><a class="anchor" id="E"></a>
+E. Access members of Library</h2>
 <ol type="1">
-<li><dl class="user"><dt><b></b></dt><dd></dd></dl>
+<li><dl class="user"><dt><b>Get Library</b></dt><dd><ol type="a">
+<li>If the Library is in a SBOLservice object, getLibrary by Library ID. For example if the Library was created using SBOLservice methods or it was read into the service object. Essentially if the equivalent of: <div class="fragment"><pre class="fragment">       SBOLservice s = <span class="keyword">new</span> SBOLservice();
+       s.insertLibrary(inputLib);
+</pre></div> Was performed then, retrieve a Library object using getLibrary(libraryID). For example: <div class="fragment"><pre class="fragment">        Library theLib = s.getLibrary(<span class="stringliteral">&quot;BioFabLib_1&quot;</span>);
+</pre></div></li>
+<li>Otherwise, a Library object may be available to you.</li>
+</ol>
+</dd></dl>
+</li>
+<li><dl class="user"><dt><b>Access the Library metadata elements</b></dt><dd><div class="fragment"><pre class="fragment">        <span class="comment">//Print Library object fields</span>
+        System.out.println(<span class="stringliteral">&quot;-----------------------&quot;</span>);
+        System.out.println(<span class="stringliteral">&quot;Library&quot;</span>);
+        System.out.println(<span class="stringliteral">&quot;-----------------------&quot;</span>);
+        System.out.println(<span class="stringliteral">&quot;DisplayId: &quot;</span> + theLib.getDisplayId());
+        System.out.println(<span class="stringliteral">&quot;Name: &quot;</span> + theLib.getName());
+        System.out.println(<span class="stringliteral">&quot;Description: &quot;</span> + theLib.getDescription());
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>To get individual DnaComponents iterate through the Library</b></dt><dd><div class="fragment"><pre class="fragment">        <span class="comment">//Get DnaComponents</span>
+        Collection c = theLib.getComponents();
+        <span class="keywordflow">for</span> (Iterator&lt;DnaComponent&gt; i = theLib.getComponents().iterator(); i.hasNext();) {
+            DnaComponent oneDC = i.next();
+            <span class="comment">//Print DnaComponent Fields</span>
+            System.out.println(<span class="stringliteral">&quot;-----------------------&quot;</span>);
+            System.out.println(<span class="stringliteral">&quot;DnaComponent(s)&quot;</span>);
+            System.out.println(<span class="stringliteral">&quot;-----------------------&quot;</span>);
+            System.out.println(<span class="stringliteral">&quot;DisplayId: &quot;</span> + oneDC.getDisplayId());
+            System.out.println(<span class="stringliteral">&quot;Name: &quot;</span> + oneDC.getName());
+            System.out.println(<span class="stringliteral">&quot;Description: &quot;</span> + oneDC.getDescription());
+
+            <span class="comment">//Get DnaSequence</span>
+            DnaSequence itsSeq = oneDC.getDnaSequence();
+
+            <span class="comment">//Print DnaSequence</span>
+
+            System.out.println(<span class="stringliteral">&quot;DnaSequence: &quot;</span> + itsSeq.getDnaSequence());
+</pre></div></dd></dl>
+</li>
+<li><dl class="user"><dt><b>Get Sequence Annotations and the SequenceFeatures for a DnaComponent use</b></dt><dd>the same pattern. <div class="fragment"><pre class="fragment">            <span class="comment">//Get SequenceAnnotations</span>
+            System.out.println(<span class="stringliteral">&quot;-----------------------&quot;</span>);
+            System.out.println(<span class="stringliteral">&quot;Annotation(s)&quot;</span>);
+            System.out.println(<span class="stringliteral">&quot;-----------------------&quot;</span>);
+            <span class="keywordflow">for</span> (Iterator&lt;SequenceAnnotation&gt; ai = oneDC.getAnnotations().iterator(); ai.hasNext();) {
+                SequenceAnnotation oneSA = ai.next();
+
+                <span class="comment">//Get SequenceFeatures</span>
+                <span class="keywordflow">for</span> (Iterator&lt;SequenceFeature&gt; fi = oneSA.getFeatures().iterator(); fi.hasNext();) {
+                    SequenceFeature oneSF = fi.next();
+
+                    <span class="comment">//Print SequenceAnnotatations and Features</span>
+                    System.out.println(<span class="stringliteral">&quot;Feature Name: &quot;</span>+oneSF.getName() +    <span class="comment">//name</span>
+                                       <span class="stringliteral">&quot;\nPosition: (&quot;</span>+ oneSA.getStart()+    <span class="comment">//Start position</span>
+                                       <span class="stringliteral">&quot;,&quot;</span>+oneSA.getStop()+                  <span class="comment">//Stop position</span>
+                                       <span class="stringliteral">&quot;) Strand:[&quot;</span>+oneSA.getStrand()+<span class="stringliteral">&quot;]\n&quot;</span>+ <span class="comment">//Strand</span>
+                                       <span class="stringliteral">&quot;Feature Description: &quot;</span>+
+                                       oneSF.getDescription());              <span class="comment">//Description</span>
+                   System.out.println(<span class="stringliteral">&quot;-----------------------&quot;</span>);
+
+                } <span class="comment">// end SequenceFeatures</span>
+            } <span class="comment">//end SequenceAnnotations</span>
+        }<span class="comment">// end DnaComponents</span>
+</pre></div></dd></dl>
 <hr/>
  Michal Galdzicki - 03/09/2011 </li>
 </ol>
@@ -178,7 +281,7 @@ D. Access members of Library</h2>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Mar 10 2011 11:58:21 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 13 2011 19:23:24 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>
