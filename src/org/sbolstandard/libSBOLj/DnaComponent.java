@@ -119,7 +119,7 @@ public class DnaComponent implements SupportsRdfId {
      * Identifier that users will see as reference to the DNA construct.
      * It should be unambiguous and is likely imported from source data. Otherwise
      * it should be generated.
-     * TODO: It should be restricted to alphanumeric/underscore and starting with a
+     * @todo It should be restricted to alphanumeric/underscore and starting with a
      * letter or underscore.
      * @param displayId a human readable identifier
      */
@@ -228,7 +228,7 @@ public class DnaComponent implements SupportsRdfId {
      * components.
      * TO DO: implement use of SO within libSBOLj.
      * @return a Sequence Ontology (SO) vocabulary term to describe the type of DnaComponent.
-     * TODO: When serialized to RDF this is a URI, so when read from persistence it should become
+     * @todo When serialized to RDF this is a URI, so when read from persistence it should become
      * one of the SO human readable vocabulary terms. Note:I should allow many types
      */
     public Collection<URI> getTypes() {

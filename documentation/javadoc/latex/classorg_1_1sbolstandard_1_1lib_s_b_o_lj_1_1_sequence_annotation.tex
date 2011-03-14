@@ -1,0 +1,333 @@
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}{
+\section{SequenceAnnotation Class Reference}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+}
+
+
+The SBOL data model's \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}{SequenceAnnotation} for RDF and Json.  
+
+
+
+
+Inherits com::clarkparsia::empire::SupportsRdfId.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a8606f263fb4a3f3d9d7265cf1d1095d3}{addFeature} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} feature)
+\begin{DoxyCompactList}\small\item\em Place a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} at this.start, .stop, .strand location. \item\end{DoxyCompactList}\item 
+Collection$<$ \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} $>$ \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a6e4112a6cec45766efb5ce852f1e764e}{getFeatures} ()
+\begin{DoxyCompactList}\small\item\em Describe the segments of DNA sequence from start to stop on the strand. \item\end{DoxyCompactList}\item 
+String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_aab219518f0eaf3db55b6a62ad6b49407}{getId} ()
+\begin{DoxyCompactList}\small\item\em The ID portion of the URI which identifies this object. \item\end{DoxyCompactList}\item 
+void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_acc7f1b4283f0e5a9a502a64403d2e625}{setId} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} parentDnaComp)
+\begin{DoxyCompactList}\small\item\em Creates an ID based on a hash of the start,stop,strand,and parent DnaCompoment. \item\end{DoxyCompactList}\item 
+int \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a1408176a248f41dbe8735bd3009e0cf5}{getStart} ()
+\begin{DoxyCompactList}\small\item\em First position of the Sequence Feature being annotated. \item\end{DoxyCompactList}\item 
+void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a95797ac4da76f48db6f9da6d5c1921cb}{setStart} (int start)
+\begin{DoxyCompactList}\small\item\em First position of the Sequence Feature on the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. \item\end{DoxyCompactList}\item 
+Integer \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_ab7312487c80acd0453c38faaef61de8b}{getStop} ()
+\begin{DoxyCompactList}\small\item\em Last position of the Sequence Feature on the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. \item\end{DoxyCompactList}\item 
+void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a6f27d883517282bf39452ee31373d266}{setStop} (Integer stop)
+\begin{DoxyCompactList}\small\item\em Last position of the Sequence Feature on the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. \item\end{DoxyCompactList}\item 
+String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_aab2543119d16ab85073c45c182a7d010}{getStrand} ()
+\begin{DoxyCompactList}\small\item\em Orientation of \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} is the + or -\/ strand. \item\end{DoxyCompactList}\item 
+void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a336a936a47073d186cafc97952c0c11a}{setStrand} (String strand)
+\begin{DoxyCompactList}\small\item\em Orientation + or -\/ of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} relative to the DNA sequence of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. \item\end{DoxyCompactList}\item 
+RdfKey \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a98d34c30847c78a8922be878a2fa4d49}{getRdfId} ()
+\item 
+void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_afe8d2a1ced8871ba217ddf364366da99}{setRdfId} (final RdfKey id)
+\item 
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_ae3ce8ca5a04e8966a9d2158aeeecfc16}{
+boolean {\bfseries equals} (Object obj)}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_ae3ce8ca5a04e8966a9d2158aeeecfc16}
+
+\item 
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a077e18fe97323c7194e2665ffc766399}{
+int {\bfseries hashCode} ()}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a077e18fe97323c7194e2665ffc766399}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The SBOL data model's \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}{SequenceAnnotation} for RDF and Json. Sequence Annotations give the location and direction of SequenceFeatures of a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. The location is specified by the start and stop positions of the Sequence Feature along the DNA sequence. We are using the convention that the first base pair of a DNA sequence is position 1. This convention is established by the broader Molecular biology community, in literature. The direction of the feature is specified by the strand \mbox{[}+/-\/\mbox{]}. Sequences used are by convention assumed 5' to 3', therefore the {\ttfamily +} strand is 5' to 3' and the {\ttfamily -\/} strand is 3' to 5'.
+
+\begin{DoxyAuthor}{Author}
+mgaldzic 
+\end{DoxyAuthor}
+\begin{DoxySince}{Since}
+0.1, 02/08/2011 
+\end{DoxySince}
+
+
+Definition at line 42 of file SequenceAnnotation.java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a8606f263fb4a3f3d9d7265cf1d1095d3}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!addFeature@{addFeature}}
+\index{addFeature@{addFeature}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{addFeature}]{\setlength{\rightskip}{0pt plus 5cm}void addFeature (
+\begin{DoxyParamCaption}
+\item[{{\bf SequenceFeature}}]{feature}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a8606f263fb4a3f3d9d7265cf1d1095d3}
+
+
+Place a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} at this.start, .stop, .strand location. 
+
+Feature describes this position so it should include the information the users want to be able to get when examining this position.
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature} & to describe what is located at this annotation. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a6e4112a6cec45766efb5ce852f1e764e}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!getFeatures@{getFeatures}}
+\index{getFeatures@{getFeatures}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{getFeatures}]{\setlength{\rightskip}{0pt plus 5cm}Collection$<${\bf SequenceFeature}$>$ getFeatures (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a6e4112a6cec45766efb5ce852f1e764e}
+
+
+Describe the segments of DNA sequence from start to stop on the strand. 
+
+The feature has its own displayID, name, description, type, and sequence. Most commonly it is used to describe the sub-\/sequences of a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. Features can be re-\/used, whenever the SequenceFeature.equals NOTE: the feature could be used as a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} itself, but this is not implemented in libSBOLj, yet. SbolService does not yet check if an .equals feature exists already. \begin{DoxyReturn}{Returns}
+collection of any features at this location 
+\end{DoxyReturn}
+
+
+Definition at line 85 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_aab219518f0eaf3db55b6a62ad6b49407}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!getId@{getId}}
+\index{getId@{getId}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{getId}]{\setlength{\rightskip}{0pt plus 5cm}String getId (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_aab219518f0eaf3db55b6a62ad6b49407}
+
+
+The ID portion of the URI which identifies this object. 
+
+\begin{DoxyReturn}{Returns}
+the RDF id for the object 
+\end{DoxyReturn}
+
+
+Definition at line 93 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a98d34c30847c78a8922be878a2fa4d49}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!getRdfId@{getRdfId}}
+\index{getRdfId@{getRdfId}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{getRdfId}]{\setlength{\rightskip}{0pt plus 5cm}RdfKey getRdfId (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a98d34c30847c78a8922be878a2fa4d49}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 202 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a1408176a248f41dbe8735bd3009e0cf5}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!getStart@{getStart}}
+\index{getStart@{getStart}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{getStart}]{\setlength{\rightskip}{0pt plus 5cm}int getStart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a1408176a248f41dbe8735bd3009e0cf5}
+
+
+First position of the Sequence Feature being annotated. 
+
+Start coordinate is in terms of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence}{DnaSequence} of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} annotated.
+
+\begin{DoxyReturn}{Returns}
+positive integer coordinate of first base of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature}. 
+\end{DoxyReturn}
+
+
+Definition at line 133 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_ab7312487c80acd0453c38faaef61de8b}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!getStop@{getStop}}
+\index{getStop@{getStop}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{getStop}]{\setlength{\rightskip}{0pt plus 5cm}Integer getStop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_ab7312487c80acd0453c38faaef61de8b}
+
+
+Last position of the Sequence Feature on the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. 
+
+Stop coordinate is in terms of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence}{DnaSequence} of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} annotated.
+
+\begin{DoxyReturn}{Returns}
+positive integer coordinate of last base of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} 
+\end{DoxyReturn}
+
+
+Definition at line 155 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_aab2543119d16ab85073c45c182a7d010}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!getStrand@{getStrand}}
+\index{getStrand@{getStrand}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{getStrand}]{\setlength{\rightskip}{0pt plus 5cm}String getStrand (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_aab2543119d16ab85073c45c182a7d010}
+
+
+Orientation of \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} is the + or -\/ strand. 
+
+Sequences used are by convention assumed 5' to 3', therefore the {\ttfamily +} strand is 5' to 3' and the {\ttfamily -\/} strand is 3' to 5'.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily +} if feature aligns in same direction as \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}, {\ttfamily -\/} if feature aligns in opposite direction as \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. 
+\end{DoxyReturn}
+
+
+Definition at line 178 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_acc7f1b4283f0e5a9a502a64403d2e625}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!setId@{setId}}
+\index{setId@{setId}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{setId}]{\setlength{\rightskip}{0pt plus 5cm}void setId (
+\begin{DoxyParamCaption}
+\item[{{\bf DnaComponent}}]{parentDnaComp}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_acc7f1b4283f0e5a9a502a64403d2e625}
+
+
+Creates an ID based on a hash of the start,stop,strand,and parent DnaCompoment. 
+
+Uses sha-\/256 to hash the information elements. The parentDnaComponent is used to make sure the hash is unique for any given Sequenceannotation of a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. This also enforces the use of one \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}{SequenceAnnotation} for a single position with strand.
+
+NOTE: The implication is that there should be a one-\/to-\/many relationship for SequenceFeatures. That way multiple features can be placed in one position and orientation. IDENTIFY THE USE CASE THAT NECESSITATES THIS.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parentDnaComp} & the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} that this annotation is for \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 111 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_afe8d2a1ced8871ba217ddf364366da99}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!setRdfId@{setRdfId}}
+\index{setRdfId@{setRdfId}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{setRdfId}]{\setlength{\rightskip}{0pt plus 5cm}void setRdfId (
+\begin{DoxyParamCaption}
+\item[{final RdfKey}]{id}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_afe8d2a1ced8871ba217ddf364366da99}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 210 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a95797ac4da76f48db6f9da6d5c1921cb}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!setStart@{setStart}}
+\index{setStart@{setStart}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{setStart}]{\setlength{\rightskip}{0pt plus 5cm}void setStart (
+\begin{DoxyParamCaption}
+\item[{int}]{start}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a95797ac4da76f48db6f9da6d5c1921cb}
+
+
+First position of the Sequence Feature on the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. 
+
+Start coordinate in terms of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence}{DnaSequence} of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} annotated.
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & positive integer coordinate of first base of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 144 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a6f27d883517282bf39452ee31373d266}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!setStop@{setStop}}
+\index{setStop@{setStop}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{setStop}]{\setlength{\rightskip}{0pt plus 5cm}void setStop (
+\begin{DoxyParamCaption}
+\item[{Integer}]{stop}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a6f27d883517282bf39452ee31373d266}
+
+
+Last position of the Sequence Feature on the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stop} & positive integer coordinate of last base of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 164 of file SequenceAnnotation.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a336a936a47073d186cafc97952c0c11a}{
+\index{org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}!setStrand@{setStrand}}
+\index{setStrand@{setStrand}!org::sbolstandard::libSBOLj::SequenceAnnotation@{org::sbolstandard::libSBOLj::SequenceAnnotation}}
+\subsubsection[{setStrand}]{\setlength{\rightskip}{0pt plus 5cm}void setStrand (
+\begin{DoxyParamCaption}
+\item[{String}]{strand}
+\end{DoxyParamCaption}
+)}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation_a336a936a47073d186cafc97952c0c11a}
+
+
+Orientation + or -\/ of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} relative to the DNA sequence of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. 
+
+\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence}{DnaSequence} used is by convention assumed 5' to 3', therefore the {\ttfamily +} strand is 5' to 3' and the {\ttfamily -\/} strand is 3' to 5'.
+
+
+\begin{DoxyParams}{Parameters}
+{\em strand} & {\ttfamily +} if feature aligns in same direction as \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}, {\ttfamily -\/} if feature aligns in opposite direction as \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 193 of file SequenceAnnotation.java.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/Users/mgaldzic/Documents/NetBeansProjects/libSBOLj/src/org/sbolstandard/libSBOLj/SequenceAnnotation.java\end{DoxyCompactItemize}

@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  */
 public class SBOLutilTest {
 
-    private SbolService s = new SbolService();
+    private SBOLservice s = new SBOLservice();
 
     ;
     private DnaSequence dnaSequence = s.createDnaSequence("actg");

@@ -51,10 +51,10 @@ public class SBOLutil {
      * @param filename The file path for a GenBank file (eg "test\\test_files\\BFa_8.15.gb")
      * @return Data from the input file as a RichSequenceIterator a BioJava iterator for annotated sequences.
      *         If it cannot find a file it prints a warning, and returns an empty iterator.
-     * @throws BioException BioJava threw up, TODO: understand what BioJava exceptions are.
+     * @throws BioException BioJava threw up, @todo understand what BioJava exceptions are.
      * @see #fromRichSequenceIter(org.biojavax.bio.seq.RichSequenceIterator)
      */
-    public RichSequenceIterator fromGenBankFile(String filename) throws BioException {
+    public static RichSequenceIterator fromGenBankFile(String filename) throws BioException {
 
         BufferedReader br = null;
         SimpleNamespace ns = null;
@@ -87,17 +87,17 @@ public class SBOLutil {
      *
      * @param rsi RichSequenceIterator created by BioJava (eg from GenBank file)
      * @return Library of DNA Components and SequenceFeatures from the input
-     * @throws BioException BioJava threw up, TODO: understand what BioJava exceptions are.
+     * @throws BioException BioJava threw up, @todo understand what BioJava exceptions are.
      */
-    public Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
-        SbolService s = new SbolService();
+    public static Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
+        SBOLservice s = new SBOLservice();
         
         Library lib = s.createLibrary("BioFabLib_1", "BIOAFAB Pilot Project",
                 "Pilot Project Designs, see http://biofab.org/data");
         while (rsi.hasNext()) {
             RichSequence rs = rsi.nextRichSequence();
             System.out.println("readGB file of: " + rs.getName());
-            s.addDnaComponentToLibrary(readRichSequence(rs), lib);
+            s.addDnaComponentToLibrary(SBOLutil.readRichSequence(rs), lib);
         }
         return lib;
     }
@@ -113,8 +113,8 @@ public class SBOLutil {
      * @param rs a RichSequence containing DNA sequence described by features.
      * @return DnaComponent with the attached SequenceAnnotations and SequenceFeatures
      */
-    public DnaComponent readRichSequence(RichSequence rs) {
-        SbolService s = new SbolService();
+    public static DnaComponent readRichSequence(RichSequence rs) {
+        SBOLservice s = new SBOLservice();
         //The main GenBank Record can be found by the following
         DnaComponent comp = s.createDnaComponent(rs.getName(),
                 rs.getName(), rs.getDescription(), false, "other_DNA",
@@ -158,6 +158,7 @@ public class SBOLutil {
             //compAnotFeat = s.addSequenceAnnotationToDnaComponent(anotFeat, comp);
 
         }
+
         return comp;
     }
 
@@ -167,7 +168,7 @@ public class SBOLutil {
      * Customizes the Json writer to leave out fields annotated with @SkipInJson.
      *
      * This is needed for the MyExclusionStrategy class
-     * TODO: Does this need to be public?
+     * @todo Does this need to be public?
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
@@ -186,7 +187,7 @@ public class SBOLutil {
      * @param input an SBOL Library to be written out
      * @return String containing the Json serialization
      */
-    public String toJson(Library input) {
+    public static String toJson(Library input) {
 
         // converting to JSON
         //add this type to skip: SupportsRdfId
@@ -223,16 +224,16 @@ public class SBOLutil {
      * @param input an SBOL Library to be written out
      * @return String containing the RDF serialization
      */
-    public String toRDF(Library input) {
+    public static String toRDF(Library input) {
         //make RDF
-        SbolService s = new SbolService();
+        SBOLservice s = new SBOLservice();
         s.insertLibrary(input);
         String rdfString = s.getAllAsRDF();
         return rdfString;
      
     }
-    public SbolService fromRDF(String rdfString) {
-        SbolService s = new SbolService(rdfString);
+    public static SBOLservice fromRDF(String rdfString) {
+        SBOLservice s = new SBOLservice(rdfString);
         return s;
     }
 
