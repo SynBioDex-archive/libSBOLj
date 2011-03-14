@@ -209,7 +209,7 @@ public class SBOLservice {
         aDC.setDescription(description);
         aDC.setCircular(isCircular);
 
-        aDC.addType(URI.create("http://sbols.org/sbol.owl#" + type));
+        aDC.addType(URI.create("http://purl.org/obo/owl/SO#" + type));
         aDC.setDnaSequence(dnaSequence);
         aManager.persist(aDC);
 
