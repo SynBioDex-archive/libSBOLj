@@ -24,8 +24,8 @@
   \section author_sec Developers
 
   - Lead: Michal Galdzicki (<a href="http://github.com/mgaldzic">mgaldzic</a>) University of Washington
-  - Second: Cesar A. Rodriguez
-  - SBOL developers: Laura Adam, Deepak Chandran, Douglas Densmore, Matthew Lux, Akshay Maheshwari, Barry Moore, Chris J. Myers, Jean Peccoud, Nicholas Roehner, Guy-Bart Stan, Mandy Wilson, Herbert M. Sauro
+  - Second: Cesar A. Rodriguez (<a href="http://github.com/cesarr">cesarr</a>) BIOFAB
+  - SBOL authors: Laura Adam, J. Christopher Anderson, Deepak Chandran, Douglas Densmore, Drew Endy, John H Gennari, Raik Gruenberg, Timothy Ham, Matthew Lux, Akshay Maheshwari, Barry Moore, Chris J. Myers, Jean Peccoud, Cesar A. Rodriguez, Nicholas Roehner, Guy-Bart Stan, Mandy Wilson, Herbert M. Sauro
 
 
   \section contact_sec Contact
@@ -36,5 +36,15 @@
 
      - <a href="javadoc">Old style libSBOLj JavaDoc</a>
      - There is a documentation guide here: <a href="http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html">How to Write Doc Comments for the Javadoc Tool</a></p>
+
+  \section included_sec Libraries Used
+     - <a href="http://github.com/clarkparsia/Empire">Empire</a> - implementation of <a href="http://semanticweb.com/empire-rdf-sparql-meet-jpa_b15617">JPA for RDF</a> (<a href="http://clarkparsia.com/">Clark & Parsia</a>)
+     - <a href="http://biojava.org/wiki/Main_Page">BioJava</a> - tools library for processing biological data (<a href="http://dx.doi.org/10.1093/bioinformatics/btn397">Holland, et al. 2008</a>)
+     - <a href="http://code.google.com/p/google-gson/">google-Gson</a> - JSON library (<a href="http://code.google.com/opensource/projects.html">Google</a>)
+     - <a href="http://www.gnu.org/software/gnu-crypto/">GNU Crypto</a> - implementations of cryptographic primitives and tools (<a href="http://www.gnu.org/">GNU Project</a>)
+     - <a href="http://commons.apache.org/io/index.html">Commons IO</a> - IO functionality (<a href="http://commons.apache.org/">Apache Commons</a>)
+
+  \section thanks_sec Acknowledgements
+     - We would like to especially thank <a href="https://github.com/clarkparsia">Michael Grove</a> of Clark & Parsia, LLC for his help in applying the Empire framework to SBOL.
 
  */
