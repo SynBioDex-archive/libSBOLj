@@ -34,7 +34,7 @@
 
   \section javadoc_old Traditional Javadoc
 
-     - <a href="../documentation/classic_javadoc">Old style libSBOLj JavaDoc</a>
+     - <a href="../../../documentation/classic_javadoc/index.html">Old style libSBOLj JavaDoc</a>
      - There is a documentation guide here: <a href="http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html">How to Write Doc Comments for the Javadoc Tool</a></p>
 
   \section included_sec Libraries Used
