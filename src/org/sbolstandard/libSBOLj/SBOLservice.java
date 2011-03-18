@@ -29,10 +29,10 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /**
- * foobar provides the methods for making new SBOL objects and adding SBOL
+ * SBOLservice provides the methods for making new SBOL objects and adding SBOL
  * data.
  *
- * Use methods of foobar when creating new SBOL objects and adding data.
+ * Use methods of SBOLservice when creating new SBOL objects and adding data.
  * It is called a service as it performs operations on the SBOL objects that do
  * not really belong to the class itself. These convenience methods SHOLD include
  * an entity manager from empire, delete methods, creating entities SHOULD check
@@ -47,12 +47,12 @@ import org.openrdf.rio.RDFParseException;
  * @author mgaldzic
  * @since 0.2, 03/2/2011
  */
-public class foobar {
+public class SBOLservice {
 
     private EntityManager aManager = null;
     private Library library = null;
 
-    public foobar() {
+    public SBOLservice() {
         EmpireConfiguration empireConfig = new EmpireConfiguration();
         empireConfig.getGlobalConfig().put("annotation.index", "config//libSBOLj.empire.annotation.config");
         empireConfig.getGlobalConfig().put("name", "michal");
@@ -62,7 +62,7 @@ public class foobar {
         aManager = Persistence.createEntityManagerFactory("newRDF").createEntityManager();
     }
 
-    public foobar(String rdfString) {
+    public SBOLservice(String rdfString) {
         this();
         InputStream is = null;
         try {
@@ -71,21 +71,21 @@ public class foobar {
             try {
                 aRepo.read(is, RDFFormat.RDFXML);
             } catch (IOException ex) {
-                Logger.getLogger(foobar.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RDFParseException ex) {
-                Logger.getLogger(foobar.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
             }
             Map aMap = new HashMap();
             aMap.put("repo_handle", aRepo);
 
             aManager = Persistence.createEntityManagerFactory("existingRDF").createEntityManager(aMap);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(foobar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 is.close();
             } catch (IOException ex) {
-                Logger.getLogger(foobar.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -300,7 +300,7 @@ public class foobar {
             rdfString = out.toString();
 
         } catch (IOException ex) {
-            Logger.getLogger(foobar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rdfString;
     }
@@ -325,10 +325,10 @@ public class foobar {
     }
 
     /**
-     * Adds the Library given as input to the foobar.
+     * Adds the Library given as input to the SBOLservice.
      *
      * If you already have a Library of components and features, you can add it
-     * directly to the foobar, to get the benefits of SBOL data persistence services.
+     * directly to the SBOLservice, to get the benefits of SBOL data persistence services.
      * 
      * @param a Library with the metadata fields set, empty otherwise (ie no components or features)
      */
