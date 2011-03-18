@@ -12,7 +12,7 @@ import org.biojava.bio.BioException;
 import org.sbolstandard.libSBOLj.DnaComponent;
 import org.sbolstandard.libSBOLj.DnaSequence;
 import org.sbolstandard.libSBOLj.Library;
-import org.sbolstandard.libSBOLj.SbolService;
+import org.sbolstandard.libSBOLj.foobar;
 import org.sbolstandard.libSBOLj.SequenceAnnotation;
 import org.sbolstandard.libSBOLj.SequenceFeature;
 
@@ -34,7 +34,7 @@ public class AccessLibrary {
 
     public static void accessLib(Library inputLib) throws BioException {
 
-        SbolService s = new SbolService();
+        foobar s = new foobar();
         s.insertLibrary(inputLib);
 
         //Get Library

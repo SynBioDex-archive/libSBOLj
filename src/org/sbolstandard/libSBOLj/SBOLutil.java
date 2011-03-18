@@ -90,7 +90,7 @@ public class SBOLutil {
      * @throws BioException BioJava threw up, @todo understand what BioJava exceptions are.
      */
     public static Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
-        SbolService s = new SbolService();
+        foobar s = new foobar();
         
         Library lib = s.createLibrary("BioFabLib_1", "BIOAFAB Pilot Project",
                 "Pilot Project Designs, see http://biofab.org/data");
@@ -114,7 +114,7 @@ public class SBOLutil {
      * @return DnaComponent with the attached SequenceAnnotations and SequenceFeatures
      */
     public static DnaComponent readRichSequence(RichSequence rs) {
-        SbolService s = new SbolService();
+        foobar s = new foobar();
         //The main GenBank Record can be found by the following
         DnaComponent comp = s.createDnaComponent(rs.getName(),
                 rs.getName(), rs.getDescription(), false, "other_DNA",
@@ -226,14 +226,14 @@ public class SBOLutil {
      */
     public static String toRDF(Library input) {
         //make RDF
-        SbolService s = new SbolService();
+        foobar s = new foobar();
         s.insertLibrary(input);
         String rdfString = s.getAllAsRDF();
         return rdfString;
      
     }
-    public static SbolService fromRDF(String rdfString) {
-        SbolService s = new SbolService(rdfString);
+    public static foobar fromRDF(String rdfString) {
+        foobar s = new foobar(rdfString);
         return s;
     }
 

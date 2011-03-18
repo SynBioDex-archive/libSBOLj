@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.biojava.bio.BioException;
 import org.sbolstandard.libSBOLj.Library;
-import org.sbolstandard.libSBOLj.SbolService;
+import org.sbolstandard.libSBOLj.foobar;
 import org.sbolstandard.libSBOLj.SBOLutil;
 
 /**
@@ -27,7 +27,7 @@ public class ReadRDFdata {
     }
     public static Library read()throws BioException{
         String rdfString = ReadGenBankFile.read();
-        SbolService aS = SBOLutil.fromRDF(rdfString);
+        foobar aS = SBOLutil.fromRDF(rdfString);
         
         Library aLib = aS.getLibrary("BioFabLib_1");
 
