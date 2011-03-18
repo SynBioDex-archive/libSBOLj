@@ -45,10 +45,11 @@ import org.openrdf.rio.RDFParseException;
  * @todo update and delete methods.
  *
  * @author mgaldzic
- * @since 0.2, 03/2/2011
+ * @since 0.31, 03/2/2011
  */
 public class SBOLservice {
-
+    // there was a naming issue for SBOLservice, it will temporarily be SBOLservice,
+    // until we go back to strick camel case or make another naming decision
     private EntityManager aManager = null;
     private Library library = null;
 
