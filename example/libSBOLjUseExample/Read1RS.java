@@ -17,7 +17,7 @@ import org.sbolstandard.libSBOLj.SBOLutil;
 /**
  * See Tutorial Example B. Read SBOL RDF data into a Library object
  * @author mgaldzic
- * @since 0.3
+ * @since 0.31
  */
 public class Read1RS {
 
