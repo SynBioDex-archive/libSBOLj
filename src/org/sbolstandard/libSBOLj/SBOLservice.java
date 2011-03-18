@@ -62,6 +62,10 @@ public class SBOLservice {
         Empire.init(empireConfig, new OpenRdfEmpireModule());
         aManager = Persistence.createEntityManagerFactory("newRDF").createEntityManager();
     }
+    public SBOLservice(Object in){
+        this();
+        aManager.persist(in);
+    }
 
     public SBOLservice(String rdfString) {
         this();

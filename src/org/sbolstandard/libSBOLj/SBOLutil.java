@@ -187,7 +187,7 @@ public class SBOLutil {
      * @param input an SBOL Library to be written out
      * @return String containing the Json serialization
      */
-    public static String toJson(Library input) {
+    public static String toJson(Object input) {
 
         // converting to JSON
         //add this type to skip: SupportsRdfId
@@ -224,10 +224,10 @@ public class SBOLutil {
      * @param input an SBOL Library to be written out
      * @return String containing the RDF serialization
      */
-    public static String toRDF(Library input) {
+    public static String toRDF(Object input) {
         //make RDF
-        SBOLservice s = new SBOLservice();
-        s.insertLibrary(input);
+        SBOLservice s = new SBOLservice(input);
+        //s.insertLibrary(input);
         String rdfString = s.getAllAsRDF();
         return rdfString;
      
