@@ -13,6 +13,7 @@
 
    <!-- My custom target for docs -->
          <target name="-post-jar">
+			 <mkdir dir="${build.dir}/classic_javadoc"/>
 			 <copy todir="${build.dir}/classic_javadoc">
                 <fileset dir="${dist.javadoc.dir}"/>
             </copy>
