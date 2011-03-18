@@ -47,7 +47,7 @@ import org.openrdf.rio.RDFParseException;
  * @author mgaldzic
  * @since 0.2, 03/2/2011
  */
-public class SBOLservice {
+public class SbolService {
 
     private EntityManager aManager = null;
     private Library library = null;
