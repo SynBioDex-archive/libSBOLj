@@ -6,6 +6,7 @@
             <name>libSBOLj</name>
             <source-roots>
                 <root id="src.documentation.dir"/>
+                <root id="src.config.dir"/>
                 <root id="src.dir"/>
                 <root id="src.example.dir" name="libSBOLjUseExample"/>
             </source-roots>

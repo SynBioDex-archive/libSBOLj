@@ -7,15 +7,20 @@ package org.sbolstandard.libSBOLj;
 import com.clarkparsia.empire.Empire;
 import com.clarkparsia.empire.config.EmpireConfiguration;
 import com.clarkparsia.empire.sesametwo.OpenRdfEmpireModule;
+import com.clarkparsia.empire.util.EmpireAnnotationProvider;
+import com.clarkparsia.empire.util.PropertiesAnnotationProvider;
 import com.clarkparsia.openrdf.ExtGraph;
 import com.clarkparsia.openrdf.ExtRepository;
 import com.clarkparsia.openrdf.OpenRdfUtil;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +30,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.spi.PersistenceProvider;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
@@ -50,17 +56,32 @@ import org.openrdf.rio.RDFParseException;
 public class SBOLservice {
     // there was a naming issue for SBOLservice, it will temporarily be SBOLservice,
     // until we go back to strick camel case or make another naming decision
+
     private EntityManager aManager = null;
     private Library library = null;
 
     public SBOLservice() {
         EmpireConfiguration empireConfig = new EmpireConfiguration();
-        empireConfig.getGlobalConfig().put("annotation.index", "config//libSBOLj.empire.annotation.config");
-        empireConfig.getGlobalConfig().put("name", "michal");
-        empireConfig.getGlobalConfig().put("factory", "sesame");
-        empireConfig.getGlobalConfig().put("files", "data//blank.rdf");
+        empireConfig.getGlobalConfig().put("annotation.index", "config//empire//libSBOLj.empire.annotation.config");
+        //empireConfig.getGlobalConfig().put("name", "michal");
+        //empireConfig.getGlobalConfig().put("factory", "sesame");
+        //empireConfig.getGlobalConfig().put("files", "data//blank.rdf");
+        Map aMap = new HashMap();
+        aMap.put("annotation.index", "config//empire//libSBOLj.empire.annotation.config");
+        aMap.put("name", "michal");
+        aMap.put("factory", "sesame");
+        aMap.put("files", "data//blank.rdf");
+        //aMap.put(
+        
+        
         Empire.init(empireConfig, new OpenRdfEmpireModule());
-        aManager = Persistence.createEntityManagerFactory("newRDF").createEntityManager();
+        
+        //aManager = Persistence.createEntityManagerFactory("newRDF").createEntityManager();
+        PersistenceProvider aProvider = Empire.get().persistenceProvider();
+       
+        aManager = aProvider.createEntityManagerFactory("newRDF", aMap).createEntityManager();
+        //aManager = aProvider.createEntityManagerFactory("newRDF").createEntityManager(aMap);
+
     }
 
     public SBOLservice(String rdfString) {
@@ -77,9 +98,13 @@ public class SBOLservice {
                 Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
             }
             Map aMap = new HashMap();
+            //aMap.put("annotation.index", "config//libSBOLj.empire.annotation.config");
+            aMap.put("name", "michal");
+            aMap.put("factory", "sesame");
+            aMap.put("files", "data//blank.rdf");
             aMap.put("repo_handle", aRepo);
-
-            aManager = Persistence.createEntityManagerFactory("existingRDF").createEntityManager(aMap);
+            PersistenceProvider aProvider = Empire.get().persistenceProvider();
+            aManager = aProvider.createEntityManagerFactory("existingRDF", aMap).createEntityManager();
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -171,12 +196,12 @@ public class SBOLservice {
     public SequenceAnnotation addSequenceFeatureToSequenceAnnotation(
             SequenceFeature feature, SequenceAnnotation annotation) {
         annotation.addFeature(feature);
-        if (aManager.contains(annotation)){
+        if (aManager.contains(annotation)) {
             aManager.merge(annotation);
         } else {
             aManager.persist(annotation);
         }
-        
+
         return annotation;
     }
 
@@ -255,9 +280,9 @@ public class SBOLservice {
      */
     public Library addDnaComponentToLibrary(DnaComponent component, Library library) {
         library.addComponent(component);
-        if (aManager.contains(library)){
-        aManager.merge(library);
-        }else{
+        if (aManager.contains(library)) {
+            aManager.merge(library);
+        } else {
             aManager.persist(library);
         }
 
