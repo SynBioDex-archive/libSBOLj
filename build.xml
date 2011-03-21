@@ -21,14 +21,6 @@
         <copy todir="${dist.dir}/config">
             <fileset dir="config/"/>
         </copy>
-        <mkdir dir="${dist.dir}/data"/>
-        <copy todir="${dist.dir}/data">
-            <fileset dir="data/"/>
-        </copy>
-        <mkdir dir="${dist.dir}/test"/>
-        <copy todir="${dist.dir}/test">
-            <fileset dir="test/"/>
-        </copy>
     </target>
 
     <!--
@@ -114,7 +106,7 @@
         <jar destfile="${store.dir}/temp_final.jar" filesetmanifest="skip">
             <zipgroupfileset dir="dist" includes="*.jar"/>
             <zipgroupfileset dir="dist/lib" includes="*.jar"/>
-            <fileset dir="dist" includes="config/libSBOLj.empire.annotation.config, data/blank.rdf, test/test_files/*.gb"/>
+            <fileset dir="dist" includes="config/empire/libSBOLj.empire.annotation.config, config/data/blank.rdf, config/test_files/*.gb"/>
 
             <manifest>
                 <attribute name="Main-Class" value="${main.class}"/>
