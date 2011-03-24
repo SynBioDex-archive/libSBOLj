@@ -26,7 +26,7 @@ public class ReadGenBankFile {
         }
     }
 public static String read() throws BioException {
-        RichSequenceIterator aRSiter = SBOLutil.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
+        RichSequenceIterator aRSiter = SBOLutil.fromGenBankFile("config\\test_files\\BFa_8.15.gb");
         Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRSiter);
         String jsonString = SBOLutil.toJson(aBioFABlib);
         String rdfString = SBOLutil.toRDF(aBioFABlib);

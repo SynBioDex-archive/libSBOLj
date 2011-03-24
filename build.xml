@@ -17,6 +17,10 @@
         <copy todir="${build.dir}/classic_javadoc">
             <fileset dir="${dist.javadoc.dir}"/>
         </copy>
+        <mkdir dir="${build.classes.dir}/config"/>
+        <copy todir="${build.classes.dir}/config">
+            <fileset dir="config/"/>
+        </copy>
         <mkdir dir="${dist.dir}/config"/>
         <copy todir="${dist.dir}/config">
             <fileset dir="config/"/>
@@ -106,10 +110,11 @@
         <jar destfile="${store.dir}/temp_final.jar" filesetmanifest="skip">
             <zipgroupfileset dir="dist" includes="*.jar"/>
             <zipgroupfileset dir="dist/lib" includes="*.jar"/>
-            <fileset dir="dist" includes="config/empire/libSBOLj.empire.annotation.config, config/data/blank.rdf, config/test_files/*.gb"/>
+            <fileset dir="dist" includes="config/empire/libSBOLj.empire.annotation.config, config/data/initial.rdf, config/test_files/*.gb"/>
 
             <manifest>
                 <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Class-Path" value="${jar.classpath} config/data/initial.rdf"/>
             </manifest>
         </jar>
 
