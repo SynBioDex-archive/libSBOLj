@@ -62,44 +62,8 @@ public class SBOLservice {
     private Library library = null;
 
     public SBOLservice() {
-//        EmpireConfiguration empireConfig = new EmpireConfiguration();
-        //URL anot_config = getClass().getResource("config/empire/annotation.config");
-//        empireConfig.getGlobalConfig().put("annotation.index", "config//empire//annotation.config");
-/*
-        URL u = this.getClass().getResource("annotation.config");
-        File con =null;
-        try {
-            con = new File(u.toURI());
-            System.out.println("con.getPath() "+con.getPath());
-        empireConfig.getGlobalConfig().put("annotation.index", "annotation.config");
-      
-
-        empireConfig.getGlobalConfig().put("annotation.index", u.toURI().toString());
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        //empireConfig.getGlobalConfig().put("name", "michal");
-        //empireConfig.getGlobalConfig().put("factory", "sesame");
-        //empireConfig.getGlobalConfig().put("files", "data//blank.rdf");
- //       Map aMap = new HashMap();
-        //aMap.put("annotation.index", "config//empire//libSBOLj.empire.annotation.config");
- //       aMap.put("name", "michal");
- //       aMap.put("factory", "sesame");
-        //final String RDF_FILE = "/config/data/blank.rdf";
- //       URL initial = getClass().getResource("/config/data/initial.rdf");
- //       aMap.put("files", initial.getFile());
-        //aMap.put(
-        
-        
-//        Empire.init(empireConfig, new OpenRdfEmpireModule());
-        Empire.init(new OpenRdfEmpireModule());
-        
+        Empire.init(new OpenRdfEmpireModule());    
         aManager = Persistence.createEntityManagerFactory("blank-data-source").createEntityManager();
-//        PersistenceProvider aProvider = Empire.get().persistenceProvider();
-       
-//        aManager = aProvider.createEntityManagerFactory("newRDF", aMap).createEntityManager();
-        //aManager = aProvider.createEntityManagerFactory("newRDF").createEntityManager(aMap);
-
     }
 
     public SBOLservice(String rdfString) {
