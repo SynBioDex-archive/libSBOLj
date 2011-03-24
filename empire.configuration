@@ -1,0 +1,5 @@
+annotation.index = empire.apt.config
+
+0.name = blank-data-source
+0.factory = sesame
+
