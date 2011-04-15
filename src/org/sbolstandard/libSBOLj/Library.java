@@ -12,7 +12,6 @@ import com.clarkparsia.empire.annotation.RdfsClass;
 import com.clarkparsia.empire.annotation.SupportsRdfIdImpl;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +39,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
  * definitions.
  *
  * @author mgaldzic
- * @since  0.2, 03/02/2011
+ * @since  0.32, 03/18/2011
  */
 @Namespaces({"sbol", "http://sbols.org/sbol.owl#"})
 @RdfsClass("sbol:Library")
@@ -87,7 +86,7 @@ public class Library implements SupportsRdfId {
      *
      * @param component a <code>DnaComponent</code> that should be a member of this library
      */
-    void addComponent(DnaComponent component) {
+    public void addComponent(DnaComponent component) {
         if (!getComponents().contains(component)) {
             getComponents().add(component);
         }

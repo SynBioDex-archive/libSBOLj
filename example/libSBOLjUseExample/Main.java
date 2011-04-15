@@ -29,7 +29,7 @@ public class Main {
         System.out.println("create BIOFAB Library");
         
 
-        RichSequenceIterator aRsIter = SBOLutil.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
+        RichSequenceIterator aRsIter = SBOLutil.fromGenBankFile("config\\test_files\\BFa_8.15.gb");
         Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRsIter);
 
         System.out.println("aBioFABlib json: \n" + SBOLutil.toJson(aBioFABlib));
