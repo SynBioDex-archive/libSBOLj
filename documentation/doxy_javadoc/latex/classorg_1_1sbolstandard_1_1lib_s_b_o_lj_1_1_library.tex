@@ -16,6 +16,8 @@ Inherits com::clarkparsia::empire::SupportsRdfId.
 \item 
 Collection$<$ \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} $>$ \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a45382b83b645ea4b89393c96023c54ba}{getComponents} ()
 \begin{DoxyCompactList}\small\item\em Elements that are intended as engineering components in synthetic biology. \item\end{DoxyCompactList}\item 
+void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a9ff983431034c861c97db6aeeecfa9c9}{addComponent} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} component)
+\begin{DoxyCompactList}\small\item\em Defined DNA segment for engineering biological systems, which belongs to this \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. \item\end{DoxyCompactList}\item 
 String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_ac7feffb7a33f63504ff1f87f19e2d2d8}{getDescription} ()
 \begin{DoxyCompactList}\small\item\em Text which is for users to read and interpret what this \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} is. \item\end{DoxyCompactList}\item 
 void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a1d15d718177c4f5411ce6ab339889fd4}{setDescription} (String description)
@@ -51,8 +53,6 @@ int {\bfseries hashCode} ()}
 \subsection*{Package Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a9ff983431034c861c97db6aeeecfa9c9}{addComponent} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} component)
-\begin{DoxyCompactList}\small\item\em Defined DNA segment for engineering biological systems, which belongs to this \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. \item\end{DoxyCompactList}\item 
 void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a8606f263fb4a3f3d9d7265cf1d1095d3}{addFeature} (\hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} feature)
 \begin{DoxyCompactList}\small\item\em Defined DNA segment for engineering biological systems, which belongs to this \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -66,11 +66,11 @@ COMMENT: Mike Galdzicki thinks \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_
 mgaldzic 
 \end{DoxyAuthor}
 \begin{DoxySince}{Since}
-0.2, 03/02/2011 
+0.32, 03/18/2011 
 \end{DoxySince}
 
 
-Definition at line 48 of file Library.java.
+Definition at line 47 of file Library.java.
 
 
 
@@ -82,7 +82,7 @@ Definition at line 48 of file Library.java.
 \begin{DoxyParamCaption}
 \item[{{\bf DnaComponent}}]{component}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  \mbox{[}package\mbox{]}}}}
+)}}
 \label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a9ff983431034c861c97db6aeeecfa9c9}
 
 
@@ -97,7 +97,7 @@ Any one of the following, standard biological parts, BioBricks, oligo components
 \end{DoxyParams}
 
 
-Definition at line 90 of file Library.java.
+Definition at line 89 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a8606f263fb4a3f3d9d7265cf1d1095d3}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!addFeature@{addFeature}}
@@ -119,7 +119,7 @@ Any one of the following, standard biological parts, BioBricks, oligo components
 \end{DoxyParams}
 
 
-Definition at line 162 of file Library.java.
+Definition at line 161 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a45382b83b645ea4b89393c96023c54ba}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!getComponents@{getComponents}}
@@ -141,7 +141,7 @@ For example, standard biological parts, BioBricks, oligo components, vector plas
 \end{DoxyReturn}
 
 
-Definition at line 77 of file Library.java.
+Definition at line 76 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_ac7feffb7a33f63504ff1f87f19e2d2d8}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!getDescription@{getDescription}}
@@ -167,7 +167,7 @@ Human readable text describing the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_
 \end{DoxyReturn}
 
 
-Definition at line 108 of file Library.java.
+Definition at line 107 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_aefe76199cb4d0096f487b280c411d843}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!getDisplayId@{getDisplayId}}
@@ -187,7 +187,7 @@ a human readable identifier
 \end{DoxyReturn}
 
 
-Definition at line 130 of file Library.java.
+Definition at line 129 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a6e4112a6cec45766efb5ce852f1e764e}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!getFeatures@{getFeatures}}
@@ -207,7 +207,7 @@ For example, pBAD, B0015, BioBrick Scar, Insertion Element, \char`\"{}Craig Vent
 \end{DoxyReturn}
 
 
-Definition at line 149 of file Library.java.
+Definition at line 148 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_aab219518f0eaf3db55b6a62ad6b49407}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!getId@{getId}}
@@ -227,7 +227,7 @@ the RDF id for the object
 \end{DoxyReturn}
 
 
-Definition at line 172 of file Library.java.
+Definition at line 171 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a78ee178b6a73658d65ca60da4d1e6683}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!getName@{getName}}
@@ -247,7 +247,7 @@ its name, commonly used to refer to this \hyperlink{classorg_1_1sbolstandard_1_1
 \end{DoxyReturn}
 
 
-Definition at line 189 of file Library.java.
+Definition at line 188 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a98d34c30847c78a8922be878a2fa4d49}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!getRdfId@{getRdfId}}
@@ -267,7 +267,7 @@ the RdfId component of the URI for the \hyperlink{classorg_1_1sbolstandard_1_1li
 \end{DoxyReturn}
 
 
-Definition at line 208 of file Library.java.
+Definition at line 207 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a1d15d718177c4f5411ce6ab339889fd4}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!setDescription@{setDescription}}
@@ -295,7 +295,7 @@ Text with an informative statement about the reason for grouping the \hyperlink{
 \end{DoxyParams}
 
 
-Definition at line 122 of file Library.java.
+Definition at line 121 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a46b93a70e7bd612a7b429aac4829bc88}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!setDisplayId@{setDisplayId}}
@@ -317,7 +317,7 @@ Identifier to display to users.
 \end{DoxyParams}
 
 
-Definition at line 138 of file Library.java.
+Definition at line 137 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_a0baf110c74c46a69b4c7a93bb68001b4}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!setId@{setId}}
@@ -339,7 +339,7 @@ A unique identifier which will be used as the ID portion of the URI.
 \end{DoxyParams}
 
 
-Definition at line 180 of file Library.java.
+Definition at line 179 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_ad737b36b74be994e0d8420797ed72f78}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!setName@{setName}}
@@ -361,7 +361,7 @@ Common name of \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{
 \end{DoxyParams}
 
 
-Definition at line 199 of file Library.java.
+Definition at line 198 of file Library.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library_afe8d2a1ced8871ba217ddf364366da99}{
 \index{org::sbolstandard::libSBOLj::Library@{org::sbolstandard::libSBOLj::Library}!setRdfId@{setRdfId}}
@@ -379,7 +379,7 @@ Definition at line 199 of file Library.java.
 \end{DoxyParams}
 
 
-Definition at line 216 of file Library.java.
+Definition at line 215 of file Library.java.
 
 
 
