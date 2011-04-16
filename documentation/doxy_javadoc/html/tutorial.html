@@ -81,7 +81,7 @@ Learn how to:</h2>
 <hr/>
 <h2><a class="anchor" id="A"></a>
 A. Write SBOL RDF or Json data from a GenBank File</h2>
-<p><em>The code in this example can be found in <a class="el" href="classlib_s_b_o_lj_use_example_1_1_read_gen_bank_file.html" title="See Tutorial Example A.">libSBOLjUseExample.ReadGenBankFile</a></em></p>
+<p><em>The code in this example can be found in libSBOLjUseExample.ReadGenBankFile</em></p>
 <p>The basic SBOL use case is to represent a DNA level design of a DNA construct. Legacy designs of biological constructs are likely to be found in GenBank flatfile format, as DNA sequence editor software (eg ApE, VectorNTI, GD-ICE's Vector Editor) used to create them has the ability to export this format. Additionally the GenBank format is the de-facto standard for exchange of annotated DNA sequence data between software. Therefore, for our first example we convert a GenBank file from the BIOFAB Pilot Project into SBOL RDF and Json serializations.</p>
 <ol type="1">
 <li><dl class="user"><dt><b>Use SBOLutil class</b></dt><dd>The SBOLutil class contains static methods, namely utilities for the GenBank to SBOL conversion use case.</dd></dl>
@@ -100,7 +100,7 @@ The serialized RDF/XML or Json can then be sent to a collaborator or written to 
 <hr/>
  <h2><a class="anchor" id="B"></a>
 B. Read SBOL RDF data into a Library object</h2>
-<p><em>The code in this example can be found in <a class="el" href="classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata.html" title="See Tutorial Example B.">libSBOLjUseExample.ReadRDFdata</a></em></p>
+<p><em>The code in this example can be found in libSBOLjUseExample.ReadRDFdata</em></p>
 <p>In an information exchange use case SBOL RDF is sent from one party to another. Once SBOL RDF exists it can be easily read by libSBOLj. Then, the libSBOLj objects can be accessed, manipulated, mapped to another API, or stored in a persistent repository. The libSBOLj object SBOLservice provides the services to manipulate the data.</p>
 <ol type="1">
 <li><dl class="user"><dt><b>Read RDF/XML from a String</b></dt><dd>For this example we use as input the rdfString, output of <a class="el" href="tutorial.html#A">example A</a>. The SBOLutil.fromRDF method reads a String which contains the RDF/XML (UTF-8) data and populates the corresponding libSBOLj objects. It returns a SBOLservice object which provides create and read methods. <div class="fragment"><pre class="fragment">SBOLservice aS = SBOLutil.fromRDF(rdfString);
@@ -296,7 +296,7 @@ E. Access members of Library</h2>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 15 2011 16:35:11 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 15 2011 18:33:06 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

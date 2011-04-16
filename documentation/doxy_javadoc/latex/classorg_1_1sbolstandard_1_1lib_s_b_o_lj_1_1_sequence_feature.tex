@@ -58,7 +58,7 @@ int {\bfseries hashCode} ()}
 The SBOL data model's \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature} for RDF and Json. The objects of this type represent DNA features which describe DnaComponents found in the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library}. They are associated with DnaComponents via the position and strand information found in the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}{SequenceAnnotation}. They SHOULD have a \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence}{DnaSequence} object which corresponds to the sequence of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} starting and ending at the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation}{SequenceAnnotation} position in the direction given by the strand. DnaComponents are EXPECTED to be found inside a SBOL \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library}{Library} object.
 
 \begin{Desc}
-\item[\hyperlink{todo__todo000008}{Todo}]SHOULD, EXPECTED above\end{Desc}
+\item[\hyperlink{todo__todo000007}{Todo}]SHOULD, EXPECTED above\end{Desc}
 
 
 \begin{DoxyAuthor}{Author}
@@ -240,12 +240,12 @@ Definition at line 194 of file SequenceFeature.java.
 Sequence Ontology vocabulary provides a defined term for types of \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature}. 
 
 \begin{Desc}
-\item[\hyperlink{todo__todo000010}{Todo}]implement use of SO within libSBOLj. \end{Desc}
+\item[\hyperlink{todo__todo000009}{Todo}]implement use of SO within libSBOLj. \end{Desc}
 \begin{DoxyReturn}{Returns}
 a Sequence Ontology (SO) vocabulary term to describe the type of \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature}{SequenceFeature}. 
 \end{DoxyReturn}
 \begin{Desc}
-\item[\hyperlink{todo__todo000011}{Todo}]When serialized to RDF this is a URI, so when read from persistence it should become one of the SO human readable vocabulary terms. Note: should allow many types \end{Desc}
+\item[\hyperlink{todo__todo000010}{Todo}]When serialized to RDF this is a URI, so when read from persistence it should become one of the SO human readable vocabulary terms. Note: should allow many types \end{Desc}
 
 
 Definition at line 171 of file SequenceFeature.java.
@@ -286,7 +286,7 @@ Definition at line 81 of file SequenceFeature.java.
 Identifier that users will see as reference to this feature. 
 
 It should be unambiguous and is likely imported from source data. Otherwise it SHOULD be generated. \begin{Desc}
-\item[\hyperlink{todo__todo000009}{Todo}]It should be restricted to alphanumeric/underscore and starting with a letter or underscore. 
+\item[\hyperlink{todo__todo000008}{Todo}]It should be restricted to alphanumeric/underscore and starting with a letter or underscore. 
 
 SHOULD \end{Desc}
 
