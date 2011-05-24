@@ -5,35 +5,43 @@
 
 package org.sbolstandard.experiment;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author cesarr
  */
 public class DnaComponent
 {
-    protected String        displayId;
-    protected String        name;
-    protected String        description;
-    protected String        type;
-    protected String        subtype;
-    protected Design        design;
-    protected Performance   performance;
+    protected int                           collectionID;
+    protected String                        displayID;
+    protected String                        name;
+    protected String                        description;
+    protected String                        type;
+    protected String                        subtype;
+    protected boolean                       isCircular;
+    protected DnaSequence                   dnaSequence;
+    protected Performance                   performance;
+    protected ArrayList<SequenceAnnotation> annotations;
 
-    public DnaComponent(String displayId, String name, String description, String type, String subtype)
+    public DnaComponent(int collectionID, String displayId, String name, String description, String type, String subtype, boolean isCircular, DnaSequence dnaSequence)
     {
-        this.displayId = displayId;
+        this.collectionID = collectionID;
+        this.displayID = displayId;
         this.name = name;
         this.description = description;
         this.type = type;
         this.subtype = subtype;
+        this.isCircular = isCircular;
+        this.dnaSequence = dnaSequence;
     }
 
     /**
      * @return the displayId
      */
-    public String getDisplayId()
+    public String getDisplayID()
     {
-        return displayId;
+        return displayID;
     }
 
     /**
@@ -71,8 +79,9 @@ public class DnaComponent
     /**
      * @param displayId the displayId to set
      */
-    public void setDisplayId(String displayId) {
-        this.displayId = displayId;
+    public void setDisplayID(String displayID)
+    {
+        this.displayID = displayID;
     }
 
     /**
@@ -80,30 +89,61 @@ public class DnaComponent
      */
     public Performance getPerformance()
     {
+        if(performance == null)
+        {
+           performance = new Performance();
+        }
+
         return performance;
     }
 
+//    /**
+//     * @param performance the performance to set
+//     */
+//    public void setPerformance(Performance performance)
+//    {
+//        this.performance = performance;
+//    }
+
     /**
-     * @param performance the performance to set
+     * @return the DnaSequence
      */
-    public void setPerformance(Performance performance)
+    public DnaSequence getDnaSequence()
     {
-        this.performance = performance;
+        return dnaSequence;
     }
 
     /**
-     * @return the design
+     * @return the collectionID
      */
-    public Design getDesign()
+    public int getCollectionID()
     {
-        return design;
+        return collectionID;
     }
 
     /**
-     * @param design the design to set
+     * @param collectionID the collectionID to set
      */
-    public void setDesign(Design design)
+    public void setCollectionID(int collectionID)
     {
-        this.design = design;
+        this.collectionID = collectionID;
+    }
+
+    public ArrayList<SequenceAnnotation> getAnnotations()
+    {
+        return annotations;
+    }
+
+    public void setAnnotations(ArrayList<SequenceAnnotation> annotations)
+    {
+        this.annotations = annotations;
+    }
+
+    /**
+     * @return the isCircular
+     */
+    public boolean isCircular()
+    {
+        return isCircular;
     }
 }

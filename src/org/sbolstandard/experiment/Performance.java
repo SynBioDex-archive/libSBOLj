@@ -15,6 +15,11 @@ public class Performance
 {
     protected ArrayList<Measurement>    measurements;
 
+    public Performance()
+    {
+        this.measurements = new ArrayList<Measurement>();
+    }
+
     /**
      * @return the measurements
      */
