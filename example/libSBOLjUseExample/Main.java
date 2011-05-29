@@ -37,7 +37,7 @@ public class Main {
         String rdfString = SBOLutil.toRDF(aBioFABlib);
 
         SBOLservice aS = SBOLutil.fromRDF(rdfString);
-        Library lib = aS.getLibrary("BioFabLib_1");
+        Library lib = aS.getLibrary();
         System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName());
     }
 }

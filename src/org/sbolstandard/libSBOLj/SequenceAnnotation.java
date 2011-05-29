@@ -234,13 +234,27 @@ public class SequenceAnnotation implements SupportsRdfId {
             }
             if (this.feature != other.feature && (this.feature == null || !this.feature.equals(other.feature))) {
                 return false;
-            }
+           }
         }
         return true;
     }
 
+  /*     if (this.id == null) {
+            String idString = start + stop + strand + parentDnaComp.hashCode();
+            IMessageDigest md = HashFactory.getInstance("sha-256");
+            byte[] input = idString.getBytes();
+            md.update(input, 0, input.length);
+            newId = new String(Hex.encodeHex(md.digest()));
+
+    */
     @Override
     public int hashCode() {
-        return getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        int hash = 1;
+        String idString = start + stop + strand;
+        hash = hash * 31 + idString.hashCode();
+        hash = hash * 31 + (feature == null ? 0 : feature.hashCode());
+        hash = hash * 31 + (id == null ? 0 : id.hashCode());
+    return hash;
+        //return getRdfId() == null ? 0 : getRdfId().value().hashCode();
     }
 }

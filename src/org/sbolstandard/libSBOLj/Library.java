@@ -57,7 +57,7 @@ public class Library implements SupportsRdfId {
     private String name;
     @RdfProperty("sbol:description")
     private String description;
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("sbol:component")
     private Collection<DnaComponent> component = new HashSet<DnaComponent>();
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -237,12 +237,15 @@ public class Library implements SupportsRdfId {
             if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
                 return false;
             }
-            if (this.component != other.component && (this.component == null || !this.component.equals(other.component))) {
+            if ((this.getComponents().isEmpty()) ? !(other.getComponents().isEmpty()) : 
+                ((this.component != other.component) && (this.component == null || !this.component.equals(other.component)))) {
                 return false;
             }
-            if (this.feature != other.feature && (this.feature == null || !this.feature.equals(other.feature))) {
+            if ((this.getFeatures().isEmpty()) ? !(other.getFeatures().isEmpty()) : 
+                ((this.feature != other.feature) && (this.feature == null || !this.feature.equals(other.feature)))) {
                 return false;
             }
+    
         }
         return true;
     }

@@ -245,7 +245,7 @@ public class DnaComponent implements SupportsRdfId {
     public void addType(URI type) {
         if (!getTypes().contains(type)) {
             getTypes().add(type);
-        //this.type.add(type);
+            //this.type.add(type);
         }
     }
 
@@ -274,7 +274,6 @@ public class DnaComponent implements SupportsRdfId {
      * @return true if another object is equivalent to this one, false otherwise
      *         (including null parameter)
      */
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -300,9 +299,6 @@ public class DnaComponent implements SupportsRdfId {
             if (this.isCircular != other.isCircular) {
                 return false;
             }
-            if (this.type != other.type && (this.type == null || !this.type.equals(other.type))) {
-                return false;
-            }
             if (this.dnaSequence != other.dnaSequence && (this.dnaSequence == null || !this.dnaSequence.equals(other.dnaSequence))) {
                 return false;
             }
@@ -315,6 +311,15 @@ public class DnaComponent implements SupportsRdfId {
 
     @Override
     public int hashCode() {
-        return getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        int hash = 1;    
+        hash = hash * 31 + (displayId == null ? 0 : displayId.hashCode());
+        hash = hash * 31 + (name == null ? 0: name.hashCode());
+        hash = hash * 31 + (annotation == null ? 0 : annotation.hashCode());
+        hash = hash * 31 + (dnaSequence == null ? 0 : dnaSequence.hashCode());
+        //System.out.println("hash b "+ hash+"\n");
+       
+        //int hash = getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        //System.out.println("hash c "+hash);
+        return hash;
     }
 }

@@ -40,6 +40,7 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 @RdfsClass("sbol:SequenceFeature")
 @Entity
 public class SequenceFeature implements SupportsRdfId {
+
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
     @RdfId(namespace = "http://sbols.org/sbol.owl#")
@@ -57,7 +58,7 @@ public class SequenceFeature implements SupportsRdfId {
     @RdfProperty("sbol:dnaSequence")
     private DnaSequence dnaSequence;
 
-     /**
+    /**
      * Text which is for users to read and interpret what this feature is.
      * (eg. engineered Lac promoter, repressible by LacI).
      * Could be lengthy, so it is the responsibility of the user application to
@@ -69,7 +70,7 @@ public class SequenceFeature implements SupportsRdfId {
         return description;
     }
 
-   /**
+    /**
      * Text which is written for users to read and interpret.
      * It should describe what the feature is used for and/or what it does.
      * Suggestion: it should provide information that cannot yet be represented in
@@ -82,7 +83,6 @@ public class SequenceFeature implements SupportsRdfId {
         this.description = description;
     }
 
-
     /**
      * Identifier to display to users.
      * @return A human readable identifier
@@ -91,7 +91,7 @@ public class SequenceFeature implements SupportsRdfId {
         return displayId;
     }
 
-     /**
+    /**
      * Identifier that users will see as reference to this feature.
      * It should be unambiguous and is likely imported from source data. Otherwise
      * it SHOULD be generated.
@@ -105,7 +105,7 @@ public class SequenceFeature implements SupportsRdfId {
         setId(displayId);
     }
 
-      /**
+    /**
      * DNA sequence which this Feature object represents.
      * @return 1 {@link DnaSequence} specifying the DNA sequence of this SequenceFeature
      * @see DnaSequence
@@ -138,7 +138,7 @@ public class SequenceFeature implements SupportsRdfId {
         this.id = id;
     }
 
-   /**
+    /**
      * The name is the most recognizable known identifier, it is often ambiguous.
      * (eg. pLac-O1) Useful for display to carry common meaning, see work on "shared
      * understanding" in CSCW field for more.
@@ -182,7 +182,7 @@ public class SequenceFeature implements SupportsRdfId {
     public void addType(URI type) {
         if (!getTypes().contains(type)) {
             getTypes().add(type);
-        //this.type.add(type);
+            //this.type.add(type);
         }
     }
 
@@ -237,6 +237,12 @@ public class SequenceFeature implements SupportsRdfId {
 
     @Override
     public int hashCode() {
-        return getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        int hash = 1;
+        hash = hash * 31 + displayId.hashCode();
+        hash = hash * 31 + type.hashCode();
+        hash = hash * 31 + (dnaSequence == null ? 0 : dnaSequence.hashCode());
+    return hash;
+    //return getRdfId() == null ? 0 : getRdfId().value().hashCode();
     }
+
 }

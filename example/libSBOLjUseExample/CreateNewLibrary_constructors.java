@@ -22,13 +22,13 @@ public class CreateNewLibrary_constructors {
 
     public static void main(String[] args) {
         try {
-            Library aLib = createLib();
+            Library aLib = createDcLib();
         } catch (BioException ex) {
             Logger.getLogger(ReadRDFdata.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static Library createLib() throws BioException {
+    public static Library createDcLib() throws BioException {
 
         SBOLservice s = new SBOLservice();
         Library aLib = s.createLibrary(
@@ -44,21 +44,43 @@ public class CreateNewLibrary_constructors {
                 "promoter", //type
                 s.createDnaSequence( //DNA sequence
                 "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"));
+       SequenceFeature aSF = s.createSequenceFeature(
+                "BBa_R0062", //displayID
+                "pLux", //name
+                "Activated by LuxR in concert with HSL", //description
+                "promoter" //type
+                );
         SequenceAnnotation aSA = s.createSequenceAnnotationForDnaComponent(
                 127, //start
                 181, //stop
                 "+", //strand orientation
-                aDC //DnaComponent
+                aSF, //feature
+                aDC  //DnaComponent
                 );
+
+        aLib = s.addDnaComponentToLibrary(aDC, aLib);
+
+        return aLib;
+    }
+    public static Library createSfLib() throws BioException {
+
+        SBOLservice s = new SBOLservice();
+        Library aLib = s.createLibrary(
+                "BioFabLib_1", //displayID
+                "BIOAFAB Pilot Project", //name
+                "Pilot Project Designs" + //description
+                " see http://biofab.org/data");
+
         SequenceFeature aSF = s.createSequenceFeature(
                 "BBa_R0062", //displayID
                 "pLux", //name
                 "Activated by LuxR in concert with HSL", //description
                 "promoter" //type
                 );
-        SequenceAnnotation aSA_SF = s.addSequenceFeatureToSequenceAnnotation(aSF, aSA);
-        aLib = s.addDnaComponentToLibrary(aDC, aLib);
+
+        aLib = s.addSequenceFeatureToLibrary(aSF, aLib);
 
         return aLib;
     }
+
 }

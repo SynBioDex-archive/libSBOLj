@@ -38,7 +38,7 @@ public class AccessLibrary {
         s.insertLibrary(inputLib);
 
         //Get Library
-        Library theLib = s.getLibrary("BioFabLib_1");
+        Library theLib = s.getLibrary();
 
         //Print Library object fields
         System.out.println("-----------------------");

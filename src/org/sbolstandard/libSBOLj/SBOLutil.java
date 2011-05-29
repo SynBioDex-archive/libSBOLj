@@ -131,8 +131,6 @@ public class SBOLutil {
             Integer rfStart = rf.getLocation().getMin();
             Integer rfStop = rf.getLocation().getMax();
             String rfStrand = Character.toString(rf.getStrand().getToken());
-            SequenceAnnotation anot = s.createSequenceAnnotationForDnaComponent(rfStart,
-                    rfStop, rfStrand, comp);
 
             //Get the Rich Annotation of the Rich Feature
             RichAnnotation ra = (RichAnnotation) rf.getAnnotation();
@@ -153,6 +151,8 @@ public class SBOLutil {
                 }
             }
             SequenceFeature feat = s.createSequenceFeature(label, label, label, rf.getType());
+            SequenceAnnotation anot = s.createSequenceAnnotationForDnaComponent(rfStart,
+                    rfStop, rfStrand, feat, comp);
             // should add return void?
             SequenceAnnotation anotFeat = s.addSequenceFeatureToSequenceAnnotation(feat, anot);
             //compAnotFeat = s.addSequenceAnnotationToDnaComponent(anotFeat, comp);

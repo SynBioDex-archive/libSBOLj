@@ -6,6 +6,7 @@ package org.sbolstandard.libSBOLj;
 
 import com.clarkparsia.empire.Empire;
 import com.clarkparsia.empire.config.EmpireConfiguration;
+import com.clarkparsia.empire.impl.RdfQuery;
 import com.clarkparsia.empire.sesametwo.OpenRdfEmpireModule;
 import com.clarkparsia.empire.util.EmpireAnnotationProvider;
 import com.clarkparsia.empire.util.PropertiesAnnotationProvider;
@@ -23,6 +24,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import java.util.logging.Level;
@@ -33,7 +35,6 @@ import javax.persistence.Query;
 import javax.persistence.spi.PersistenceProvider;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
-
 
 /**
  * SBOLservice provides the methods for making new SBOL objects and adding SBOL
@@ -62,7 +63,7 @@ public class SBOLservice {
     private Library library = null;
 
     public SBOLservice() {
-        Empire.init(new OpenRdfEmpireModule());    
+        Empire.init(new OpenRdfEmpireModule());
         aManager = Persistence.createEntityManagerFactory("blank-data-source").createEntityManager();
     }
 
@@ -155,16 +156,27 @@ public class SBOLservice {
      * @see SequenceAnnotation#setStrand(java.lang.String)
      */
     public SequenceAnnotation createSequenceAnnotationForDnaComponent(Integer start,
-            Integer stop, String strand, DnaComponent component) {
-        SequenceAnnotation aSA = new SequenceAnnotation();
-        aSA.setStart(start);
-        aSA.setStop(stop);
-        aSA.setStrand(strand);
-        aSA.setId(component);
-        aManager.persist(aSA);
-        component.addAnnotation(aSA);
-        aManager.merge(component);
-        return aSA;
+            Integer stop, String strand, SequenceFeature feature, DnaComponent component) {
+        SequenceAnnotation aSA_SF = new SequenceAnnotation();
+        aSA_SF.setStart(start);
+        aSA_SF.setStop(stop);
+        aSA_SF.setStrand(strand);
+        aSA_SF.addFeature(feature);
+        aSA_SF.setId(component);
+        component.addAnnotation(aSA_SF);
+
+        if (aManager.contains(aSA_SF)) {
+            aManager.merge(aSA_SF);
+        } else {
+             aManager.persist(aSA_SF);
+        }
+
+        if (aManager.contains(component)) {
+            aManager.merge(component);
+        } else {
+            aManager.persist(component);
+        }
+        return aSA_SF;
     }
 
     /**
@@ -221,10 +233,7 @@ public class SBOLservice {
         aDC.setDnaSequence(dnaSequence);
         aManager.persist(aDC);
 
-
         return aDC;
-
-
     }
 
     /**
@@ -246,10 +255,7 @@ public class SBOLservice {
         aL.setDescription(description);
         aManager.persist(aL);
 
-
         return aL;
-
-
     }
 
     /**
@@ -313,11 +319,36 @@ public class SBOLservice {
         return rdfString;
     }
 
+    public Library getLibrary() {
+        Library findMe = null;
+        Query aQuery = aManager.createQuery("WHERE {?result rdf:type sbol:Library}");
+        aQuery.setHint(RdfQuery.HINT_ENTITY_CLASS, Library.class);
+        List aResults = aQuery.getResultList();
+        if (aResults.size()>0){
+            findMe = (Library) aResults.get(0);
+        } else {
+            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, "Empty Library: no results found", this);
+ 
+        }
+        //Library lib = aManager.find(Library.class, findMe.getRdfId());
+       
+        return findMe;
+    }
+
+    //This doesnt do what it implies, put the id searching back in
     public Library getLibrary(String id) {
-        Library findMe = new Library();
-        findMe.setId(id);
-        aManager.persist(findMe);
+        Library findMe = null;
+        Query aQuery = aManager.createQuery("WHERE {?result rdf:type sbol:Library}");
+        aQuery.setHint(RdfQuery.HINT_ENTITY_CLASS, Library.class);
+        List aResults = aQuery.getResultList();
+        if (aResults.size()>0){
+            Library findMe1 = (Library) aResults.get(0);
+        } else {
+            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, "Empty Library: no results found", this);
+
+        }
         Library lib = aManager.find(Library.class, findMe.getRdfId());
+
         return lib;
     }
 
