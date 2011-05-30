@@ -41,9 +41,11 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 @Entity
 public class SequenceFeature implements SupportsRdfId {
 
+    static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
+
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
-    @RdfId(namespace = "http://sbols.org/sbol.owl#")
+    @RdfId(namespace = DATA_NAMESPACE_DEFAULT)
     private String id;
     @RdfProperty("sbol:displayId")
     private String displayId;
@@ -102,7 +104,7 @@ public class SequenceFeature implements SupportsRdfId {
      */
     public void setDisplayId(String displayId) {
         this.displayId = displayId;
-        setId(displayId);
+        this.generateId();
     }
 
     /**
@@ -134,8 +136,9 @@ public class SequenceFeature implements SupportsRdfId {
      * A unique identifier which will be used as the ID portion of the URI
      * @param id the RDF id for the object
      */
-    public void setId(String id) {
-        this.id = id;
+    private void generateId() {
+        String idString = this.getClass().toString()+getDisplayId();
+        this.id = IdentifierUtils.encryptSHA(idString);;
     }
 
     /**
@@ -238,11 +241,15 @@ public class SequenceFeature implements SupportsRdfId {
     @Override
     public int hashCode() {
         int hash = 1;
-        hash = hash * 31 + displayId.hashCode();
-        hash = hash * 31 + type.hashCode();
+        hash = hash * 31 + this.getClass().hashCode();
+        hash = hash * 31 + (displayId == null ? 0 : displayId.hashCode());
+        hash = hash * 31 + (name == null ? 0: name.hashCode());
+        hash = hash * 31 + (description == null ? 0 : description.hashCode());
+        hash = hash * 31 + (type == null ? 0 : type.hashCode());
         hash = hash * 31 + (dnaSequence == null ? 0 : dnaSequence.hashCode());
-    return hash;
-    //return getRdfId() == null ? 0 : getRdfId().value().hashCode();
+
+        //int hash = getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        return hash;
     }
 
 }

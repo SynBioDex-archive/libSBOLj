@@ -44,7 +44,6 @@ public class CreateNewLibrary_indi_objects {
         aDC.setName("pTet");
         aDC.setDescription("TetR repressible promoter");
         aDC.setCircular(false);
-        aDC.addType(URI.create("http://purl.org/obo/owl/SO#" + "promoter"));
         aDC.setDnaSequence(s.createDnaSequence(
                 "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"));
         s.insertDnaComponent(aDC);
@@ -53,7 +52,7 @@ public class CreateNewLibrary_indi_objects {
         aSA.setStart(127);
         aSA.setStop(181);
         aSA.setStrand("+");
-        aSA.setId(aDC);
+        aSA.generateId(aDC);
         s.insertSequenceAnnotation(aSA);
 
         SequenceFeature aSF = new SequenceFeature();

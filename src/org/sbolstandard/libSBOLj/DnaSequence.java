@@ -34,9 +34,12 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 @RdfsClass("sbol:DnaSequence")
 @Entity
 public class DnaSequence implements SupportsRdfId {
+
+    static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
+
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
-    @RdfId(namespace = "http://sbols.org/sbol.owl#")
+    @RdfId(namespace = DATA_NAMESPACE_DEFAULT)
     private String id;
     @RdfProperty("sbol:DnaSequence")
     private String dnaSequence;
@@ -87,7 +90,7 @@ public class DnaSequence implements SupportsRdfId {
      */
     public void setDnaSequence(String dnaSequence) {
         this.dnaSequence = dnaSequence;
-        setId();
+        generateId();
     }
 
     /**
@@ -99,11 +102,12 @@ public class DnaSequence implements SupportsRdfId {
         return id;
     }
 
-    private void setId() {
-        IMessageDigest md = HashFactory.getInstance("sha-256");
-        byte[] input = getDnaSequence().toLowerCase().getBytes();
-        md.update(input, 0, input.length);
-        this.id = new String(Hex.encodeHex(md.digest()));
+    private void generateId() {
+        this.id = IdentifierUtils.encryptSHA(getDnaSequence().toLowerCase());
+       // IMessageDigest md = HashFactory.getInstance("sha-256");
+       // byte[] input = getDnaSequence().toLowerCase().getBytes();
+       // md.update(input, 0, input.length);
+       // this.id = new String(Hex.encodeHex(md.digest()));
     }
 
     /**
@@ -147,6 +151,12 @@ public class DnaSequence implements SupportsRdfId {
 
     @Override
     public int hashCode() {
-        return getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        int hash = 1;
+        hash = hash * 31 + this.getClass().hashCode();
+        hash = hash * 31 + (dnaSequence == null ? 0 : dnaSequence.hashCode());
+        hash = hash * 31 + (dnaRef == null ? 0: dnaRef.hashCode());
+
+        //int hash = getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        return hash;
     }
 }

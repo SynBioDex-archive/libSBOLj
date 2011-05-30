@@ -60,7 +60,8 @@ public class SBOLservice {
     // until we go back to strick camel case or make another naming decision
 
     private EntityManager aManager = null;
-    private Library library = null;
+    static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
+    
 
     public SBOLservice() {
         Empire.init(new OpenRdfEmpireModule());
@@ -162,7 +163,7 @@ public class SBOLservice {
         aSA_SF.setStop(stop);
         aSA_SF.setStrand(strand);
         aSA_SF.addFeature(feature);
-        aSA_SF.setId(component);
+        aSA_SF.generateId(component);
         component.addAnnotation(aSA_SF);
 
         if (aManager.contains(aSA_SF)) {
@@ -229,7 +230,6 @@ public class SBOLservice {
         aDC.setDescription(description);
         aDC.setCircular(isCircular);
 
-        aDC.addType(URI.create("http://purl.org/obo/owl/SO#" + type));
         aDC.setDnaSequence(dnaSequence);
         aManager.persist(aDC);
 

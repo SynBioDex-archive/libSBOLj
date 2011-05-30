@@ -41,9 +41,11 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 @Entity
 public class SequenceAnnotation implements SupportsRdfId {
 
+    static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
+
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
-    @RdfId(namespace = "http://sbols.org/sbol.owl#")
+    @RdfId(namespace = DATA_NAMESPACE_DEFAULT)
     private String id;
     @RdfProperty("sbol:start")
     private Integer start;
@@ -54,7 +56,6 @@ public class SequenceAnnotation implements SupportsRdfId {
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("sbol:feature")
     private Collection<SequenceFeature> feature = new HashSet<SequenceFeature>();
-
 
     /**
      * Place a SequenceFeature at this.start, .stop, .strand location.
@@ -108,18 +109,10 @@ public class SequenceAnnotation implements SupportsRdfId {
      *
      * @param parentDnaComp the DnaComponent that this annotation is for
      */
-    public void setId(DnaComponent parentDnaComp) {
-        String newId;
-        if (this.id == null) {
-            String idString = start + stop + strand + parentDnaComp.hashCode();
-            IMessageDigest md = HashFactory.getInstance("sha-256");
-            byte[] input = idString.getBytes();
-            md.update(input, 0, input.length);
-            newId = new String(Hex.encodeHex(md.digest()));
-        } else {
-            newId = this.id;
-        }
-        this.id = newId;
+    public void generateId(DnaComponent parentDnaComp) {
+        //String idString = start + stop + strand + parentDnaComp.getId();
+        String idString = start + stop + strand + parentDnaComp.getId();
+        this.id = IdentifierUtils.encryptSHA(idString);
     }
 
     /**
@@ -234,27 +227,21 @@ public class SequenceAnnotation implements SupportsRdfId {
             }
             if (this.feature != other.feature && (this.feature == null || !this.feature.equals(other.feature))) {
                 return false;
-           }
+            }
         }
         return true;
     }
 
-  /*     if (this.id == null) {
-            String idString = start + stop + strand + parentDnaComp.hashCode();
-            IMessageDigest md = HashFactory.getInstance("sha-256");
-            byte[] input = idString.getBytes();
-            md.update(input, 0, input.length);
-            newId = new String(Hex.encodeHex(md.digest()));
-
-    */
     @Override
     public int hashCode() {
         int hash = 1;
-        String idString = start + stop + strand;
-        hash = hash * 31 + idString.hashCode();
+        hash = hash * 31 + this.getClass().hashCode();
+        hash = hash * 31 + (start == null ? 0 : start.hashCode());
+        hash = hash * 31 + (stop == null ? 0 : stop.hashCode());
+        hash = hash * 31 + (strand == null ? 0 : strand.hashCode());
         hash = hash * 31 + (feature == null ? 0 : feature.hashCode());
-        hash = hash * 31 + (id == null ? 0 : id.hashCode());
-    return hash;
-        //return getRdfId() == null ? 0 : getRdfId().value().hashCode();
+
+        //int hash = getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        return hash;
     }
 }

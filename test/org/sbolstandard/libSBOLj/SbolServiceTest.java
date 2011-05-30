@@ -22,7 +22,7 @@ public class SBOLserviceTest {
     public SBOLserviceTest() {
     }
     private Library aLib = new Library();
-    private Library aLib_DC_seq_SA_SF_seq = new Library(); //fully connected
+    //private Library aLib_DC_seq_SA_SF_seq = new Library(); //fully connected
     private DnaSequence aDS = new DnaSequence(); //just dna
     private SequenceFeature aSF = new SequenceFeature(); //just feature
     private DnaComponent aDC = new DnaComponent(); //just component
@@ -40,13 +40,12 @@ public class SBOLserviceTest {
         aDC.setName("name");
         aDC.setDescription("desc");
         aDC.setCircular(false);
-        aDC.addType(URI.create("http://purl.org/obo/owl/SO#" + "so_id"));
         aDC.setDnaSequence(aDS);
 
         aSA.setStart(1);
         aSA.setStop(2);
         aSA.setStrand("+");
-        aSA.setId(aDC);
+        aSA.generateId(aDC);
 
         aSF.setDisplayId("id");
         aSF.setName("name");
@@ -322,33 +321,16 @@ public class SBOLserviceTest {
         comp.setName("name");
         comp.setDescription("desc");
         comp.setCircular(false);
-        comp.addType(URI.create("http://purl.org/obo/owl/SO#" + "so_id"));
         comp.setDnaSequence(aDS);
         SBOLservice instance = new SBOLservice();
-        //instance.insertLibrary(aLib);
-        //DnaComponent result = instance.getLibrary("id").getComponents().iterator().next();
-        
+
         DnaComponent expResult = aDC;
 
         //test
-        
-        //aLib.addComponent(comp);
-        System.out.println("comp aL1 " + aLib.getComponents().contains(comp));
-        instance.insertLibrary(aLib);
         instance.insertDnaComponent(comp);
         aLib = instance.addDnaComponentToLibrary(comp, aLib);
-        System.out.println("comp aL2 " + aLib.getComponents().contains(comp));
-        String a = instance.getAllAsRDF();
-        System.out.println("rdf: " +a+"\n");
-        Library result1 = instance.getLibrary();
-        System.out.println("\nres lib "+result1.getId());
-        System.out.println("comp res " + result1.getComponents().contains(comp));
-        
-        for ( DnaComponent i : result1.getComponents()){
-            System.out.println("comp? " +i.getRdfId() );
-        }
-
-        DnaComponent result = result1.getComponents().iterator().next();
+        Library libWresult = instance.getLibrary();
+        DnaComponent result = libWresult.getComponents().iterator().next();
         assertEquals(expResult, result);
     }
 
