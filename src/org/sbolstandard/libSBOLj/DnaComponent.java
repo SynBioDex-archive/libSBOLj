@@ -10,7 +10,6 @@ import com.clarkparsia.empire.annotation.RdfId;
 import com.clarkparsia.empire.annotation.RdfProperty;
 import com.clarkparsia.empire.annotation.RdfsClass;
 import com.clarkparsia.empire.annotation.SupportsRdfIdImpl;
-import java.net.URI;
 import java.util.Collection;
 import java.util.HashSet;
 import javax.persistence.CascadeType;

@@ -10,10 +10,7 @@ import com.clarkparsia.empire.annotation.RdfId;
 import com.clarkparsia.empire.annotation.RdfProperty;
 import com.clarkparsia.empire.annotation.RdfsClass;
 import com.clarkparsia.empire.annotation.SupportsRdfIdImpl;
-import gnu.crypto.hash.HashFactory;
-import gnu.crypto.hash.IMessageDigest;
 import javax.persistence.Entity;
-import org.apache.commons.codec.binary.Hex;
 import org.sbolstandard.libSBOLj.IOTools.SkipInJson;
 
 /**

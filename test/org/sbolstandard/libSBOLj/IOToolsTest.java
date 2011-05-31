@@ -5,10 +5,6 @@
 package org.sbolstandard.libSBOLj;
 
 import org.junit.Ignore;
-import java.util.logging.Logger;
-import java.util.logging.Level;
-import java.io.IOException;
-import org.biojavax.bio.seq.RichSequence;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

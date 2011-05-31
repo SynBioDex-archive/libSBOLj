@@ -5,23 +5,17 @@
 package org.sbolstandard.libSBOLj;
 
 import com.clarkparsia.empire.Empire;
-import com.clarkparsia.empire.config.EmpireConfiguration;
 import com.clarkparsia.empire.impl.RdfQuery;
 import com.clarkparsia.empire.sesametwo.OpenRdfEmpireModule;
-import com.clarkparsia.empire.util.EmpireAnnotationProvider;
-import com.clarkparsia.empire.util.PropertiesAnnotationProvider;
 import com.clarkparsia.openrdf.ExtGraph;
 import com.clarkparsia.openrdf.ExtRepository;
 import com.clarkparsia.openrdf.OpenRdfUtil;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 import java.util.HashMap;
 import java.util.List;

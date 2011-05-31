@@ -6,8 +6,6 @@
 package org.sbolstandard.libSBOLj;
 
 import org.junit.Ignore;
-import java.net.URI;
-import com.clarkparsia.empire.SupportsRdfId.RdfKey;
 import java.util.Collection;
 import org.junit.After;
 import org.junit.AfterClass;
