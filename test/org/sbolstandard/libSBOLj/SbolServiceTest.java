@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
  * @author mgaldzic
  * @since 0.35 5/30/2011
  */
-public class SBOLserviceTest {
+public class SbolServiceTest {
 
-    public SBOLserviceTest() {
+    public SbolServiceTest() {
     }
     private Library aLib = new Library();
     //private Library aLib_DC_seq_SA_SF_seq = new Library(); //fully connected
@@ -65,13 +65,13 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of createDnaSequence method, of class SBOLservice.
+     * Test of createDnaSequence method, of class SbolService.
      */
     @Test
     public void testCreateDnaSequence() {
         System.out.println("createDnaSequence");
         String dnaSequence = "actg";
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         DnaSequence expResult = aDS;
         //DnaSequence expResult = new DnaSequence();
@@ -83,7 +83,7 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of createSequenceFeature method, of class SBOLservice.
+     * Test of createSequenceFeature method, of class SbolService.
      */
     @Test
     public void testCreateSequenceFeature() {
@@ -92,7 +92,7 @@ public class SBOLserviceTest {
         String name = "name";
         String description = "desc";
         String type = "so_id";
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         SequenceFeature expResult = aSF;
 
@@ -103,7 +103,7 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of createSequenceAnnotationForDnaComponent method, of class SBOLservice.
+     * Test of createSequenceAnnotationForDnaComponent method, of class SbolService.
      */
     @Test
     public void testCreateSequenceAnnotationForDnaComponent() {
@@ -115,7 +115,7 @@ public class SBOLserviceTest {
         DnaComponent component = aDC;
         DnaSequence sequence = aDS;
         component.setDnaSequence(sequence);
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         //SequenceAnnotation w SequenceFeature connected
         SequenceAnnotation aSA_SF = new SequenceAnnotation(); //full annotation
@@ -130,14 +130,14 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of addSequenceFeatureToSequenceAnnotation method, of class SBOLservice.
+     * Test of addSequenceFeatureToSequenceAnnotation method, of class SbolService.
      */
     @Test
     public void testAddSequenceFeatureToSequenceAnnotation() {
         System.out.println("addSequenceFeatureToSequenceAnnotation");
         SequenceFeature feature = aSF;
         SequenceAnnotation annotation = aSA;
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         
         
@@ -153,7 +153,7 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of createDnaComponent method, of class SBOLservice.
+     * Test of createDnaComponent method, of class SbolService.
      */
     @Test
     public void testCreateDnaComponent() {
@@ -164,7 +164,7 @@ public class SBOLserviceTest {
         Boolean isCircular = false;
         String type = "so_id";
         DnaSequence dnaSequence = aDS;
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         DnaComponent expResult = aDC;
 
@@ -175,7 +175,7 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of createLibrary method, of class SBOLservice.
+     * Test of createLibrary method, of class SbolService.
      */
     @Test
     public void testCreateLibrary() {
@@ -183,7 +183,7 @@ public class SBOLserviceTest {
         String displayId = "id";
         String name = "name";
         String description = "desc";
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         Library expResult = aLib;
 
@@ -194,14 +194,14 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of addDnaComponentToLibrary method, of class SBOLservice.
+     * Test of addDnaComponentToLibrary method, of class SbolService.
      */
     @Test
     public void testAddDnaComponentToLibrary() {
         System.out.println("addDnaComponentToLibrary");
         DnaComponent component = aDC;
         Library library = aLib;
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         //Library w a DnaComponent - a Virtual Part
         Library aLib_DC = new Library(); //virtual part
@@ -215,14 +215,14 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of addSequenceFeatureToLibrary method, of class SBOLservice.
+     * Test of addSequenceFeatureToLibrary method, of class SbolService.
      */
     @Test
     public void testAddSequenceFeatureToLibrary() {
         System.out.println("addSequenceFeatureToLibrary");
         SequenceFeature feature = aSF;
         Library library = aLib;
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         //Library w a SequenceFeature - False SF Library
         Library aLib_SF = new Library(); //false_SF library
@@ -236,13 +236,13 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of getAllAsRdf method, of class SBOLservice.
+     * Test of getAllAsRdf method, of class SbolService.
      */
     @Ignore
     @Test
     public void testGetAllAsRDF() {
         System.out.println("getAllAsRDF");
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
         String expResult = "";
         String result = instance.getAllAsRdf();
         assertEquals(expResult, result);
@@ -251,13 +251,13 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of getLibrary method, of class SBOLservice.
+     * Test of getLibrary method, of class SbolService.
      */
     @Test
     public void testGetLibrary() {
         System.out.println("getLibrary");
         String id = "id";
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
         instance.createLibrary("id", "name", "desc");
 
         Library expResult = aLib;
@@ -268,14 +268,14 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of addSequenceAnnotationToDnaComponent method, of class SBOLservice.
+     * Test of addSequenceAnnotationToDnaComponent method, of class SbolService.
      */
     @Test
     public void testAddSequenceAnnotationToDnaComponent() {
         System.out.println("addSequenceAnnotationToDnaComponent");
         SequenceAnnotation annotation = aSA;
         DnaComponent component = aDC;
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         //DnaComponent w a SequenceAnnotation connected
         SequenceAnnotation aSA_SF = new SequenceAnnotation(); //full annotation
@@ -293,13 +293,13 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of insertLibrary method, of class SBOLservice.
+     * Test of insertLibrary method, of class SbolService.
      */
     @Test
     public void testInsertLibrary() {
         System.out.println("insertLibrary");
         Library lib = aLib;
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         Library expResult = aLib;
         
@@ -310,7 +310,7 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of insertDnaComponent method, of class SBOLservice.
+     * Test of insertDnaComponent method, of class SbolService.
      */
     @Test
     public void testInsertDnaComponent() {
@@ -321,7 +321,7 @@ public class SBOLserviceTest {
         comp.setDescription("desc");
         comp.setCircular(false);
         comp.setDnaSequence(aDS);
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         DnaComponent expResult = aDC;
 
@@ -334,7 +334,7 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of insertSequenceAnnotation method, of class SBOLservice.
+     * Test of insertSequenceAnnotation method, of class SbolService.
      */
     @Test
     public void testInsertSequenceAnnotation() {
@@ -345,7 +345,7 @@ public class SBOLserviceTest {
         anotSF.setStrand("+");
         anotSF.addFeature(aSF);
         anotSF.generateId(aDC);
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
 
         //Library w a DnaComponent - a Virtual Part
         Library aLib_DC = new Library(); //virtual part
@@ -367,14 +367,14 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of insertSequenceFeature method, of class SBOLservice.
+     * Test of insertSequenceFeature method, of class SbolService.
      */
     @Test
     public void testInsertSequenceFeature() {
         System.out.println("insertSequenceFeature");
         SequenceFeature feat = aSF;
         //Make a Library w a DnaComponent and a SequenceAnnotation
-        SBOLservice instance = new SBOLservice();
+        SbolService instance = new SbolService();
         instance.addDnaComponentToLibrary(aDC, aLib);
         //Annotated component
         instance.addSequenceAnnotationToDnaComponent(aSA, aDC);  //empty promise

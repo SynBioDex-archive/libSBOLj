@@ -37,10 +37,10 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
 
 /**
- * SBOLservice provides the methods for making new SBOL objects and adding SBOL
+ * SbolService provides the methods for making new SBOL objects and adding SBOL
  * data.
  *
- * Use methods of SBOLservice when creating new SBOL objects and adding data.
+ * Use methods of SbolService when creating new SBOL objects and adding data.
  * It is called a service as it performs operations on the SBOL objects that do
  * not really belong to the class itself. These convenience methods SHOLD include
  * an entity manager from empire, delete methods, creating entities SHOULD check
@@ -55,20 +55,20 @@ import org.openrdf.rio.RDFParseException;
  * @author mgaldzic
  * @since 0.31, 03/2/2011
  */
-public class SBOLservice {
-    // there was a naming issue for SBOLservice, it will temporarily be SBOLservice,
+public class SbolService {
+    // there was a naming issue for SbolService, it will temporarily be SbolService,
     // until we go back to strick camel case or make another naming decision
 
     private EntityManager aManager = null;
     static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
     
 
-    public SBOLservice() {
+    public SbolService() {
         Empire.init(new OpenRdfEmpireModule());
         aManager = Persistence.createEntityManagerFactory("blank-data-source").createEntityManager();
     }
 
-    public SBOLservice(String rdfString) {
+    public SbolService(String rdfString) {
         this();
         InputStream is = null;
         try {
@@ -77,9 +77,9 @@ public class SBOLservice {
             try {
                 aRepo.read(is, RDFFormat.RDFXML);
             } catch (IOException ex) {
-                Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RDFParseException ex) {
-                Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
             }
             Map aMap = new HashMap();
             //aMap.put("annotation.index", "config//libSBOLj.empire.annotation.config");
@@ -90,12 +90,12 @@ public class SBOLservice {
             PersistenceProvider aProvider = Empire.get().persistenceProvider();
             aManager = aProvider.createEntityManagerFactory("existingRDF", aMap).createEntityManager();
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 is.close();
             } catch (IOException ex) {
-                Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -314,7 +314,7 @@ public class SBOLservice {
             rdfString = out.toString();
 
         } catch (IOException ex) {
-            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rdfString;
     }
@@ -327,7 +327,7 @@ public class SBOLservice {
         if (aResults.size()>0){
             findMe = (Library) aResults.get(0);
         } else {
-            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, "Empty Library: no results found", this);
+            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, "Empty Library: no results found", this);
  
         }
         //Library lib = aManager.find(Library.class, findMe.getRdfId());
@@ -344,7 +344,7 @@ public class SBOLservice {
         if (aResults.size()>0){
             Library findMe1 = (Library) aResults.get(0);
         } else {
-            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, "Empty Library: no results found", this);
+            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, "Empty Library: no results found", this);
 
         }
         Library lib = aManager.find(Library.class, findMe.getRdfId());
@@ -364,10 +364,10 @@ public class SBOLservice {
     }
 
     /**
-     * Adds the Library given as input to the SBOLservice.
+     * Adds the Library given as input to the SbolService.
      *
      * If you already have a Library of components and features, you can add it
-     * directly to the SBOLservice, to get the benefits of SBOL data persistence services.
+     * directly to the SbolService, to get the benefits of SBOL data persistence services.
      * 
      * @param a Library with the metadata fields set, empty otherwise (ie no components or features)
      */

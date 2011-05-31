@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import org.biojava.bio.BioException;
 import org.sbolstandard.libSBOLj.DnaComponent;
 import org.sbolstandard.libSBOLj.Library;
-import org.sbolstandard.libSBOLj.SBOLservice;
+import org.sbolstandard.libSBOLj.SbolService;
 import org.sbolstandard.libSBOLj.SequenceAnnotation;
 import org.sbolstandard.libSBOLj.SequenceFeature;
 
@@ -30,7 +30,7 @@ public class CreateNewLibrary_constructors {
 
     public static Library createDcLib() throws BioException {
 
-        SBOLservice s = new SBOLservice();
+        SbolService s = new SbolService();
         Library aLib = s.createLibrary(
                 "BioFabLib_1", //displayID
                 "BIOAFAB Pilot Project", //name
@@ -64,7 +64,7 @@ public class CreateNewLibrary_constructors {
     }
     public static Library createSfLib() throws BioException {
 
-        SBOLservice s = new SBOLservice();
+        SbolService s = new SbolService();
         Library aLib = s.createLibrary(
                 "BioFabLib_1", //displayID
                 "BIOAFAB Pilot Project", //name

@@ -65,7 +65,7 @@ public class IOTools {
         try {
             br = new BufferedReader(new FileReader(fileString));
         } catch (FileNotFoundException fnfe) {
-            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, "FileNotFoundException: ", fnfe);
+            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, "FileNotFoundException: ", fnfe);
         }
         // try {
         ns = new SimpleNamespace("bioJavaNS");
@@ -92,7 +92,7 @@ public class IOTools {
      * @throws BioException BioJava threw up, @todo understand what BioJava exceptions are.
      */
     public static Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
-        SBOLservice s = new SBOLservice();
+        SbolService s = new SbolService();
         
         Library lib = s.createLibrary("BioFabLib_1", "BIOAFAB Pilot Project",
                 "Pilot Project Designs, see http://biofab.org/data");
@@ -116,7 +116,7 @@ public class IOTools {
      * @return DnaComponent with the attached SequenceAnnotations and SequenceFeatures
      */
     public static DnaComponent readRichSequence(RichSequence rs) {
-        SBOLservice s = new SBOLservice();
+        SbolService s = new SbolService();
         //The main GenBank Record can be found by the following
         DnaComponent comp = s.createDnaComponent(rs.getName(),
                 rs.getName(), rs.getDescription(), false, "other_DNA",
@@ -228,14 +228,14 @@ public class IOTools {
      */
     public static String toRdf(Library input) {
         //make RDF
-        SBOLservice s = new SBOLservice();
+        SbolService s = new SbolService();
         s.insertLibrary(input);
         String rdfString = s.getAllAsRdf();
         return rdfString;
      
     }
-    public static SBOLservice fromRdf(String rdfString) {
-        SBOLservice s = new SBOLservice(rdfString);
+    public static SbolService fromRdf(String rdfString) {
+        SbolService s = new SbolService(rdfString);
         return s;
     }
 

@@ -21,14 +21,14 @@ import static org.junit.Assert.*;
  * @author mgaldzic
  * @since 0.35 5/30/2011
  */
-public class SBOLutilTest {
+public class IOToolsTest {
 
-    private SBOLservice s = new SBOLservice();
+    private SbolService s = new SbolService();
 
     
     private DnaSequence dnaSequence = s.createDnaSequence("actg");
 
-    public SBOLutilTest() {
+    public IOToolsTest() {
     }
 
     @BeforeClass
@@ -104,7 +104,7 @@ public class SBOLutilTest {
 
         //System.out.println("aBioFABpart string: " + IOTools.toRdf(aBioFABpartLib).toString());
         //  } catch (IOException ex) {
-        //Logger.getLogger(SBOLutilTest.class.getName()).log(Level.SEVERE, "sout RDF", ex);
+        //Logger.getLogger(IOToolsTest.class.getName()).log(Level.SEVERE, "sout RDF", ex);
         //  }
         //System.out.println("aBioFABpart json" + IOTools.toJson(aBioFABpartLib));
         //ring expResult = "";

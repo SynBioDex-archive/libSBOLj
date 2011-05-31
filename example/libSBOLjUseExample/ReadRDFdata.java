@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.biojava.bio.BioException;
 import org.sbolstandard.libSBOLj.Library;
-import org.sbolstandard.libSBOLj.SBOLservice;
+import org.sbolstandard.libSBOLj.SbolService;
 import org.sbolstandard.libSBOLj.IOTools;
 
 
@@ -34,7 +34,7 @@ public class ReadRDFdata {
         Library aLib = new Library();
         String newRdfString = IOTools.toRdf(CreateNewLibrary_constructors.createSfLib());
         FileUtil.writeFile("test\\test_files\\test_file.rdf", newRdfString);
-        SBOLservice aS = IOTools.fromRdf(newRdfString);
+        SbolService aS = IOTools.fromRdf(newRdfString);
 
         aLib =aS.getLibrary();
 
@@ -47,7 +47,7 @@ public class ReadRDFdata {
         Library aLib = new Library();
         String aRdfFileString = FileUtil.readFile(path);
         //System.out.println("file: "+ aRdfFileString);
-        SBOLservice aS = IOTools.fromRdf(aRdfFileString);
+        SbolService aS = IOTools.fromRdf(aRdfFileString);
 
         aLib = aS.getLibrary();
         
@@ -60,7 +60,7 @@ public class ReadRDFdata {
 
     public static Library readGenBankRoundTrip()throws BioException{
         String rdfString = ReadGenBankFile.read();
-        SBOLservice aS = IOTools.fromRdf(rdfString);
+        SbolService aS = IOTools.fromRdf(rdfString);
         
         Library aLib = aS.getLibrary();
 

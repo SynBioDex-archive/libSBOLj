@@ -8,7 +8,7 @@ import org.biojava.bio.BioException;
 import org.biojavax.bio.seq.RichSequenceIterator;
 import org.sbolstandard.libSBOLj.IOTools;
 import org.sbolstandard.libSBOLj.Library;
-import org.sbolstandard.libSBOLj.SBOLservice;
+import org.sbolstandard.libSBOLj.SbolService;
 
 /**
  * Main serves as a simple example of use.
@@ -38,7 +38,7 @@ public class Main {
         System.out.println("aBioFABlib RDF: \n"+ IOTools.toRDF(aBioFABlib));
         String rdfString = IOTools.toRDF(aBioFABlib);
 
-        SBOLservice aS = IOTools.fromRDF(rdfString);
+        SbolService aS = IOTools.fromRDF(rdfString);
         Library lib = aS.getLibrary();
         System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName());
    *
