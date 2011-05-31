@@ -90,25 +90,25 @@ public class SBOLutilTest {
     fail("The test case is a prototype.");
     }*/
     /**
-     * Test of toRDF method, of class IOTools.
+     * Test of toRdf method, of class IOTools.
      */
     @Ignore
     @Test
-    public void testToRDF() throws Exception {
-        System.out.println("toRDF");
+    public void testToRdf() throws Exception {
+        System.out.println("toRdf");
 
         //DnaComponent input = s.createDnaComponent("diplayId", "name", "description", false, "type", dnaSequence);
 
         Library aBioFABpartLib = IOTools.fromRichSequenceIter(IOTools.fromGenBankFile("test\\test_files\\BFa_8.15.gb"));
         // try {
 
-        //System.out.println("aBioFABpart string: " + IOTools.toRDF(aBioFABpartLib).toString());
+        //System.out.println("aBioFABpart string: " + IOTools.toRdf(aBioFABpartLib).toString());
         //  } catch (IOException ex) {
         //Logger.getLogger(SBOLutilTest.class.getName()).log(Level.SEVERE, "sout RDF", ex);
         //  }
         //System.out.println("aBioFABpart json" + IOTools.toJson(aBioFABpartLib));
         //ring expResult = "";
-        //String result = instance.toRDF(input);
+        //String result = instance.toRdf(input);
         boolean result = true;
         boolean expResult = true;
         assertEquals(expResult, result);

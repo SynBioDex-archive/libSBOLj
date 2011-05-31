@@ -301,7 +301,7 @@ public class SBOLservice {
         return library;
     }
 
-    public String getAllAsRDF() {
+    public String getAllAsRdf() {
         String rdfString = null;
 
 

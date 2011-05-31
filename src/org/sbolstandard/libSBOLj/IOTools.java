@@ -226,15 +226,15 @@ public class IOTools {
      * @param input an SBOL Library to be written out
      * @return String containing the RDF serialization
      */
-    public static String toRDF(Library input) {
+    public static String toRdf(Library input) {
         //make RDF
         SBOLservice s = new SBOLservice();
         s.insertLibrary(input);
-        String rdfString = s.getAllAsRDF();
+        String rdfString = s.getAllAsRdf();
         return rdfString;
      
     }
-    public static SBOLservice fromRDF(String rdfString) {
+    public static SBOLservice fromRdf(String rdfString) {
         SBOLservice s = new SBOLservice(rdfString);
         return s;
     }

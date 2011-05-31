@@ -236,7 +236,7 @@ public class SBOLserviceTest {
     }
 
     /**
-     * Test of getAllAsRDF method, of class SBOLservice.
+     * Test of getAllAsRdf method, of class SBOLservice.
      */
     @Ignore
     @Test
@@ -244,7 +244,7 @@ public class SBOLserviceTest {
         System.out.println("getAllAsRDF");
         SBOLservice instance = new SBOLservice();
         String expResult = "";
-        String result = instance.getAllAsRDF();
+        String result = instance.getAllAsRdf();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
