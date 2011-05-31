@@ -1,0 +1,29 @@
+/*! \page devnotes Developer Notes libSBOLj v.05
+
+\section sec_toc Required Libraries:
+
+\code
+
+file.reference.aopalliance.jar=libs\\empire\\lib\\guice\\aopalliance.jar
+file.reference.biojava-1.7.1.jar=libs\\biojava-1.7.1\\biojava-1.7.1.jar
+file.reference.commons-io-2.0.1.jar=libs\\commons-io-2.0.1\\commons-io-2.0.1.jar
+file.reference.cp-common-openrdf-0.2.3.jar=libs\\empire\\lib\\clark-parsia\\cp-common-openrdf-0.2.3.jar
+file.reference.cp-common-utils-1.0.1.jar=libs\\empire\\lib\\clark-parsia\\cp-common-utils-1.0.1.jar
+file.reference.ejb3-persistence.jar=libs\\empire\\lib\\jpa\\ejb3-persistence.jar
+file.reference.empire-core.jar=libs\\empire\\lib\\empire-core.jar
+file.reference.empire-sesame.jar=libs\\empire\\lib\\empire-sesame.jar
+file.reference.gson-1.6.jar=libs\\google-gson-1.6\\gson-1.6.jar
+file.reference.guice-2.0.jar=libs\\empire\\lib\\guice\\guice-2.0.jar
+file.reference.guice-multibindings-2.0.jar=libs\\empire\\lib\\guice\\guice-multibindings-2.0.jar
+file.reference.javassist.jar=libs\\empire\\lib\\javassist\\javassist.jar
+file.reference.junit-4.5.jar=libs\\empire\\lib\\jena\\junit-4.5.jar
+file.reference.log4j-1.2.13.jar=libs\\empire\\lib\\jena\\log4j-1.2.13.jar
+file.reference.openrdf-sesame-2.3.0-onejar.jar=libs\\empire\\lib\\sesame\\openrdf-sesame-2.3.0-onejar.jar
+file.reference.slf4j-api-1.5.8.jar=libs\\empire\\lib\\sesame\\slf4j-api-1.5.8.jar
+file.reference.slf4j-log4j12-1.5.6.jar=libs\\empire\\lib\\jena\\slf4j-log4j12-1.5.6.jar
+
+
+
+\endcode
+
+*/
