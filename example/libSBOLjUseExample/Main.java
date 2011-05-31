@@ -6,7 +6,7 @@ package libSBOLjUseExample;
 
 import org.biojava.bio.BioException;
 import org.biojavax.bio.seq.RichSequenceIterator;
-import org.sbolstandard.libSBOLj.SBOLutil;
+import org.sbolstandard.libSBOLj.IOTools;
 import org.sbolstandard.libSBOLj.Library;
 import org.sbolstandard.libSBOLj.SBOLservice;
 
@@ -31,14 +31,14 @@ public class Main {
         System.out.println("create BIOFAB Library");
         
 
-        RichSequenceIterator aRsIter = SBOLutil.fromGenBankFile("config\\test_files\\BFa_8.15.gb");
-        Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRsIter);
+        RichSequenceIterator aRsIter = IOTools.fromGenBankFile("config\\test_files\\BFa_8.15.gb");
+        Library aBioFABlib = IOTools.fromRichSequenceIter(aRsIter);
 
-        System.out.println("aBioFABlib json: \n" + SBOLutil.toJson(aBioFABlib));
-        System.out.println("aBioFABlib RDF: \n"+ SBOLutil.toRDF(aBioFABlib));
-        String rdfString = SBOLutil.toRDF(aBioFABlib);
+        System.out.println("aBioFABlib json: \n" + IOTools.toJson(aBioFABlib));
+        System.out.println("aBioFABlib RDF: \n"+ IOTools.toRDF(aBioFABlib));
+        String rdfString = IOTools.toRDF(aBioFABlib);
 
-        SBOLservice aS = SBOLutil.fromRDF(rdfString);
+        SBOLservice aS = IOTools.fromRDF(rdfString);
         Library lib = aS.getLibrary();
         System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName());
    *

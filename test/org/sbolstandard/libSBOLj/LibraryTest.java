@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 /**
  *
  * @author mgaldzic
+ * @since 0.35 5/30/2011
  */
 @Ignore
 public class LibraryTest {

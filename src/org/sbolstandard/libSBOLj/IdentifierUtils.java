@@ -13,6 +13,7 @@ import java.util.UUID;
  * These utility methods calculate ID encodings.
  * code borrowed from  org.jbei.ice.lib.utils.Utils by Tim Ham
  * @author mgaldzic
+ * @since 0.35, 05/30/2011
  */
 public class IdentifierUtils {
 

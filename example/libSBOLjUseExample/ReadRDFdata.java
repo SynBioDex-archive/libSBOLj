@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import org.biojava.bio.BioException;
 import org.sbolstandard.libSBOLj.Library;
 import org.sbolstandard.libSBOLj.SBOLservice;
-import org.sbolstandard.libSBOLj.SBOLutil;
+import org.sbolstandard.libSBOLj.IOTools;
 
 
 /**
@@ -32,9 +32,9 @@ public class ReadRDFdata {
     }
     public static Library readRdfString() throws BioException{
         Library aLib = new Library();
-        String newRdfString = SBOLutil.toRDF(CreateNewLibrary_constructors.createSfLib());
+        String newRdfString = IOTools.toRDF(CreateNewLibrary_constructors.createSfLib());
         FileUtil.writeFile("test\\test_files\\test_file.rdf", newRdfString);
-        SBOLservice aS = SBOLutil.fromRDF(newRdfString);
+        SBOLservice aS = IOTools.fromRDF(newRdfString);
 
         aLib =aS.getLibrary();
 
@@ -47,12 +47,12 @@ public class ReadRDFdata {
         Library aLib = new Library();
         String aRdfFileString = FileUtil.readFile(path);
         //System.out.println("file: "+ aRdfFileString);
-        SBOLservice aS = SBOLutil.fromRDF(aRdfFileString);
+        SBOLservice aS = IOTools.fromRDF(aRdfFileString);
 
         aLib = aS.getLibrary();
         
         //Logger.getLogger("DnaComponent Name").log(Level.INFO, aLib.getComponents().iterator().next().getName());
-        Logger.getLogger("s:").log(Level.INFO, SBOLutil.toRDF(aLib));
+        Logger.getLogger("s:").log(Level.INFO, IOTools.toRDF(aLib));
         Logger.getLogger("Library Name").log(Level.INFO, aLib.getName());
         Logger.getLogger("SequenceFeature Name").log(Level.INFO, aLib.getFeatures().iterator().next().getName());
       return aLib;
@@ -60,7 +60,7 @@ public class ReadRDFdata {
 
     public static Library readGenBankRoundTrip()throws BioException{
         String rdfString = ReadGenBankFile.read();
-        SBOLservice aS = SBOLutil.fromRDF(rdfString);
+        SBOLservice aS = IOTools.fromRDF(rdfString);
         
         Library aLib = aS.getLibrary();
 

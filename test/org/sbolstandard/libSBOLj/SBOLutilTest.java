@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 /**
  *
  * @author mgaldzic
+ * @since 0.35 5/30/2011
  */
 public class SBOLutilTest {
 
@@ -47,13 +48,13 @@ public class SBOLutilTest {
     }
 
     /**
-     * Test of fromGenBankFile method, of class SBOLutil.
+     * Test of fromGenBankFile method, of class IOTools.
      */
     /* @Test
     public void testFromGenBankFile() throws Exception {
     System.out.println("fromGenBankFile");
     String filename = "";
-    SBOLutil instance = new SBOLutil();
+    IOTools instance = new IOTools();
     RichSequence expResult = null;
     RichSequence result = instance.fromGenBankFile(filename);
     assertEquals(expResult, result);
@@ -61,13 +62,13 @@ public class SBOLutilTest {
     fail("The test case is a prototype.");
     }*/
     /**
-     * Test of readRichSequence method, of class SBOLutil.
+     * Test of readRichSequence method, of class IOTools.
      */
     /*   @Test
     public void testReadRichSequence() {
     System.out.println("readRichSequence");
     RichSequence rs = null;
-    SBOLutil instance = new SBOLutil();
+    IOTools instance = new IOTools();
     DnaComponent expResult = null;
     DnaComponent result = instance.readRichSequence(rs);
     assertEquals(expResult, result);
@@ -75,13 +76,13 @@ public class SBOLutilTest {
     fail("The test case is a prototype.");
     }*/
     /**
-     * Test of toJson method, of class SBOLutil.
+     * Test of toJson method, of class IOTools.
      */
     /*  @Test
     public void testToJson() {
     System.out.println("toJson");
     DnaComponent input = null;
-    SBOLutil instance = new SBOLutil();
+    IOTools instance = new IOTools();
     String expResult = "";
     String result = instance.toJson(input);
     assertEquals(expResult, result);
@@ -89,7 +90,7 @@ public class SBOLutilTest {
     fail("The test case is a prototype.");
     }*/
     /**
-     * Test of toRDF method, of class SBOLutil.
+     * Test of toRDF method, of class IOTools.
      */
     @Ignore
     @Test
@@ -98,14 +99,14 @@ public class SBOLutilTest {
 
         //DnaComponent input = s.createDnaComponent("diplayId", "name", "description", false, "type", dnaSequence);
 
-        Library aBioFABpartLib = SBOLutil.fromRichSequenceIter(SBOLutil.fromGenBankFile("test\\test_files\\BFa_8.15.gb"));
+        Library aBioFABpartLib = IOTools.fromRichSequenceIter(IOTools.fromGenBankFile("test\\test_files\\BFa_8.15.gb"));
         // try {
 
-        //System.out.println("aBioFABpart string: " + SBOLutil.toRDF(aBioFABpartLib).toString());
+        //System.out.println("aBioFABpart string: " + IOTools.toRDF(aBioFABpartLib).toString());
         //  } catch (IOException ex) {
         //Logger.getLogger(SBOLutilTest.class.getName()).log(Level.SEVERE, "sout RDF", ex);
         //  }
-        //System.out.println("aBioFABpart json" + SBOLutil.toJson(aBioFABpartLib));
+        //System.out.println("aBioFABpart json" + IOTools.toJson(aBioFABpartLib));
         //ring expResult = "";
         //String result = instance.toRDF(input);
         boolean result = true;

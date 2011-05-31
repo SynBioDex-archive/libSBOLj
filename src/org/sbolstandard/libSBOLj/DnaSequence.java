@@ -14,7 +14,7 @@ import gnu.crypto.hash.HashFactory;
 import gnu.crypto.hash.IMessageDigest;
 import javax.persistence.Entity;
 import org.apache.commons.codec.binary.Hex;
-import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
+import org.sbolstandard.libSBOLj.IOTools.SkipInJson;
 
 /**
  * The SBOL data model's DnaSequence for RDF and Json.

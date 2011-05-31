@@ -16,7 +16,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
+import org.sbolstandard.libSBOLj.IOTools.SkipInJson;
 
 /**
  * The SBOL data model's SequenceAnnotation for RDF and Json.

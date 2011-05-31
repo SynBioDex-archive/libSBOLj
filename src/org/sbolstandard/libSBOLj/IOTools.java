@@ -39,7 +39,7 @@ import java.util.logging.Logger;
  * @author mgaldzic
  * @since 0.2, 03/2/2011
  */
-public class SBOLutil {
+public class IOTools {
 
     /**
      * Reads the common GenBank flat file so the records in it can be iterated over.
@@ -99,7 +99,7 @@ public class SBOLutil {
         while (rsi.hasNext()) {
             RichSequence rs = rsi.nextRichSequence();
             //System.out.println("readGB file of: " + rs.getName());
-            s.addDnaComponentToLibrary(SBOLutil.readRichSequence(rs), lib);
+            s.addDnaComponentToLibrary(IOTools.readRichSequence(rs), lib);
         }
         return lib;
     }
