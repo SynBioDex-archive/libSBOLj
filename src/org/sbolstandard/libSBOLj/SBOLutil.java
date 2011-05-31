@@ -26,6 +26,8 @@ import org.biojavax.SimpleNamespace;
 import org.biojavax.bio.seq.RichFeature;
 import org.biojavax.bio.seq.RichSequence;
 import org.biojavax.bio.seq.RichSequenceIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.
@@ -63,7 +65,7 @@ public class SBOLutil {
         try {
             br = new BufferedReader(new FileReader(fileString));
         } catch (FileNotFoundException fnfe) {
-            System.out.println("FileNotFoundException: " + fnfe);
+            Logger.getLogger(SBOLservice.class.getName()).log(Level.SEVERE, "FileNotFoundException: ", fnfe);
         }
         // try {
         ns = new SimpleNamespace("bioJavaNS");
@@ -96,7 +98,7 @@ public class SBOLutil {
                 "Pilot Project Designs, see http://biofab.org/data");
         while (rsi.hasNext()) {
             RichSequence rs = rsi.nextRichSequence();
-            System.out.println("readGB file of: " + rs.getName());
+            //System.out.println("readGB file of: " + rs.getName());
             s.addDnaComponentToLibrary(SBOLutil.readRichSequence(rs), lib);
         }
         return lib;

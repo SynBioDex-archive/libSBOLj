@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -29,7 +31,7 @@ public class FileUtil {
         //readGenBankRoundTrip();
         writeFile("test\\test_files\\test.txt", "test");
         String i = readFile("test\\test_files\\test.txt");
-        System.out.println("i: " + i);
+        Logger.getLogger(FileUtil.class.getName()).log(Level.INFO, "File contents ", i);
     }
 
     static String readFile(String infilename) throws FileNotFoundException {

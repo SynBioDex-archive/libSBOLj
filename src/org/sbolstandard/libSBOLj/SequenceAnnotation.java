@@ -10,15 +10,12 @@ import com.clarkparsia.empire.annotation.RdfId;
 import com.clarkparsia.empire.annotation.RdfProperty;
 import com.clarkparsia.empire.annotation.RdfsClass;
 import com.clarkparsia.empire.annotation.SupportsRdfIdImpl;
-import gnu.crypto.hash.HashFactory;
-import gnu.crypto.hash.IMessageDigest;
 import java.util.Collection;
 import java.util.HashSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import org.apache.commons.codec.binary.Hex;
 import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 
 /**

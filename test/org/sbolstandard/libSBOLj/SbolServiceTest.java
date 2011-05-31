@@ -285,8 +285,6 @@ public class SBOLserviceTest {
         aDC_SA_SF = aDC;
         aDC_SA_SF.addAnnotation(aSA_SF);
         DnaComponent expResult = aDC_SA_SF;
-
-        System.out.println("has "+ aDC_SA_SF.hashCode());
         
         //test
         DnaComponent result = instance.addSequenceAnnotationToDnaComponent(annotation, component);
@@ -340,18 +338,28 @@ public class SBOLserviceTest {
     @Test
     public void testInsertSequenceAnnotation() {
         System.out.println("insertSequenceAnnotation");
-        SequenceAnnotation anot = aSA; //p
+        SequenceAnnotation anotSF = new SequenceAnnotation();
+        anotSF.setStart(1);
+        anotSF.setStop(2);
+        anotSF.setStrand("+");
+        anotSF.addFeature(aSF);
+        anotSF.generateId(aDC);
         SBOLservice instance = new SBOLservice();
+
         //Library w a DnaComponent - a Virtual Part
         Library aLib_DC = new Library(); //virtual part
         aLib_DC = aLib;
         aLib_DC.addComponent(aDC);
         instance.insertLibrary(aLib_DC);
 
-        SequenceAnnotation expResult = aSA;
+        SequenceAnnotation expResult =aSA;
+        expResult.addFeature(aSF);
 
         //test
-        instance.insertSequenceAnnotation(anot);
+        instance.insertSequenceAnnotation(anotSF);
+       
+        instance.addSequenceAnnotationToDnaComponent(anotSF, aDC);
+        instance.addSequenceFeatureToSequenceAnnotation(aSF, anotSF);
         SequenceAnnotation result = instance.getLibrary().getComponents()
                 .iterator().next().getAnnotations().iterator().next();
         assertEquals(expResult, result);
@@ -364,22 +372,17 @@ public class SBOLserviceTest {
     public void testInsertSequenceFeature() {
         System.out.println("insertSequenceFeature");
         SequenceFeature feat = aSF;
+        //Make a Library w a DnaComponent and a SequenceAnnotation
         SBOLservice instance = new SBOLservice();
+        instance.addDnaComponentToLibrary(aDC, aLib);
+        //Annotated component
+        instance.addSequenceAnnotationToDnaComponent(aSA, aDC);  //empty promise
 
-        //Library w a DnaComponent and a SequenceAnnotation
-        Library aLib_DC_SA_SF = new Library(); //empty promise
-        aLib_DC_SA_SF = aLib;
-        DnaComponent aDC_SA_SF = new DnaComponent(); //Annotated component
-        //aDC_SA_SF.addAnnotation(aSA_SF);
-        //DnaComponent expResult = aDC_SA_SF;
-        aLib_DC_SA_SF.addComponent(aDC_SA_SF);
-        instance.insertLibrary(aLib_DC_SA_SF);
-        
         SequenceFeature expResult = aSF;
 
         //test
         instance.insertSequenceFeature(feat);
-        // fails no linking SA-SF
+        instance.addSequenceFeatureToSequenceAnnotation(feat, aSA);
         SequenceFeature result = instance.getLibrary().getComponents()
                 .iterator().next().getAnnotations()
                 .iterator().next().getFeatures().iterator().next();

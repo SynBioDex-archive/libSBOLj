@@ -26,6 +26,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws BioException {
+  /*    The following should be moved to test and example:
+
         System.out.println("create BIOFAB Library");
         
 
@@ -39,5 +41,7 @@ public class Main {
         SBOLservice aS = SBOLutil.fromRDF(rdfString);
         Library lib = aS.getLibrary();
         System.out.println("lib Contains: "+lib.getComponents().iterator().next().getName());
+   *
+   */
     }
 }

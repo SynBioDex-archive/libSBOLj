@@ -185,7 +185,16 @@ public class SequenceFeature implements SupportsRdfId {
     public void addType(URI type) {
         if (!getTypes().contains(type)) {
             getTypes().add(type);
-            //this.type.add(type);
+        }
+
+        //Setting the default_type for SequenceFeatures to create uniform behavior.
+        //Sequence Features are always of type sbol:SequenceFeature
+        //This default makes SF objects read and SF objects created equal.
+        //the other option would be to by default remove sbol:SF from type when
+        //reading however other applications would then beahave differently.
+        URI default_type = URI.create("http://sbols.org/sbol.owl#SequenceFeature");
+        if (!getTypes().contains(default_type)){
+            getTypes().add(default_type);
         }
     }
 
@@ -222,7 +231,7 @@ public class SequenceFeature implements SupportsRdfId {
             if ((this.displayId == null) ? (other.displayId != null) : !this.displayId.equals(other.displayId)) {
                 return false;
             }
-            if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+           if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
                 return false;
             }
             if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {

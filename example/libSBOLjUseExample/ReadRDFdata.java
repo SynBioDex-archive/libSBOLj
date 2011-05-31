@@ -52,7 +52,7 @@ public class ReadRDFdata {
         aLib = aS.getLibrary();
         
         //Logger.getLogger("DnaComponent Name").log(Level.INFO, aLib.getComponents().iterator().next().getName());
-        System.out.println("s: "+SBOLutil.toRDF(aLib));
+        Logger.getLogger("s:").log(Level.INFO, SBOLutil.toRDF(aLib));
         Logger.getLogger("Library Name").log(Level.INFO, aLib.getName());
         Logger.getLogger("SequenceFeature Name").log(Level.INFO, aLib.getFeatures().iterator().next().getName());
       return aLib;
