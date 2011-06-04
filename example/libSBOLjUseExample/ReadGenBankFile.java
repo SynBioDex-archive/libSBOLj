@@ -29,7 +29,7 @@ public static String read() throws BioException {
         RichSequenceIterator aRSiter = IOTools.fromGenBankFile("config\\test_files\\BFa_8.15.gb");
         Library aBioFABlib = IOTools.fromRichSequenceIter(aRSiter);
         String jsonString = IOTools.toJson(aBioFABlib);
-        String rdfString = IOTools.toRdf(aBioFABlib);
+        String rdfString = IOTools.toRdfXml(aBioFABlib);
 
         Logger.getLogger("Json").log(Level.INFO, jsonString);
         Logger.getLogger("RDF").log(Level.INFO, rdfString);

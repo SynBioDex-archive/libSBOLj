@@ -9,13 +9,20 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Iterator;
+import java.util.Scanner;
 import org.biojava.bio.BioException;
 import org.biojava.bio.seq.Feature;
 import org.biojava.bio.seq.FeatureFilter;
@@ -28,6 +35,8 @@ import org.biojavax.bio.seq.RichSequence;
 import org.biojavax.bio.seq.RichSequenceIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.openrdf.rio.RDFFormat;
+import org.apache.commons.io.FileUtils;
 
 /**
  * SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.
@@ -93,7 +102,7 @@ public class IOTools {
      */
     public static Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
         SbolService s = new SbolService();
-        
+
         Library lib = s.createLibrary("BioFabLib_1", "BIOAFAB Pilot Project",
                 "Pilot Project Designs, see http://biofab.org/data");
         while (rsi.hasNext()) {
@@ -164,8 +173,6 @@ public class IOTools {
         return comp;
     }
 
-
-
     /**
      * Customizes the Json writer to leave out fields annotated with @SkipInJson.
      *
@@ -226,17 +233,64 @@ public class IOTools {
      * @param input an SBOL Library to be written out
      * @return String containing the RDF serialization
      */
-    public static String toRdf(Library input) {
-        //make RDF
+    public static String toRdfXml(Library input) {
+        //make RDF XML
         SbolService s = new SbolService();
         s.insertLibrary(input);
-        String rdfString = s.getAllAsRdf();
-        return rdfString;
-     
+        String xmlString = s.getAllAsRdf(RDFFormat.RDFXML);
+        return xmlString;
+
     }
-    public static SbolService fromRdf(String rdfString) {
-        SbolService s = new SbolService(rdfString);
+
+    public static String toRdfTurtle(Library input) {
+        //make RDF Turtle
+        SbolService s = new SbolService();
+        s.insertLibrary(input);
+        String ttlString = s.getAllAsRdf(RDFFormat.TURTLE);
+        return ttlString;
+    }
+
+    public static SbolService fromRdfXml(String rdfString) {
+        SbolService s = new SbolService(rdfString, RDFFormat.RDFXML);
         return s;
     }
 
+    static String readFile(String infilename) throws FileNotFoundException {
+
+        StringBuilder text = new StringBuilder();
+        String NL = System.getProperty("line.separator");
+        Scanner scanner = new Scanner(new FileInputStream(infilename), "UTF-8");
+        try {
+            while (scanner.hasNextLine()) {
+                text.append(scanner.nextLine()).append(NL);
+            }
+        } finally {
+            scanner.close();
+        }
+        return text.toString();
+    }
+
+    static void writeFile(String outfilename, String content) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfilename), "UTF8"));
+
+            bw.write(content);
+            bw.close();
+        } catch (IOException e) {
+            Logger.getLogger(IOTools.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
+    static void touchfile(String filename) {
+        try {
+            File file = new File(filename);
+            //
+            // Touch the file, when the file is not exist a new file will be
+            // created. If the file exist change the file timestamp.
+            //
+            FileUtils.touch(file);
+        } catch (IOException e) {
+        }
+    }
 }

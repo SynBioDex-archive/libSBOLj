@@ -55,21 +55,20 @@ public class SbolService {
 
     private EntityManager aManager = null;
     static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
-    
 
     public SbolService() {
         Empire.init(new OpenRdfEmpireModule());
         aManager = Persistence.createEntityManagerFactory("blank-data-source").createEntityManager();
     }
 
-    public SbolService(String rdfString) {
+    public SbolService(String rdfString, RDFFormat format) {
         this();
         InputStream is = null;
         try {
             ExtRepository aRepo = OpenRdfUtil.createInMemoryRepo();
             is = new ByteArrayInputStream(rdfString.getBytes("UTF-8"));
             try {
-                aRepo.read(is, RDFFormat.RDFXML);
+                aRepo.read(is, format);
             } catch (IOException ex) {
                 Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RDFParseException ex) {
@@ -163,7 +162,7 @@ public class SbolService {
         if (aManager.contains(aSA_SF)) {
             aManager.merge(aSA_SF);
         } else {
-             aManager.persist(aSA_SF);
+            aManager.persist(aSA_SF);
         }
 
         if (aManager.contains(component)) {
@@ -295,16 +294,20 @@ public class SbolService {
         return library;
     }
 
-    public String getAllAsRdf() {
+    public String getAllAsRdf(RDFFormat mimetype) {
         String rdfString = null;
-
-
+        Query aQuery = aManager.createQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o.}");
+        ExtGraph singleResult = (ExtGraph) aQuery.getSingleResult();
+        StringWriter out = new StringWriter();
+        //RDFXMLPrettyWriter rdfWriter = new RDFXMLPrettyWriter(out);
+        
         try {
-            Query aQuery = aManager.createQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o.}");
-            ExtGraph singleResult = (ExtGraph) aQuery.getSingleResult();
-            StringWriter out = new StringWriter();
-            //RDFXMLPrettyWriter rdfWriter = new RDFXMLPrettyWriter(out);
-            singleResult.write(out, RDFFormat.RDFXML);
+            if (mimetype.equals(RDFFormat.RDFXML)) {
+                singleResult.write(out, RDFFormat.RDFXML);
+
+            } else if (mimetype.equals(RDFFormat.TURTLE)) {
+                singleResult.write(out, RDFFormat.TURTLE);
+            }
             rdfString = out.toString();
 
         } catch (IOException ex) {
@@ -318,14 +321,14 @@ public class SbolService {
         Query aQuery = aManager.createQuery("WHERE {?result rdf:type sbol:Library}");
         aQuery.setHint(RdfQuery.HINT_ENTITY_CLASS, Library.class);
         List aResults = aQuery.getResultList();
-        if (aResults.size()>0){
+        if (aResults.size() > 0) {
             findMe = (Library) aResults.get(0);
         } else {
             Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, "Empty Library: no results found", this);
- 
+
         }
         //Library lib = aManager.find(Library.class, findMe.getRdfId());
-       
+
         return findMe;
     }
 
@@ -335,7 +338,7 @@ public class SbolService {
         Query aQuery = aManager.createQuery("WHERE {?result rdf:type sbol:Library}");
         aQuery.setHint(RdfQuery.HINT_ENTITY_CLASS, Library.class);
         List aResults = aQuery.getResultList();
-        if (aResults.size()>0){
+        if (aResults.size() > 0) {
             Library findMe1 = (Library) aResults.get(0);
         } else {
             Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, "Empty Library: no results found", this);

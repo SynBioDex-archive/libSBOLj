@@ -4,18 +4,14 @@
  */
 package libSBOLjUseExample;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,28 +46,15 @@ public class FileUtil {
     }
 
     static void writeFile(String outfilename, String content) {
-        DataOutputStream dos;
-        FileOutputStream fos;
         try {
-            //FileWriter fw = new FileWriter(outfilename);
-            //BufferedWriter bw = new BufferedWriter(fw);
-            //PrintWriter pw = new PrintWriter(bw);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfilename), "UTF8"));
-            //   File file= new File(outfilename);
-            //   fos = new FileOutputStream(file);
-            //   dos=new DataOutputStream(fos);
-            //   dos.writeUTF(content);
-            //   dos.writeBytes(content);
-            //   dos.writeBytes("\n");
-            //   dos.close();
-
-            //   pw.write(content);
+           
             bw.write(content);
             bw.close();
-            //pw.close();
         } catch (IOException e) {
-        } finally {
+            Logger.getLogger(FileUtil.class.getName()).log(Level.SEVERE, null, e);
         }
+   
     }
 
     static void touchfile(String filename) {

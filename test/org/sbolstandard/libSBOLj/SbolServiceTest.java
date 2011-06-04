@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.sbolstandard.libSBOLj;
 
-
+import org.openrdf.rio.RDFFormat;
 import org.junit.Ignore;
 import java.net.URI;
 import org.junit.After;
@@ -52,12 +51,6 @@ public class SbolServiceTest {
         aSF.setName("name");
         aSF.setDescription("desc");
         aSF.addType(URI.create("http://purl.org/obo/owl/SO#" + "so_id"));
-
-
-
-
-
-        
     }
 
     @After
@@ -99,7 +92,7 @@ public class SbolServiceTest {
         //test
         SequenceFeature result = instance.createSequenceFeature(displayId, name, description, type);
         assertEquals(expResult, result);
-        
+
     }
 
     /**
@@ -139,8 +132,8 @@ public class SbolServiceTest {
         SequenceAnnotation annotation = aSA;
         SbolService instance = new SbolService();
 
-        
-        
+
+
         SequenceAnnotation aSA_SF = new SequenceAnnotation(); //full annotation
         aSA_SF = aSA;
         aSA_SF.addFeature(aSF);
@@ -149,7 +142,7 @@ public class SbolServiceTest {
         //test
         SequenceAnnotation result = instance.addSequenceFeatureToSequenceAnnotation(feature, annotation);
         assertEquals(expResult, result);
-        
+
     }
 
     /**
@@ -171,7 +164,7 @@ public class SbolServiceTest {
         //test
         DnaComponent result = instance.createDnaComponent(displayId, name, description, isCircular, type, dnaSequence);
         assertEquals(expResult, result);
-        
+
     }
 
     /**
@@ -190,7 +183,7 @@ public class SbolServiceTest {
         //test
         Library result = instance.createLibrary(displayId, name, description);
         assertEquals(expResult, result);
-        
+
     }
 
     /**
@@ -238,16 +231,44 @@ public class SbolServiceTest {
     /**
      * Test of getAllAsRdf method, of class SbolService.
      */
-    @Ignore
     @Test
-    public void testGetAllAsRDF() {
-        System.out.println("getAllAsRDF");
+    public void testGetAllAsRDF_inXML() {
+        System.out.println("getAllAsRDFinXML");
         SbolService instance = new SbolService();
-        String expResult = "";
-        String result = instance.getAllAsRdf();
+
+        //Make a Library w a DnaComponent a SequenceAnnotation and a SequenceFeature
+        instance.addDnaComponentToLibrary(aDC, aLib);
+        //Annotated component
+        instance.addSequenceAnnotationToDnaComponent(aSA, aDC);  //empty promise
+        instance.addSequenceFeatureToSequenceAnnotation(aSF, aSA);
+
+        Library expResult = instance.getLibrary();
+        
+        String rdfxml = instance.getAllAsRdf(RDFFormat.RDFXML);
+        SbolService test = new SbolService(rdfxml, RDFFormat.RDFXML);
+        Library result = test.getLibrary();
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testGetAllAsRDF_inTurtle() {
+        System.out.println("getAllAsRDFinTurtle");
+        SbolService instance = new SbolService();
+
+        //Make a Library w a DnaComponent a SequenceAnnotation and a SequenceFeature
+        instance.addDnaComponentToLibrary(aDC, aLib);
+        //Annotated component
+        instance.addSequenceAnnotationToDnaComponent(aSA, aDC);  //empty promise
+        instance.addSequenceFeatureToSequenceAnnotation(aSF, aSA);
+
+        Library expResult = instance.getLibrary();
+
+        String rdfttl = instance.getAllAsRdf(RDFFormat.TURTLE);
+        SbolService test = new SbolService(rdfttl, RDFFormat.TURTLE);
+        Library result = test.getLibrary();
+
+        assertEquals(expResult, result);
     }
 
     /**
@@ -286,7 +307,7 @@ public class SbolServiceTest {
         aDC_SA_SF = aDC;
         aDC_SA_SF.addAnnotation(aSA_SF);
         DnaComponent expResult = aDC_SA_SF;
-        
+
         //test
         DnaComponent result = instance.addSequenceAnnotationToDnaComponent(annotation, component);
         assertEquals(expResult, result);
@@ -302,7 +323,7 @@ public class SbolServiceTest {
         SbolService instance = new SbolService();
 
         Library expResult = aLib;
-        
+
         //test
         instance.insertLibrary(lib);
         Library result = instance.getLibrary();
@@ -353,16 +374,15 @@ public class SbolServiceTest {
         aLib_DC.addComponent(aDC);
         instance.insertLibrary(aLib_DC);
 
-        SequenceAnnotation expResult =aSA;
+        SequenceAnnotation expResult = aSA;
         expResult.addFeature(aSF);
 
         //test
         instance.insertSequenceAnnotation(anotSF);
-       
+
         instance.addSequenceAnnotationToDnaComponent(anotSF, aDC);
         instance.addSequenceFeatureToSequenceAnnotation(aSF, anotSF);
-        SequenceAnnotation result = instance.getLibrary().getComponents()
-                .iterator().next().getAnnotations().iterator().next();
+        SequenceAnnotation result = instance.getLibrary().getComponents().iterator().next().getAnnotations().iterator().next();
         assertEquals(expResult, result);
     }
 
@@ -384,10 +404,7 @@ public class SbolServiceTest {
         //test
         instance.insertSequenceFeature(feat);
         instance.addSequenceFeatureToSequenceAnnotation(feat, aSA);
-        SequenceFeature result = instance.getLibrary().getComponents()
-                .iterator().next().getAnnotations()
-                .iterator().next().getFeatures().iterator().next();
+        SequenceFeature result = instance.getLibrary().getComponents().iterator().next().getAnnotations().iterator().next().getFeatures().iterator().next();
         assertEquals(expResult, result);
     }
-
 }

@@ -32,9 +32,9 @@ public class ReadRDFdata {
     }
     public static Library readRdfString() throws BioException{
         Library aLib = new Library();
-        String newRdfString = IOTools.toRdf(CreateNewLibrary_constructors.createSfLib());
+        String newRdfString = IOTools.toRdfXml(CreateNewLibrary_constructors.createSfLib());
         FileUtil.writeFile("test\\test_files\\test_file.rdf", newRdfString);
-        SbolService aS = IOTools.fromRdf(newRdfString);
+        SbolService aS = IOTools.fromRdfXml(newRdfString);
 
         aLib =aS.getLibrary();
 
@@ -47,12 +47,12 @@ public class ReadRDFdata {
         Library aLib = new Library();
         String aRdfFileString = FileUtil.readFile(path);
         //System.out.println("file: "+ aRdfFileString);
-        SbolService aS = IOTools.fromRdf(aRdfFileString);
+        SbolService aS = IOTools.fromRdfXml(aRdfFileString);
 
         aLib = aS.getLibrary();
         
         //Logger.getLogger("DnaComponent Name").log(Level.INFO, aLib.getComponents().iterator().next().getName());
-        Logger.getLogger("s:").log(Level.INFO, IOTools.toRdf(aLib));
+        Logger.getLogger("s:").log(Level.INFO, IOTools.toRdfXml(aLib));
         Logger.getLogger("Library Name").log(Level.INFO, aLib.getName());
         Logger.getLogger("SequenceFeature Name").log(Level.INFO, aLib.getFeatures().iterator().next().getName());
       return aLib;
@@ -60,7 +60,7 @@ public class ReadRDFdata {
 
     public static Library readGenBankRoundTrip()throws BioException{
         String rdfString = ReadGenBankFile.read();
-        SbolService aS = IOTools.fromRdf(rdfString);
+        SbolService aS = IOTools.fromRdfXml(rdfString);
         
         Library aLib = aS.getLibrary();
 
