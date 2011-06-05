@@ -70,7 +70,7 @@ public class IOTools {
         BufferedReader br = null;
         SimpleNamespace ns = null;
         String fileString = filename;
-        RichSequence rs_1 = null;
+
         try {
             br = new BufferedReader(new FileReader(fileString));
         } catch (FileNotFoundException fnfe) {

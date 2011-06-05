@@ -5,6 +5,7 @@
 
 package org.sbolstandard.libSBOLj;
 
+import org.junit.Ignore;
 import org.biojavax.bio.seq.RichSequence;
 import org.biojavax.bio.seq.RichSequenceIterator;
 import org.junit.After;
@@ -23,14 +24,6 @@ public class IOToolsTest {
     public IOToolsTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
     @Before
     public void setUp() {
     }
@@ -45,9 +38,11 @@ public class IOToolsTest {
     @Test
     public void testFromGenBankFile() throws Exception {
         System.out.println("fromGenBankFile");
-        String filename = "";
+        String filename = "test\\test_files\\testFromGenBankFile.gb";
         RichSequenceIterator expResult = null;
-        RichSequenceIterator result = IOTools.fromGenBankFile(filename);
+        RichSequenceIterator aRSiter = IOTools.fromGenBankFile(filename);
+        Library result = IOTools.fromRichSequenceIter(aRSiter);
+        System.out.println("ttl: "+IOTools.toRdfTurtle(result));
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -56,6 +51,7 @@ public class IOToolsTest {
     /**
      * Test of fromRichSequenceIter method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testFromRichSequenceIter() throws Exception {
         System.out.println("fromRichSequenceIter");
@@ -70,6 +66,7 @@ public class IOToolsTest {
     /**
      * Test of readRichSequence method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testReadRichSequence() {
         System.out.println("readRichSequence");
@@ -84,6 +81,7 @@ public class IOToolsTest {
     /**
      * Test of toJson method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testToJson() {
         System.out.println("toJson");
@@ -98,6 +96,7 @@ public class IOToolsTest {
     /**
      * Test of toRdfXml method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testToRdfXml() {
         System.out.println("toRdfXml");
@@ -112,6 +111,7 @@ public class IOToolsTest {
     /**
      * Test of toRdfTurtle method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testToRdfTurtle() {
         System.out.println("toRdfTurtle");
@@ -126,6 +126,7 @@ public class IOToolsTest {
     /**
      * Test of fromRdfXml method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testFromRdfXml() {
         System.out.println("fromRdfXml");
@@ -140,6 +141,7 @@ public class IOToolsTest {
     /**
      * Test of readFile method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testReadFile() throws Exception {
         System.out.println("readFile");
@@ -154,6 +156,7 @@ public class IOToolsTest {
     /**
      * Test of writeFile method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testWriteFile() {
         System.out.println("writeFile");
@@ -167,6 +170,7 @@ public class IOToolsTest {
     /**
      * Test of touchfile method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testTouchfile() {
         System.out.println("touchfile");
