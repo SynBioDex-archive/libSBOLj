@@ -1,0 +1,114 @@
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils}{
+\section{IdentifierUtils Class Reference}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils}\index{org::sbolstandard::libSBOLj::IdentifierUtils@{org::sbolstandard::libSBOLj::IdentifierUtils}}
+}
+
+
+These utility methods calculate ID encodings.  
+
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils_a703d02fbf288b0f4ea3f1a7af3b143dc}{getHexString} (byte\mbox{[}$\,$\mbox{]} bytes)  throws UnsupportedEncodingException 
+\begin{DoxyCompactList}\small\item\em Provides a String of the Hex encoded input. \item\end{DoxyCompactList}\item 
+static String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils_a3208b690b93a8287aeb551c699274213}{encryptSHA} (String string)
+\begin{DoxyCompactList}\small\item\em Hashes the input String with SHA-\/1 into a Hex encoded String. \item\end{DoxyCompactList}\item 
+static String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils_a84a93baf12201bb5cacb63a492ec824f}{generateUUID} ()
+\begin{DoxyCompactList}\small\item\em Random Unique ID. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+These utility methods calculate ID encodings. code borrowed from org.jbei.ice.lib.utils.Utils by Tim Ham \begin{DoxyAuthor}{Author}
+mgaldzic 
+\end{DoxyAuthor}
+\begin{DoxySince}{Since}
+0.35, 05/30/2011 
+\end{DoxySince}
+
+
+Definition at line 18 of file IdentifierUtils.java.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils_a3208b690b93a8287aeb551c699274213}{
+\index{org::sbolstandard::libSBOLj::IdentifierUtils@{org::sbolstandard::libSBOLj::IdentifierUtils}!encryptSHA@{encryptSHA}}
+\index{encryptSHA@{encryptSHA}!org::sbolstandard::libSBOLj::IdentifierUtils@{org::sbolstandard::libSBOLj::IdentifierUtils}}
+\subsubsection[{encryptSHA}]{\setlength{\rightskip}{0pt plus 5cm}static String encryptSHA (
+\begin{DoxyParamCaption}
+\item[{String}]{string}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils_a3208b690b93a8287aeb551c699274213}
+
+
+Hashes the input String with SHA-\/1 into a Hex encoded String. 
+
+Useful for keys 
+\begin{DoxyParams}{Parameters}
+{\em string} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Hex version of hash 
+\end{DoxyReturn}
+
+
+Definition at line 50 of file IdentifierUtils.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils_a84a93baf12201bb5cacb63a492ec824f}{
+\index{org::sbolstandard::libSBOLj::IdentifierUtils@{org::sbolstandard::libSBOLj::IdentifierUtils}!generateUUID@{generateUUID}}
+\index{generateUUID@{generateUUID}!org::sbolstandard::libSBOLj::IdentifierUtils@{org::sbolstandard::libSBOLj::IdentifierUtils}}
+\subsubsection[{generateUUID}]{\setlength{\rightskip}{0pt plus 5cm}static String generateUUID (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils_a84a93baf12201bb5cacb63a492ec824f}
+
+
+Random Unique ID. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 78 of file IdentifierUtils.java.
+
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils_a703d02fbf288b0f4ea3f1a7af3b143dc}{
+\index{org::sbolstandard::libSBOLj::IdentifierUtils@{org::sbolstandard::libSBOLj::IdentifierUtils}!getHexString@{getHexString}}
+\index{getHexString@{getHexString}!org::sbolstandard::libSBOLj::IdentifierUtils@{org::sbolstandard::libSBOLj::IdentifierUtils}}
+\subsubsection[{getHexString}]{\setlength{\rightskip}{0pt plus 5cm}static String getHexString (
+\begin{DoxyParamCaption}
+\item[{byte\mbox{[}$\,$\mbox{]}}]{bytes}
+\end{DoxyParamCaption}
+)  throws UnsupportedEncodingException \hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils_a703d02fbf288b0f4ea3f1a7af3b143dc}
+
+
+Provides a String of the Hex encoded input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em UnsupportedEncodingException} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 26 of file IdentifierUtils.java.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/Users/mgaldzic/Documents/NetBeansProjects/libSBOLj/src/org/sbolstandard/libSBOLj/IdentifierUtils.java\end{DoxyCompactItemize}
