@@ -10,7 +10,6 @@ import com.clarkparsia.empire.annotation.RdfId;
 import com.clarkparsia.empire.annotation.RdfProperty;
 import com.clarkparsia.empire.annotation.RdfsClass;
 import com.clarkparsia.empire.annotation.SupportsRdfIdImpl;
-import java.net.URI;
 import java.util.Collection;
 import java.util.HashSet;
 import javax.persistence.CascadeType;
@@ -18,7 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
+import org.sbolstandard.libSBOLj.IOTools.SkipInJson;
 
 /**
  * The SBOL data model's DnaComponent for RDF and Json.
@@ -35,10 +34,12 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 @RdfsClass("sbol:DnaComponent")
 @Entity
 public class DnaComponent implements SupportsRdfId {
+    
+    static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
 
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
-    @RdfId(namespace = "http://sbols.org/sbol.owl#")
+    @RdfId(namespace = DATA_NAMESPACE_DEFAULT)
     private String id;
     @RdfProperty("sbol:displayId")
     private String displayId;
@@ -48,15 +49,13 @@ public class DnaComponent implements SupportsRdfId {
     private String description;
     @RdfProperty("sbol:isCircular")
     private boolean isCircular;
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @RdfProperty("rdf:type")
-    private Collection<URI> type = new HashSet<URI>();
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("sbol:dnaSequence")
     private DnaSequence dnaSequence;
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @RdfProperty("sbol:annotation")
     private Collection<SequenceAnnotation> annotation = new HashSet<SequenceAnnotation>();
+
 
     /**
      * Positions and directions of <code>SequenceFeature</code>[s] that describe
@@ -125,7 +124,7 @@ public class DnaComponent implements SupportsRdfId {
      */
     public void setDisplayId(String displayId) {
         this.displayId = displayId;
-        setId(displayId);
+        this.generateId();
     }
 
     /**
@@ -157,8 +156,9 @@ public class DnaComponent implements SupportsRdfId {
      * A unique identifier which will be used as the ID portion of the URI
      * @param id the RDF id for the object
      */
-    public void setId(String id) {
-        this.id = id;
+    private void generateId() {
+        String idString = this.getClass().toString()+getDisplayId();
+        this.id = IdentifierUtils.encryptSHA(idString);
     }
 
     /**
@@ -224,32 +224,6 @@ public class DnaComponent implements SupportsRdfId {
     }
 
     /**
-     * Sequence Ontology vocabulary provides a defined term for types of DNA
-     * components.
-     * TO DO: implement use of SO within libSBOLj.
-     * @return a Sequence Ontology (SO) vocabulary term to describe the type of DnaComponent.
-     * @todo When serialized to RDF this is a URI, so when read from persistence it should become
-     * one of the SO human readable vocabulary terms. Note:I should allow many types
-     */
-    public Collection<URI> getTypes() {
-        return type;
-    }
-
-    /**
-     * Sequence Ontology vocabulary provides a defined term for types of DNA
-     * components.
-     *
-     * @param type Sequence Ontology URI specifying the type of the DnaComponent
-     * @see setType
-     */
-    public void addType(URI type) {
-        if (!getTypes().contains(type)) {
-            getTypes().add(type);
-        //this.type.add(type);
-        }
-    }
-
-    /**
      * a com.clarkparsia.empire required RDF id.
      * Not sure what the difference is in empire compared to {@link id}
      * @return the RdfId component of the URI for the DnaComponent
@@ -274,7 +248,6 @@ public class DnaComponent implements SupportsRdfId {
      * @return true if another object is equivalent to this one, false otherwise
      *         (including null parameter)
      */
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -300,9 +273,6 @@ public class DnaComponent implements SupportsRdfId {
             if (this.isCircular != other.isCircular) {
                 return false;
             }
-            if (this.type != other.type && (this.type == null || !this.type.equals(other.type))) {
-                return false;
-            }
             if (this.dnaSequence != other.dnaSequence && (this.dnaSequence == null || !this.dnaSequence.equals(other.dnaSequence))) {
                 return false;
             }
@@ -315,6 +285,14 @@ public class DnaComponent implements SupportsRdfId {
 
     @Override
     public int hashCode() {
-        return getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        int hash = 1;
+        hash = hash * 31 + this.getClass().hashCode();
+        hash = hash * 31 + (displayId == null ? 0 : displayId.hashCode());
+        hash = hash * 31 + (name == null ? 0: name.hashCode());
+        hash = hash * 31 + (annotation == null ? 0 : annotation.hashCode());
+        hash = hash * 31 + (dnaSequence == null ? 0 : dnaSequence.hashCode());
+        
+        //int hash = getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        return hash;
     }
 }

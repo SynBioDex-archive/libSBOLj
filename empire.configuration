@@ -1,0 +1,10 @@
+annotation.index = empire.apt.config
+ns_list = sbol, mydata
+
+sbol=http://sbols.org/sbol.owl#
+mydata=http://sbols.org/data#
+
+0.name = blank-data-source
+0.factory = sesame
+
+

@@ -16,7 +16,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
+import org.sbolstandard.libSBOLj.IOTools.SkipInJson;
 
 /**
 * The SBOL data model's Library for RDF and Json.
@@ -46,9 +46,11 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 @Entity
 public class Library implements SupportsRdfId {
 
+    static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
+
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
-    @RdfId(namespace = "http://sbols.org/sbol.owl#")
+    @RdfId(namespace = DATA_NAMESPACE_DEFAULT)
     private String id;
     
     @RdfProperty("sbol:displayId")
@@ -136,7 +138,7 @@ public class Library implements SupportsRdfId {
      */
     public void setDisplayId(String displayId) {
         this.displayId = displayId;
-        setId(displayId);
+        generateId();
     }
 
     /**
@@ -176,8 +178,10 @@ public class Library implements SupportsRdfId {
      * A unique identifier which will be used as the ID portion of the URI
      * @param id
      */
-    public void setId(String id) {
-        this.id = id;
+    private void generateId() {
+        String idString = this.getClass().toString()+getDisplayId();
+
+        this.id = IdentifierUtils.encryptSHA(idString);
     }
 
     /**
@@ -237,18 +241,30 @@ public class Library implements SupportsRdfId {
             if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
                 return false;
             }
-            if (this.component != other.component && (this.component == null || !this.component.equals(other.component))) {
+            if ((this.getComponents().isEmpty()) ? !(other.getComponents().isEmpty()) : 
+                ((this.component != other.component) && (this.component == null || !this.component.equals(other.component)))) {
                 return false;
             }
-            if (this.feature != other.feature && (this.feature == null || !this.feature.equals(other.feature))) {
+            if ((this.getFeatures().isEmpty()) ? !(other.getFeatures().isEmpty()) : 
+                ((this.feature != other.feature) && (this.feature == null || !this.feature.equals(other.feature)))) {
                 return false;
             }
+    
         }
         return true;
     }
 
     @Override
     public int hashCode() {
-        return getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        int hash = 1;    
+        hash = hash * 31 + this.getClass().hashCode();
+        hash = hash * 31 + (displayId == null ? 0 : displayId.hashCode());
+        hash = hash * 31 + (name == null ? 0: name.hashCode());
+        hash = hash * 31 + (description == null ? 0: description.hashCode());
+        hash = hash * 31 + (component == null ? 0 : component.hashCode());
+        hash = hash * 31 + (feature == null ? 0 : feature.hashCode());
+        
+        //int hash = getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        return hash;
     }
 }

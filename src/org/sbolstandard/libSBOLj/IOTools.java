@@ -9,13 +9,20 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Iterator;
+import java.util.Scanner;
 import org.biojava.bio.BioException;
 import org.biojava.bio.seq.Feature;
 import org.biojava.bio.seq.FeatureFilter;
@@ -26,6 +33,11 @@ import org.biojavax.SimpleNamespace;
 import org.biojavax.bio.seq.RichFeature;
 import org.biojavax.bio.seq.RichSequence;
 import org.biojavax.bio.seq.RichSequenceIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.openrdf.rio.RDFFormat;
+import org.apache.commons.io.FileUtils;
+import org.openrdf.rio.RDFParseException;
 
 /**
  * SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.
@@ -37,7 +49,7 @@ import org.biojavax.bio.seq.RichSequenceIterator;
  * @author mgaldzic
  * @since 0.2, 03/2/2011
  */
-public class SBOLutil {
+public class IOTools {
 
     /**
      * Reads the common GenBank flat file so the records in it can be iterated over.
@@ -59,11 +71,11 @@ public class SBOLutil {
         BufferedReader br = null;
         SimpleNamespace ns = null;
         String fileString = filename;
-        RichSequence rs_1 = null;
+
         try {
             br = new BufferedReader(new FileReader(fileString));
         } catch (FileNotFoundException fnfe) {
-            System.out.println("FileNotFoundException: " + fnfe);
+            Logger.getLogger(SbolService.class.getName()).log(Level.SEVERE, "FileNotFoundException: ", fnfe);
         }
         // try {
         ns = new SimpleNamespace("bioJavaNS");
@@ -90,14 +102,14 @@ public class SBOLutil {
      * @throws BioException BioJava threw up, @todo understand what BioJava exceptions are.
      */
     public static Library fromRichSequenceIter(RichSequenceIterator rsi) throws BioException {
-        SBOLservice s = new SBOLservice();
-        
+        SbolService s = new SbolService();
+
         Library lib = s.createLibrary("BioFabLib_1", "BIOAFAB Pilot Project",
                 "Pilot Project Designs, see http://biofab.org/data");
         while (rsi.hasNext()) {
             RichSequence rs = rsi.nextRichSequence();
-            System.out.println("readGB file of: " + rs.getName());
-            s.addDnaComponentToLibrary(SBOLutil.readRichSequence(rs), lib);
+            //System.out.println("readGB file of: " + rs.getName());
+            s.addDnaComponentToLibrary(IOTools.readRichSequence(rs), lib);
         }
         return lib;
     }
@@ -114,7 +126,7 @@ public class SBOLutil {
      * @return DnaComponent with the attached SequenceAnnotations and SequenceFeatures
      */
     public static DnaComponent readRichSequence(RichSequence rs) {
-        SBOLservice s = new SBOLservice();
+        SbolService s = new SbolService();
         //The main GenBank Record can be found by the following
         DnaComponent comp = s.createDnaComponent(rs.getName(),
                 rs.getName(), rs.getDescription(), false, "other_DNA",
@@ -131,8 +143,6 @@ public class SBOLutil {
             Integer rfStart = rf.getLocation().getMin();
             Integer rfStop = rf.getLocation().getMax();
             String rfStrand = Character.toString(rf.getStrand().getToken());
-            SequenceAnnotation anot = s.createSequenceAnnotationForDnaComponent(rfStart,
-                    rfStop, rfStrand, comp);
 
             //Get the Rich Annotation of the Rich Feature
             RichAnnotation ra = (RichAnnotation) rf.getAnnotation();
@@ -153,6 +163,8 @@ public class SBOLutil {
                 }
             }
             SequenceFeature feat = s.createSequenceFeature(label, label, label, rf.getType());
+            SequenceAnnotation anot = s.createSequenceAnnotationForDnaComponent(rfStart,
+                    rfStop, rfStrand, feat, comp);
             // should add return void?
             SequenceAnnotation anotFeat = s.addSequenceFeatureToSequenceAnnotation(feat, anot);
             //compAnotFeat = s.addSequenceAnnotationToDnaComponent(anotFeat, comp);
@@ -161,8 +173,6 @@ public class SBOLutil {
 
         return comp;
     }
-
-
 
     /**
      * Customizes the Json writer to leave out fields annotated with @SkipInJson.
@@ -224,17 +234,64 @@ public class SBOLutil {
      * @param input an SBOL Library to be written out
      * @return String containing the RDF serialization
      */
-    public static String toRDF(Library input) {
-        //make RDF
-        SBOLservice s = new SBOLservice();
+    public static String toRdfXml(Library input) {
+        //make RDF XML
+        SbolService s = new SbolService();
         s.insertLibrary(input);
-        String rdfString = s.getAllAsRDF();
-        return rdfString;
-     
+        String xmlString = s.getAllAsRdf(RDFFormat.RDFXML);
+        return xmlString;
+
     }
-    public static SBOLservice fromRDF(String rdfString) {
-        SBOLservice s = new SBOLservice(rdfString);
+
+    public static String toRdfTurtle(Library input) {
+        //make RDF Turtle
+        SbolService s = new SbolService();
+        s.insertLibrary(input);
+        String ttlString = s.getAllAsRdf(RDFFormat.TURTLE);
+        return ttlString;
+    }
+
+    public static SbolService fromRdfXml(String rdfString) {
+        SbolService s = new SbolService(rdfString, RDFFormat.RDFXML);
         return s;
     }
 
+    static String readFile(String infilename) throws FileNotFoundException {
+
+        StringBuilder text = new StringBuilder();
+        String NL = System.getProperty("line.separator");
+        Scanner scanner = new Scanner(new FileInputStream(infilename), "UTF-8");
+        try {
+            while (scanner.hasNextLine()) {
+                text.append(scanner.nextLine()).append(NL);
+            }
+        } finally {
+            scanner.close();
+        }
+        return text.toString();
+    }
+
+    static void writeFile(String outfilename, String content) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfilename), "UTF8"));
+
+            bw.write(content);
+            bw.close();
+        } catch (IOException e) {
+            Logger.getLogger(IOTools.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
+    static void touchfile(String filename) {
+        try {
+            File file = new File(filename);
+            //
+            // Touch the file, when the file is not exist a new file will be
+            // created. If the file exist change the file timestamp.
+            //
+            FileUtils.touch(file);
+        } catch (IOException e) {
+        }
+    }
 }
