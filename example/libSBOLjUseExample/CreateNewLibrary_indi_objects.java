@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import org.biojava.bio.BioException;
 import org.sbolstandard.libSBOLj.DnaComponent;
 import org.sbolstandard.libSBOLj.Library;
-import org.sbolstandard.libSBOLj.SBOLservice;
+import org.sbolstandard.libSBOLj.SbolService;
 import org.sbolstandard.libSBOLj.SequenceAnnotation;
 import org.sbolstandard.libSBOLj.SequenceFeature;
 
@@ -31,7 +31,7 @@ public class CreateNewLibrary_indi_objects {
 
     public static Library createLib() throws BioException {
 
-        SBOLservice s = new SBOLservice();
+        SbolService s = new SbolService();
 
         Library aLib = new Library();
         aLib.setDisplayId("BioFabLib_1");
@@ -44,7 +44,6 @@ public class CreateNewLibrary_indi_objects {
         aDC.setName("pTet");
         aDC.setDescription("TetR repressible promoter");
         aDC.setCircular(false);
-        aDC.addType(URI.create("http://purl.org/obo/owl/SO#" + "promoter"));
         aDC.setDnaSequence(s.createDnaSequence(
                 "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"));
         s.insertDnaComponent(aDC);
@@ -53,7 +52,7 @@ public class CreateNewLibrary_indi_objects {
         aSA.setStart(127);
         aSA.setStop(181);
         aSA.setStrand("+");
-        aSA.setId(aDC);
+        aSA.generateId(aDC);
         s.insertSequenceAnnotation(aSA);
 
         SequenceFeature aSF = new SequenceFeature();

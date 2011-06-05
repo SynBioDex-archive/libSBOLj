@@ -4,10 +4,17 @@
  */
 package libSBOLjUseExample;
 
-import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -16,19 +23,38 @@ import org.apache.commons.io.FileUtils;
  */
 public class FileUtil {
 
-    static String readfile(String infilename) {
-        String out = null;
+    public static void main(String[] args) throws FileNotFoundException {
+        //readGenBankRoundTrip();
+        writeFile("test\\test_files\\test.txt", "test");
+        String i = readFile("test\\test_files\\test.txt");
+        Logger.getLogger(FileUtil.class.getName()).log(Level.INFO, "File contents ", i);
+    }
+
+    static String readFile(String infilename) throws FileNotFoundException {
+
+        StringBuilder text = new StringBuilder();
+        String NL = System.getProperty("line.separator");
+        Scanner scanner = new Scanner(new FileInputStream(infilename), "UTF-8");
         try {
-            BufferedReader in = new BufferedReader(new FileReader(infilename));
-            String str;
-            while ((str = in.readLine()) != null) {
-                out += str;
+            while (scanner.hasNextLine()) {
+                text.append(scanner.nextLine()).append(NL);
             }
-            in.close();
-        } catch (IOException e) {
         } finally {
-            return out;
+            scanner.close();
         }
+        return text.toString();
+    }
+
+    static void writeFile(String outfilename, String content) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfilename), "UTF8"));
+           
+            bw.write(content);
+            bw.close();
+        } catch (IOException e) {
+            Logger.getLogger(FileUtil.class.getName()).log(Level.SEVERE, null, e);
+        }
+   
     }
 
     static void touchfile(String filename) {

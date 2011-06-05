@@ -1,0 +1,12 @@
+LOCUS       id                4 bp    DNA     circular     null
+ACCESSION   name
+VERSION     name
+KEYWORDS    .
+COMMENT     desc
+FEATURES             Location/Qualifiers
+     promoter        1..2
+                     /so_id="id"
+                     /label=name
+ORIGIN
+        1 actg
+//

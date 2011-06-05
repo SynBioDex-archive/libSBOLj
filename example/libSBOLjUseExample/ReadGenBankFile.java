@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import org.biojava.bio.BioException;
 import org.biojavax.bio.seq.RichSequenceIterator;
 import org.sbolstandard.libSBOLj.Library;
-import org.sbolstandard.libSBOLj.SBOLutil;
+import org.sbolstandard.libSBOLj.IOTools;
 
 /**
  * See Tutorial Example A. Write SBOL RDF or Json data from a GenBank File
@@ -26,10 +26,10 @@ public class ReadGenBankFile {
         }
     }
 public static String read() throws BioException {
-        RichSequenceIterator aRSiter = SBOLutil.fromGenBankFile("test\\test_files\\BFa_8.15.gb");
-        Library aBioFABlib = SBOLutil.fromRichSequenceIter(aRSiter);
-        String jsonString = SBOLutil.toJson(aBioFABlib);
-        String rdfString = SBOLutil.toRDF(aBioFABlib);
+        RichSequenceIterator aRSiter = IOTools.fromGenBankFile("config\\test_files\\BFa_8.15.gb");
+        Library aBioFABlib = IOTools.fromRichSequenceIter(aRSiter);
+        String jsonString = IOTools.toJson(aBioFABlib);
+        String rdfString = IOTools.toRdfXml(aBioFABlib);
 
         Logger.getLogger("Json").log(Level.INFO, jsonString);
         Logger.getLogger("RDF").log(Level.INFO, rdfString);

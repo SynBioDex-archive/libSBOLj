@@ -18,7 +18,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
+import org.sbolstandard.libSBOLj.IOTools.SkipInJson;
 
 /**
  * The SBOL data model's SequenceFeature for RDF and Json.
@@ -40,9 +40,12 @@ import org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
 @RdfsClass("sbol:SequenceFeature")
 @Entity
 public class SequenceFeature implements SupportsRdfId {
+
+    static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
+
     @SkipInJson
     private SupportsRdfId mIdSupport = new SupportsRdfIdImpl();
-    @RdfId(namespace = "http://sbols.org/sbol.owl#")
+    @RdfId(namespace = DATA_NAMESPACE_DEFAULT)
     private String id;
     @RdfProperty("sbol:displayId")
     private String displayId;
@@ -57,7 +60,7 @@ public class SequenceFeature implements SupportsRdfId {
     @RdfProperty("sbol:dnaSequence")
     private DnaSequence dnaSequence;
 
-     /**
+    /**
      * Text which is for users to read and interpret what this feature is.
      * (eg. engineered Lac promoter, repressible by LacI).
      * Could be lengthy, so it is the responsibility of the user application to
@@ -69,7 +72,7 @@ public class SequenceFeature implements SupportsRdfId {
         return description;
     }
 
-   /**
+    /**
      * Text which is written for users to read and interpret.
      * It should describe what the feature is used for and/or what it does.
      * Suggestion: it should provide information that cannot yet be represented in
@@ -82,7 +85,6 @@ public class SequenceFeature implements SupportsRdfId {
         this.description = description;
     }
 
-
     /**
      * Identifier to display to users.
      * @return A human readable identifier
@@ -91,7 +93,7 @@ public class SequenceFeature implements SupportsRdfId {
         return displayId;
     }
 
-     /**
+    /**
      * Identifier that users will see as reference to this feature.
      * It should be unambiguous and is likely imported from source data. Otherwise
      * it SHOULD be generated.
@@ -102,10 +104,10 @@ public class SequenceFeature implements SupportsRdfId {
      */
     public void setDisplayId(String displayId) {
         this.displayId = displayId;
-        setId(displayId);
+        this.generateId();
     }
 
-      /**
+    /**
      * DNA sequence which this Feature object represents.
      * @return 1 {@link DnaSequence} specifying the DNA sequence of this SequenceFeature
      * @see DnaSequence
@@ -134,11 +136,12 @@ public class SequenceFeature implements SupportsRdfId {
      * A unique identifier which will be used as the ID portion of the URI
      * @param id the RDF id for the object
      */
-    public void setId(String id) {
-        this.id = id;
+    private void generateId() {
+        String idString = this.getClass().toString()+getDisplayId();
+        this.id = IdentifierUtils.encryptSHA(idString);;
     }
 
-   /**
+    /**
      * The name is the most recognizable known identifier, it is often ambiguous.
      * (eg. pLac-O1) Useful for display to carry common meaning, see work on "shared
      * understanding" in CSCW field for more.
@@ -182,7 +185,16 @@ public class SequenceFeature implements SupportsRdfId {
     public void addType(URI type) {
         if (!getTypes().contains(type)) {
             getTypes().add(type);
-        //this.type.add(type);
+        }
+
+        //Setting the default_type for SequenceFeatures to create uniform behavior.
+        //Sequence Features are always of type sbol:SequenceFeature
+        //This default makes SF objects read and SF objects created equal.
+        //the other option would be to by default remove sbol:SF from type when
+        //reading however other applications would then beahave differently.
+        URI default_type = URI.create("http://sbols.org/sbol.owl#SequenceFeature");
+        if (!getTypes().contains(default_type)){
+            getTypes().add(default_type);
         }
     }
 
@@ -219,7 +231,7 @@ public class SequenceFeature implements SupportsRdfId {
             if ((this.displayId == null) ? (other.displayId != null) : !this.displayId.equals(other.displayId)) {
                 return false;
             }
-            if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+           if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
                 return false;
             }
             if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
@@ -237,6 +249,16 @@ public class SequenceFeature implements SupportsRdfId {
 
     @Override
     public int hashCode() {
-        return getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        int hash = 1;
+        hash = hash * 31 + this.getClass().hashCode();
+        hash = hash * 31 + (displayId == null ? 0 : displayId.hashCode());
+        hash = hash * 31 + (name == null ? 0: name.hashCode());
+        hash = hash * 31 + (description == null ? 0 : description.hashCode());
+        hash = hash * 31 + (type == null ? 0 : type.hashCode());
+        hash = hash * 31 + (dnaSequence == null ? 0 : dnaSequence.hashCode());
+
+        //int hash = getRdfId() == null ? 0 : getRdfId().value().hashCode();
+        return hash;
     }
+
 }
