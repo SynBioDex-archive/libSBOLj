@@ -85,7 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00009"></a>00009 <span class="keyword">import</span> org.biojava.bio.BioException;
 <a name="l00010"></a>00010 <span class="keyword">import</span> org.sbolstandard.libSBOLj.DnaComponent;
 <a name="l00011"></a>00011 <span class="keyword">import</span> org.sbolstandard.libSBOLj.Library;
-<a name="l00012"></a>00012 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SBOLservice;
+<a name="l00012"></a>00012 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SbolService;
 <a name="l00013"></a>00013 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SequenceAnnotation;
 <a name="l00014"></a>00014 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SequenceFeature;
 <a name="l00015"></a>00015 
@@ -93,46 +93,68 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> main(String[] args) {
 <a name="l00024"></a>00024         <span class="keywordflow">try</span> {
-<a name="l00025"></a>00025             <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> aLib = createLib();
+<a name="l00025"></a>00025             <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> aLib = createDcLib();
 <a name="l00026"></a>00026         } <span class="keywordflow">catch</span> (BioException ex) {
 <a name="l00027"></a>00027             Logger.getLogger(<a class="code" href="classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata.html" title="See Tutorial Example B.">ReadRDFdata</a>.class.getName()).log(Level.SEVERE, null, ex);
 <a name="l00028"></a>00028         }
 <a name="l00029"></a>00029     }
 <a name="l00030"></a>00030 
-<a name="l00031"></a>00031     <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> createLib() <span class="keywordflow">throws</span> BioException {
+<a name="l00031"></a>00031     <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> createDcLib() <span class="keywordflow">throws</span> BioException {
 <a name="l00032"></a>00032 
-<a name="l00033"></a>00033         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html" title="SBOLservice provides the methods for making new SBOL objects and adding SBOL data.">SBOLservice</a> s = <span class="keyword">new</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html" title="SBOLservice provides the methods for making new SBOL objects and adding SBOL data.">SBOLservice</a>();
-<a name="l00034"></a>00034         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> aLib = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#a7a21049be3161d93bd273e6906899c5a" title="Builds a new Library, ready to collect any DnaComponents or Features.">createLibrary</a>(
+<a name="l00033"></a>00033         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html" title="SbolService provides the methods for making new SBOL objects and adding SBOL data.">SbolService</a> s = <span class="keyword">new</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html" title="SbolService provides the methods for making new SBOL objects and adding SBOL data.">SbolService</a>();
+<a name="l00034"></a>00034         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> aLib = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html#a7a21049be3161d93bd273e6906899c5a" title="Builds a new Library, ready to collect any DnaComponents or Features.">createLibrary</a>(
 <a name="l00035"></a>00035                 <span class="stringliteral">&quot;BioFabLib_1&quot;</span>, <span class="comment">//displayID</span>
 <a name="l00036"></a>00036                 <span class="stringliteral">&quot;BIOAFAB Pilot Project&quot;</span>, <span class="comment">//name</span>
 <a name="l00037"></a>00037                 <span class="stringliteral">&quot;Pilot Project Designs&quot;</span> + <span class="comment">//description</span>
 <a name="l00038"></a>00038                 <span class="stringliteral">&quot; see http://biofab.org/data&quot;</span>);
-<a name="l00039"></a>00039         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a> aDC = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#ad3946d924f4c43fa442841aa5d56d474" title="Builds a new DnaComponent to describe and add to Library.">createDnaComponent</a>(
+<a name="l00039"></a>00039         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a> aDC = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html#ad3946d924f4c43fa442841aa5d56d474" title="Builds a new DnaComponent to describe and add to Library.">createDnaComponent</a>(
 <a name="l00040"></a>00040                 <span class="stringliteral">&quot;BBa_R0040&quot;</span>, <span class="comment">//displayId</span>
 <a name="l00041"></a>00041                 <span class="stringliteral">&quot;pTet&quot;</span>, <span class="comment">//name</span>
 <a name="l00042"></a>00042                 <span class="stringliteral">&quot;TetR repressible promoter&quot;</span>, <span class="comment">//description</span>
 <a name="l00043"></a>00043                 <span class="keyword">false</span>, <span class="comment">//circular</span>
 <a name="l00044"></a>00044                 <span class="stringliteral">&quot;promoter&quot;</span>, <span class="comment">//type</span>
-<a name="l00045"></a>00045                 s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#a61e2cda6134ecedb3a5d0b92206b91a2" title="Builds a new DnaSequence using a string of dna sequence is input.">createDnaSequence</a>( <span class="comment">//DNA sequence</span>
+<a name="l00045"></a>00045                 s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html#a61e2cda6134ecedb3a5d0b92206b91a2" title="Builds a new DnaSequence using a string of dna sequence is input.">createDnaSequence</a>( <span class="comment">//DNA sequence</span>
 <a name="l00046"></a>00046                 <span class="stringliteral">&quot;tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac&quot;</span>));
-<a name="l00047"></a>00047         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&amp;#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a> aSA = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#ab96b56fff36ffe4e728e749e0dcbef29" title="Builds a new SequenceAnnotation to describe a segment of the DnaComponent.">createSequenceAnnotationForDnaComponent</a>(
-<a name="l00048"></a>00048                 127, <span class="comment">//start</span>
-<a name="l00049"></a>00049                 181, <span class="comment">//stop</span>
-<a name="l00050"></a>00050                 <span class="stringliteral">&quot;+&quot;</span>, <span class="comment">//strand orientation</span>
-<a name="l00051"></a>00051                 aDC <span class="comment">//DnaComponent</span>
+<a name="l00047"></a>00047        <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&amp;#39;s SequenceFeature for RDF and Json.">SequenceFeature</a> aSF = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html#a5dab616a55f915c1ebaa6b244fb48fb5" title="Builds a new SequenceFeature which SequenceAnnotations can point to.">createSequenceFeature</a>(
+<a name="l00048"></a>00048                 <span class="stringliteral">&quot;BBa_R0062&quot;</span>, <span class="comment">//displayID</span>
+<a name="l00049"></a>00049                 <span class="stringliteral">&quot;pLux&quot;</span>, <span class="comment">//name</span>
+<a name="l00050"></a>00050                 <span class="stringliteral">&quot;Activated by LuxR in concert with HSL&quot;</span>, <span class="comment">//description</span>
+<a name="l00051"></a>00051                 <span class="stringliteral">&quot;promoter&quot;</span> <span class="comment">//type</span>
 <a name="l00052"></a>00052                 );
-<a name="l00053"></a>00053         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&amp;#39;s SequenceFeature for RDF and Json.">SequenceFeature</a> aSF = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#a5dab616a55f915c1ebaa6b244fb48fb5" title="Builds a new SequenceFeature which SequenceAnnotations can point to.">createSequenceFeature</a>(
-<a name="l00054"></a>00054                 <span class="stringliteral">&quot;BBa_R0062&quot;</span>, <span class="comment">//displayID</span>
-<a name="l00055"></a>00055                 <span class="stringliteral">&quot;pLux&quot;</span>, <span class="comment">//name</span>
-<a name="l00056"></a>00056                 <span class="stringliteral">&quot;Activated by LuxR in concert with HSL&quot;</span>, <span class="comment">//description</span>
-<a name="l00057"></a>00057                 <span class="stringliteral">&quot;promoter&quot;</span> <span class="comment">//type</span>
-<a name="l00058"></a>00058                 );
-<a name="l00059"></a>00059         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&amp;#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a> aSA_SF = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#a4dbd0885b3977f121439873805a294ba" title="Links SequenceFeature to its SequenceAnnotation.">addSequenceFeatureToSequenceAnnotation</a>(aSF, aSA);
-<a name="l00060"></a>00060         aLib = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html#a0f8d861cd85028c6a67c6480dc87d15e" title="Link the DnaComponent into a Library for organizing it as a list of components that can be re-used...">addDnaComponentToLibrary</a>(aDC, aLib);
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062         <span class="keywordflow">return</span> aLib;
-<a name="l00063"></a>00063     }
-<a name="l00064"></a>00064 }
+<a name="l00053"></a>00053         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&amp;#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a> aSA = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html#a356289e398e1fe3a192b8c1ef74e0a4c" title="Builds a new SequenceAnnotation to describe a segment of the DnaComponent.">createSequenceAnnotationForDnaComponent</a>(
+<a name="l00054"></a>00054                 127, <span class="comment">//start</span>
+<a name="l00055"></a>00055                 181, <span class="comment">//stop</span>
+<a name="l00056"></a>00056                 <span class="stringliteral">&quot;+&quot;</span>, <span class="comment">//strand orientation</span>
+<a name="l00057"></a>00057                 aSF, <span class="comment">//feature</span>
+<a name="l00058"></a>00058                 aDC  <span class="comment">//DnaComponent</span>
+<a name="l00059"></a>00059                 );
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061         aLib = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html#a0f8d861cd85028c6a67c6480dc87d15e" title="Link the DnaComponent into a Library for organizing it as a list of components that can be re-used...">addDnaComponentToLibrary</a>(aDC, aLib);
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063         <span class="keywordflow">return</span> aLib;
+<a name="l00064"></a>00064     }
+<a name="l00065"></a>00065     <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> createSfLib() <span class="keywordflow">throws</span> BioException {
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html" title="SbolService provides the methods for making new SBOL objects and adding SBOL data.">SbolService</a> s = <span class="keyword">new</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html" title="SbolService provides the methods for making new SBOL objects and adding SBOL data.">SbolService</a>();
+<a name="l00068"></a>00068         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> aLib = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html#a7a21049be3161d93bd273e6906899c5a" title="Builds a new Library, ready to collect any DnaComponents or Features.">createLibrary</a>(
+<a name="l00069"></a>00069                 <span class="stringliteral">&quot;BioFabLib_1&quot;</span>, <span class="comment">//displayID</span>
+<a name="l00070"></a>00070                 <span class="stringliteral">&quot;BIOAFAB Pilot Project&quot;</span>, <span class="comment">//name</span>
+<a name="l00071"></a>00071                 <span class="stringliteral">&quot;Pilot Project Designs&quot;</span> + <span class="comment">//description</span>
+<a name="l00072"></a>00072                 <span class="stringliteral">&quot; see http://biofab.org/data&quot;</span>);
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&amp;#39;s SequenceFeature for RDF and Json.">SequenceFeature</a> aSF = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html#a5dab616a55f915c1ebaa6b244fb48fb5" title="Builds a new SequenceFeature which SequenceAnnotations can point to.">createSequenceFeature</a>(
+<a name="l00075"></a>00075                 <span class="stringliteral">&quot;BBa_R0062&quot;</span>, <span class="comment">//displayID</span>
+<a name="l00076"></a>00076                 <span class="stringliteral">&quot;pLux&quot;</span>, <span class="comment">//name</span>
+<a name="l00077"></a>00077                 <span class="stringliteral">&quot;Activated by LuxR in concert with HSL&quot;</span>, <span class="comment">//description</span>
+<a name="l00078"></a>00078                 <span class="stringliteral">&quot;promoter&quot;</span> <span class="comment">//type</span>
+<a name="l00079"></a>00079                 );
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081         aLib = s.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html#ae387ca46de01accf2c313559d3783d1c" title="Link the SequenceFeature into a Library for organizing it as a list of features that can be re-used...">addSequenceFeatureToLibrary</a>(aSF, aLib);
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083         <span class="keywordflow">return</span> aLib;
+<a name="l00084"></a>00084     }
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 }
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -149,7 +171,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 15 2011 17:02:01 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 5 2011 01:39:47 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

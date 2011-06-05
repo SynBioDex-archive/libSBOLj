@@ -86,85 +86,85 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 <span class="keyword">import</span> com.clarkparsia.empire.annotation.RdfProperty;
 <a name="l00011"></a>00011 <span class="keyword">import</span> com.clarkparsia.empire.annotation.RdfsClass;
 <a name="l00012"></a>00012 <span class="keyword">import</span> com.clarkparsia.empire.annotation.SupportsRdfIdImpl;
-<a name="l00013"></a>00013 <span class="keyword">import</span> java.net.URI;
-<a name="l00014"></a>00014 <span class="keyword">import</span> java.util.Collection;
-<a name="l00015"></a>00015 <span class="keyword">import</span> java.util.HashSet;
-<a name="l00016"></a>00016 <span class="keyword">import</span> javax.persistence.CascadeType;
-<a name="l00017"></a>00017 <span class="keyword">import</span> javax.persistence.Entity;
-<a name="l00018"></a>00018 <span class="keyword">import</span> javax.persistence.FetchType;
-<a name="l00019"></a>00019 <span class="keyword">import</span> javax.persistence.OneToMany;
-<a name="l00020"></a>00020 <span class="keyword">import</span> javax.persistence.OneToOne;
-<a name="l00021"></a>00021 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
-<a name="l00022"></a>00022 
-<a name="l00034"></a>00034 @Namespaces({<span class="stringliteral">&quot;sbol&quot;</span>, <span class="stringliteral">&quot;http://sbols.org/sbol.owl#&quot;</span>})
-<a name="l00035"></a>00035 @RdfsClass(<span class="stringliteral">&quot;sbol:DnaComponent&quot;</span>)
-<a name="l00036"></a>00036 @Entity
-<a name="l00037"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">00037</a> <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a> <span class="keyword">implements</span> SupportsRdfId {
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039     @<a class="code" href="interfaceorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_1_1_skip_in_json.html" title="Customizes the Json writer to leave out fields annotated with .">SkipInJson</a>
-<a name="l00040"></a>00040     <span class="keyword">private</span> SupportsRdfId mIdSupport = <span class="keyword">new</span> SupportsRdfIdImpl();
-<a name="l00041"></a>00041     @RdfId(<span class="keyword">namespace</span> = <span class="stringliteral">&quot;http://sbols.org/sbol.owl#&quot;</span>)
-<a name="l00042"></a>00042     <span class="keyword">private</span> String id;
-<a name="l00043"></a>00043     @RdfProperty(<span class="stringliteral">&quot;sbol:displayId&quot;</span>)
-<a name="l00044"></a>00044     <span class="keyword">private</span> String displayId;
-<a name="l00045"></a>00045     @RdfProperty(<span class="stringliteral">&quot;sbol:name&quot;</span>)
-<a name="l00046"></a>00046     <span class="keyword">private</span> String name;
-<a name="l00047"></a>00047     @RdfProperty(<span class="stringliteral">&quot;sbol:description&quot;</span>)
-<a name="l00048"></a>00048     <span class="keyword">private</span> String description;
-<a name="l00049"></a>00049     @RdfProperty(<span class="stringliteral">&quot;sbol:isCircular&quot;</span>)
-<a name="l00050"></a>00050     <span class="keyword">private</span> <span class="keywordtype">boolean</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a38c303dc9a19b2789b973aea68824e1e" title="If circular the DnaSequence should be interpreted as circular.">isCircular</a>;
-<a name="l00051"></a>00051     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-<a name="l00052"></a>00052     @RdfProperty(<span class="stringliteral">&quot;rdf:type&quot;</span>)
-<a name="l00053"></a>00053     private Collection&lt;URI&gt; type = new HashSet&lt;URI&gt;();
-<a name="l00054"></a>00054     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-<a name="l00055"></a>00055     @RdfProperty(<span class="stringliteral">&quot;sbol:dnaSequence&quot;</span>)
-<a name="l00056"></a>00056     private DnaSequence dnaSequence;
-<a name="l00057"></a>00057     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-<a name="l00058"></a>00058     @RdfProperty(<span class="stringliteral">&quot;sbol:annotation&quot;</span>)
-<a name="l00059"></a>00059     private Collection&lt;SequenceAnnotation&gt; annotation = new HashSet&lt;SequenceAnnotation&gt;();
-<a name="l00060"></a>00060 
-<a name="l00068"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a0275a8297f992718e6fe7c8638c14010">00068</a>     public Collection&lt;SequenceAnnotation&gt; getAnnotations() {
-<a name="l00069"></a>00069         <span class="keywordflow">return</span> annotation;
-<a name="l00070"></a>00070     }
-<a name="l00071"></a>00071 
-<a name="l00078"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a642b2e7e1064f8f55a741e3d2945261f">00078</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a642b2e7e1064f8f55a741e3d2945261f" title="New position and direction of a SequenceFeature that describes the DNA sequence.">addAnnotation</a>(<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&amp;#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a> annotation) {
-<a name="l00079"></a>00079         <span class="keywordflow">if</span> (!getAnnotations().contains(annotation)) {
-<a name="l00080"></a>00080             getAnnotations().add(annotation);
-<a name="l00081"></a>00081             <span class="comment">//this.feature.add(feature);</span>
-<a name="l00082"></a>00082         }
-<a name="l00083"></a>00083     }
-<a name="l00084"></a>00084 
-<a name="l00093"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ac7feffb7a33f63504ff1f87f19e2d2d8">00093</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ac7feffb7a33f63504ff1f87f19e2d2d8" title="Text which is for users to read and interpret what this component is.">getDescription</a>() {
-<a name="l00094"></a>00094         <span class="keywordflow">return</span> description;
-<a name="l00095"></a>00095     }
-<a name="l00096"></a>00096 
-<a name="l00106"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a1d15d718177c4f5411ce6ab339889fd4">00106</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a1d15d718177c4f5411ce6ab339889fd4" title="Text which is written for users to read and interpret.">setDescription</a>(String description) {
-<a name="l00107"></a>00107         this.description = description;
-<a name="l00108"></a>00108     }
-<a name="l00109"></a>00109 
-<a name="l00114"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#aefe76199cb4d0096f487b280c411d843">00114</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#aefe76199cb4d0096f487b280c411d843" title="Identifier to display to users.">getDisplayId</a>() {
-<a name="l00115"></a>00115         <span class="keywordflow">return</span> displayId;
-<a name="l00116"></a>00116     }
-<a name="l00117"></a>00117 
-<a name="l00126"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a46b93a70e7bd612a7b429aac4829bc88">00126</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a46b93a70e7bd612a7b429aac4829bc88" title="Identifier that users will see as reference to the DNA construct.">setDisplayId</a>(String displayId) {
-<a name="l00127"></a>00127         this.displayId = displayId;
-<a name="l00128"></a>00128         setId(displayId);
-<a name="l00129"></a>00129     }
-<a name="l00130"></a>00130 
-<a name="l00136"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a596826001de0d3a682c2effa7fd6d50d">00136</a>     <span class="keyword">public</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&amp;#39;s DnaSequence for RDF and Json.">DnaSequence</a> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a596826001de0d3a682c2effa7fd6d50d" title="DNA sequence which this DnaComponent object represents.">getDnaSequence</a>() {
-<a name="l00137"></a>00137         <span class="keywordflow">return</span> dnaSequence;
-<a name="l00138"></a>00138     }
-<a name="l00139"></a>00139 
-<a name="l00144"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a2e16af0dece16378b9ee31d818bd8ef1">00144</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a2e16af0dece16378b9ee31d818bd8ef1" title="DNA sequence which this DnaComponent object represents.">setDnaSequence</a>(<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&amp;#39;s DnaSequence for RDF and Json.">DnaSequence</a> dnaSequence) {
-<a name="l00145"></a>00145         this.dnaSequence = dnaSequence;
-<a name="l00146"></a>00146     }
-<a name="l00147"></a>00147 
-<a name="l00152"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#aab219518f0eaf3db55b6a62ad6b49407">00152</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#aab219518f0eaf3db55b6a62ad6b49407" title="The ID portion of the URI which identifies this object.">getId</a>() {
-<a name="l00153"></a>00153         <span class="keywordflow">return</span> id;
-<a name="l00154"></a>00154     }
-<a name="l00155"></a>00155 
-<a name="l00160"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a0baf110c74c46a69b4c7a93bb68001b4">00160</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a0baf110c74c46a69b4c7a93bb68001b4" title="A unique identifier which will be used as the ID portion of the URI.">setId</a>(String <span class="keywordtype">id</span>) {
-<a name="l00161"></a>00161         this.<span class="keywordtype">id</span> = id;
+<a name="l00013"></a>00013 <span class="keyword">import</span> java.util.Collection;
+<a name="l00014"></a>00014 <span class="keyword">import</span> java.util.HashSet;
+<a name="l00015"></a>00015 <span class="keyword">import</span> javax.persistence.CascadeType;
+<a name="l00016"></a>00016 <span class="keyword">import</span> javax.persistence.Entity;
+<a name="l00017"></a>00017 <span class="keyword">import</span> javax.persistence.FetchType;
+<a name="l00018"></a>00018 <span class="keyword">import</span> javax.persistence.OneToMany;
+<a name="l00019"></a>00019 <span class="keyword">import</span> javax.persistence.OneToOne;
+<a name="l00020"></a>00020 <span class="keyword">import</span> org.sbolstandard.libSBOLj.IOTools.SkipInJson;
+<a name="l00021"></a>00021 
+<a name="l00033"></a>00033 @Namespaces({<span class="stringliteral">&quot;sbol&quot;</span>, <span class="stringliteral">&quot;http://sbols.org/sbol.owl#&quot;</span>})
+<a name="l00034"></a>00034 @RdfsClass(<span class="stringliteral">&quot;sbol:DnaComponent&quot;</span>)
+<a name="l00035"></a>00035 @Entity
+<a name="l00036"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">00036</a> <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a> <span class="keyword">implements</span> SupportsRdfId {
+<a name="l00037"></a>00037     
+<a name="l00038"></a>00038     <span class="keyword">static</span> <span class="keyword">final</span> String DATA_NAMESPACE_DEFAULT = <span class="stringliteral">&quot;http://sbols.org/data#&quot;</span>;
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040     @<a class="code" href="interfaceorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_i_o_tools_1_1_skip_in_json.html" title="Customizes the Json writer to leave out fields annotated with .">SkipInJson</a>
+<a name="l00041"></a>00041     <span class="keyword">private</span> SupportsRdfId mIdSupport = <span class="keyword">new</span> SupportsRdfIdImpl();
+<a name="l00042"></a>00042     @RdfId(<span class="keyword">namespace</span> = DATA_NAMESPACE_DEFAULT)
+<a name="l00043"></a>00043     <span class="keyword">private</span> String id;
+<a name="l00044"></a>00044     @RdfProperty(<span class="stringliteral">&quot;sbol:displayId&quot;</span>)
+<a name="l00045"></a>00045     <span class="keyword">private</span> String displayId;
+<a name="l00046"></a>00046     @RdfProperty(<span class="stringliteral">&quot;sbol:name&quot;</span>)
+<a name="l00047"></a>00047     <span class="keyword">private</span> String name;
+<a name="l00048"></a>00048     @RdfProperty(<span class="stringliteral">&quot;sbol:description&quot;</span>)
+<a name="l00049"></a>00049     <span class="keyword">private</span> String description;
+<a name="l00050"></a>00050     @RdfProperty(<span class="stringliteral">&quot;sbol:isCircular&quot;</span>)
+<a name="l00051"></a>00051     <span class="keyword">private</span> <span class="keywordtype">boolean</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a38c303dc9a19b2789b973aea68824e1e" title="If circular the DnaSequence should be interpreted as circular.">isCircular</a>;
+<a name="l00052"></a>00052     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+<a name="l00053"></a>00053     @RdfProperty(<span class="stringliteral">&quot;sbol:dnaSequence&quot;</span>)
+<a name="l00054"></a>00054     private <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&amp;#39;s DnaSequence for RDF and Json.">DnaSequence</a> dnaSequence;
+<a name="l00055"></a>00055     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+<a name="l00056"></a>00056     @RdfProperty(<span class="stringliteral">&quot;sbol:annotation&quot;</span>)
+<a name="l00057"></a>00057     private Collection&lt;SequenceAnnotation&gt; annotation = new HashSet&lt;SequenceAnnotation&gt;();
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059 
+<a name="l00067"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a0275a8297f992718e6fe7c8638c14010">00067</a>     public Collection&lt;SequenceAnnotation&gt; getAnnotations() {
+<a name="l00068"></a>00068         <span class="keywordflow">return</span> annotation;
+<a name="l00069"></a>00069     }
+<a name="l00070"></a>00070 
+<a name="l00077"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a642b2e7e1064f8f55a741e3d2945261f">00077</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a642b2e7e1064f8f55a741e3d2945261f" title="New position and direction of a SequenceFeature that describes the DNA sequence.">addAnnotation</a>(<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&amp;#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a> annotation) {
+<a name="l00078"></a>00078         <span class="keywordflow">if</span> (!getAnnotations().contains(annotation)) {
+<a name="l00079"></a>00079             getAnnotations().add(annotation);
+<a name="l00080"></a>00080             <span class="comment">//this.feature.add(feature);</span>
+<a name="l00081"></a>00081         }
+<a name="l00082"></a>00082     }
+<a name="l00083"></a>00083 
+<a name="l00092"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ac7feffb7a33f63504ff1f87f19e2d2d8">00092</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ac7feffb7a33f63504ff1f87f19e2d2d8" title="Text which is for users to read and interpret what this component is.">getDescription</a>() {
+<a name="l00093"></a>00093         <span class="keywordflow">return</span> description;
+<a name="l00094"></a>00094     }
+<a name="l00095"></a>00095 
+<a name="l00105"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a1d15d718177c4f5411ce6ab339889fd4">00105</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a1d15d718177c4f5411ce6ab339889fd4" title="Text which is written for users to read and interpret.">setDescription</a>(String description) {
+<a name="l00106"></a>00106         this.description = description;
+<a name="l00107"></a>00107     }
+<a name="l00108"></a>00108 
+<a name="l00113"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#aefe76199cb4d0096f487b280c411d843">00113</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#aefe76199cb4d0096f487b280c411d843" title="Identifier to display to users.">getDisplayId</a>() {
+<a name="l00114"></a>00114         <span class="keywordflow">return</span> displayId;
+<a name="l00115"></a>00115     }
+<a name="l00116"></a>00116 
+<a name="l00125"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a46b93a70e7bd612a7b429aac4829bc88">00125</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a46b93a70e7bd612a7b429aac4829bc88" title="Identifier that users will see as reference to the DNA construct.">setDisplayId</a>(String displayId) {
+<a name="l00126"></a>00126         this.displayId = displayId;
+<a name="l00127"></a>00127         this.generateId();
+<a name="l00128"></a>00128     }
+<a name="l00129"></a>00129 
+<a name="l00135"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a596826001de0d3a682c2effa7fd6d50d">00135</a>     <span class="keyword">public</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&amp;#39;s DnaSequence for RDF and Json.">DnaSequence</a> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a596826001de0d3a682c2effa7fd6d50d" title="DNA sequence which this DnaComponent object represents.">getDnaSequence</a>() {
+<a name="l00136"></a>00136         <span class="keywordflow">return</span> dnaSequence;
+<a name="l00137"></a>00137     }
+<a name="l00138"></a>00138 
+<a name="l00143"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a2e16af0dece16378b9ee31d818bd8ef1">00143</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a2e16af0dece16378b9ee31d818bd8ef1" title="DNA sequence which this DnaComponent object represents.">setDnaSequence</a>(<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&amp;#39;s DnaSequence for RDF and Json.">DnaSequence</a> dnaSequence) {
+<a name="l00144"></a>00144         this.dnaSequence = dnaSequence;
+<a name="l00145"></a>00145     }
+<a name="l00146"></a>00146 
+<a name="l00151"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#aab219518f0eaf3db55b6a62ad6b49407">00151</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#aab219518f0eaf3db55b6a62ad6b49407" title="The ID portion of the URI which identifies this object.">getId</a>() {
+<a name="l00152"></a>00152         <span class="keywordflow">return</span> id;
+<a name="l00153"></a>00153     }
+<a name="l00154"></a>00154 
+<a name="l00159"></a>00159     <span class="keyword">private</span> <span class="keywordtype">void</span> generateId() {
+<a name="l00160"></a>00160         String idString = this.getClass().toString()+getDisplayId();
+<a name="l00161"></a>00161         this.<span class="keywordtype">id</span> = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils.html" title="These utility methods calculate ID encodings.">IdentifierUtils</a>.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils.html#a3208b690b93a8287aeb551c699274213" title="Hashes the input String with SHA-1 into a Hex encoded String.">encryptSHA</a>(idString);
 <a name="l00162"></a>00162     }
 <a name="l00163"></a>00163 
 <a name="l00188"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a38c303dc9a19b2789b973aea68824e1e">00188</a>     <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a38c303dc9a19b2789b973aea68824e1e" title="If circular the DnaSequence should be interpreted as circular.">isCircular</a>() {
@@ -183,68 +183,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00223"></a>00223         this.name = name;
 <a name="l00224"></a>00224     }
 <a name="l00225"></a>00225 
-<a name="l00234"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a518b97368db3de477d5fb57150d8b711">00234</a>     <span class="keyword">public</span> Collection&lt;URI&gt; <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a518b97368db3de477d5fb57150d8b711" title="Sequence Ontology vocabulary provides a defined term for types of DNA components.">getTypes</a>() {
-<a name="l00235"></a>00235         <span class="keywordflow">return</span> type;
-<a name="l00236"></a>00236     }
-<a name="l00237"></a>00237 
-<a name="l00245"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a26d3aea2567e9235daef5a79a5e6a521">00245</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a26d3aea2567e9235daef5a79a5e6a521" title="Sequence Ontology vocabulary provides a defined term for types of DNA components.">addType</a>(URI type) {
-<a name="l00246"></a>00246         <span class="keywordflow">if</span> (!getTypes().contains(type)) {
-<a name="l00247"></a>00247             getTypes().add(type);
-<a name="l00248"></a>00248         <span class="comment">//this.type.add(type);</span>
-<a name="l00249"></a>00249         }
-<a name="l00250"></a>00250     }
-<a name="l00251"></a>00251 
-<a name="l00257"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a98d34c30847c78a8922be878a2fa4d49">00257</a>     <span class="keyword">public</span> RdfKey <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a98d34c30847c78a8922be878a2fa4d49" title="a com.clarkparsia.empire required RDF id.">getRdfId</a>() {
-<a name="l00258"></a>00258         <span class="keywordflow">return</span> mIdSupport.getRdfId();
-<a name="l00259"></a>00259     }
+<a name="l00231"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a98d34c30847c78a8922be878a2fa4d49">00231</a>     <span class="keyword">public</span> RdfKey <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a98d34c30847c78a8922be878a2fa4d49" title="a com.clarkparsia.empire required RDF id.">getRdfId</a>() {
+<a name="l00232"></a>00232         <span class="keywordflow">return</span> mIdSupport.getRdfId();
+<a name="l00233"></a>00233     }
+<a name="l00234"></a>00234 
+<a name="l00240"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#afe8d2a1ced8871ba217ddf364366da99">00240</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#afe8d2a1ced8871ba217ddf364366da99">setRdfId</a>(<span class="keyword">final</span> RdfKey <span class="keywordtype">id</span>) {
+<a name="l00241"></a>00241         mIdSupport.setRdfId(<span class="keywordtype">id</span>);
+<a name="l00242"></a>00242     }
+<a name="l00243"></a>00243 
+<a name="l00251"></a>00251     @Override
+<a name="l00252"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ae3ce8ca5a04e8966a9d2158aeeecfc16">00252</a>     <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ae3ce8ca5a04e8966a9d2158aeeecfc16" title="Checks whether the other object is an equivalent DnaComponent.">equals</a>(Object obj) {
+<a name="l00253"></a>00253         <span class="keywordflow">if</span> (obj == null) {
+<a name="l00254"></a>00254             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00255"></a>00255         }
+<a name="l00256"></a>00256         <span class="keywordflow">if</span> (obj == null || getClass() != obj.getClass()) {
+<a name="l00257"></a>00257             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00258"></a>00258         }
+<a name="l00259"></a>00259         <span class="keyword">final</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a> other = (<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a>) obj;
 <a name="l00260"></a>00260 
-<a name="l00266"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#afe8d2a1ced8871ba217ddf364366da99">00266</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#afe8d2a1ced8871ba217ddf364366da99">setRdfId</a>(<span class="keyword">final</span> RdfKey <span class="keywordtype">id</span>) {
-<a name="l00267"></a>00267         mIdSupport.setRdfId(<span class="keywordtype">id</span>);
-<a name="l00268"></a>00268     }
-<a name="l00269"></a>00269 
-<a name="l00278"></a>00278     @Override
-<a name="l00279"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ae3ce8ca5a04e8966a9d2158aeeecfc16">00279</a>     <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ae3ce8ca5a04e8966a9d2158aeeecfc16" title="Checks whether the other object is an equivalent DnaComponent.">equals</a>(Object obj) {
-<a name="l00280"></a>00280         <span class="keywordflow">if</span> (obj == null) {
-<a name="l00281"></a>00281             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00261"></a>00261         <span class="keywordflow">if</span> (getRdfId() != null) {
+<a name="l00262"></a>00262             <span class="keywordflow">return</span> getRdfId().<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ae3ce8ca5a04e8966a9d2158aeeecfc16" title="Checks whether the other object is an equivalent DnaComponent.">equals</a>(other.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a98d34c30847c78a8922be878a2fa4d49" title="a com.clarkparsia.empire required RDF id.">getRdfId</a>());
+<a name="l00263"></a>00263         } <span class="keywordflow">else</span> {
+<a name="l00264"></a>00264             <span class="keywordflow">if</span> ((this.displayId == null) ? (other.displayId != null) : !this.displayId.equals(other.displayId)) {
+<a name="l00265"></a>00265                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00266"></a>00266             }
+<a name="l00267"></a>00267             <span class="keywordflow">if</span> ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+<a name="l00268"></a>00268                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00269"></a>00269             }
+<a name="l00270"></a>00270             <span class="keywordflow">if</span> ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
+<a name="l00271"></a>00271                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00272"></a>00272             }
+<a name="l00273"></a>00273             <span class="keywordflow">if</span> (this.isCircular != other.isCircular) {
+<a name="l00274"></a>00274                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00275"></a>00275             }
+<a name="l00276"></a>00276             <span class="keywordflow">if</span> (this.dnaSequence != other.dnaSequence &amp;&amp; (<span class="keyword">this</span>.dnaSequence == null || !<span class="keyword">this</span>.dnaSequence.equals(other.dnaSequence))) {
+<a name="l00277"></a>00277                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00278"></a>00278             }
+<a name="l00279"></a>00279             <span class="keywordflow">if</span> (this.annotation != other.annotation &amp;&amp; (<span class="keyword">this</span>.annotation == null || !<span class="keyword">this</span>.annotation.equals(other.annotation))) {
+<a name="l00280"></a>00280                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00281"></a>00281             }
 <a name="l00282"></a>00282         }
-<a name="l00283"></a>00283         <span class="keywordflow">if</span> (obj == null || getClass() != obj.getClass()) {
-<a name="l00284"></a>00284             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00285"></a>00285         }
-<a name="l00286"></a>00286         <span class="keyword">final</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a> other = (<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a>) obj;
-<a name="l00287"></a>00287 
-<a name="l00288"></a>00288         <span class="keywordflow">if</span> (getRdfId() != null) {
-<a name="l00289"></a>00289             <span class="keywordflow">return</span> getRdfId().<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#ae3ce8ca5a04e8966a9d2158aeeecfc16" title="Checks whether the other object is an equivalent DnaComponent.">equals</a>(other.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html#a98d34c30847c78a8922be878a2fa4d49" title="a com.clarkparsia.empire required RDF id.">getRdfId</a>());
-<a name="l00290"></a>00290         } <span class="keywordflow">else</span> {
-<a name="l00291"></a>00291             <span class="keywordflow">if</span> ((this.displayId == null) ? (other.displayId != null) : !this.displayId.equals(other.displayId)) {
-<a name="l00292"></a>00292                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00293"></a>00293             }
-<a name="l00294"></a>00294             <span class="keywordflow">if</span> ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
-<a name="l00295"></a>00295                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00296"></a>00296             }
-<a name="l00297"></a>00297             <span class="keywordflow">if</span> ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
-<a name="l00298"></a>00298                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00299"></a>00299             }
-<a name="l00300"></a>00300             <span class="keywordflow">if</span> (this.isCircular != other.isCircular) {
-<a name="l00301"></a>00301                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00302"></a>00302             }
-<a name="l00303"></a>00303             <span class="keywordflow">if</span> (this.type != other.type &amp;&amp; (<span class="keyword">this</span>.type == null || !<span class="keyword">this</span>.type.equals(other.type))) {
-<a name="l00304"></a>00304                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00305"></a>00305             }
-<a name="l00306"></a>00306             <span class="keywordflow">if</span> (this.dnaSequence != other.dnaSequence &amp;&amp; (<span class="keyword">this</span>.dnaSequence == null || !<span class="keyword">this</span>.dnaSequence.equals(other.dnaSequence))) {
-<a name="l00307"></a>00307                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00308"></a>00308             }
-<a name="l00309"></a>00309             <span class="keywordflow">if</span> (this.annotation != other.annotation &amp;&amp; (<span class="keyword">this</span>.annotation == null || !<span class="keyword">this</span>.annotation.equals(other.annotation))) {
-<a name="l00310"></a>00310                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00311"></a>00311             }
-<a name="l00312"></a>00312         }
-<a name="l00313"></a>00313         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00314"></a>00314     }
-<a name="l00315"></a>00315 
-<a name="l00316"></a>00316     @Override
-<a name="l00317"></a>00317     <span class="keyword">public</span> <span class="keywordtype">int</span> hashCode() {
-<a name="l00318"></a>00318         <span class="keywordflow">return</span> getRdfId() == null ? 0 : getRdfId().value().hashCode();
-<a name="l00319"></a>00319     }
-<a name="l00320"></a>00320 }
+<a name="l00283"></a>00283         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00284"></a>00284     }
+<a name="l00285"></a>00285 
+<a name="l00286"></a>00286     @Override
+<a name="l00287"></a>00287     <span class="keyword">public</span> <span class="keywordtype">int</span> hashCode() {
+<a name="l00288"></a>00288         <span class="keywordtype">int</span> hash = 1;
+<a name="l00289"></a>00289         hash = hash * 31 + this.getClass().hashCode();
+<a name="l00290"></a>00290         hash = hash * 31 + (displayId == null ? 0 : displayId.hashCode());
+<a name="l00291"></a>00291         hash = hash * 31 + (name == null ? 0: name.hashCode());
+<a name="l00292"></a>00292         hash = hash * 31 + (annotation == null ? 0 : annotation.hashCode());
+<a name="l00293"></a>00293         hash = hash * 31 + (dnaSequence == null ? 0 : dnaSequence.hashCode());
+<a name="l00294"></a>00294         
+<a name="l00295"></a>00295         <span class="comment">//int hash = getRdfId() == null ? 0 : getRdfId().value().hashCode();</span>
+<a name="l00296"></a>00296         <span class="keywordflow">return</span> hash;
+<a name="l00297"></a>00297     }
+<a name="l00298"></a>00298 }
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -261,7 +255,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 15 2011 20:00:17 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 5 2011 01:39:47 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

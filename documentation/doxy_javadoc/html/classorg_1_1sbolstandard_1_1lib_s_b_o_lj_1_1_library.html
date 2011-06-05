@@ -82,7 +82,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pac-methods">Package Functions</a>  </div>
+<a href="#pac-methods">Package Functions</a> &#124;
+<a href="#pac-static-attribs">Static Package Attributes</a>  </div>
   <div class="headertitle">
 <h1>Library Class Reference</h1>  </div>
 </div>
@@ -113,8 +114,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Descriptions for DNA component sequences.  <a href="#a6e4112a6cec45766efb5ce852f1e764e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#aab219518f0eaf3db55b6a62ad6b49407">getId</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The ID portion of the URI which identifies this object.  <a href="#aab219518f0eaf3db55b6a62ad6b49407"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a0baf110c74c46a69b4c7a93bb68001b4">setId</a> (String id)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A unique identifier which will be used as the ID portion of the URI.  <a href="#a0baf110c74c46a69b4c7a93bb68001b4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a78ee178b6a73658d65ca60da4d1e6683">getName</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Recognizable human identifier, it is often ambiguous.  <a href="#a78ee178b6a73658d65ca60da4d1e6683"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#ad737b36b74be994e0d8420797ed72f78">setName</a> (String name)</td></tr>
@@ -130,6 +129,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 Package Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a8606f263fb4a3f3d9d7265cf1d1095d3">addFeature</a> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html">SequenceFeature</a> feature)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defined DNA segment for engineering biological systems, which belongs to this <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a>.  <a href="#a8606f263fb4a3f3d9d7265cf1d1095d3"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="pac-static-attribs"></a>
+Static Package Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20b86331ad9418b0c6b737a193b5b051"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::Library::DATA_NAMESPACE_DEFAULT" ref="a20b86331ad9418b0c6b737a193b5b051" args="" -->
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>DATA_NAMESPACE_DEFAULT</b> = &quot;http://sbols.org/data#&quot;</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>The SBOL data model's <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> for RDF and Json. </p>
@@ -164,7 +167,7 @@ Package Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00089">89</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00091">91</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -192,7 +195,7 @@ Package Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00161">161</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00163">163</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -214,7 +217,7 @@ Package Functions</h2></td></tr>
 <p>For example, standard biological parts, BioBricks, oligo components, vector plasmids, genomes, or any other DNA segment of interest as a building block of biological systems.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>0 or more <code><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a></code>[s] that are in this <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00076">76</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00078">78</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -241,7 +244,7 @@ Package Functions</h2></td></tr>
 <p>Informative description which allows human users to interpret the likely members of this <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a>. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Human readable text describing the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00107">107</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00109">109</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -262,7 +265,7 @@ Package Functions</h2></td></tr>
 <p>Identifier to display to users. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>a human readable identifier </dd></dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00129">129</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00131">131</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -284,7 +287,7 @@ Package Functions</h2></td></tr>
 <p>For example, pBAD, B0015, BioBrick Scar, Insertion Element, "Craig Venter's name". </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>0 or more <code>SequenceFeatures</code>[s] that are in this <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00148">148</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00150">150</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -305,7 +308,7 @@ Package Functions</h2></td></tr>
 <p>The ID portion of the URI which identifies this object. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the RDF id for the object </dd></dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00171">171</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00173">173</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -327,7 +330,7 @@ Package Functions</h2></td></tr>
 <p>(eg. Mike's Arabidopsis Project A; Sleight, et al. (2010) J.Bioeng; BBF RFC 10 features; Bookmarked Parts). </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>its name, commonly used to refer to this <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&#39;s Library for RDF and Json.">Library</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00188">188</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00192">192</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -349,7 +352,7 @@ Package Functions</h2></td></tr>
 <p>Not sure what the difference is in empire compared to <a class="el" href="">id</a> </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the RdfId component of the URI for the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00207">207</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00211">211</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -381,7 +384,7 @@ Package Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00121">121</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00123">123</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -408,34 +411,7 @@ Package Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00137">137</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0baf110c74c46a69b4c7a93bb68001b4"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::Library::setId" ref="a0baf110c74c46a69b4c7a93bb68001b4" args="(String id)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setId </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>A unique identifier which will be used as the ID portion of the URI. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00179">179</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00139">139</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -463,7 +439,7 @@ Package Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00198">198</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00202">202</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -488,7 +464,7 @@ Package Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_library_8java_source.html#l00215">215</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
+<p>Definition at line <a class="el" href="_library_8java_source.html#l00219">219</a> of file <a class="el" href="_library_8java_source.html">Library.java</a>.</p>
 
 </div>
 </div>
@@ -510,7 +486,7 @@ Package Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 15 2011 20:00:17 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 5 2011 01:39:47 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

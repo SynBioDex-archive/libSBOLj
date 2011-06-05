@@ -81,7 +81,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pac-static-attribs">Static Package Attributes</a>  </div>
   <div class="headertitle">
 <h1>SequenceAnnotation Class Reference</h1>  </div>
 </div>
@@ -102,8 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Describe the segments of DNA sequence from start to stop on the strand.  <a href="#a6e4112a6cec45766efb5ce852f1e764e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html#aab219518f0eaf3db55b6a62ad6b49407">getId</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The ID portion of the URI which identifies this object.  <a href="#aab219518f0eaf3db55b6a62ad6b49407"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html#acc7f1b4283f0e5a9a502a64403d2e625">setId</a> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">DnaComponent</a> parentDnaComp)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an ID based on a hash of the start,stop,strand,and parent DnaCompoment.  <a href="#acc7f1b4283f0e5a9a502a64403d2e625"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html#a6773fea6fb2901722a2fdf2ea2da6d70">generateId</a> (<a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">DnaComponent</a> parentDnaComp)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an ID based on a hash of the start,stop,strand,and parent DnaCompoment.  <a href="#a6773fea6fb2901722a2fdf2ea2da6d70"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html#a1408176a248f41dbe8735bd3009e0cf5">getStart</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">First position of the Sequence Feature being annotated.  <a href="#a1408176a248f41dbe8735bd3009e0cf5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html#a95797ac4da76f48db6f9da6d5c1921cb">setStart</a> (int start)</td></tr>
@@ -122,6 +123,10 @@ Public Member Functions</h2></td></tr>
 boolean&#160;</td><td class="memItemRight" valign="bottom"><b>equals</b> (Object obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a077e18fe97323c7194e2665ffc766399"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SequenceAnnotation::hashCode" ref="a077e18fe97323c7194e2665ffc766399" args="()" -->
 int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></tr>
+<tr><td colspan="2"><h2><a name="pac-static-attribs"></a>
+Static Package Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20b86331ad9418b0c6b737a193b5b051"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SequenceAnnotation::DATA_NAMESPACE_DEFAULT" ref="a20b86331ad9418b0c6b737a193b5b051" args="" -->
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>DATA_NAMESPACE_DEFAULT</b> = &quot;http://sbols.org/data#&quot;</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>The SBOL data model's <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a> for RDF and Json. </p>
@@ -129,7 +134,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <dl class="author"><dt><b>Author:</b></dt><dd>mgaldzic </dd></dl>
 <dl class="since"><dt><b>Since:</b></dt><dd>0.1, 02/08/2011 </dd></dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00042">42</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00039">39</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a8606f263fb4a3f3d9d7265cf1d1095d3"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SequenceAnnotation::addFeature" ref="a8606f263fb4a3f3d9d7265cf1d1095d3" args="(SequenceFeature feature)" -->
 <div class="memitem">
@@ -155,7 +160,36 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00067">67</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00065">65</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6773fea6fb2901722a2fdf2ea2da6d70"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SequenceAnnotation::generateId" ref="a6773fea6fb2901722a2fdf2ea2da6d70" args="(DnaComponent parentDnaComp)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void generateId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">DnaComponent</a>&#160;</td>
+          <td class="paramname"><em>parentDnaComp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Creates an ID based on a hash of the start,stop,strand,and parent DnaCompoment. </p>
+<p>Uses sha-256 to hash the information elements. The parentDnaComponent is used to make sure the hash is unique for any given Sequenceannotation of a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a>. This also enforces the use of one <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a> for a single position with strand.</p>
+<p>NOTE: The implication is that there should be a one-to-many relationship for SequenceFeatures. That way multiple features can be placed in one position and orientation. IDENTIFY THE USE CASE THAT NECESSITATES THIS.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parentDnaComp</td><td>the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> that this annotation is for </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00109">109</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -174,10 +208,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <div class="memdoc">
 
 <p>Describe the segments of DNA sequence from start to stop on the strand. </p>
-<p>The feature has its own displayID, name, description, type, and sequence. Most commonly it is used to describe the sub-sequences of a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a>. Features can be re-used, whenever the SequenceFeature.equals NOTE: the feature could be used as a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> itself, but this is not implemented in libSBOLj, yet. SbolService does not yet check if an .equals feature exists already. </p>
+<p>The feature has its own displayID, name, description, type, and sequence. Most commonly it is used to describe the sub-sequences of a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a>. Features can be re-used, whenever the SequenceFeature.equals NOTE: the feature could be used as a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> itself, but this is not implemented in libSBOLj, yet. <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html" title="SbolService provides the methods for making new SBOL objects and adding SBOL data.">SbolService</a> does not yet check if an .equals feature exists already. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>collection of any features at this location </dd></dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00085">85</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00083">83</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -198,7 +232,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <p>The ID portion of the URI which identifies this object. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the RDF id for the object </dd></dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00093">93</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00091">91</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -217,7 +251,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <div class="memdoc">
 <dl class="return"><dt><b>Returns:</b></dt><dd></dd></dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00202">202</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00192">192</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -239,7 +273,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <p>Start coordinate is in terms of the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&#39;s DnaSequence for RDF and Json.">DnaSequence</a> of the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> annotated.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>positive integer coordinate of first base of the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&#39;s SequenceFeature for RDF and Json.">SequenceFeature</a>. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00133">133</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00123">123</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -261,7 +295,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <p>Stop coordinate is in terms of the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&#39;s DnaSequence for RDF and Json.">DnaSequence</a> of the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> annotated.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>positive integer coordinate of last base of the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&#39;s SequenceFeature for RDF and Json.">SequenceFeature</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00155">155</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00145">145</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -283,36 +317,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <p>Sequences used are by convention assumed 5' to 3', therefore the <code>+</code> strand is 5' to 3' and the <code>-</code> strand is 3' to 5'.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd><code>+</code> if feature aligns in same direction as <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a>, <code>-</code> if feature aligns in opposite direction as <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a>. </dd></dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00178">178</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="acc7f1b4283f0e5a9a502a64403d2e625"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::SequenceAnnotation::setId" ref="acc7f1b4283f0e5a9a502a64403d2e625" args="(DnaComponent parentDnaComp)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void setId </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html">DnaComponent</a>&#160;</td>
-          <td class="paramname"><em>parentDnaComp</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Creates an ID based on a hash of the start,stop,strand,and parent DnaCompoment. </p>
-<p>Uses sha-256 to hash the information elements. The parentDnaComponent is used to make sure the hash is unique for any given Sequenceannotation of a <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a>. This also enforces the use of one <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_annotation.html" title="The SBOL data model&#39;s SequenceAnnotation for RDF and Json.">SequenceAnnotation</a> for a single position with strand.</p>
-<p>NOTE: The implication is that there should be a one-to-many relationship for SequenceFeatures. That way multiple features can be placed in one position and orientation. IDENTIFY THE USE CASE THAT NECESSITATES THIS.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">parentDnaComp</td><td>the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> that this annotation is for </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00111">111</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00168">168</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -337,7 +342,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00210">210</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00200">200</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -365,7 +370,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00144">144</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00134">134</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -392,7 +397,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00164">164</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00154">154</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -420,7 +425,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00193">193</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
+<p>Definition at line <a class="el" href="_sequence_annotation_8java_source.html#l00183">183</a> of file <a class="el" href="_sequence_annotation_8java_source.html">SequenceAnnotation.java</a>.</p>
 
 </div>
 </div>
@@ -442,7 +447,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 15 2011 20:00:17 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 5 2011 01:39:47 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

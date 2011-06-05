@@ -81,7 +81,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pac-static-attribs">Static Package Attributes</a>  </div>
   <div class="headertitle">
 <h1>DnaSequence Class Reference</h1>  </div>
 </div>
@@ -113,6 +114,10 @@ Public Member Functions</h2></td></tr>
 boolean&#160;</td><td class="memItemRight" valign="bottom"><b>equals</b> (Object obj)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a077e18fe97323c7194e2665ffc766399"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::DnaSequence::hashCode" ref="a077e18fe97323c7194e2665ffc766399" args="()" -->
 int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></tr>
+<tr><td colspan="2"><h2><a name="pac-static-attribs"></a>
+Static Package Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20b86331ad9418b0c6b737a193b5b051"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::DnaSequence::DATA_NAMESPACE_DEFAULT" ref="a20b86331ad9418b0c6b737a193b5b051" args="" -->
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>DATA_NAMESPACE_DEFAULT</b> = &quot;http://sbols.org/data#&quot;</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>The SBOL data model's <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&#39;s DnaSequence for RDF and Json.">DnaSequence</a> for RDF and Json. </p>
@@ -120,7 +125,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <dl class="author"><dt><b>Author:</b></dt><dd>mgaldzic </dd></dl>
 <dl class="since"><dt><b>Since:</b></dt><dd>0.1, 02/08/2011 </dd></dl>
 
-<p>Definition at line <a class="el" href="_dna_sequence_8java_source.html#l00036">36</a> of file <a class="el" href="_dna_sequence_8java_source.html">DnaSequence.java</a>.</p>
+<p>Definition at line <a class="el" href="_dna_sequence_8java_source.html#l00033">33</a> of file <a class="el" href="_dna_sequence_8java_source.html">DnaSequence.java</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aa65410fe45bf6277117ef6a880e6ddce"></a><!-- doxytag: member="org::sbolstandard::libSBOLj::DnaSequence::getDnaRef" ref="aa65410fe45bf6277117ef6a880e6ddce" args="()" -->
 <div class="memitem">
@@ -137,7 +142,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <div class="memdoc">
 
 <p>The URI which specifies the DNA sequence at another location. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>currently this is not supported by a test case where both the String <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&#39;s DnaSequence for RDF and Json.">DnaSequence</a> and DnaRef are both specified. Only one should exist according to the spec. The need for this field may be redundant with the URI for the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&#39;s DnaSequence for RDF and Json.">DnaSequence</a> object (id). Should be re-examined when looking at use cases. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>currently this is not supported by a test case where both the String <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&#39;s DnaSequence for RDF and Json.">DnaSequence</a> and DnaRef are both specified. Only one should exist according to the spec. The need for this field may be redundant with the URI for the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence.html" title="The SBOL data model&#39;s DnaSequence for RDF and Json.">DnaSequence</a> object (id). Should be re-examined when looking at use cases. </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd></dd></dl>
 
 <p>Definition at line <a class="el" href="_dna_sequence_8java_source.html#l00055">55</a> of file <a class="el" href="_dna_sequence_8java_source.html">DnaSequence.java</a>.</p>
@@ -205,7 +210,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 <p>Not sure what the difference is in empire compared to <a class="el" href="">id</a> </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the RdfId component of the URI for the <a class="el" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&#39;s DnaComponent for RDF and Json.">DnaComponent</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_dna_sequence_8java_source.html#l00114">114</a> of file <a class="el" href="_dna_sequence_8java_source.html">DnaSequence.java</a>.</p>
+<p>Definition at line <a class="el" href="_dna_sequence_8java_source.html#l00115">115</a> of file <a class="el" href="_dna_sequence_8java_source.html">DnaSequence.java</a>.</p>
 
 </div>
 </div>
@@ -285,7 +290,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_dna_sequence_8java_source.html#l00122">122</a> of file <a class="el" href="_dna_sequence_8java_source.html">DnaSequence.java</a>.</p>
+<p>Definition at line <a class="el" href="_dna_sequence_8java_source.html#l00123">123</a> of file <a class="el" href="_dna_sequence_8java_source.html">DnaSequence.java</a>.</p>
 
 </div>
 </div>
@@ -307,7 +312,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> ()</td></
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 15 2011 20:00:17 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 5 2011 01:39:47 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

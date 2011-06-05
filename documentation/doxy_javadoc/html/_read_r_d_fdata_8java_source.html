@@ -81,32 +81,65 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00005"></a>00005 
 <a name="l00006"></a>00006 <span class="keyword">package </span>libSBOLjUseExample;
 <a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="keyword">import</span> java.util.logging.Level;
-<a name="l00009"></a>00009 <span class="keyword">import</span> java.util.logging.Logger;
-<a name="l00010"></a>00010 <span class="keyword">import</span> org.biojava.bio.BioException;
-<a name="l00011"></a>00011 <span class="keyword">import</span> org.sbolstandard.libSBOLj.Library;
-<a name="l00012"></a>00012 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SBOLservice;
-<a name="l00013"></a>00013 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SBOLutil;
-<a name="l00014"></a>00014 
-<a name="l00020"></a><a class="code" href="classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata.html">00020</a> <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata.html" title="See Tutorial Example B.">ReadRDFdata</a> {
-<a name="l00021"></a>00021     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> main(String[] args) {
-<a name="l00022"></a>00022         <span class="keywordflow">try</span> {
-<a name="l00023"></a>00023             read();
-<a name="l00024"></a>00024         } <span class="keywordflow">catch</span> (BioException ex) {
-<a name="l00025"></a>00025             Logger.getLogger(<a class="code" href="classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata.html" title="See Tutorial Example B.">ReadRDFdata</a>.class.getName()).log(Level.SEVERE, null, ex);
-<a name="l00026"></a>00026         }
-<a name="l00027"></a>00027     }
-<a name="l00028"></a>00028     <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> read()<span class="keywordflow">throws</span> BioException{
-<a name="l00029"></a>00029         String rdfString = <a class="code" href="classlib_s_b_o_lj_use_example_1_1_read_gen_bank_file.html" title="See Tutorial Example A.">ReadGenBankFile</a>.read();
-<a name="l00030"></a>00030         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lservice.html" title="SBOLservice provides the methods for making new SBOL objects and adding SBOL data.">SBOLservice</a> aS = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">SBOLutil</a>.fromRDF(rdfString);
-<a name="l00031"></a>00031         
-<a name="l00032"></a>00032         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> aLib = aS.getLibrary(<span class="stringliteral">&quot;BioFabLib_1&quot;</span>);
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034         Logger.getLogger(<span class="stringliteral">&quot;DnaComponent Name&quot;</span>).log(Level.INFO, aLib.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a45382b83b645ea4b89393c96023c54ba" title="Elements that are intended as engineering components in synthetic biology.">getComponents</a>().iterator().next().getName());
-<a name="l00035"></a>00035         <span class="keywordflow">return</span> aLib;
-<a name="l00036"></a>00036     }
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038 }
+<a name="l00008"></a>00008 <span class="keyword">import</span> java.io.FileNotFoundException;
+<a name="l00009"></a>00009 <span class="keyword">import</span> java.util.logging.Level;
+<a name="l00010"></a>00010 <span class="keyword">import</span> java.util.logging.Logger;
+<a name="l00011"></a>00011 <span class="keyword">import</span> org.biojava.bio.BioException;
+<a name="l00012"></a>00012 <span class="keyword">import</span> org.sbolstandard.libSBOLj.Library;
+<a name="l00013"></a>00013 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SbolService;
+<a name="l00014"></a>00014 <span class="keyword">import</span> org.sbolstandard.libSBOLj.IOTools;
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 
+<a name="l00022"></a><a class="code" href="classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata.html">00022</a> <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata.html" title="See Tutorial Example B.">ReadRDFdata</a> {
+<a name="l00023"></a>00023     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> main(String[] args) <span class="keywordflow">throws</span> FileNotFoundException {
+<a name="l00024"></a>00024         <span class="keywordflow">try</span> {
+<a name="l00025"></a>00025             <span class="comment">//readGenBankRoundTrip();</span>
+<a name="l00026"></a>00026             readRdfString();
+<a name="l00027"></a>00027             <span class="comment">//readRdfFile(&quot;test\\test_files\\test_file.rdf&quot;);</span>
+<a name="l00028"></a>00028             readRdfFile(<span class="stringliteral">&quot;test\\test_files\\testFile1.rdf&quot;</span>);
+<a name="l00029"></a>00029         } <span class="keywordflow">catch</span> (BioException ex) {
+<a name="l00030"></a>00030             Logger.getLogger(<a class="code" href="classlib_s_b_o_lj_use_example_1_1_read_r_d_fdata.html" title="See Tutorial Example B.">ReadRDFdata</a>.class.getName()).log(Level.SEVERE, null, ex);
+<a name="l00031"></a>00031         }
+<a name="l00032"></a>00032     }
+<a name="l00033"></a>00033     <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> readRdfString() <span class="keywordflow">throws</span> BioException{
+<a name="l00034"></a>00034         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> aLib = <span class="keyword">new</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a>();
+<a name="l00035"></a>00035         String newRdfString = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_i_o_tools.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">IOTools</a>.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_i_o_tools.html#a25d16649fdc5acaee48925e3139362bb" title="Writes a RDF serialization of a Library.">toRdfXml</a>(<a class="code" href="classlib_s_b_o_lj_use_example_1_1_create_new_library__constructors.html" title="See Tutorial Example C.">CreateNewLibrary_constructors</a>.createSfLib());
+<a name="l00036"></a>00036         FileUtil.writeFile(<span class="stringliteral">&quot;test\\test_files\\test_file.rdf&quot;</span>, newRdfString);
+<a name="l00037"></a>00037         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html" title="SbolService provides the methods for making new SBOL objects and adding SBOL data.">SbolService</a> aS = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_i_o_tools.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">IOTools</a>.fromRdfXml(newRdfString);
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039         aLib =aS.getLibrary();
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041         Logger.getLogger(<span class="stringliteral">&quot;DnaComponent Name pre&quot;</span>).log(Level.INFO, aLib.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a6e4112a6cec45766efb5ce852f1e764e" title="Descriptions for DNA component sequences.">getFeatures</a>().iterator().next().getName());
+<a name="l00042"></a>00042         Logger.getLogger(<span class="stringliteral">&quot;Library Name pre&quot;</span>).log(Level.INFO, aLib.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a78ee178b6a73658d65ca60da4d1e6683" title="Recognizable human identifier, it is often ambiguous.">getName</a>());
+<a name="l00043"></a>00043         
+<a name="l00044"></a>00044         <span class="keywordflow">return</span> aLib;
+<a name="l00045"></a>00045     }
+<a name="l00046"></a>00046     <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> readRdfFile(String path)<span class="keywordflow">throws</span> BioException, FileNotFoundException{
+<a name="l00047"></a>00047         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> aLib = <span class="keyword">new</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a>();
+<a name="l00048"></a>00048         String aRdfFileString = FileUtil.readFile(path);
+<a name="l00049"></a>00049         <span class="comment">//System.out.println(&quot;file: &quot;+ aRdfFileString);</span>
+<a name="l00050"></a>00050         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html" title="SbolService provides the methods for making new SBOL objects and adding SBOL data.">SbolService</a> aS = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_i_o_tools.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">IOTools</a>.fromRdfXml(aRdfFileString);
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052         aLib = aS.getLibrary();
+<a name="l00053"></a>00053         
+<a name="l00054"></a>00054         <span class="comment">//Logger.getLogger(&quot;DnaComponent Name&quot;).log(Level.INFO, aLib.getComponents().iterator().next().getName());</span>
+<a name="l00055"></a>00055         Logger.getLogger(<span class="stringliteral">&quot;s:&quot;</span>).log(Level.INFO, <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_i_o_tools.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">IOTools</a>.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_i_o_tools.html#a25d16649fdc5acaee48925e3139362bb" title="Writes a RDF serialization of a Library.">toRdfXml</a>(aLib));
+<a name="l00056"></a>00056         Logger.getLogger(<span class="stringliteral">&quot;Library Name&quot;</span>).log(Level.INFO, aLib.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a78ee178b6a73658d65ca60da4d1e6683" title="Recognizable human identifier, it is often ambiguous.">getName</a>());
+<a name="l00057"></a>00057         Logger.getLogger(<span class="stringliteral">&quot;SequenceFeature Name&quot;</span>).log(Level.INFO, aLib.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a6e4112a6cec45766efb5ce852f1e764e" title="Descriptions for DNA component sequences.">getFeatures</a>().iterator().next().getName());
+<a name="l00058"></a>00058       <span class="keywordflow">return</span> aLib;
+<a name="l00059"></a>00059     }
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061     <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> readGenBankRoundTrip()<span class="keywordflow">throws</span> BioException{
+<a name="l00062"></a>00062         String rdfString = <a class="code" href="classlib_s_b_o_lj_use_example_1_1_read_gen_bank_file.html" title="See Tutorial Example A.">ReadGenBankFile</a>.read();
+<a name="l00063"></a>00063         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sbol_service.html" title="SbolService provides the methods for making new SBOL objects and adding SBOL data.">SbolService</a> aS = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_i_o_tools.html" title="SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj...">IOTools</a>.fromRdfXml(rdfString);
+<a name="l00064"></a>00064         
+<a name="l00065"></a>00065         <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> aLib = aS.getLibrary();
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067         Logger.getLogger(<span class="stringliteral">&quot;DnaComponent Name&quot;</span>).log(Level.INFO, aLib.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a45382b83b645ea4b89393c96023c54ba" title="Elements that are intended as engineering components in synthetic biology.">getComponents</a>().iterator().next().getName());
+<a name="l00068"></a>00068         <span class="keywordflow">return</span> aLib;
+<a name="l00069"></a>00069     }
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 }
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -123,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 15 2011 17:02:01 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 5 2011 01:39:47 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

@@ -92,127 +92,143 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00016"></a>00016 <span class="keyword">import</span> javax.persistence.Entity;
 <a name="l00017"></a>00017 <span class="keyword">import</span> javax.persistence.FetchType;
 <a name="l00018"></a>00018 <span class="keyword">import</span> javax.persistence.OneToMany;
-<a name="l00019"></a>00019 <span class="keyword">import</span> org.sbolstandard.libSBOLj.SBOLutil.SkipInJson;
+<a name="l00019"></a>00019 <span class="keyword">import</span> org.sbolstandard.libSBOLj.IOTools.SkipInJson;
 <a name="l00020"></a>00020 
 <a name="l00044"></a>00044 @Namespaces({<span class="stringliteral">&quot;sbol&quot;</span>, <span class="stringliteral">&quot;http://sbols.org/sbol.owl#&quot;</span>})
 <a name="l00045"></a>00045 @RdfsClass(<span class="stringliteral">&quot;sbol:Library&quot;</span>)
 <a name="l00046"></a>00046 @Entity
 <a name="l00047"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html">00047</a> <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html" title="The SBOL data model&amp;#39;s Library for RDF and Json.">Library</a> <span class="keyword">implements</span> SupportsRdfId {
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049     @<a class="code" href="interfaceorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_s_b_o_lutil_1_1_skip_in_json.html" title="Customizes the Json writer to leave out fields annotated with .">SkipInJson</a>
-<a name="l00050"></a>00050     <span class="keyword">private</span> SupportsRdfId mIdSupport = <span class="keyword">new</span> SupportsRdfIdImpl();
-<a name="l00051"></a>00051     @RdfId(<span class="keyword">namespace</span> = <span class="stringliteral">&quot;http://sbols.org/sbol.owl#&quot;</span>)
-<a name="l00052"></a>00052     <span class="keyword">private</span> String id;
-<a name="l00053"></a>00053     
-<a name="l00054"></a>00054     @RdfProperty(<span class="stringliteral">&quot;sbol:displayId&quot;</span>)
-<a name="l00055"></a>00055     <span class="keyword">private</span> String displayId;
-<a name="l00056"></a>00056     @RdfProperty(<span class="stringliteral">&quot;sbol:name&quot;</span>)
-<a name="l00057"></a>00057     <span class="keyword">private</span> String name;
-<a name="l00058"></a>00058     @RdfProperty(<span class="stringliteral">&quot;sbol:description&quot;</span>)
-<a name="l00059"></a>00059     <span class="keyword">private</span> String description;
-<a name="l00060"></a>00060     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-<a name="l00061"></a>00061     @RdfProperty(<span class="stringliteral">&quot;sbol:component&quot;</span>)
-<a name="l00062"></a>00062     private Collection&lt;<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a>&gt; component = new HashSet&lt;<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a>&gt;();
-<a name="l00063"></a>00063     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-<a name="l00064"></a>00064     @RdfProperty(<span class="stringliteral">&quot;sbol:SequenceFeature&quot;</span>)
-<a name="l00065"></a>00065     private Collection&lt;SequenceFeature&gt; feature = new HashSet&lt;SequenceFeature&gt;();
-<a name="l00066"></a>00066 
-<a name="l00076"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a45382b83b645ea4b89393c96023c54ba">00076</a>     public Collection&lt;<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a>&gt; getComponents() {
-<a name="l00077"></a>00077         <span class="keywordflow">return</span> component;
-<a name="l00078"></a>00078     }
-<a name="l00089"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a9ff983431034c861c97db6aeeecfa9c9">00089</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a9ff983431034c861c97db6aeeecfa9c9" title="Defined DNA segment for engineering biological systems, which belongs to this Library.">addComponent</a>(<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a> component) {
-<a name="l00090"></a>00090         <span class="keywordflow">if</span> (!getComponents().contains(component)) {
-<a name="l00091"></a>00091             getComponents().add(component);
-<a name="l00092"></a>00092         }
-<a name="l00093"></a>00093     }
-<a name="l00094"></a>00094 
-<a name="l00107"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#ac7feffb7a33f63504ff1f87f19e2d2d8">00107</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#ac7feffb7a33f63504ff1f87f19e2d2d8" title="Text which is for users to read and interpret what this Library is.">getDescription</a>() {
-<a name="l00108"></a>00108         <span class="keywordflow">return</span> description;
-<a name="l00109"></a>00109     }
-<a name="l00110"></a>00110 
-<a name="l00121"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a1d15d718177c4f5411ce6ab339889fd4">00121</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a1d15d718177c4f5411ce6ab339889fd4" title="Text with an informative statement about the reason for grouping the Library members.">setDescription</a>(String description) {
-<a name="l00122"></a>00122         this.description = description;
-<a name="l00123"></a>00123     }
-<a name="l00124"></a>00124 
-<a name="l00129"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#aefe76199cb4d0096f487b280c411d843">00129</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#aefe76199cb4d0096f487b280c411d843" title="Identifier to display to users.">getDisplayId</a>() {
-<a name="l00130"></a>00130         <span class="keywordflow">return</span> displayId;
-<a name="l00131"></a>00131     }
-<a name="l00132"></a>00132 
-<a name="l00137"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a46b93a70e7bd612a7b429aac4829bc88">00137</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a46b93a70e7bd612a7b429aac4829bc88" title="Identifier to display to users.">setDisplayId</a>(String displayId) {
-<a name="l00138"></a>00138         this.displayId = displayId;
-<a name="l00139"></a>00139         setId(displayId);
-<a name="l00140"></a>00140     }
-<a name="l00141"></a>00141 
-<a name="l00148"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a6e4112a6cec45766efb5ce852f1e764e">00148</a>     <span class="keyword">public</span> Collection&lt;SequenceFeature&gt; <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a6e4112a6cec45766efb5ce852f1e764e" title="Descriptions for DNA component sequences.">getFeatures</a>() {
-<a name="l00149"></a>00149         <span class="keywordflow">return</span> feature;
-<a name="l00150"></a>00150     }
-<a name="l00151"></a>00151 
-<a name="l00161"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a8606f263fb4a3f3d9d7265cf1d1095d3">00161</a>     <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a8606f263fb4a3f3d9d7265cf1d1095d3" title="Defined DNA segment for engineering biological systems, which belongs to this Library.">addFeature</a>(<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&amp;#39;s SequenceFeature for RDF and Json.">SequenceFeature</a> feature) {
-<a name="l00162"></a>00162         <span class="keywordflow">if</span> (!getFeatures().contains(feature)) {
-<a name="l00163"></a>00163             getFeatures().add(feature);
-<a name="l00164"></a>00164         }
-<a name="l00165"></a>00165     }
-<a name="l00166"></a>00166 
-<a name="l00171"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#aab219518f0eaf3db55b6a62ad6b49407">00171</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#aab219518f0eaf3db55b6a62ad6b49407" title="The ID portion of the URI which identifies this object.">getId</a>() {
-<a name="l00172"></a>00172         <span class="keywordflow">return</span> id;
-<a name="l00173"></a>00173     }
-<a name="l00174"></a>00174 
-<a name="l00179"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a0baf110c74c46a69b4c7a93bb68001b4">00179</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a0baf110c74c46a69b4c7a93bb68001b4" title="A unique identifier which will be used as the ID portion of the URI.">setId</a>(String <span class="keywordtype">id</span>) {
-<a name="l00180"></a>00180         this.<span class="keywordtype">id</span> = id;
-<a name="l00181"></a>00181     }
-<a name="l00182"></a>00182 
-<a name="l00188"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a78ee178b6a73658d65ca60da4d1e6683">00188</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a78ee178b6a73658d65ca60da4d1e6683" title="Recognizable human identifier, it is often ambiguous.">getName</a>() {
-<a name="l00189"></a>00189         <span class="keywordflow">return</span> name;
-<a name="l00190"></a>00190     }
-<a name="l00191"></a>00191 
-<a name="l00198"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#ad737b36b74be994e0d8420797ed72f78">00198</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#ad737b36b74be994e0d8420797ed72f78" title="Common name of Library should confer what is contained in the Library.">setName</a>(String name) {
-<a name="l00199"></a>00199         this.name = name;
-<a name="l00200"></a>00200     }
-<a name="l00201"></a>00201 
-<a name="l00207"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a98d34c30847c78a8922be878a2fa4d49">00207</a>     <span class="keyword">public</span> RdfKey <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a98d34c30847c78a8922be878a2fa4d49" title="a com.clarkparsia.empire required RDF id.">getRdfId</a>() {
-<a name="l00208"></a>00208         <span class="keywordflow">return</span> mIdSupport.getRdfId();
-<a name="l00209"></a>00209     }
-<a name="l00210"></a>00210 
-<a name="l00215"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#afe8d2a1ced8871ba217ddf364366da99">00215</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#afe8d2a1ced8871ba217ddf364366da99">setRdfId</a>(<span class="keyword">final</span> RdfKey <span class="keywordtype">id</span>) {
-<a name="l00216"></a>00216         mIdSupport.setRdfId(<span class="keywordtype">id</span>);
-<a name="l00217"></a>00217     }
-<a name="l00218"></a>00218 
-<a name="l00219"></a>00219     @Override
-<a name="l00220"></a>00220     <span class="keyword">public</span> <span class="keywordtype">boolean</span> equals(Object obj) {
-<a name="l00221"></a>00221         <span class="keywordflow">if</span> (obj == null) {
-<a name="l00222"></a>00222             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00223"></a>00223         }
-<a name="l00224"></a>00224         <span class="keywordflow">if</span> (getClass() != obj.getClass()) {
-<a name="l00225"></a>00225             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00226"></a>00226         }
-<a name="l00227"></a>00227         <span class="keyword">final</span> Library other = (Library) obj;
-<a name="l00228"></a>00228         <span class="keywordflow">if</span> (getRdfId() != null) {
-<a name="l00229"></a>00229             <span class="keywordflow">return</span> getRdfId().equals(other.getRdfId());
-<a name="l00230"></a>00230         } <span class="keywordflow">else</span> {
-<a name="l00231"></a>00231             <span class="keywordflow">if</span> ((this.displayId == null) ? (other.displayId != null) : !this.displayId.equals(other.displayId)) {
-<a name="l00232"></a>00232                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00233"></a>00233             }
-<a name="l00234"></a>00234             <span class="keywordflow">if</span> ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
-<a name="l00235"></a>00235                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00236"></a>00236             }
-<a name="l00237"></a>00237             <span class="keywordflow">if</span> ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
-<a name="l00238"></a>00238                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00239"></a>00239             }
-<a name="l00240"></a>00240             <span class="keywordflow">if</span> (this.component != other.component &amp;&amp; (<span class="keyword">this</span>.component == null || !<span class="keyword">this</span>.component.equals(other.component))) {
-<a name="l00241"></a>00241                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00242"></a>00242             }
-<a name="l00243"></a>00243             <span class="keywordflow">if</span> (this.feature != other.feature &amp;&amp; (<span class="keyword">this</span>.feature == null || !<span class="keyword">this</span>.feature.equals(other.feature))) {
-<a name="l00244"></a>00244                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00245"></a>00245             }
-<a name="l00246"></a>00246         }
-<a name="l00247"></a>00247         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00248"></a>00248     }
-<a name="l00249"></a>00249 
-<a name="l00250"></a>00250     @Override
-<a name="l00251"></a>00251     <span class="keyword">public</span> <span class="keywordtype">int</span> hashCode() {
-<a name="l00252"></a>00252         <span class="keywordflow">return</span> getRdfId() == null ? 0 : getRdfId().value().hashCode();
-<a name="l00253"></a>00253     }
-<a name="l00254"></a>00254 }
+<a name="l00049"></a>00049     <span class="keyword">static</span> <span class="keyword">final</span> String DATA_NAMESPACE_DEFAULT = <span class="stringliteral">&quot;http://sbols.org/data#&quot;</span>;
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051     @<a class="code" href="interfaceorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_i_o_tools_1_1_skip_in_json.html" title="Customizes the Json writer to leave out fields annotated with .">SkipInJson</a>
+<a name="l00052"></a>00052     <span class="keyword">private</span> SupportsRdfId mIdSupport = <span class="keyword">new</span> SupportsRdfIdImpl();
+<a name="l00053"></a>00053     @RdfId(<span class="keyword">namespace</span> = DATA_NAMESPACE_DEFAULT)
+<a name="l00054"></a>00054     <span class="keyword">private</span> String id;
+<a name="l00055"></a>00055     
+<a name="l00056"></a>00056     @RdfProperty(<span class="stringliteral">&quot;sbol:displayId&quot;</span>)
+<a name="l00057"></a>00057     <span class="keyword">private</span> String displayId;
+<a name="l00058"></a>00058     @RdfProperty(<span class="stringliteral">&quot;sbol:name&quot;</span>)
+<a name="l00059"></a>00059     <span class="keyword">private</span> String name;
+<a name="l00060"></a>00060     @RdfProperty(<span class="stringliteral">&quot;sbol:description&quot;</span>)
+<a name="l00061"></a>00061     <span class="keyword">private</span> String description;
+<a name="l00062"></a>00062     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+<a name="l00063"></a>00063     @RdfProperty(<span class="stringliteral">&quot;sbol:component&quot;</span>)
+<a name="l00064"></a>00064     private Collection&lt;<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a>&gt; component = new HashSet&lt;<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a>&gt;();
+<a name="l00065"></a>00065     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+<a name="l00066"></a>00066     @RdfProperty(<span class="stringliteral">&quot;sbol:SequenceFeature&quot;</span>)
+<a name="l00067"></a>00067     private Collection&lt;SequenceFeature&gt; feature = new HashSet&lt;SequenceFeature&gt;();
+<a name="l00068"></a>00068 
+<a name="l00078"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a45382b83b645ea4b89393c96023c54ba">00078</a>     public Collection&lt;<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a>&gt; getComponents() {
+<a name="l00079"></a>00079         <span class="keywordflow">return</span> component;
+<a name="l00080"></a>00080     }
+<a name="l00091"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a9ff983431034c861c97db6aeeecfa9c9">00091</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a9ff983431034c861c97db6aeeecfa9c9" title="Defined DNA segment for engineering biological systems, which belongs to this Library.">addComponent</a>(<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component.html" title="The SBOL data model&amp;#39;s DnaComponent for RDF and Json.">DnaComponent</a> component) {
+<a name="l00092"></a>00092         <span class="keywordflow">if</span> (!getComponents().contains(component)) {
+<a name="l00093"></a>00093             getComponents().add(component);
+<a name="l00094"></a>00094         }
+<a name="l00095"></a>00095     }
+<a name="l00096"></a>00096 
+<a name="l00109"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#ac7feffb7a33f63504ff1f87f19e2d2d8">00109</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#ac7feffb7a33f63504ff1f87f19e2d2d8" title="Text which is for users to read and interpret what this Library is.">getDescription</a>() {
+<a name="l00110"></a>00110         <span class="keywordflow">return</span> description;
+<a name="l00111"></a>00111     }
+<a name="l00112"></a>00112 
+<a name="l00123"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a1d15d718177c4f5411ce6ab339889fd4">00123</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a1d15d718177c4f5411ce6ab339889fd4" title="Text with an informative statement about the reason for grouping the Library members.">setDescription</a>(String description) {
+<a name="l00124"></a>00124         this.description = description;
+<a name="l00125"></a>00125     }
+<a name="l00126"></a>00126 
+<a name="l00131"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#aefe76199cb4d0096f487b280c411d843">00131</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#aefe76199cb4d0096f487b280c411d843" title="Identifier to display to users.">getDisplayId</a>() {
+<a name="l00132"></a>00132         <span class="keywordflow">return</span> displayId;
+<a name="l00133"></a>00133     }
+<a name="l00134"></a>00134 
+<a name="l00139"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a46b93a70e7bd612a7b429aac4829bc88">00139</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a46b93a70e7bd612a7b429aac4829bc88" title="Identifier to display to users.">setDisplayId</a>(String displayId) {
+<a name="l00140"></a>00140         this.displayId = displayId;
+<a name="l00141"></a>00141         generateId();
+<a name="l00142"></a>00142     }
+<a name="l00143"></a>00143 
+<a name="l00150"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a6e4112a6cec45766efb5ce852f1e764e">00150</a>     <span class="keyword">public</span> Collection&lt;SequenceFeature&gt; <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a6e4112a6cec45766efb5ce852f1e764e" title="Descriptions for DNA component sequences.">getFeatures</a>() {
+<a name="l00151"></a>00151         <span class="keywordflow">return</span> feature;
+<a name="l00152"></a>00152     }
+<a name="l00153"></a>00153 
+<a name="l00163"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a8606f263fb4a3f3d9d7265cf1d1095d3">00163</a>     <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a8606f263fb4a3f3d9d7265cf1d1095d3" title="Defined DNA segment for engineering biological systems, which belongs to this Library.">addFeature</a>(<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_sequence_feature.html" title="The SBOL data model&amp;#39;s SequenceFeature for RDF and Json.">SequenceFeature</a> feature) {
+<a name="l00164"></a>00164         <span class="keywordflow">if</span> (!getFeatures().contains(feature)) {
+<a name="l00165"></a>00165             getFeatures().add(feature);
+<a name="l00166"></a>00166         }
+<a name="l00167"></a>00167     }
+<a name="l00168"></a>00168 
+<a name="l00173"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#aab219518f0eaf3db55b6a62ad6b49407">00173</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#aab219518f0eaf3db55b6a62ad6b49407" title="The ID portion of the URI which identifies this object.">getId</a>() {
+<a name="l00174"></a>00174         <span class="keywordflow">return</span> id;
+<a name="l00175"></a>00175     }
+<a name="l00176"></a>00176 
+<a name="l00181"></a>00181     <span class="keyword">private</span> <span class="keywordtype">void</span> generateId() {
+<a name="l00182"></a>00182         String idString = this.getClass().toString()+getDisplayId();
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184         this.<span class="keywordtype">id</span> = <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils.html" title="These utility methods calculate ID encodings.">IdentifierUtils</a>.<a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_identifier_utils.html#a3208b690b93a8287aeb551c699274213" title="Hashes the input String with SHA-1 into a Hex encoded String.">encryptSHA</a>(idString);
+<a name="l00185"></a>00185     }
+<a name="l00186"></a>00186 
+<a name="l00192"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a78ee178b6a73658d65ca60da4d1e6683">00192</a>     <span class="keyword">public</span> String <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a78ee178b6a73658d65ca60da4d1e6683" title="Recognizable human identifier, it is often ambiguous.">getName</a>() {
+<a name="l00193"></a>00193         <span class="keywordflow">return</span> name;
+<a name="l00194"></a>00194     }
+<a name="l00195"></a>00195 
+<a name="l00202"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#ad737b36b74be994e0d8420797ed72f78">00202</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#ad737b36b74be994e0d8420797ed72f78" title="Common name of Library should confer what is contained in the Library.">setName</a>(String name) {
+<a name="l00203"></a>00203         this.name = name;
+<a name="l00204"></a>00204     }
+<a name="l00205"></a>00205 
+<a name="l00211"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a98d34c30847c78a8922be878a2fa4d49">00211</a>     <span class="keyword">public</span> RdfKey <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#a98d34c30847c78a8922be878a2fa4d49" title="a com.clarkparsia.empire required RDF id.">getRdfId</a>() {
+<a name="l00212"></a>00212         <span class="keywordflow">return</span> mIdSupport.getRdfId();
+<a name="l00213"></a>00213     }
+<a name="l00214"></a>00214 
+<a name="l00219"></a><a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#afe8d2a1ced8871ba217ddf364366da99">00219</a>     <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_library.html#afe8d2a1ced8871ba217ddf364366da99">setRdfId</a>(<span class="keyword">final</span> RdfKey <span class="keywordtype">id</span>) {
+<a name="l00220"></a>00220         mIdSupport.setRdfId(<span class="keywordtype">id</span>);
+<a name="l00221"></a>00221     }
+<a name="l00222"></a>00222 
+<a name="l00223"></a>00223     @Override
+<a name="l00224"></a>00224     <span class="keyword">public</span> <span class="keywordtype">boolean</span> equals(Object obj) {
+<a name="l00225"></a>00225         <span class="keywordflow">if</span> (obj == null) {
+<a name="l00226"></a>00226             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00227"></a>00227         }
+<a name="l00228"></a>00228         <span class="keywordflow">if</span> (getClass() != obj.getClass()) {
+<a name="l00229"></a>00229             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00230"></a>00230         }
+<a name="l00231"></a>00231         <span class="keyword">final</span> Library other = (Library) obj;
+<a name="l00232"></a>00232         <span class="keywordflow">if</span> (getRdfId() != null) {
+<a name="l00233"></a>00233             <span class="keywordflow">return</span> getRdfId().equals(other.getRdfId());
+<a name="l00234"></a>00234         } <span class="keywordflow">else</span> {
+<a name="l00235"></a>00235             <span class="keywordflow">if</span> ((this.displayId == null) ? (other.displayId != null) : !this.displayId.equals(other.displayId)) {
+<a name="l00236"></a>00236                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00237"></a>00237             }
+<a name="l00238"></a>00238             <span class="keywordflow">if</span> ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+<a name="l00239"></a>00239                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00240"></a>00240             }
+<a name="l00241"></a>00241             <span class="keywordflow">if</span> ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
+<a name="l00242"></a>00242                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00243"></a>00243             }
+<a name="l00244"></a>00244             <span class="keywordflow">if</span> ((this.getComponents().isEmpty()) ? !(other.getComponents().isEmpty()) : 
+<a name="l00245"></a>00245                 ((this.component != other.component) &amp;&amp; (this.component == null || !this.component.equals(other.component)))) {
+<a name="l00246"></a>00246                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00247"></a>00247             }
+<a name="l00248"></a>00248             <span class="keywordflow">if</span> ((this.getFeatures().isEmpty()) ? !(other.getFeatures().isEmpty()) : 
+<a name="l00249"></a>00249                 ((this.feature != other.feature) &amp;&amp; (this.feature == null || !this.feature.equals(other.feature)))) {
+<a name="l00250"></a>00250                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00251"></a>00251             }
+<a name="l00252"></a>00252     
+<a name="l00253"></a>00253         }
+<a name="l00254"></a>00254         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00255"></a>00255     }
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257     @Override
+<a name="l00258"></a>00258     <span class="keyword">public</span> <span class="keywordtype">int</span> hashCode() {
+<a name="l00259"></a>00259         <span class="keywordtype">int</span> hash = 1;    
+<a name="l00260"></a>00260         hash = hash * 31 + this.getClass().hashCode();
+<a name="l00261"></a>00261         hash = hash * 31 + (displayId == null ? 0 : displayId.hashCode());
+<a name="l00262"></a>00262         hash = hash * 31 + (name == null ? 0: name.hashCode());
+<a name="l00263"></a>00263         hash = hash * 31 + (description == null ? 0: description.hashCode());
+<a name="l00264"></a>00264         hash = hash * 31 + (component == null ? 0 : component.hashCode());
+<a name="l00265"></a>00265         hash = hash * 31 + (feature == null ? 0 : feature.hashCode());
+<a name="l00266"></a>00266         
+<a name="l00267"></a>00267         <span class="comment">//int hash = getRdfId() == null ? 0 : getRdfId().value().hashCode();</span>
+<a name="l00268"></a>00268         <span class="keywordflow">return</span> hash;
+<a name="l00269"></a>00269     }
+<a name="l00270"></a>00270 }
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -229,7 +245,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Fri Apr 15 2011 20:00:17 for libSBOLj by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Jun 5 2011 01:39:47 for libSBOLj by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

@@ -32,8 +32,6 @@ void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a2e16
 \begin{DoxyCompactList}\small\item\em DNA sequence which this \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} object represents. \item\end{DoxyCompactList}\item 
 String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_aab219518f0eaf3db55b6a62ad6b49407}{getId} ()
 \begin{DoxyCompactList}\small\item\em The ID portion of the URI which identifies this object. \item\end{DoxyCompactList}\item 
-void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a0baf110c74c46a69b4c7a93bb68001b4}{setId} (String id)
-\begin{DoxyCompactList}\small\item\em A unique identifier which will be used as the ID portion of the URI. \item\end{DoxyCompactList}\item 
 boolean \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a38c303dc9a19b2789b973aea68824e1e}{isCircular} ()
 \begin{DoxyCompactList}\small\item\em If circular the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_sequence}{DnaSequence} should be interpreted as circular. \item\end{DoxyCompactList}\item 
 void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_aa985eba9ff6208a84c0da097ade01781}{setCircular} (boolean isCircular)
@@ -42,10 +40,6 @@ String \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a78
 \begin{DoxyCompactList}\small\item\em The name is the most recognizable known identifier, it is often ambiguous. \item\end{DoxyCompactList}\item 
 void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_ad737b36b74be994e0d8420797ed72f78}{setName} (String name)
 \begin{DoxyCompactList}\small\item\em Common name of DNA component, confers meaning of what it is. \item\end{DoxyCompactList}\item 
-Collection$<$ URI $>$ \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a518b97368db3de477d5fb57150d8b711}{getTypes} ()
-\begin{DoxyCompactList}\small\item\em Sequence Ontology vocabulary provides a defined term for types of DNA components. \item\end{DoxyCompactList}\item 
-void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a26d3aea2567e9235daef5a79a5e6a521}{addType} (URI type)
-\begin{DoxyCompactList}\small\item\em Sequence Ontology vocabulary provides a defined term for types of DNA components. \item\end{DoxyCompactList}\item 
 RdfKey \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a98d34c30847c78a8922be878a2fa4d49}{getRdfId} ()
 \begin{DoxyCompactList}\small\item\em a com.clarkparsia.empire required RDF id. \item\end{DoxyCompactList}\item 
 void \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_afe8d2a1ced8871ba217ddf364366da99}{setRdfId} (final RdfKey id)
@@ -55,6 +49,14 @@ boolean \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_ae
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a077e18fe97323c7194e2665ffc766399}{
 int {\bfseries hashCode} ()}
 \label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a077e18fe97323c7194e2665ffc766399}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Package Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a20b86331ad9418b0c6b737a193b5b051}{
+static final String {\bfseries DATA\_\-NAMESPACE\_\-DEFAULT} = \char`\"{}http://sbols.org/data\#\char`\"{}}
+\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a20b86331ad9418b0c6b737a193b5b051}
 
 \end{DoxyCompactItemize}
 
@@ -70,7 +72,7 @@ mgaldzic
 \end{DoxySince}
 
 
-Definition at line 37 of file DnaComponent.java.
+Definition at line 36 of file DnaComponent.java.
 
 
 
@@ -95,32 +97,7 @@ The \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaCo
 \end{DoxyParams}
 
 
-Definition at line 78 of file DnaComponent.java.
-
-\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a26d3aea2567e9235daef5a79a5e6a521}{
-\index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!addType@{addType}}
-\index{addType@{addType}!org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}}
-\subsubsection[{addType}]{\setlength{\rightskip}{0pt plus 5cm}void addType (
-\begin{DoxyParamCaption}
-\item[{URI}]{type}
-\end{DoxyParamCaption}
-)}}
-\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a26d3aea2567e9235daef5a79a5e6a521}
-
-
-Sequence Ontology vocabulary provides a defined term for types of DNA components. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em type} & Sequence Ontology URI specifying the type of the \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent} \\
-\hline
-\end{DoxyParams}
-\begin{DoxySeeAlso}{See also}
-setType 
-\end{DoxySeeAlso}
-
-
-Definition at line 245 of file DnaComponent.java.
+Definition at line 77 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_ae3ce8ca5a04e8966a9d2158aeeecfc16}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!equals@{equals}}
@@ -145,7 +122,7 @@ true if another object is equivalent to this one, false otherwise (including nul
 \end{DoxyReturn}
 
 
-Definition at line 279 of file DnaComponent.java.
+Definition at line 252 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a0275a8297f992718e6fe7c8638c14010}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!getAnnotations@{getAnnotations}}
@@ -168,7 +145,7 @@ Positions and directions of {\ttfamily \hyperlink{classorg_1_1sbolstandard_1_1li
 \end{DoxySeeAlso}
 
 
-Definition at line 68 of file DnaComponent.java.
+Definition at line 67 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_ac7feffb7a33f63504ff1f87f19e2d2d8}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!getDescription@{getDescription}}
@@ -191,7 +168,7 @@ Human readable text describing the component
 \end{DoxySeeAlso}
 
 
-Definition at line 93 of file DnaComponent.java.
+Definition at line 92 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_aefe76199cb4d0096f487b280c411d843}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!getDisplayId@{getDisplayId}}
@@ -211,7 +188,7 @@ a human readable identifier
 \end{DoxyReturn}
 
 
-Definition at line 114 of file DnaComponent.java.
+Definition at line 113 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a596826001de0d3a682c2effa7fd6d50d}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!getDnaSequence@{getDnaSequence}}
@@ -234,7 +211,7 @@ DNA sequence which this \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_
 \end{DoxySeeAlso}
 
 
-Definition at line 136 of file DnaComponent.java.
+Definition at line 135 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_aab219518f0eaf3db55b6a62ad6b49407}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!getId@{getId}}
@@ -254,7 +231,7 @@ the RDF id for the object
 \end{DoxyReturn}
 
 
-Definition at line 152 of file DnaComponent.java.
+Definition at line 151 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a78ee178b6a73658d65ca60da4d1e6683}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!getName@{getName}}
@@ -295,29 +272,7 @@ the RdfId component of the URI for the \hyperlink{classorg_1_1sbolstandard_1_1li
 \end{DoxyReturn}
 
 
-Definition at line 257 of file DnaComponent.java.
-
-\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a518b97368db3de477d5fb57150d8b711}{
-\index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!getTypes@{getTypes}}
-\index{getTypes@{getTypes}!org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}}
-\subsubsection[{getTypes}]{\setlength{\rightskip}{0pt plus 5cm}Collection$<$URI$>$ getTypes (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a518b97368db3de477d5fb57150d8b711}
-
-
-Sequence Ontology vocabulary provides a defined term for types of DNA components. 
-
-TO DO: implement use of SO within libSBOLj. \begin{DoxyReturn}{Returns}
-a Sequence Ontology (SO) vocabulary term to describe the type of \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component}{DnaComponent}. 
-\end{DoxyReturn}
-\begin{Desc}
-\item[\hyperlink{todo__todo000002}{Todo}]When serialized to RDF this is a URI, so when read from persistence it should become one of the SO human readable vocabulary terms. Note:I should allow many types \end{Desc}
-
-
-Definition at line 234 of file DnaComponent.java.
+Definition at line 231 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a38c303dc9a19b2789b973aea68824e1e}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!isCircular@{isCircular}}
@@ -385,7 +340,7 @@ It should describe what the component is used for and/or what it does. Suggestio
 \end{DoxyParams}
 
 
-Definition at line 106 of file DnaComponent.java.
+Definition at line 105 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a46b93a70e7bd612a7b429aac4829bc88}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!setDisplayId@{setDisplayId}}
@@ -409,7 +364,7 @@ It should be unambiguous and is likely imported from source data. Otherwise it s
 \end{DoxyParams}
 
 
-Definition at line 126 of file DnaComponent.java.
+Definition at line 125 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a2e16af0dece16378b9ee31d818bd8ef1}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!setDnaSequence@{setDnaSequence}}
@@ -431,29 +386,7 @@ DNA sequence which this \hyperlink{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_
 \end{DoxyParams}
 
 
-Definition at line 144 of file DnaComponent.java.
-
-\hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a0baf110c74c46a69b4c7a93bb68001b4}{
-\index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!setId@{setId}}
-\index{setId@{setId}!org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}}
-\subsubsection[{setId}]{\setlength{\rightskip}{0pt plus 5cm}void setId (
-\begin{DoxyParamCaption}
-\item[{String}]{id}
-\end{DoxyParamCaption}
-)}}
-\label{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_a0baf110c74c46a69b4c7a93bb68001b4}
-
-
-A unique identifier which will be used as the ID portion of the URI. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em id} & the RDF id for the object \\
-\hline
-\end{DoxyParams}
-
-
-Definition at line 160 of file DnaComponent.java.
+Definition at line 143 of file DnaComponent.java.
 
 \hypertarget{classorg_1_1sbolstandard_1_1lib_s_b_o_lj_1_1_dna_component_ad737b36b74be994e0d8420797ed72f78}{
 \index{org::sbolstandard::libSBOLj::DnaComponent@{org::sbolstandard::libSBOLj::DnaComponent}!setName@{setName}}
@@ -496,7 +429,7 @@ Definition at line 222 of file DnaComponent.java.
 \end{DoxyParams}
 
 
-Definition at line 266 of file DnaComponent.java.
+Definition at line 240 of file DnaComponent.java.
 
 
 
