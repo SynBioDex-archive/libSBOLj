@@ -37,6 +37,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openrdf.rio.RDFFormat;
 import org.apache.commons.io.FileUtils;
+import org.openrdf.rio.RDFParseException;
 
 /**
  * SBOL utils provide read and write methods for interacting with interfaces outside of libSBOLj.

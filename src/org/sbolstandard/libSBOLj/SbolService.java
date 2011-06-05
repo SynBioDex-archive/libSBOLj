@@ -11,9 +11,12 @@ import com.clarkparsia.openrdf.ExtGraph;
 import com.clarkparsia.openrdf.ExtRepository;
 import com.clarkparsia.openrdf.OpenRdfUtil;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import org.openrdf.repository.RepositoryException;
+import org.openrdf.rio.turtle.TurtleWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
@@ -57,8 +60,10 @@ public class SbolService {
     static final String DATA_NAMESPACE_DEFAULT = "http://sbols.org/data#";
 
     public SbolService() {
+        
         Empire.init(new OpenRdfEmpireModule());
         aManager = Persistence.createEntityManagerFactory("blank-data-source").createEntityManager();
+ 
     }
 
     public SbolService(String rdfString, RDFFormat format) {
@@ -80,6 +85,7 @@ public class SbolService {
             aMap.put("factory", "sesame");
             //aMap.put("files", "data//blank.rdf");
             aMap.put("repo_handle", aRepo);
+
             PersistenceProvider aProvider = Empire.get().persistenceProvider();
             aManager = aProvider.createEntityManagerFactory("existingRDF", aMap).createEntityManager();
         } catch (UnsupportedEncodingException ex) {
@@ -297,13 +303,16 @@ public class SbolService {
     public String getAllAsRdf(RDFFormat mimetype) {
         String rdfString = null;
         Query aQuery = aManager.createQuery("CONSTRUCT {?s ?p ?o} WHERE {?s ?p ?o.}");
+
         ExtGraph singleResult = (ExtGraph) aQuery.getSingleResult();
+
         StringWriter out = new StringWriter();
+        //StringWriter out1 = new TurtleWriter(out);
         //RDFXMLPrettyWriter rdfWriter = new RDFXMLPrettyWriter(out);
-        
+
         try {
             if (mimetype.equals(RDFFormat.RDFXML)) {
-                singleResult.write(out, RDFFormat.RDFXML);
+               singleResult.write(out, RDFFormat.RDFXML);
 
             } else if (mimetype.equals(RDFFormat.TURTLE)) {
                 singleResult.write(out, RDFFormat.TURTLE);

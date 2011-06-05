@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.sbolstandard.libSBOLj;
 
+import java.io.IOException;
+import java.net.URI;
 import org.junit.Ignore;
 import org.biojavax.bio.seq.RichSequence;
 import org.biojavax.bio.seq.RichSequenceIterator;
@@ -14,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.openrdf.rio.RDFParseException;
 
 /**
  *
@@ -21,11 +23,45 @@ import static org.junit.Assert.*;
  */
 public class IOToolsTest {
 
+    private SbolService s = new SbolService();
     public IOToolsTest() {
     }
 
     @Before
     public void setUp() {
+        Library aLib = new Library();
+        aLib.setDisplayId("id");
+        aLib.setName("name");
+        aLib.setDescription("desc");
+
+        DnaSequence aDS = new DnaSequence();
+        aDS.setDnaSequence("actg");
+
+        DnaComponent aDC = new DnaComponent();
+        aDC.setDisplayId("id");
+        aDC.setName("name");
+        aDC.setDescription("desc");
+        aDC.setCircular(false);
+        aDC.setDnaSequence(aDS);
+
+        SequenceAnnotation aSA = new SequenceAnnotation();
+        aSA.setStart(1);
+        aSA.setStop(2);
+        aSA.setStrand("+");
+        aSA.generateId(aDC);
+
+        SequenceFeature aSF = new SequenceFeature();
+        aSF.setDisplayId("id");
+        aSF.setName("name");
+        aSF.setDescription("desc");
+        aSF.addType(URI.create("http://purl.org/obo/owl/SO#" + "so_id"));
+
+        
+        //Make a Library w a DnaComponent a SequenceAnnotation and a SequenceFeature
+        s.addDnaComponentToLibrary(aDC, aLib);
+        //Annotated component
+        s.addSequenceAnnotationToDnaComponent(aSA, aDC);  //empty promise
+        s.addSequenceFeatureToSequenceAnnotation(aSF, aSA);
     }
 
     @After
@@ -35,17 +71,18 @@ public class IOToolsTest {
     /**
      * Test of fromGenBankFile method, of class IOTools.
      */
+    @Ignore
     @Test
     public void testFromGenBankFile() throws Exception {
         System.out.println("fromGenBankFile");
         String filename = "test\\test_files\\testFromGenBankFile.gb";
-        RichSequenceIterator expResult = null;
+
+        Library expResult = s.getLibrary();
+
         RichSequenceIterator aRSiter = IOTools.fromGenBankFile(filename);
         Library result = IOTools.fromRichSequenceIter(aRSiter);
-        System.out.println("ttl: "+IOTools.toRdfTurtle(result));
+        System.out.println("ttl: " + IOTools.toRdfTurtle(result));
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -98,7 +135,7 @@ public class IOToolsTest {
      */
     @Ignore
     @Test
-    public void testToRdfXml() {
+    public void testToRdfXml() throws RDFParseException, IOException {
         System.out.println("toRdfXml");
         Library input = null;
         String expResult = "";
@@ -113,7 +150,7 @@ public class IOToolsTest {
      */
     @Ignore
     @Test
-    public void testToRdfTurtle() {
+    public void testToRdfTurtle() throws IOException, RDFParseException {
         System.out.println("toRdfTurtle");
         Library input = null;
         String expResult = "";
@@ -179,5 +216,4 @@ public class IOToolsTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
 }
