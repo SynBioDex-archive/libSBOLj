@@ -13,20 +13,24 @@ public class Measurement
 {
     protected String    type;
     protected String    label;
+    protected String    unit;
     protected String    definition;
     protected float     value;
     protected float     standardDeviation;
+    protected String    constructId;
 
 //  protected RawData            rawData;
 //  protected AcquisitionInfo    acquisitionInfo;
 
-    public Measurement(String type, String label, String definition, float value, float standardDeviation)
+    public Measurement(String type, String label, String unit, String definition, float value, float standardDeviation, String constructId)
     {
         this.type = type;
         this.label = label;
+        this.unit = unit;
         this.definition = definition;
         this.value = value;
         this.standardDeviation = standardDeviation;
+        this.constructId = constructId;
     }
 
     /**
@@ -43,6 +47,14 @@ public class Measurement
     public String getLabel()
     {
         return label;
+    }
+    
+    /**
+     * @return the unit
+     */
+    public String getUnit()
+    {
+        return unit;
     }
 
     /**
@@ -67,5 +79,10 @@ public class Measurement
     public float getStandardDeviation()
     {
         return standardDeviation;
+    }
+    
+    public String getConstructId()
+    {
+        return constructId;
     }
 }
