@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class DnaComponent
 {
-    protected String                        displayID;
+    protected String                        displayId;
     protected String                        name;
     protected String                        description;
     protected String                        type;
@@ -22,7 +22,7 @@ public class DnaComponent
 
     public DnaComponent(String displayId, String name, String description, String type)
     {
-        this.displayID = displayId;
+        this.displayId = displayId;
         this.name = name;
         this.description = description;
         this.type = type;
@@ -31,7 +31,7 @@ public class DnaComponent
     
     public DnaComponent(String displayId, String name, String description, String type, DnaSequence dnaSequence)
     {
-        this.displayID = displayId;
+        this.displayId = displayId;
         this.name = name;
         this.description = description;
         this.type = type;
@@ -41,9 +41,9 @@ public class DnaComponent
     /**
      * @return the displayId
      */
-    public String getDisplayID()
+    public String getDisplayId()
     {
-        return displayID;
+        return displayId;
     }
 
     /**

@@ -3,12 +3,13 @@
  * and open the template in the editor.
  */
 
-package org.sbolstandard.libSBOLj.experiment;
+package org.sbol.libsbol.json.performance;
 
 /**
  *
  * @author cesarr
  */
-public class SequenceFeature {
+public class Entry
+{
 
 }
